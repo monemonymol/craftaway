@@ -1293,7 +1293,7 @@
     <h2 class="section-title">ลึกแค่ไหน<em>ก็ได้</em></h2>
     <p class="section-desc">เริ่มฟรีได้เลย หรือจะให้ monemoll_ ช่วยออกแบบทริปให้ก็ได้เหมือนกัน — ไม่มีแรงกดดัน</p>
 
-    <div class="pricing-grid">
+    <div class="pricing-grid" style="grid-template-columns:repeat(auto-fit,minmax(260px,1fr));">
       <!-- Free -->
       <div class="price-card" onclick="openModal('free')">
         <div class="price-tier">Free</div>
@@ -1309,112 +1309,58 @@
         <button class="price-btn" onclick="event.stopPropagation(); document.getElementById('discover').scrollIntoView({behavior:'smooth'})">ทำ quiz เลย</button>
       </div>
 
-      <!-- 129 -->
-      <div class="price-card" onclick="openModal('mini')">
-        <div class="price-tier">Starter</div>
-        <div class="price-name">MBTI Travel Card</div>
-        <div class="price-amount"><span>฿</span>129</div>
-        <div class="price-note">download ได้เลย ไม่ต้องรอ</div>
-        <div class="price-divider"></div>
-        <ul class="price-features">
-          <li>การ์ด 1 หน้าตาม MBTI type ของคุณ</li>
-          <li>3 ที่ที่น่าจะตรงกับ type นั้น</li>
-          <li>วิธีเที่ยวที่ชาร์จพลังได้จริง</li>
-        </ul>
-        <button class="price-btn">เลือก</button>
-      </div>
-
-      <!-- 199 -->
-      <div class="price-card" onclick="openModal('guide')">
+      <!-- 888 -->
+      <div class="price-card" onclick="openModal('essential')">
         <div class="price-tier">Essential</div>
-        <div class="price-name">Mood × Trip Guide</div>
-        <div class="price-amount"><span>฿</span>199</div>
-        <div class="price-note">download ได้เลย ไม่ต้องรอ</div>
-        <div class="price-divider"></div>
-        <ul class="price-features">
-          <li>Guide แยกตาม 3 mood</li>
-          <li>เที่ยวยังไงให้คุ้มงบ ไม่ใช่แค่ถูก</li>
-          <li>Checklist เตรียมทริปสั้น</li>
-        </ul>
-        <button class="price-btn">เลือก</button>
-      </div>
-
-      <!-- 399 -->
-      <div class="price-card" onclick="openModal('starter1on1')">
-        <div class="price-tier">Personal</div>
-        <div class="price-name">Trip Starter 1:1</div>
-        <div class="price-amount"><span>฿</span>399</div>
-        <div class="price-note">ส่งผลภายใน 3 วัน</div>
-        <div class="price-divider"></div>
-        <ul class="price-features">
-          <li>วิเคราะห์ mood + สไตล์การเดินทาง</li>
-          <li>แนะนำ destination ที่เหมาะกับตอนนี้</li>
-          <li>ส่งเป็น PDF เฉพาะคุณ</li>
-        </ul>
-        <button class="price-btn">เลือก</button>
-      </div>
-
-      <!-- 549 -->
-      <div class="price-card" onclick="openModal('mbti1on1')">
-        <div class="price-tier">Personal+</div>
-        <div class="price-name">MBTI × Trip Design</div>
-        <div class="price-amount"><span>฿</span>549</div>
+        <div class="price-name">Craft Your Trip</div>
+        <div class="price-amount"><span>฿</span>888</div>
         <div class="price-note">ส่งผลภายใน 3–5 วัน</div>
         <div class="price-divider"></div>
         <ul class="price-features">
           <li>อ่าน MBTI แล้วออกแบบทริปเฉพาะคุณ</li>
-          <li>แนะนำที่ไปและวิธีเที่ยวที่เหมาะ</li>
+          <li>แนะนำ destination ที่ตรงกับพลังงาน</li>
+          <li>วิธีเที่ยวให้ชาร์จพลังได้จริง</li>
           <li>ส่งเป็น PDF เขียนขึ้นมาเพื่อคุณ</li>
-          <li>ถามเพิ่มได้ 1 ข้อ</li>
         </ul>
         <button class="price-btn">เลือก</button>
       </div>
 
-      <!-- 1499 -->
+      <!-- 1555 -->
       <div class="price-card featured" onclick="openModal('signature')">
         <div class="price-tier">Signature</div>
-        <div class="price-name">MBTI + HD × Trip Design</div>
-        <div class="price-amount"><span>฿</span>1,499</div>
+        <div class="price-name">Design Your Journey</div>
+        <div class="price-amount"><span>฿</span>1,555</div>
         <div class="price-note">monemoll_ ทำให้ ส่งใน 3–5 วัน</div>
         <div class="price-divider"></div>
         <ul class="price-features">
           <li>วิเคราะห์ MBTI + Human Design chart</li>
-          <li>ออกแบบทริปตามพลังงานที่แท้จริง</li>
-          <li>ส่งเป็น PDF ละเอียด</li>
-          <li>ถามเพิ่มได้ 2 ข้อ</li>
+          <li>อ่านแผนที่พลังงานของคุณ</li>
+          <li>ออกแบบทริปที่ชาร์จพลังงานได้จริง</li>
+          <li>destination ที่เหมาะกับ energy type</li>
+          <li>ส่งเป็น PDF ละเอียด + ถามเพิ่มได้ 2 ข้อ</li>
         </ul>
         <button class="price-btn">เลือก</button>
       </div>
 
-      <!-- 2499 -->
+      <!-- 2999 -->
       <div class="price-card" onclick="openModal('premium')">
-        <div class="price-tier">Premium</div>
-        <div class="price-name">Trip by Your Design</div>
-        <div class="price-amount"><span>฿</span>2,499</div>
+        <div class="price-tier">Full Reading</div>
+        <div class="price-name">Discover Yourself</div>
+        <div class="price-amount"><span>฿</span>2,999</div>
         <div class="price-note">เปิดรับ 2 คน / เดือน</div>
         <div class="price-divider"></div>
         <ul class="price-features">
-          <li>ทุกอย่างใน Signature</li>
-          <li>วาง itinerary จริง ทั้งทริป</li>
+          <li>MBTI + Human Design + โหราศาสตร์ตะวันตก</li>
+          <li>อ่านแผนที่พลังงานและดวงชะตาลึกๆ</li>
+          <li>ออกแบบทริปที่ชาร์จได้จริงตามธรรมชาติของคุณ</li>
+          <li>itinerary จริงทั้งทริป</li>
           <li>คุยกัน 30 นาที หลังรับไฟล์</li>
         </ul>
         <button class="price-btn">เลือก</button>
       </div>
     </div>
 
-    <!-- HD Addon -->
-    <div class="hd-addon" onclick="openModal('signature', true)">
-      <div class="hd-icon">✦</div>
-      <div class="hd-text">
-        <div class="hd-label">เสริมได้ใน Signature / Premium</div>
-        <div class="hd-title">+ Human Design Layer</div>
-        <div class="hd-desc">ถ้า MBTI คือ "แบบที่คุณคิด" — Human Design คือ "แบบที่คุณถูกออกแบบมา" เพิ่ม layer นี้เข้าไป แล้วทริปจะไม่ใช่แค่ที่ที่คุณอยากไป แต่คือที่ที่พลังงานของคุณจะไปได้ดีจริงๆ</div>
-      </div>
-      <div class="hd-price">
-        <div class="hd-price-amount">+฿500</div>
-        <div class="hd-price-note">เพิ่มตอน checkout</div>
-      </div>
-    </div>
+    <!-- HD Addon ลบออกแล้ว รวมใน tier -->
   </div>
 </section>
 
@@ -1987,13 +1933,10 @@
   function closeDashOutside(e){if(e.target===document.getElementById('dashboard-modal'))closeDashboard();}
 
   const tiers={
-    free:       {title:'Travel Profile',sub:'ผลจาก quiz ของคุณ — ฟรี ไม่มีค่าใช้จ่าย',price:0,showMBTI:false,showHD:false,free:true},
-    mini:       {title:'MBTI Travel Card',sub:'การ์ด 1 หน้าตาม MBTI type — download ได้ทันที',price:129,showMBTI:true,showHD:false},
-    guide:      {title:'Mood × Trip Guide',sub:'PDF guide แยกตาม travel mood — download ได้ทันที',price:199,showMBTI:false,showHD:false},
-    starter1on1:{title:'Trip Starter 1:1',sub:'monemoll_ วิเคราะห์ mood และแนะนำ destination เฉพาะคุณ',price:399,showMBTI:false,showHD:false},
-    mbti1on1:   {title:'MBTI × Trip Design',sub:'monemoll_ อ่าน MBTI แล้วออกแบบทริปเฉพาะคุณ',price:549,showMBTI:true,showHD:false},
-    signature:  {title:'MBTI + HD × Trip Design',sub:'วิเคราะห์ MBTI + Human Design แล้วออกแบบทริปที่ตรงกับพลังงานของคุณจริงๆ',price:1499,showMBTI:true,showHD:true},
-    premium:    {title:'Trip by Your Design',sub:'Full experience — itinerary จริงทั้งทริป + คุยกัน 30 นาที',price:2499,showMBTI:true,showHD:true},
+    free:      {title:'Travel Profile',sub:'ผลจาก quiz ของคุณ — ฟรี ไม่มีค่าใช้จ่าย',price:0,showMBTI:false,showHD:false,free:true},
+    essential: {title:'Craft Your Trip',sub:'monemoll_ อ่าน MBTI แล้วออกแบบทริปเฉพาะคุณ',price:888,showMBTI:true,showHD:false},
+    signature: {title:'Design Your Journey',sub:'MBTI + Human Design — ออกแบบทริปที่ชาร์จพลังงานได้จริง',price:1555,showMBTI:true,showHD:true},
+    premium:   {title:'Discover Yourself',sub:'MBTI + HD + โหราศาสตร์ — อ่านแผนที่พลังงานลึกที่สุด + itinerary จริง',price:2999,showMBTI:true,showHD:true},
   };
   let currentTier='signature',hdAdded=false;
 
