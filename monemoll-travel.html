@@ -1705,22 +1705,42 @@
   }
 
   const destinations = {
-    nan:{ country:'ไทย',city:'น่าน',flag:'🇹🇭', desc:'เมืองเก่าที่เดินช้าๆ ได้ทุกวัน วัดภูมินมีจิตรกรรมฝาผนังที่หาที่ไหนไม่ได้อีกแล้ว', nature:['mountain','forest'],art:['heritage','craft'],vibe:['slow','cozy'],scope:['domestic'],budget:['low','mid'], itinerary:['วันที่ 1 — เดินเมืองเก่า เช้าที่ตลาดนัด กาแฟริมน้ำน่าน','วันที่ 2 — วัดภูมิน ดูจิตรกรรม · ขับรถไปดอยภูคา','วันที่ 3 — ตลาดเช้าบ้านผาถ่าน · เดินทางกลับ']},
-    chiangrai:{ country:'ไทย',city:'เชียงราย',flag:'🇹🇭', desc:'มากกว่าวัดขาว — เชียงรายมีชุมชนชาติพันธุ์ ไร่ชา และหมอกยามเช้าที่ทำให้ลืมปฏิทิน', nature:['mountain','forest'],art:['heritage','contemporary','craft'],vibe:['offbeat','slow'],scope:['domestic'],budget:['low','mid'], itinerary:['วันที่ 1 — ดอยตุง · สวนแม่ฟ้าหลวง · กาแฟดอยช้าง','วันที่ 2 — วัดร่องขุ่น · วัดร่องเสือเต้น · ตลาดไนท์บาซาร์','วันที่ 3 — บ้านดำ · ชายแดนแม่สาย']},
-    kanchanaburi:{ country:'ไทย',city:'กาญจนบุรี',flag:'🇹🇭', desc:'ใกล้กรุงเทพแต่ vibe ต่างกันสิ้น แม่น้ำแควที่เงียบและประวัติศาสตร์ที่ยังมีลมหายใจ', nature:['forest'],art:['heritage','food'],vibe:['slow','cozy'],scope:['domestic'],budget:['low','mid'], itinerary:['วันที่ 1 — สะพานข้ามแม่น้ำแคว · พิพิธภัณฑ์สงคราม · นอนบนแพ','วันที่ 2 — น้ำตกเอราวัณ · ถ้ำ · กินข้าวริมน้ำ']},
-    kohsamui:{ country:'ไทย',city:'เกาะสมุย',flag:'🇹🇭', desc:'ทะเลใต้ที่ยังมีมุมเงียบ ถ้าหลีกเลี่ยงช่วง peak ได้จะเจอเกาะที่รู้สึกว่ามีไว้สำหรับคุณ', nature:['sea'],art:['food'],vibe:['slow','wild'],scope:['domestic'],budget:['mid','high'], itinerary:['วันที่ 1 — หาดเฉวงตอนเช้า · ตลาดฟิชเชอร์แมน','วันที่ 2 — หาดบ่อผุด · น้ำตกนาเมือง · sunset หัวหิน','วันที่ 3 — Ang Thong Marine Park day trip']},
-    maehongson:{ country:'ไทย',city:'แม่ฮ่องสอน',flag:'🇹🇭', desc:'เมืองที่ห่างไกลที่สุดของไทย — หมอก ชาวเขา และชีวิตที่เดินช้ากว่าที่อื่น', nature:['mountain','forest'],art:['heritage','craft'],vibe:['offbeat','slow'],scope:['domestic'],budget:['low','mid'], itinerary:['วันที่ 1 — วัดจองคำ · ทะเลสาบจองกลาง · ตลาดเช้า','วันที่ 2 — บ้านรักไทย · ปาย รอบเช้า','วันที่ 3 — ปาย · คาเฟ่ริมน้ำ']},
-    kyoto:{ country:'ญี่ปุ่น',city:'เกียวโต',flag:'🇯🇵', desc:'เมืองที่สอนให้เดินช้า มองตรงหน้า ไม่รีบ มีวัด ป่าไผ่ และร้านชาที่อยากกลับมาอีก', nature:['forest','mountain'],art:['heritage','craft','contemporary'],vibe:['slow','cozy'],scope:['asia'],budget:['mid','high'], itinerary:['วันที่ 1 — Arashiyama bamboo grove เช้าตรู่ · วัด Tenryu-ji · ย่าน Sagano','วันที่ 2 — Fushimi Inari เช้า · Gion เย็น · Nishiki Market','วันที่ 3 — Philosopher\'s Path · Nanzen-ji · Higashiyama']},
-    tokyo:{ country:'ญี่ปุ่น',city:'โตเกียว',flag:'🇯🇵', desc:'เมืองที่มีทุกอย่างอยู่ในที่เดียว — ยิ่งหลงยิ่งเจอของดี', nature:['city'],art:['contemporary','food','craft'],vibe:['wild','offbeat'],scope:['asia'],budget:['mid','high'], itinerary:['วันที่ 1 — Shimokitazawa · ร้านมือสอง · live house เล็กๆ','วันที่ 2 — Yanaka ย่านเก่า · Ueno Museum','วันที่ 3 — Harajuku · Meiji Shrine · Nakameguro canal']},
-    bali:{ country:'อินโดนีเซีย',city:'บาหลี (Ubud)',flag:'🇮🇩', desc:'Ubud ยังมีนาขั้นบันได วัด และชุมชนศิลปะที่ทำให้อยากอยู่ต่อ', nature:['forest','mountain','sea'],art:['craft','heritage','contemporary'],vibe:['slow','cozy'],scope:['asia'],budget:['low','mid'], itinerary:['วันที่ 1 — Tegalalang Rice Terrace เช้า · Ubud Market · Kecak dance','วันที่ 2 — Tirta Empul · Campuhan Ridge Walk · นวดแผนโบราณ','วันที่ 3 — Seminyak beach · sunset Tanah Lot']},
-    hanoi:{ country:'เวียดนาม',city:'ฮานอย',flag:'🇻🇳', desc:'เมืองหลวงที่ยังมีวิญญาณ เดินในย่านเก่า กิน Pho ตั้งแต่เช้า ดูชีวิตจริงของผู้คน', nature:['city'],art:['heritage','food'],vibe:['offbeat','cozy'],scope:['asia'],budget:['low','mid'], itinerary:['วันที่ 1 — Old Quarter · Ho Hoan Kiem · Train Street','วันที่ 2 — Temple of Literature · Hoan Kiem Lake เช้า · Beer corner','วันที่ 3 — Ha Long Bay day trip']},
-    seoul:{ country:'เกาหลี',city:'โซล',flag:'🇰🇷', desc:'โซลไม่ได้มีแค่ Myeongdong — Bukchon และ Hongdae มีชีวิตอีกแบบที่น่าค้นพบ', nature:['city','mountain'],art:['contemporary','food','craft'],vibe:['wild','cozy'],scope:['asia'],budget:['mid','high'], itinerary:['วันที่ 1 — Bukchon Hanok · Insadong · Gyeongbokgung','วันที่ 2 — Hongdae · Sinchon · street food tour','วันที่ 3 — Namsan Tower · Han River picnic']},
-    hoi_an:{ country:'เวียดนาม',city:'ฮอยอัน',flag:'🇻🇳', desc:'เมืองเก่าที่เดินได้ทั้งวัน โคมไฟส่องแม่น้ำยามค่ำ และร้านตัดผ้าที่ทำให้อยากซื้อเสื้อผ้าใหม่', nature:['sea','city'],art:['heritage','craft','food'],vibe:['slow','cozy'],scope:['asia'],budget:['low','mid'], itinerary:['วันที่ 1 — Ancient Town เดินเท้า · Japanese Bridge · ล่องเรือ','วันที่ 2 — Cooking class · ตลาดเช้า · ชายหาด An Bang','วันที่ 3 — My Son Sanctuary · ร้านตัดเสื้อ']},
-    lisbon:{ country:'โปรตุเกส',city:'ลิสบอน',flag:'🇵🇹', desc:'เมืองที่รู้สึกเหมือน "ค้นพบ" ได้ทุกวัน เนินเขา ราง tram เก่า Fado และอาหารทะเลที่ดีที่สุดในยุโรป', nature:['city','sea'],art:['heritage','contemporary','food'],vibe:['slow','offbeat'],scope:['far'],budget:['mid','high','flex'], itinerary:['วันที่ 1 — Alfama เดินเท้า · Castelo de São Jorge · Fado bar','วันที่ 2 — Belém · Pastéis de Belém · LX Factory','วันที่ 3 — Sintra day trip · Pena Palace · หาด Cascais']},
-    amsterdam:{ country:'เนเธอร์แลนด์',city:'อัมสเตอร์ดัม',flag:'🇳🇱', desc:'เมืองจักรยานและคลอง ที่ทุกย่านมีบุคลิกเป็นของตัวเอง — museum ที่ไม่น่าเบื่อเลย', nature:['city'],art:['contemporary','heritage'],vibe:['cozy','offbeat'],scope:['far'],budget:['high','flex'], itinerary:['วันที่ 1 — Rijksmuseum · Vondelpark · Jordaan','วันที่ 2 — Van Gogh Museum · Nine Streets · canal cruise','วันที่ 3 — NDSM Wharf street art · Haarlem day trip']},
-    tbilisi:{ country:'จอร์เจีย',city:'ทบิลิซี',flag:'🇬🇪', desc:'เมืองที่ยัง overtourism ยังไปไม่ถึง — สถาปัตยกรรมเก่า ไวน์ local และคนที่ warm มาก', nature:['mountain','city'],art:['heritage','craft','food'],vibe:['offbeat','cozy'],scope:['far'],budget:['low','mid'], itinerary:['วันที่ 1 — Old Town เดินเท้า · Narikala Fortress · อาบน้ำกำมะถัน','วันที่ 2 — Wine tasting · Mtatsminda Park · Fabrika market','วันที่ 3 — Kazbegi day trip · Trinity Church บนเขา']},
-    barcelona:{ country:'สเปน',city:'บาร์เซโลนา',flag:'🇪🇸', desc:'Gaudí ทำให้เมืองนี้ดูเหมือนหลุดออกจากจินตนาการ และ La Boqueria ทำให้กลับมาอีก', nature:['sea','city'],art:['contemporary','heritage','food'],vibe:['wild','slow'],scope:['far'],budget:['high','flex'], itinerary:['วันที่ 1 — Sagrada Família เช้า · Park Güell · El Born','วันที่ 2 — La Boqueria · Las Ramblas · Barceloneta beach','วันที่ 3 — Montjuïc · MNAC museum · tapas tour']},
-  };
+    nan:{country:'ไทย',city:'น่าน',flag:'🇹🇭',desc:'เมืองเก่าที่เดินช้าๆ ได้ทุกวัน วัดภูมินมีจิตรกรรมฝาผนังที่หาที่ไหนไม่ได้',nature:['mountain','forest'],art:['heritage','craft'],vibe:['slow','cozy'],scope:['domestic'],budget:['low','mid'],itinerary:['วันที่ 1 — เดินเมืองเก่า กาแฟริมน้ำน่าน','วันที่ 2 — วัดภูมิน · ดอยภูคา','วันที่ 3 — ตลาดเช้าบ้านผาถ่าน']},
+    chiangmai:{country:'ไทย',city:'เชียงใหม่',flag:'🇹🇭',desc:'เมืองที่มีคาเฟ่ทุกมุม นิมมาน วัดเก่า และตลาดกลางคืนที่ทำให้เดินได้ทั้งคืน',nature:['mountain','forest'],art:['heritage','contemporary','food'],vibe:['cozy','slow'],scope:['domestic'],budget:['low','mid'],itinerary:['วันที่ 1 — นิมมานเหมินท์ · ดอยสุเทพ','วันที่ 2 — วัดเจดีย์หลวง · ตลาดวโรรส','วันที่ 3 — ดอยอินทนนท์']},
+    chiangrai:{country:'ไทย',city:'เชียงราย',flag:'🇹🇭',desc:'มากกว่าวัดขาว — ชุมชนชาติพันธุ์ ไร่ชา และหมอกยามเช้าที่ทำให้ลืมปฏิทิน',nature:['mountain','forest'],art:['heritage','contemporary','craft'],vibe:['offbeat','slow'],scope:['domestic'],budget:['low','mid'],itinerary:['วันที่ 1 — ดอยตุง · สวนแม่ฟ้าหลวง','วันที่ 2 — วัดร่องขุ่น · ไนท์บาซาร์','วันที่ 3 — บ้านดำ · แม่สาย']},
+    lampang:{country:'ไทย',city:'ลำปาง',flag:'🇹🇭',desc:'เมืองรถม้าที่ยังมีชีวิต สถาปัตยกรรมล้านนาที่ไม่ถูก overtourism',nature:['city','forest'],art:['heritage','craft'],vibe:['slow','cozy'],scope:['domestic'],budget:['low','mid'],itinerary:['วันที่ 1 — วัดพระธาตุลำปางหลวง · ขี่รถม้า','วันที่ 2 — ย่านกาดกองต้า · คาเฟ่ริมน้ำวัง']},
+    phrae:{country:'ไทย',city:'แพร่',flag:'🇹🇭',desc:'เมืองเก่าที่ยังไม่ถูกค้นพบ บ้านวงศ์บุรี และบรรยากาศที่เหมือนหยุดเวลาไว้',nature:['city','forest'],art:['heritage','craft'],vibe:['slow','offbeat'],scope:['domestic'],budget:['low'],itinerary:['วันที่ 1 — บ้านวงศ์บุรี · วัดหลวง · เดินเมืองเก่า','วันที่ 2 — วัดพระธาตุช่อแฮ']},
+    maehongson:{country:'ไทย',city:'แม่ฮ่องสอน',flag:'🇹🇭',desc:'เมืองที่ห่างไกลที่สุดของไทย — หมอก ชาวเขา และชีวิตที่เดินช้ากว่าที่อื่น',nature:['mountain','forest'],art:['heritage','craft'],vibe:['offbeat','slow'],scope:['domestic'],budget:['low','mid'],itinerary:['วันที่ 1 — วัดจองคำ · ทะเลสาบจองกลาง','วันที่ 2 — บ้านรักไทย · ปายรอบเช้า','วันที่ 3 — ปาย · คาเฟ่ริมน้ำ']},
+    loei:{country:'ไทย',city:'เลย',flag:'🇹🇭',desc:'ภูกระดึง ภูหินร่องกล้า และอากาศหนาวที่สุดในไทย สำหรับคนอยากรู้สึกว่าไม่ได้อยู่ในไทย',nature:['mountain','forest'],art:['heritage'],vibe:['offbeat','slow'],scope:['domestic'],budget:['low','mid'],itinerary:['วันที่ 1 — ภูกระดึง เดินทางขึ้น · ตั้งแคมป์','วันที่ 2 — เดินชมธรรมชาติบนภู','วันที่ 3 — เดินลงและเดินทางกลับ']},
+    khonkaen:{country:'ไทย',city:'ขอนแก่น',flag:'🇹🇭',desc:'เมืองมหาวิทยาลัยที่มีพลังงานดี อาหารอีสานจริงๆ และทะเลสาบที่นั่งเล่นได้ทั้งวัน',nature:['city'],art:['food','contemporary'],vibe:['cozy','slow'],scope:['domestic'],budget:['low','mid'],itinerary:['วันที่ 1 — บึงแก่นนคร · ตลาดกลางคืน','วันที่ 2 — พิพิธภัณฑ์ไดโนเสาร์ · วัดหนองแวง']},
+    ubonratchathani:{country:'ไทย',city:'อุบลราชธานี',flag:'🇹🇭',desc:'ปลายทางของแม่น้ำโขง แกรนด์แคนยอนไทย และวัฒนธรรมอีสานที่ยังดิบอยู่',nature:['forest','mountain'],art:['heritage','craft','food'],vibe:['offbeat','slow'],scope:['domestic'],budget:['low','mid'],itinerary:['วันที่ 1 — ผาแต้ม · พระอาทิตย์ขึ้นเหนือโขง','วันที่ 2 — สามพันโบก · แกรนด์แคนยอนไทย']},
+    nakhonratchasima:{country:'ไทย',city:'นครราชสีมา',flag:'🇹🇭',desc:'ประตูสู่อีสาน อุทยานเขาใหญ่ และย่านเก่าที่มีเรื่องราวของย่าโม',nature:['forest','mountain'],art:['heritage','food'],vibe:['slow','cozy'],scope:['domestic'],budget:['low','mid'],itinerary:['วันที่ 1 — เขาใหญ่ · ดูช้างและสัตว์ป่า','วันที่ 2 — อนุสาวรีย์ย่าโม · เมืองเก่า']},
+    kanchanaburi:{country:'ไทย',city:'กาญจนบุรี',flag:'🇹🇭',desc:'ใกล้กรุงเทพแต่ vibe ต่างกันสิ้น แม่น้ำแควที่เงียบและประวัติศาสตร์ที่ยังมีลมหายใจ',nature:['forest'],art:['heritage','food'],vibe:['slow','cozy'],scope:['domestic'],budget:['low','mid'],itinerary:['วันที่ 1 — สะพานข้ามแม่น้ำแคว · นอนบนแพ','วันที่ 2 — น้ำตกเอราวัณ · ถ้ำ']},
+    ayutthaya:{country:'ไทย',city:'พระนครศรีอยุธยา',flag:'🇹🇭',desc:'อดีตราชธานีที่ยังหายใจอยู่ ขี่จักรยานผ่านวัดพังๆ และรู้สึกถึงความยิ่งใหญ่',nature:['city'],art:['heritage'],vibe:['slow','cozy'],scope:['domestic'],budget:['low','mid'],itinerary:['วันที่ 1 — วัดมหาธาตุ · วัดพระศรีสรรเพชญ์ · ขี่จักรยาน','วันที่ 2 — วัดใหญ่ชัยมงคล · ตลาดน้ำ']},
+    khaoyai:{country:'ไทย',city:'เขาใหญ่',flag:'🇹🇭',desc:'ป่ามรดกโลกใกล้กรุงเทพ น้ำตก ช้างป่า คาเฟ่สไตล์ยุโรปและอากาศดีตลอดปี',nature:['forest','mountain'],art:['food','contemporary'],vibe:['slow','cozy'],scope:['domestic'],budget:['mid','high'],itinerary:['วันที่ 1 — อุทยานเขาใหญ่ · ดูสัตว์ป่า','วันที่ 2 — น้ำตกเหวนรก · คาเฟ่ริมป่า']},
+    phetchaburi:{country:'ไทย',city:'เพชรบุรี',flag:'🇹🇭',desc:'เมืองขนมหวานที่มีประวัติศาสตร์ยาวนาน พระนครคีรี และชายหาดชะอำใกล้ๆ',nature:['sea','mountain'],art:['heritage','food'],vibe:['slow','cozy'],scope:['domestic'],budget:['low','mid'],itinerary:['วันที่ 1 — พระนครคีรี · เดินย่านเมืองเก่า','วันที่ 2 — ถ้ำเขาหลวง · ชายหาดชะอำ']},
+    kohsamui:{country:'ไทย',city:'เกาะสมุย',flag:'🇹🇭',desc:'ทะเลใต้ที่ยังมีมุมเงียบ ถ้าหลีกเลี่ยงช่วง peak ได้จะเจอเกาะที่รู้สึกว่ามีไว้สำหรับคุณ',nature:['sea'],art:['food'],vibe:['slow','wild'],scope:['domestic'],budget:['mid','high'],itinerary:['วันที่ 1 — หาดเฉวงตอนเช้า · ตลาดฟิชเชอร์แมน','วันที่ 2 — หาดบ่อผุด · น้ำตกนาเมือง','วันที่ 3 — Ang Thong Marine Park']},
+    krabi:{country:'ไทย',city:'กระบี่',flag:'🇹🇭',desc:'หน้าผาหินปูนที่สวยที่สุดในโลก เกาะพีพี และหาดไร่เลย์ที่ไปได้แค่ทางเรือ',nature:['sea','mountain'],art:['food'],vibe:['wild','slow'],scope:['domestic'],budget:['mid','high'],itinerary:['วันที่ 1 — อ่าวนาง · ล่องเรือเที่ยวเกาะ','วันที่ 2 — ไร่เลย์ · ถ้ำพระนาง','วันที่ 3 — เกาะพีพี']},
+    kohphangan:{country:'ไทย',city:'เกาะพะงัน',flag:'🇹🇭',desc:'มากกว่า Full Moon Party — หาดเงียบๆ น้ำตกในป่า และ vibe ที่สบายกว่าที่คิด',nature:['sea','forest'],art:['food'],vibe:['wild','offbeat'],scope:['domestic'],budget:['low','mid'],itinerary:['วันที่ 1 — หาดทองนาย · ธรรมชาติบนเกาะ','วันที่ 2 — น้ำตกธารปาหลัน · สนอร์เกิ้ล']},
+    trang:{country:'ไทย',city:'ตรัง',flag:'🇹🇭',desc:'ทะเลอันดามันที่ยังไม่ถูกรุกราน หาดสวย ถ้ำทะเล และอาหารใต้ที่ดีที่สุด',nature:['sea','forest'],art:['food','heritage'],vibe:['offbeat','slow'],scope:['domestic'],budget:['low','mid'],itinerary:['วันที่ 1 — เกาะเชือก · ถ้ำมรกต','วันที่ 2 — หาดปากเมง · อาหารเช้าสไตล์ตรัง']},
+    songkhla:{country:'ไทย',city:'สงขลา',flag:'🇹🇭',desc:'เมืองเก่าที่ไม่ค่อยมีคนรู้จัก street art มีชีวิต ทะเลสาบสงขลา และอาหารต่างจากที่อื่น',nature:['sea','city'],art:['contemporary','heritage','food'],vibe:['offbeat','cozy'],scope:['domestic'],budget:['low','mid'],itinerary:['วันที่ 1 — เมืองเก่าสงขลา · street art','วันที่ 2 — หาดสมิหลา · ทะเลสาบสงขลา']},
+    hanoi:{country:'เวียดนาม',city:'ฮานอย',flag:'🇻🇳',desc:'เมืองหลวงที่ยังมีวิญญาณ เดินในย่านเก่า กิน Pho ตั้งแต่เช้า ดูชีวิตจริงของผู้คน',nature:['city'],art:['heritage','food'],vibe:['offbeat','cozy'],scope:['asia'],budget:['low','mid'],itinerary:['วันที่ 1 — Old Quarter · Hoan Kiem · Train Street','วันที่ 2 — Temple of Literature · Beer corner','วันที่ 3 — Ha Long Bay day trip']},
+    hoi_an:{country:'เวียดนาม',city:'ฮอยอัน',flag:'🇻🇳',desc:'เมืองเก่าที่เดินได้ทั้งวัน โคมไฟส่องแม่น้ำยามค่ำ และร้านตัดผ้าที่ทำให้อยากซื้อใหม่',nature:['sea','city'],art:['heritage','craft','food'],vibe:['slow','cozy'],scope:['asia'],budget:['low','mid'],itinerary:['วันที่ 1 — Ancient Town · Japanese Bridge · ล่องเรือ','วันที่ 2 — Cooking class · ชายหาด An Bang','วันที่ 3 — My Son Sanctuary']},
+    bali:{country:'อินโดนีเซีย',city:'บาหลี (Ubud)',flag:'🇮🇩',desc:'Ubud ยังมีนาขั้นบันได วัด และชุมชนศิลปะที่ทำให้อยากอยู่ต่อ',nature:['forest','mountain','sea'],art:['craft','heritage','contemporary'],vibe:['slow','cozy'],scope:['asia'],budget:['low','mid'],itinerary:['วันที่ 1 — Tegalalang Rice Terrace · Ubud Market','วันที่ 2 — Tirta Empul · Campuhan Ridge Walk','วันที่ 3 — Seminyak · sunset Tanah Lot']},
+    luangprabang:{country:'ลาว',city:'หลวงพระบาง',flag:'🇱🇦',desc:'เมืองมรดกโลกที่เวลาเดินช้ากว่าที่อื่น ตักบาตรยามเช้า น้ำตกกวางสี และแม่น้ำโขง',nature:['forest','mountain'],art:['heritage','craft','food'],vibe:['slow','cozy'],scope:['asia'],budget:['low','mid'],itinerary:['วันที่ 1 — ตักบาตรยามเช้า · วัดเชียงทอง · ตลาดกลางคืน','วันที่ 2 — น้ำตกกวางสี · ล่องเรือโขง','วันที่ 3 — ถ้ำปากอู']},
+    yangon:{country:'พม่า',city:'ย่างกุ้ง',flag:'🇲🇲',desc:'เมืองที่ยังมีชั้นประวัติศาสตร์อยู่ครบ เจดีย์ชเวดากอง และย่านเก่าที่รอคนมาสำรวจ',nature:['city'],art:['heritage','food'],vibe:['offbeat','slow'],scope:['asia'],budget:['low','mid'],itinerary:['วันที่ 1 — เจดีย์ชเวดากอง · ย่านเมืองเก่า','วันที่ 2 — Circular Train · ตลาด Bogyoke']},
+    tbilisi:{country:'จอร์เจีย',city:'ทบิลิซี',flag:'🇬🇪',desc:'เมืองที่ overtourism ยังไปไม่ถึง — สถาปัตยกรรมเก่า ไวน์ local และคนที่ warm มาก',nature:['mountain','city'],art:['heritage','craft','food'],vibe:['offbeat','cozy'],scope:['far'],budget:['low','mid'],itinerary:['วันที่ 1 — Old Town · Narikala · อาบน้ำกำมะถัน','วันที่ 2 — Wine tasting · Fabrika market','วันที่ 3 — Kazbegi day trip']},
+    kyoto:{country:'ญี่ปุ่น',city:'เกียวโต',flag:'🇯🇵',desc:'เมืองที่สอนให้เดินช้า มองตรงหน้า ไม่รีบ มีวัด ป่าไผ่ และร้านชาที่อยากกลับมาอีก',nature:['forest','mountain'],art:['heritage','craft','contemporary'],vibe:['slow','cozy'],scope:['asia'],budget:['mid','high'],itinerary:['วันที่ 1 — Arashiyama bamboo grove · วัด Tenryu-ji','วันที่ 2 — Fushimi Inari · Gion · Nishiki Market','วันที่ 3 — Philosopher Path · Nanzen-ji']},
+    tokyo:{country:'ญี่ปุ่น',city:'โตเกียว',flag:'🇯🇵',desc:'เมืองที่มีทุกอย่างอยู่ในที่เดียว — ยิ่งหลงยิ่งเจอของดี',nature:['city'],art:['contemporary','food','craft'],vibe:['wild','offbeat'],scope:['asia'],budget:['mid','high'],itinerary:['วันที่ 1 — Shimokitazawa · ร้านมือสอง','วันที่ 2 — Yanaka ย่านเก่า · Ueno Museum','วันที่ 3 — Harajuku · Meiji Shrine']},
+    osaka:{country:'ญี่ปุ่น',city:'โอซาก้า',flag:'🇯🇵',desc:'เมืองที่คนกินเก่งที่สุดในญี่ปุ่น Dotonbori ไฟสว่างตลอดคืน และ takoyaki ทุกมุม',nature:['city'],art:['food','contemporary'],vibe:['wild','cozy'],scope:['asia'],budget:['mid','high'],itinerary:['วันที่ 1 — Dotonbori · Shinsaibashi · street food','วันที่ 2 — Osaka Castle · Kuromon Market','วันที่ 3 — Nara day trip · กวางอิสระ']},
+    seoul:{country:'เกาหลี',city:'โซล',flag:'🇰🇷',desc:'โซลไม่ได้มีแค่ Myeongdong — Bukchon และ Hongdae มีชีวิตอีกแบบที่น่าค้นพบ',nature:['city','mountain'],art:['contemporary','food','craft'],vibe:['wild','cozy'],scope:['asia'],budget:['mid','high'],itinerary:['วันที่ 1 — Bukchon Hanok · Gyeongbokgung','วันที่ 2 — Hongdae · street food tour','วันที่ 3 — Namsan Tower · Han River']},
+    taipei:{country:'ไต้หวัน',city:'ไทเป',flag:'🇹🇼',desc:'เมืองที่กิน street food ได้ทุก 10 เมตร คนดีมาก ระบบขนส่งดีที่สุดในเอเชีย',nature:['city','mountain'],art:['contemporary','food','heritage'],vibe:['cozy','offbeat'],scope:['asia'],budget:['mid','high'],itinerary:['วันที่ 1 — Jiufen · ทะเลสาบ Ruifang','วันที่ 2 — Shilin Night Market · Taipei 101','วันที่ 3 — Elephant Mountain · Da an Park']},
+    singapore:{country:'สิงคโปร์',city:'สิงคโปร์',flag:'🇸🇬',desc:'เมืองที่สะอาดที่สุด อาหารดีที่สุด และ hawker center ที่ทำให้ไม่อยากกลับบ้าน',nature:['city'],art:['contemporary','food','heritage'],vibe:['cozy','wild'],scope:['asia'],budget:['mid','high'],itinerary:['วันที่ 1 — Gardens by the Bay · Marina Bay','วันที่ 2 — Chinatown · Maxwell Hawker','วันที่ 3 — Sentosa · Haji Lane']},
+    lisbon:{country:'โปรตุเกส',city:'ลิสบอน',flag:'🇵🇹',desc:'เมืองที่รู้สึกเหมือน "ค้นพบ" ได้ทุกวัน เนินเขา ราง tram เก่า Fado และอาหารทะเล',nature:['city','sea'],art:['heritage','contemporary','food'],vibe:['slow','offbeat'],scope:['far'],budget:['mid','high','flex'],itinerary:['วันที่ 1 — Alfama · Castelo · Fado bar','วันที่ 2 — Belém · LX Factory','วันที่ 3 — Sintra day trip']},
+    amsterdam:{country:'เนเธอร์แลนด์',city:'อัมสเตอร์ดัม',flag:'🇳🇱',desc:'เมืองจักรยานและคลอง ที่ทุกย่านมีบุคลิกเป็นของตัวเอง — museum ที่ไม่น่าเบื่อเลย',nature:['city'],art:['contemporary','heritage'],vibe:['cozy','offbeat'],scope:['far'],budget:['high','flex'],itinerary:['วันที่ 1 — Rijksmuseum · Vondelpark · Jordaan','วันที่ 2 — Van Gogh Museum · canal cruise','วันที่ 3 — NDSM Wharf · Haarlem']},
+    prague:{country:'เช็กเกีย',city:'ปราก',flag:'🇨🇿',desc:'เมืองเทพนิยายที่สะพานชาร์ลส์และปราสาทโกธิคยังงดงามทุกเช้า งบไม่แพงเมื่อเทียบกับยุโรปตะวันตก',nature:['city'],art:['heritage','contemporary','food'],vibe:['slow','cozy'],scope:['far'],budget:['mid','high'],itinerary:['วันที่ 1 — Old Town Square · Charles Bridge','วันที่ 2 — Prague Castle · Lesser Town','วันที่ 3 — Vinohrady ย่าน local']},
+    barcelona:{country:'สเปน',city:'บาร์เซโลนา',flag:'🇪🇸',desc:'Gaudi ทำให้เมืองนี้ดูเหมือนหลุดออกจากจินตนาการ และ La Boqueria ทำให้กลับมาอีก',nature:['sea','city'],art:['contemporary','heritage','food'],vibe:['wild','slow'],scope:['far'],budget:['high','flex'],itinerary:['วันที่ 1 — Sagrada Familia · Park Guell','วันที่ 2 — La Boqueria · Barceloneta beach','วันที่ 3 — Montjuic · tapas tour']},
+  };;
 
   const mbtiInsights = {
     INTJ:'INTJ ชาร์จพลังในที่เงียบและมีความหมาย ทริปที่ดีสำหรับคุณคือมีเวลาคิดคนเดียว ที่พักที่ดี และ itinerary ที่ไม่แน่นจนเกินไป',
@@ -1760,10 +1780,13 @@
   }
 
   const profiles = {
-    recharge:{type:'The Quiet Wanderer',title:'นักเดินทางผู้เงียบงาม',desc:'คุณเดินทางเพื่อ restore ไม่ใช่เพื่อ check-in ทริปที่ใช่คือที่ที่ไม่ต้องรีบ ไม่ต้องอธิบาย แค่ได้เป็นตัวเอง'},
-    reset:{type:'The Gentle Reset',title:'นักหนีชีวิตฉบับ soft',desc:'คุณไม่ได้อยากหนีทุกอย่าง แค่อยากออกไปหายใจ ทริปสั้น 2–3 วันที่ vibe ดี กินอาหารอร่อย เปลี่ยนวิว นั่นพอแล้ว'},
-    explore:{type:'The Curious Soul',title:'นักสำรวจตัวจริง',desc:'คุณชาร์จพลังด้วยประสบการณ์ใหม่ๆ อยากค้นพบที่ที่ไม่มีใครรู้จัก ลองอาหารที่ไม่มีในเมนู และพูดคุยกับคนแปลกหน้า'},
-    connect:{type:'The Heartful Traveler',title:'นักเดินทางแห่งการเชื่อมต่อ',desc:'คุณเดินทางเพื่อสัมผัสชีวิตจริงของที่นั่น ผู้คน อาหาร เรื่องราว ทริปที่ดีทำให้รู้สึกว่าได้รู้จักอะไรบางอย่างที่แท้จริง'},
+    recharge: {type:'The Quiet Wanderer',title:'นักเดินทางผู้เงียบงาม',desc:'คุณเดินทางเพื่อ restore ไม่ใช่เพื่อ check-in ทริปที่ใช่คือที่ที่ไม่ต้องรีบ ไม่ต้องอธิบาย แค่ได้เป็นตัวเอง'},
+    reset:    {type:'The Gentle Reset',title:'นักหนีชีวิตฉบับ soft',desc:'คุณไม่ได้อยากหนีทุกอย่าง แค่อยากออกไปหายใจ ทริปสั้น 2–3 วันที่ vibe ดี กินอาหารอร่อย เปลี่ยนวิว นั่นพอแล้ว'},
+    explore:  {type:'The Curious Soul',title:'นักสำรวจตัวจริง',desc:'คุณชาร์จพลังด้วยประสบการณ์ใหม่ๆ อยากค้นพบที่ที่ไม่มีใครรู้จัก ลองอาหารที่ไม่มีในเมนู และพูดคุยกับคนแปลกหน้า'},
+    connect:  {type:'The Heartful Traveler',title:'นักเดินทางแห่งการเชื่อมต่อ',desc:'คุณเดินทางเพื่อสัมผัสชีวิตจริงของที่นั่น ผู้คน อาหาร เรื่องราว ทริปที่ดีทำให้รู้สึกว่าได้รู้จักอะไรบางอย่างที่แท้จริง'},
+    still:    {type:'The Still Seeker',title:'นักเดินทางแห่งความเงียบภายใน',desc:'คุณไม่ได้มองหาที่ใหม่ แต่มองหาตัวเองใหม่ในที่เดิม ทริปที่ดีที่สุดของคุณคือที่ที่ไม่มีเสียง ไม่มีแผน แค่นั่งอยู่กับตัวเองได้จริงๆ'},
+    transform:{type:'The Transformer',title:'นักเปลี่ยนผ่านตัวเอง',desc:'คุณรู้ว่าตัวเองกำลังอยู่ในช่วงเปลี่ยน และทริปคือพื้นที่ปลอดภัยสำหรับการเป็นคนใหม่ คุณไม่ได้หนีจากอะไร คุณกำลังเดินเข้าหาอะไรบางอย่าง'},
+    drift:    {type:'The Free Drifter',title:'นักปล่อยวางผู้กล้า',desc:'คุณชาร์จพลังด้วยการไม่รู้ว่าวันพรุ่งนี้จะเป็นยังไง ทริปที่ดีที่สุดของคุณคือที่ที่ไม่มีแผน มีแค่ตั๋วและความอยากรู้'},
   };
 
   const budgetLabels={low:'น้อยกว่า 3,000',mid:'3,000–8,000',high:'8,000–20,000',flex:'ขึ้นอยู่กับที่'};
@@ -1818,6 +1841,40 @@
         <ellipse cx="430" cy="15" rx="100" ry="38" fill="#D8B0BC" opacity="0.35" filter="url(#blur4)"/>
         <text x="50%" y="58%" text-anchor="middle" font-family="Georgia,serif" font-size="11" fill="#8B4A5A" opacity="0.5" letter-spacing="3">THE HEARTFUL TRAVELER</text>
       </svg>`,
+      still: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 120" preserveAspectRatio="xMidYMid slice">
+        <defs><filter id="blur5"><feGaussianBlur stdDeviation="10"/></filter></defs>
+        <rect width="600" height="120" fill="#1A1A2E"/>
+        <ellipse cx="100" cy="100" rx="200" ry="90" fill="#2A2A4A" opacity="0.8" filter="url(#blur5)"/>
+        <ellipse cx="400" cy="30" rx="180" ry="60" fill="#3A3A5C" opacity="0.6" filter="url(#blur5)"/>
+        <ellipse cx="520" cy="80" rx="120" ry="50" fill="#4A4A6C" opacity="0.5" filter="url(#blur5)"/>
+        <ellipse cx="280" cy="60" rx="100" ry="40" fill="#5A5A8A" opacity="0.3" filter="url(#blur5)"/>
+        <circle cx="480" cy="25" r="3" fill="#E8E0F0" opacity="0.6"/>
+        <circle cx="320" cy="15" r="2" fill="#E8E0F0" opacity="0.5"/>
+        <circle cx="150" cy="35" r="2.5" fill="#E8E0F0" opacity="0.4"/>
+        <circle cx="560" cy="50" r="2" fill="#E8E0F0" opacity="0.5"/>
+        <circle cx="80" cy="20" r="1.5" fill="#E8E0F0" opacity="0.4"/>
+        <text x="50%" y="60%" text-anchor="middle" font-family="Georgia,serif" font-size="11" fill="#C8C0E0" opacity="0.5" letter-spacing="3">THE STILL SEEKER</text>
+      </svg>`,
+      transform: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 120" preserveAspectRatio="xMidYMid slice">
+        <defs><filter id="blur6"><feGaussianBlur stdDeviation="8"/></filter></defs>
+        <rect width="600" height="120" fill="#F0EBF5"/>
+        <ellipse cx="80" cy="90" rx="160" ry="80" fill="#C8A8D8" opacity="0.4" filter="url(#blur6)"/>
+        <ellipse cx="300" cy="40" rx="220" ry="65" fill="#B890C8" opacity="0.35" filter="url(#blur6)"/>
+        <ellipse cx="520" cy="75" rx="140" ry="55" fill="#D4B8E0" opacity="0.3" filter="url(#blur6)"/>
+        <ellipse cx="180" cy="20" rx="100" ry="40" fill="#E8D4F0" opacity="0.4" filter="url(#blur6)"/>
+        <ellipse cx="450" cy="100" rx="90" ry="35" fill="#C0A0D0" opacity="0.35" filter="url(#blur6)"/>
+        <text x="50%" y="58%" text-anchor="middle" font-family="Georgia,serif" font-size="11" fill="#7A5090" opacity="0.5" letter-spacing="3">THE TRANSFORMER</text>
+      </svg>`,
+      drift: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 120" preserveAspectRatio="xMidYMid slice">
+        <defs><filter id="blur7"><feGaussianBlur stdDeviation="9"/></filter></defs>
+        <rect width="600" height="120" fill="#E8F4F8"/>
+        <ellipse cx="60" cy="70" rx="150" ry="75" fill="#88C4D8" opacity="0.4" filter="url(#blur7)"/>
+        <ellipse cx="280" cy="40" rx="210" ry="60" fill="#70B0C8" opacity="0.35" filter="url(#blur7)"/>
+        <ellipse cx="500" cy="80" rx="150" ry="55" fill="#58A0B8" opacity="0.3" filter="url(#blur7)"/>
+        <ellipse cx="160" cy="95" rx="120" ry="40" fill="#A8D4E4" opacity="0.35" filter="url(#blur7)"/>
+        <ellipse cx="420" cy="15" rx="100" ry="35" fill="#C0E4F0" opacity="0.4" filter="url(#blur7)"/>
+        <text x="50%" y="58%" text-anchor="middle" font-family="Georgia,serif" font-size="11" fill="#3A7A94" opacity="0.5" letter-spacing="3">THE FREE DRIFTER</text>
+      </svg>`,
     };
     return w[profileKey] || w['explore'];
   }
@@ -1828,8 +1885,17 @@
   }
 
   function showResult() {
-    const key=answers[0]||'explore';
-    const p=profiles[key];
+    const mood = answers[0] || 'explore';
+    const energy = answers[1] || 'solo';
+    let key = mood;
+    if (mood==='recharge' && energy==='solo') key='still';
+    else if (mood==='recharge') key='recharge';
+    else if (mood==='reset') key='reset';
+    else if (mood==='explore' && energy==='experience') key='drift';
+    else if (mood==='explore') key='explore';
+    else if (mood==='connect' && energy==='solo') key='transform';
+    else if (mood==='connect') key='connect';
+    const p=profiles[key] || profiles['explore'];
     document.getElementById('result-type').textContent=p.type;
     document.getElementById('result-title').textContent=p.title;
     document.getElementById('result-desc').textContent=p.desc;
