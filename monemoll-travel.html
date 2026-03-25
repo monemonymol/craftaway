@@ -1616,18 +1616,44 @@
         <textarea class="form-input" style="min-height:80px; resize:vertical;" placeholder="เช่น อยากหนีไปคนเดียว งบ 3,000 มีเวลา 2 วัน..."></textarea>
       </div>
 
-      <button class="pay-btn" id="pay-btn-main" onclick="handlePay()">ชำระเงิน <span id="pay-btn-price">฿1,290</span></button>
+      <button class="pay-btn" id="pay-btn-main" onclick="handlePay()">ชำระเงิน <span id="pay-btn-price">฿1,499</span></button>
       <div class="pay-secure">
         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
-        ชำระผ่านช่องทางปลอดภัย
+        ชำระผ่าน PromptPay — ปลอดภัย ไม่มีค่าธรรมเนียม
       </div>
     </div>
 
-    <!-- Success state -->
+    <!-- PromptPay QR state -->
+    <div class="success-state" id="modal-qr" style="display:none;">
+      <div style="font-size:13px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--moss);margin-bottom:16px;">ขั้นตอนการชำระเงิน</div>
+
+      <!-- QR Code via PromptPay -->
+      <div style="background:var(--cream);border-radius:20px;padding:24px 20px;margin-bottom:20px;border:1px solid var(--cream-dark);">
+        <div style="font-size:13px;font-weight:300;color:var(--charcoal-soft);margin-bottom:14px;">สแกน QR หรือโอนเข้าเบอร์ PromptPay</div>
+        <img id="qr-img" src="" alt="PromptPay QR" style="width:180px;height:180px;border-radius:12px;display:block;margin:0 auto 14px;">
+        <div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:400;color:var(--charcoal);margin-bottom:4px;" id="qr-amount"></div>
+        <div style="font-size:13px;color:var(--charcoal-soft);">เบอร์ PromptPay: <b style="color:var(--charcoal);">097-280-9498</b></div>
+        <div style="font-size:12px;color:var(--charcoal-soft);margin-top:4px;opacity:0.7;">ชื่อบัญชี: monemoll_</div>
+      </div>
+
+      <!-- Step 2: Send slip -->
+      <div style="background:rgba(107,124,92,0.07);border-radius:16px;padding:18px 20px;margin-bottom:20px;text-align:left;">
+        <div style="font-size:13px;font-weight:500;color:var(--charcoal);margin-bottom:10px;">หลังโอนแล้ว ส่งสลิปมาที่</div>
+        <a href="https://instagram.com/monemoll_" target="_blank" style="display:inline-flex;align-items:center;gap:8px;background:var(--moss);color:var(--white);padding:10px 20px;border-radius:99px;text-decoration:none;font-size:14px;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='var(--moss-dark)'" onmouseout="this.style.background='var(--moss)'">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+          DM @monemoll_ ทาง Instagram
+        </a>
+        <div style="font-size:12px;color:var(--charcoal-soft);margin-top:10px;line-height:1.6;">แนบสลิป + บอกชื่อและ tier ที่สั่ง<br>monemoll_ จะยืนยันและเริ่มทำภายใน 24 ชม.</div>
+      </div>
+
+      <button class="btn-primary" onclick="closeModal()" style="width:100%;">รับทราบ กลับหน้าหลัก</button>
+    </div>
+
+    <!-- Success state (free tier) -->
     <div class="success-state" id="modal-success">
       <div class="success-icon">🌿</div>
-      <div class="success-title" id="success-title">ได้รับแล้ว ขอบคุณนะ</div>
-      <p class="success-desc" id="success-desc">monemoll_ จะส่งผลให้คุณภายใน 3–5 วัน ทาง email หรือ DM ที่ระบุไว้</p>
+      <div class="success-title" id="success-title">เย้ ได้ profile แล้ว!</div>
+      <p class="success-desc" id="success-desc">ลองเลื่อนขึ้นไปดู travel profile ของคุณได้เลย</p>
       <button class="btn-primary" onclick="closeModal()">กลับ</button>
     </div>
   </div>
@@ -1934,7 +1960,12 @@
     document.getElementById('modal').classList.add('open');
     document.body.style.overflow='hidden';
   }
-  function closeModal(){document.getElementById('modal').classList.remove('open');document.body.style.overflow='';}
+  function closeModal(){
+    document.getElementById('modal').classList.remove('open');
+    document.body.style.overflow='';
+    document.getElementById('modal-qr').style.display='none';
+    document.getElementById('modal-success').style.display='none';
+  }
   function closeModalOutside(e){if(e.target===document.getElementById('modal'))closeModal();}
 
   function toggleHD(){
@@ -1959,25 +1990,35 @@
     const mbtiSelected=document.querySelector('#mbti-section .mbti-btn.selected');
     const hdTypeEl=document.querySelector('#hd-input-section select');
     const total=hdAdded?t.price+500:t.price;
-    if(!t.free){
-      sbPost('orders',{
-        user_name:nameEl?.value||null,
-        user_email:emailEl?.value||null,
-        ig_or_line:igEl?.value||null,
-        tier:currentTier,
-        tier_price:t.price,
-        hd_addon:hdAdded,
-        total_price:total,
-        mbti_type:mbtiSelected?.textContent||null,
-        hd_type:hdTypeEl?.value||null,
-        trip_note:noteEl?.value||null,
-        status:'pending'
-      });
+
+    if(t.free){
+      document.getElementById('modal-form').style.display='none';
+      document.getElementById('modal-success').style.display='block';
+      document.getElementById('success-title').textContent='เย้ ได้ profile แล้ว!';
+      document.getElementById('success-desc').textContent='ลองเลื่อนขึ้นไปดู travel profile ของคุณได้เลย';
+      return;
     }
+
+    sbPost('orders',{
+      user_name:nameEl?.value||null,
+      user_email:emailEl?.value||null,
+      ig_or_line:igEl?.value||null,
+      tier:currentTier,
+      tier_price:t.price,
+      hd_addon:hdAdded,
+      total_price:total,
+      mbti_type:mbtiSelected?.textContent||null,
+      hd_type:hdTypeEl?.value||null,
+      trip_note:noteEl?.value||null,
+      status:'pending'
+    });
+
+    const phone='0972809498';
+    const qrUrl=`https://promptpay.io/${phone}/${total}.png`;
+    document.getElementById('qr-img').src=qrUrl;
+    document.getElementById('qr-amount').textContent='฿'+total.toLocaleString();
     document.getElementById('modal-form').style.display='none';
-    document.getElementById('modal-success').style.display='block';
-    if(t.free){document.getElementById('success-title').textContent='เย้ ได้ profile แล้ว!';document.getElementById('success-desc').textContent='ลองเลื่อนขึ้นไปดู travel profile ของคุณได้เลย';}
-    else{document.getElementById('success-title').textContent='ได้รับแล้ว ขอบคุณนะ';document.getElementById('success-desc').textContent='monemoll_ จะส่งผลให้คุณภายใน 3–5 วัน ทาง email หรือ DM ที่ระบุไว้';}
+    document.getElementById('modal-qr').style.display='block';
   }
 
   renderUserBar();
