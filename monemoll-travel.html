@@ -1248,32 +1248,54 @@
         <h3 class="quiz-q" style="margin-bottom:6px;">นี่คือ travel profile ของคุณ ✦</h3>
         <p style="font-size:13px;color:var(--charcoal-soft);font-weight:300;margin-bottom:24px;">จาก 11 คำตอบของคุณ</p>
 
-        <!-- Profile card -->
+        <!-- Profile card — teaser (เห็นได้ทุกคน) -->
         <div class="result-card" id="result-card" style="margin-bottom:20px;overflow:hidden;">
           <div id="result-watercolor" style="width:100%;height:120px;margin:-1px -1px 16px -1px;border-radius:16px 16px 0 0;overflow:hidden;"></div>
           <div class="result-type" id="result-type"></div>
           <div class="result-title" id="result-title"></div>
           <p class="result-desc" id="result-desc"></p>
-          <div id="mbti-insight" style="display:none;background:rgba(155,139,180,0.08);border-radius:10px;padding:10px 14px;margin:12px 0;font-size:13px;color:var(--charcoal-soft);line-height:1.7;border-left:3px solid var(--purple-soft);"></div>
         </div>
 
-        <!-- Destination cards -->
-        <div id="dest-section" style="margin-bottom:20px;">
-          <div style="font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--moss);margin-bottom:14px;font-weight:500;">ที่ที่น่าจะ ใช่ สำหรับคุณ</div>
-          <div id="dest-cards" style="display:flex;flex-direction:column;gap:12px;"></div>
+        <!-- LOCKED section — blur gate -->
+        <div id="result-locked" style="position:relative;margin-bottom:20px;">
+          <!-- blurred preview -->
+          <div id="result-blur-preview" style="filter:blur(6px);pointer-events:none;user-select:none;opacity:0.7;">
+            <div id="mbti-insight-preview" style="background:rgba(155,139,180,0.08);border-radius:10px;padding:10px 14px;margin-bottom:12px;font-size:13px;color:var(--charcoal-soft);line-height:1.7;border-left:3px solid var(--purple-soft);">
+              MBTI ของคุณบอกว่าคุณชาร์จพลังแบบ... และทริปที่เหมาะสำหรับคุณจริงๆ คือ...
+            </div>
+            <div style="font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--moss);margin-bottom:10px;font-weight:500;">ที่ที่น่าจะ ใช่ สำหรับคุณ</div>
+            <div style="display:flex;flex-direction:column;gap:10px;">
+              <div style="background:var(--white);border:1px solid rgba(212,197,169,0.5);border-radius:14px;padding:14px;">🗾 &nbsp; เมืองที่ 1 — xxxxxxxx · xxxxxxx</div>
+              <div style="background:var(--white);border:1px solid rgba(212,197,169,0.5);border-radius:14px;padding:14px;">🏝️ &nbsp; เมืองที่ 2 — xxxxxxxx · xxxxxxx</div>
+              <div style="background:var(--white);border:1px solid rgba(212,197,169,0.5);border-radius:14px;padding:14px;">🌿 &nbsp; เมืองที่ 3 — xxxxxxxx · xxxxxxx</div>
+            </div>
+          </div>
+
+          <!-- unlock overlay -->
+          <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:rgba(245,240,232,0.7);backdrop-filter:blur(2px);border-radius:16px;padding:28px 24px;text-align:center;">
+            <div style="font-size:24px;margin-bottom:10px;">🔒</div>
+            <div style="font-family:'Playfair Display',serif;font-size:18px;font-weight:400;color:var(--charcoal);margin-bottom:8px;">บันทึก profile เพื่ออ่านผลเต็มๆ</div>
+            <p style="font-size:13px;font-weight:300;color:var(--charcoal-soft);line-height:1.6;margin-bottom:20px;max-width:300px;">destination ที่เหมาะกับพลังงานคุณ, itinerary ง่ายๆ และ MBTI insight รอคุณอยู่ข้างใน</p>
+            <button class="btn-primary" onclick="openLoginModal()" style="margin-bottom:10px;width:100%;max-width:280px;">สร้าง profile ฟรี — ดูผลเต็มๆ</button>
+            <button style="background:none;border:none;font-size:12px;color:var(--charcoal-soft);opacity:0.5;cursor:pointer;font-family:'Sarabun',sans-serif;" onclick="unlockResult()">ข้ามไปก่อน →</button>
+          </div>
         </div>
 
-        <!-- Summary strip -->
-        <div id="result-summary" style="background:rgba(107,124,92,0.06);border-radius:12px;padding:14px 16px;margin-bottom:20px;font-size:13px;line-height:1.9;color:var(--charcoal-soft);"></div>
+        <!-- Full result — shown after login or skip -->
+        <div id="result-full" style="display:none;">
+          <div id="mbti-insight" style="display:none;background:rgba(155,139,180,0.08);border-radius:10px;padding:10px 14px;margin-bottom:16px;font-size:13px;color:var(--charcoal-soft);line-height:1.7;border-left:3px solid var(--purple-soft);"></div>
+          <div id="dest-section" style="margin-bottom:20px;">
+            <div style="font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--moss);margin-bottom:14px;font-weight:500;">ที่ที่น่าจะ ใช่ สำหรับคุณ</div>
+            <div id="dest-cards" style="display:flex;flex-direction:column;gap:12px;"></div>
+          </div>
+          <div id="result-summary" style="background:rgba(107,124,92,0.06);border-radius:12px;padding:14px 16px;margin-bottom:20px;font-size:13px;line-height:1.9;color:var(--charcoal-soft);"></div>
+          <div class="result-tags" id="result-tags" style="margin-bottom:24px;"></div>
+        </div>
 
-        <!-- Tags -->
-        <div class="result-tags" id="result-tags" style="margin-bottom:24px;"></div>
-
-        <p style="font-size:14px;font-weight:300;color:var(--charcoal-soft);line-height:1.7;margin-bottom:20px;">นี่คือ profile เบื้องต้น ถ้าอยากให้ monemoll_ วิเคราะห์ MBTI และออกแบบทริปให้ลึกกว่านี้ — Signature service รอคุณอยู่</p>
+        <p style="font-size:14px;font-weight:300;color:var(--charcoal-soft);line-height:1.7;margin-bottom:20px;">ถ้าอยากให้ monemoll_ วิเคราะห์และออกแบบทริปให้ลึกกว่านี้ — เลือก service ด้านล่างได้เลย</p>
         <div style="display:flex;gap:12px;flex-wrap:wrap;">
           <button class="btn-primary" onclick="openModal('signature')">อยากรู้ให้ลึกกว่านี้</button>
           <a class="btn-ghost" href="craftaway-demo.html" style="text-decoration:none;display:inline-flex;align-items:center;gap:6px;">💬 คุยกับ Craftaway</a>
-          <button class="btn-ghost" onclick="saveResultPrompt()">บันทึก profile นี้</button>
         </div>
         <div class="quiz-nav" style="margin-top:20px;">
           <button class="quiz-back" onclick="goStep(10)">← ย้อนกลับ</button>
@@ -1347,7 +1369,7 @@
         <div class="price-tier">Full Reading</div>
         <div class="price-name">Discover Yourself</div>
         <div class="price-amount"><span>฿</span>2,999</div>
-        <div class="price-note">เปิดรับ 2 คน / เดือน</div>
+        <div class="price-note">ส่งผลภายใน 5–7 วัน</div>
         <div class="price-divider"></div>
         <ul class="price-features">
           <li>MBTI + Human Design + โหราศาสตร์ตะวันตก</li>
@@ -1356,6 +1378,10 @@
           <li>itinerary จริงทั้งทริป</li>
           <li>คุยกัน 30 นาที หลังรับไฟล์</li>
         </ul>
+        <div style="margin-top:12px;background:rgba(196,149,106,0.1);border-radius:10px;padding:10px 12px;border-left:3px solid var(--accent);">
+          <div style="font-size:11px;font-weight:500;color:var(--accent);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:4px;">✦ Add-on พิเศษ</div>
+          <div style="font-size:12px;font-weight:300;color:var(--charcoal-soft);line-height:1.6;">โหราศาสตร์แผนที่ (Astrocartography) — ดูว่าพลังงานของคุณไปได้ดีกับประเทศและเมืองไหนในโลกจริงๆ</div>
+        </div>
         <button class="price-btn">เลือก</button>
       </div>
     </div>
@@ -1796,6 +1822,11 @@
     return w[profileKey] || w['explore'];
   }
 
+  function unlockResult() {
+    document.getElementById('result-locked').style.display='none';
+    document.getElementById('result-full').style.display='block';
+  }
+
   function showResult() {
     const key=answers[0]||'explore';
     const p=profiles[key];
@@ -1856,6 +1887,10 @@
       user.lastProfile={...p,dest:scopeLabels[answers[4]]||'—',budget:budgetLabels[answers[6]]||'—',style:styleLabels[answers[7]]||'—',duration:durationLabels[answers[8]]||'—',mbti:mbti||'—',topCity:tops[0]?.city||'—',date:new Date().toLocaleDateString('th-TH')};
       saveUser(user);
       sbPost('quiz_results',{user_email:user.email,user_name:user.name,profile_type:p.type,profile_title:p.title,mbti:mbti||null,top_city:tops[0]?.city||null,destination_scope:scopeLabels[answers[4]]||null,budget:budgetLabels[answers[6]]||null,travel_style:styleLabels[answers[7]]||null,duration:durationLabels[answers[8]]||null,nature_type:answers[2]||null,art_type:answers[3]||null,accommodation:answers[9]||null});
+      unlockResult();
+    } else {
+      document.getElementById('result-locked').style.display='block';
+      document.getElementById('result-full').style.display='none';
     }
   }
 
@@ -1899,6 +1934,7 @@
     document.getElementById('login-welcome').textContent='ยินดีต้อนรับ '+name+' 🌿';
     document.getElementById('login-form-state').style.display='none';
     document.getElementById('login-success-state').style.display='block';
+    unlockResult();
   }
 
   function logoutUser(){localStorage.removeItem('craftaway_user');renderUserBar();}
@@ -1935,8 +1971,8 @@
   const tiers={
     free:      {title:'Travel Profile',sub:'ผลจาก quiz ของคุณ — ฟรี ไม่มีค่าใช้จ่าย',price:0,showMBTI:false,showHD:false,free:true},
     essential: {title:'Craft Your Trip',sub:'monemoll_ อ่าน MBTI แล้วออกแบบทริปเฉพาะคุณ',price:888,showMBTI:true,showHD:false},
-    signature: {title:'Design Your Journey',sub:'MBTI + Human Design — ออกแบบทริปที่ชาร์จพลังงานได้จริง',price:1555,showMBTI:true,showHD:true},
-    premium:   {title:'Discover Yourself',sub:'MBTI + HD + โหราศาสตร์ — อ่านแผนที่พลังงานลึกที่สุด + itinerary จริง',price:2999,showMBTI:true,showHD:true},
+    signature: {title:'Design Your Journey',sub:'MBTI + Human Design — ออกแบบทริปที่ชาร์จพลังงานได้จริง',price:1555,showMBTI:true,showHD:false},
+    premium:   {title:'Discover Yourself',sub:'MBTI + HD + โหราศาสตร์ — อ่านแผนที่พลังงานลึกที่สุด + itinerary จริง',price:2999,showMBTI:true,showHD:false},
   };
   let currentTier='signature',hdAdded=false;
 
