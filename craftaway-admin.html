@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Craftaway Admin</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Sarabun:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --cream:#F5F0E8;--cream-dark:#EDE6D6;--sand:#D4C5A9;
+  --moss:#6B7C5C;--moss-light:#8A9E77;--moss-dark:#4A5840;
+  --charcoal:#2C2C2A;--charcoal-soft:#4A4845;
+  --white:#FEFCF8;--purple-soft:#9B8BB4;--purple-dark:#6B5A8A;
+  --accent:#C4956A;--red:#C0392B;--green:#27AE60;
+}
+body{font-family:'Sarabun',sans-serif;background:var(--cream);color:var(--charcoal);min-height:100vh;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+
+/* LOGIN */
+.login-screen{
+  min-height:100vh;display:flex;align-items:center;justify-content:center;
+  padding:24px;
+  background:radial-gradient(ellipse 60% 50% at 30% 70%,rgba(107,124,92,0.1),transparent 60%),
+             radial-gradient(ellipse 50% 40% at 70% 30%,rgba(196,149,106,0.08),transparent 55%);
+}
+.login-card{
+  background:var(--white);border-radius:24px;padding:48px 40px;
+  width:100%;max-width:420px;
+  border:0.5px solid var(--cream-dark);
+  box-shadow:0 4px 40px rgba(44,44,42,0.08);
+  animation:fadeUp 0.5s ease both;
+}
+.login-logo{font-family:'Playfair Display',serif;font-size:28px;font-style:italic;color:var(--charcoal);margin-bottom:4px;}
+.login-sub{font-size:13px;color:var(--charcoal-soft);font-weight:300;margin-bottom:32px;}
+.login-label{font-size:11px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:var(--charcoal-soft);display:block;margin-bottom:8px;}
+.login-input{
+  width:100%;padding:13px 16px;
+  border:1.5px solid var(--cream-dark);border-radius:12px;
+  font-family:'Sarabun',sans-serif;font-size:15px;font-weight:300;
+  color:var(--charcoal);background:var(--white);outline:none;
+  transition:border-color 0.2s;margin-bottom:16px;
+}
+.login-input:focus{border-color:var(--moss);}
+.login-input::placeholder{color:var(--sand);}
+.login-btn{
+  width:100%;padding:14px;background:var(--moss);color:var(--white);
+  font-family:'Sarabun',sans-serif;font-size:15px;font-weight:500;
+  border:none;border-radius:12px;cursor:pointer;transition:all 0.3s;
+  margin-top:4px;
+}
+.login-btn:hover{background:var(--moss-dark);transform:translateY(-1px);}
+.login-error{font-size:13px;color:var(--red);margin-top:12px;text-align:center;display:none;}
+
+/* ADMIN LAYOUT */
+.admin-screen{display:none;min-height:100vh;}
+.admin-screen.active{display:block;animation:fadeIn 0.4s ease both;}
+
+.admin-nav{
+  background:var(--charcoal);padding:0 32px;height:60px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:sticky;top:0;z-index:100;
+}
+.admin-nav-logo{font-family:'Playfair Display',serif;font-size:18px;font-style:italic;color:var(--white);}
+.admin-nav-right{display:flex;align-items:center;gap:16px;}
+.admin-email{font-size:12px;color:rgba(254,252,248,0.5);}
+.admin-logout{
+  font-size:12px;color:rgba(254,252,248,0.6);background:none;
+  border:1px solid rgba(254,252,248,0.2);padding:5px 14px;
+  border-radius:99px;cursor:pointer;font-family:'Sarabun',sans-serif;
+  transition:all 0.2s;
+}
+.admin-logout:hover{color:var(--white);border-color:rgba(254,252,248,0.5);}
+
+.admin-body{max-width:1100px;margin:0 auto;padding:40px 24px 80px;}
+
+/* TABS */
+.tab-row{display:flex;gap:4px;margin-bottom:32px;border-bottom:1px solid var(--cream-dark);padding-bottom:0;}
+.tab-btn{
+  font-family:'Sarabun',sans-serif;font-size:14px;font-weight:400;
+  color:var(--charcoal-soft);background:none;border:none;
+  padding:10px 20px;cursor:pointer;border-bottom:2px solid transparent;
+  transition:all 0.2s;margin-bottom:-1px;
+}
+.tab-btn:hover{color:var(--charcoal);}
+.tab-btn.active{color:var(--moss);border-bottom-color:var(--moss);font-weight:500;}
+
+.tab-panel{display:none;}
+.tab-panel.active{display:block;animation:fadeUp 0.3s ease both;}
+
+/* STAT CARDS */
+.stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-bottom:32px;}
+.stat-card{background:var(--white);border:0.5px solid var(--cream-dark);border-radius:16px;padding:20px;}
+.stat-num{font-family:'Playfair Display',serif;font-size:36px;color:var(--moss);line-height:1;}
+.stat-label{font-size:12px;color:var(--charcoal-soft);margin-top:6px;}
+
+/* LINKS SECTION */
+.links-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-bottom:32px;}
+.link-card{
+  background:var(--white);border:0.5px solid var(--cream-dark);
+  border-radius:20px;padding:24px;
+}
+.link-card-header{display:flex;align-items:center;gap:12px;margin-bottom:14px;}
+.link-card-icon{
+  width:44px;height:44px;border-radius:12px;
+  display:flex;align-items:center;justify-content:center;font-size:20px;
+  flex-shrink:0;
+}
+.link-card-title{font-size:15px;font-weight:500;color:var(--charcoal);}
+.link-card-sub{font-size:12px;color:var(--charcoal-soft);margin-top:2px;}
+.link-url{
+  background:var(--cream);border-radius:10px;padding:10px 14px;
+  font-size:12px;font-family:monospace;color:var(--charcoal-soft);
+  word-break:break-all;margin-bottom:12px;line-height:1.6;
+}
+.link-btn-row{display:flex;gap:8px;}
+.link-action-btn{
+  flex:1;padding:9px 14px;border-radius:10px;
+  font-family:'Sarabun',sans-serif;font-size:12px;font-weight:500;
+  cursor:pointer;transition:all 0.2s;border:1.5px solid var(--cream-dark);
+  background:var(--white);color:var(--charcoal-soft);
+}
+.link-action-btn:hover{border-color:var(--moss);color:var(--moss);}
+.link-action-btn.primary{background:var(--moss);border-color:var(--moss);color:var(--white);}
+.link-action-btn.primary:hover{background:var(--moss-dark);}
+
+/* USERS TABLE */
+.section-title{font-size:15px;font-weight:500;color:var(--charcoal);margin-bottom:16px;display:flex;align-items:center;justify-content:space-between;}
+.table-wrap{background:var(--white);border:0.5px solid var(--cream-dark);border-radius:16px;overflow:hidden;margin-bottom:24px;}
+table{width:100%;border-collapse:collapse;}
+thead th{
+  font-size:11px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;
+  color:var(--charcoal-soft);background:var(--cream);
+  padding:12px 16px;text-align:left;border-bottom:0.5px solid var(--cream-dark);
+}
+tbody tr{border-bottom:0.5px solid var(--cream-dark);transition:background 0.15s;}
+tbody tr:last-child{border-bottom:none;}
+tbody tr:hover{background:rgba(107,124,92,0.03);}
+tbody td{padding:12px 16px;font-size:13px;font-weight:300;color:var(--charcoal-soft);vertical-align:middle;}
+.td-name{font-weight:500;color:var(--charcoal);}
+.badge-type{
+  display:inline-block;font-size:11px;font-weight:500;padding:2px 10px;
+  border-radius:99px;letter-spacing:0.04em;
+}
+
+/* QUIZ RESULTS */
+.result-cards{display:flex;flex-direction:column;gap:10px;}
+.result-row{
+  background:var(--white);border:0.5px solid var(--cream-dark);
+  border-radius:14px;padding:16px 20px;
+  display:grid;grid-template-columns:1fr 1fr 1fr auto;
+  gap:12px;align-items:center;
+}
+.result-label{font-size:11px;color:var(--charcoal-soft);margin-bottom:3px;}
+.result-val{font-size:13px;font-weight:500;color:var(--charcoal);}
+.del-btn{
+  background:none;border:1px solid rgba(192,57,43,0.2);color:var(--red);
+  font-size:11px;padding:4px 10px;border-radius:8px;cursor:pointer;
+  font-family:'Sarabun',sans-serif;transition:all 0.2s;white-space:nowrap;
+}
+.del-btn:hover{background:rgba(192,57,43,0.08);}
+
+/* SETTINGS */
+.settings-card{background:var(--white);border:0.5px solid var(--cream-dark);border-radius:16px;padding:24px;margin-bottom:16px;}
+.settings-title{font-size:14px;font-weight:500;color:var(--charcoal);margin-bottom:16px;padding-bottom:12px;border-bottom:0.5px solid var(--cream-dark);}
+.setting-row{display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:0.5px solid var(--cream-dark);gap:16px;}
+.setting-row:last-child{border-bottom:none;}
+.setting-info{flex:1;}
+.setting-name{font-size:13px;font-weight:500;color:var(--charcoal);}
+.setting-desc{font-size:12px;color:var(--charcoal-soft);margin-top:2px;}
+.setting-input{
+  padding:8px 12px;border:1.5px solid var(--cream-dark);border-radius:10px;
+  font-family:'Sarabun',sans-serif;font-size:13px;color:var(--charcoal);
+  background:var(--white);outline:none;min-width:200px;
+}
+.setting-input:focus{border-color:var(--moss);}
+.save-btn{
+  padding:8px 20px;background:var(--moss);color:var(--white);
+  font-family:'Sarabun',sans-serif;font-size:13px;font-weight:500;
+  border:none;border-radius:10px;cursor:pointer;transition:all 0.2s;
+}
+.save-btn:hover{background:var(--moss-dark);}
+
+/* EMPTY STATE */
+.empty-state{text-align:center;padding:48px 24px;color:var(--charcoal-soft);}
+.empty-icon{font-size:40px;margin-bottom:14px;opacity:0.4;}
+.empty-text{font-size:14px;font-weight:300;}
+
+/* TOAST */
+.toast{
+  position:fixed;bottom:24px;right:24px;
+  background:var(--charcoal);color:var(--white);
+  padding:12px 20px;border-radius:12px;font-size:13px;
+  display:none;animation:fadeUp 0.3s ease both;z-index:9999;
+  max-width:280px;
+}
+
+@media(max-width:700px){
+  .result-row{grid-template-columns:1fr 1fr;}.admin-body{padding:24px 16px 60px;}
+  .admin-nav{padding:0 16px;}.tab-btn{padding:10px 12px;font-size:13px;}
+  .login-card{padding:32px 24px;}
+}
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div class="login-screen" id="login-screen">
+  <div class="login-card">
+    <div class="login-logo">Craftaway</div>
+    <div class="login-sub">Admin Dashboard — ระบบจัดการหลังบ้าน</div>
+    <label class="login-label">Email</label>
+    <input class="login-input" id="login-email" type="email" placeholder="monemonymol@gmail.com" value="">
+    <label class="login-label">Password</label>
+    <input class="login-input" id="login-pass" type="password" placeholder="••••••••" onkeydown="if(event.key==='Enter')doLogin()">
+    <button class="login-btn" onclick="doLogin()">เข้าสู่ระบบ</button>
+    <div class="login-error" id="login-error">Email หรือ password ไม่ถูกต้อง</div>
+    <p style="font-size:11px;color:var(--sand);text-align:center;margin-top:20px;">Default password: craftaway2024</p>
+  </div>
+</div>
+
+<!-- ADMIN -->
+<div class="admin-screen" id="admin-screen">
+  <nav class="admin-nav">
+    <span class="admin-nav-logo">Craftaway Admin</span>
+    <div class="admin-nav-right">
+      <span class="admin-email" id="admin-email-display"></span>
+      <button class="admin-logout" onclick="doLogout()">ออกจากระบบ</button>
+    </div>
+  </nav>
+
+  <div class="admin-body">
+
+    <!-- TABS -->
+    <div class="tab-row">
+      <button class="tab-btn active" onclick="switchTab('overview')">ภาพรวม</button>
+      <button class="tab-btn" onclick="switchTab('links')">ลิงก์ทั้งหมด</button>
+      <button class="tab-btn" onclick="switchTab('users')">ผู้ใช้งาน</button>
+      <button class="tab-btn" onclick="switchTab('quiz')">ผล Quiz</button>
+      <button class="tab-btn" onclick="switchTab('orders')">Orders</button>
+      <button class="tab-btn" onclick="switchTab('settings')">ตั้งค่า</button>
+    </div>
+
+    <!-- TAB: OVERVIEW -->
+    <div class="tab-panel active" id="tab-overview">
+      <div class="stat-grid" id="stat-grid"></div>
+
+      <div class="section-title">ผู้ลงทะเบียนล่าสุด</div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr>
+            <th>ชื่อ</th><th>Email</th><th>อาชีพ</th><th>แผนเดินทาง</th><th>วันที่</th>
+          </tr></thead>
+          <tbody id="recent-users-body"></tbody>
+        </table>
+      </div>
+
+      <div class="section-title">ผล Quiz ล่าสุด</div>
+      <div id="recent-quiz-cards" class="result-cards"></div>
+    </div>
+
+    <!-- TAB: LINKS -->
+    <div class="tab-panel" id="tab-links">
+      <div class="links-grid" id="links-grid"></div>
+    </div>
+
+    <!-- TAB: USERS -->
+    <div class="tab-panel" id="tab-users">
+      <div class="section-title">
+        <span>ผู้ลงทะเบียนทั้งหมด (<span id="user-count">0</span> คน)</span>
+        <button class="save-btn" style="font-size:12px;padding:7px 16px;" onclick="exportCSV()">Export CSV</button>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr>
+            <th>ชื่อ</th><th>Email</th><th>อายุ</th><th>อาชีพ</th><th>แผนเดินทาง</th><th>Quiz ที่ทำ</th><th>วันที่สมัคร</th>
+          </tr></thead>
+          <tbody id="all-users-body"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- TAB: QUIZ RESULTS -->
+    <div class="tab-panel" id="tab-quiz">
+      <div class="section-title">
+        <span>ผล Quiz ทั้งหมด (<span id="quiz-count">0</span> ผล)</span>
+      </div>
+      <div id="all-quiz-cards" class="result-cards"></div>
+    </div>
+
+    <!-- TAB: ORDERS -->
+    <div class="tab-panel" id="tab-orders">
+      <div class="section-title">
+        <span>Orders ทั้งหมด</span>
+        <button class="save-btn" style="font-size:12px;padding:7px 16px;" onclick="loadDashboard()">Refresh</button>
+      </div>
+      <div id="all-orders-cards" class="result-cards"></div>
+    </div>
+
+    <!-- TAB: SETTINGS -->
+    <div class="tab-panel" id="tab-settings">
+      <div class="settings-card">
+        <div class="settings-title">ข้อมูล Service</div>
+        <div class="setting-row">
+          <div class="setting-info"><div class="setting-name">ชื่อ Service</div><div class="setting-desc">แสดงใน header และ hero</div></div>
+          <input class="setting-input" id="s-name" value="Craftaway">
+        </div>
+        <div class="setting-row">
+          <div class="setting-info"><div class="setting-name">Tagline</div><div class="setting-desc">ใต้ชื่อ service</div></div>
+          <input class="setting-input" id="s-tagline" value="Design your journey, discover yourself">
+        </div>
+        <div class="setting-row">
+          <div class="setting-info"><div class="setting-name">Instagram</div><div class="setting-desc">@username</div></div>
+          <input class="setting-input" id="s-ig" value="@monemoll_">
+        </div>
+        <div class="setting-row">
+          <div class="setting-info"><div class="setting-name">Email ติดต่อ</div><div class="setting-desc">แสดงในหน้าหลัก</div></div>
+          <input class="setting-input" id="s-email" value="monemonymol@gmail.com">
+        </div>
+        <div style="margin-top:16px;text-align:right;"><button class="save-btn" onclick="saveSettings()">บันทึก</button></div>
+      </div>
+
+      <div class="settings-card">
+        <div class="settings-title">เปลี่ยน Password</div>
+        <div class="setting-row">
+          <div class="setting-info"><div class="setting-name">Password ปัจจุบัน</div></div>
+          <input class="setting-input" id="s-old-pass" type="password" placeholder="••••••••">
+        </div>
+        <div class="setting-row">
+          <div class="setting-info"><div class="setting-name">Password ใหม่</div></div>
+          <input class="setting-input" id="s-new-pass" type="password" placeholder="อย่างน้อย 8 ตัวอักษร">
+        </div>
+        <div style="margin-top:16px;text-align:right;"><button class="save-btn" onclick="changePassword()">เปลี่ยน Password</button></div>
+      </div>
+
+      <div class="settings-card" style="border-color:rgba(192,57,43,0.2);">
+        <div class="settings-title" style="color:var(--red);">Danger Zone</div>
+        <div class="setting-row">
+          <div class="setting-info"><div class="setting-name">ล้างข้อมูลผู้ใช้ทั้งหมด</div><div class="setting-desc">ไม่สามารถกู้คืนได้</div></div>
+          <button class="save-btn" style="background:var(--red);" onclick="clearAllData()">ล้างข้อมูล</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ─── AUTH ───
+const ADMIN_EMAIL = 'monemonymol@gmail.com';
+const DEFAULT_PASS = 'craftaway2024';
+
+function getPass() { return localStorage.getItem('craftaway_admin_pass') || DEFAULT_PASS; }
+
+function doLogin() {
+  const email = document.getElementById('login-email').value.trim();
+  const pass = document.getElementById('login-pass').value;
+  const err = document.getElementById('login-error');
+  if (email === ADMIN_EMAIL && pass === getPass()) {
+    err.style.display = 'none';
+    localStorage.setItem('craftaway_admin_session', '1');
+    document.getElementById('login-screen').style.display = 'none';
+    document.getElementById('admin-screen').classList.add('active');
+    document.getElementById('admin-email-display').textContent = email;
+    loadDashboard();
+  } else {
+    err.style.display = 'block';
+  }
+}
+
+function doLogout() {
+  localStorage.removeItem('craftaway_admin_session');
+  document.getElementById('admin-screen').classList.remove('active');
+  document.getElementById('login-screen').style.display = 'flex';
+  document.getElementById('login-pass').value = '';
+}
+
+// Auto-login if session exists
+window.addEventListener('DOMContentLoaded', () => {
+  if (localStorage.getItem('craftaway_admin_session')) {
+    document.getElementById('login-screen').style.display = 'none';
+    document.getElementById('admin-screen').classList.add('active');
+    document.getElementById('admin-email-display').textContent = ADMIN_EMAIL;
+    loadDashboard();
+  }
+});
+
+// ─── SUPABASE ───
+const SUPA_URL='https://tcbtdlnksfytnixeandw.supabase.co';
+const SUPA_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRjYnRkbG5rc2Z5dG5peGVhbmR3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ0MjY4NTMsImV4cCI6MjA5MDAwMjg1M30.Z6_5pNrGr4LPMI4i1sFI7EpxiiiPZvQKIkbv1StNp2Q';
+const SH={'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY,'Content-Type':'application/json','Prefer':'return=representation'};
+
+async function sbGet(path){
+  try{const r=await fetch(SUPA_URL+'/rest/v1/'+path,{headers:SH});return r.ok?await r.json():[];}
+  catch(e){console.warn(e);return [];}
+}
+
+// ─── TABS ───
+function switchTab(id) {
+  document.querySelectorAll('.tab-btn').forEach((b,i)=>{
+    const tabs=['overview','links','users','quiz','orders','settings'];
+    b.classList.toggle('active', tabs[i]===id);
+  });
+  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+  document.getElementById('tab-'+id).classList.add('active');
+}
+
+// ─── LOAD DASHBOARD ───
+async function loadDashboard() {
+  showToast('กำลังโหลดข้อมูล...');
+  const [users, quiz, orders] = await Promise.all([
+    sbGet('users?select=*&order=joined_at.desc'),
+    sbGet('quiz_results?select=*&order=created_at.desc'),
+    sbGet('orders?select=*&order=created_at.desc')
+  ]);
+  renderStats(users, quiz, orders);
+  renderRecentUsers(users.slice(0,5));
+  renderRecentQuiz(quiz.slice(0,3));
+  loadLinks();
+  renderAllUsers(users);
+  renderAllQuiz(quiz);
+  renderOrders(orders);
+  loadSettings();
+  showToast('โหลดข้อมูลแล้ว 🌿');
+}
+
+function fmtDate(d){ if(!d) return '—'; return new Date(d).toLocaleDateString('th-TH'); }
+
+function renderStats(users, quiz, orders) {
+  const mbtiCount = quiz.filter(q=>q.mbti&&q.mbti!=='unknown').length;
+  const intlCount = users.filter(u=>u.travel_plan_label==='นอกประเทศ'||u.travel_plan_label==='ทั้งสองอย่าง').length;
+  const pendingOrders = orders.filter(o=>o.status==='pending').length;
+  const revenue = orders.reduce((s,o)=>s+(o.total_price||0),0);
+  document.getElementById('stat-grid').innerHTML = `
+    <div class="stat-card"><div class="stat-num">${users.length}</div><div class="stat-label">ผู้ลงทะเบียน</div></div>
+    <div class="stat-card"><div class="stat-num">${quiz.length}</div><div class="stat-label">Quiz ที่ทำแล้ว</div></div>
+    <div class="stat-card"><div class="stat-num">${mbtiCount}</div><div class="stat-label">ระบุ MBTI</div></div>
+    <div class="stat-card"><div class="stat-num">${intlCount}</div><div class="stat-label">สนใจต่างประเทศ</div></div>
+    <div class="stat-card"><div class="stat-num">${pendingOrders}</div><div class="stat-label">Orders รอดำเนินการ</div></div>
+    <div class="stat-card"><div class="stat-num">฿${revenue.toLocaleString()}</div><div class="stat-label">ยอดรวม</div></div>
+  `;
+}
+
+function renderRecentUsers(users) {
+  const tbody = document.getElementById('recent-users-body');
+  if (!users.length) { tbody.innerHTML='<tr><td colspan="5" style="text-align:center;padding:24px;opacity:0.4;">ยังไม่มีผู้ลงทะเบียน</td></tr>'; return; }
+  tbody.innerHTML = users.map(u=>`<tr>
+    <td class="td-name">${u.name||'—'}</td>
+    <td>${u.email||'—'}</td>
+    <td>${u.job||'—'}</td>
+    <td>${u.travel_plan_label||'—'}</td>
+    <td>${fmtDate(u.joined_at)}</td>
+  </tr>`).join('');
+}
+
+function renderRecentQuiz(results) {
+  const c = document.getElementById('recent-quiz-cards');
+  if (!results.length) { c.innerHTML='<div class="empty-state"><div class="empty-icon">📊</div><div class="empty-text">ยังไม่มีผลลัพธ์</div></div>'; return; }
+  c.innerHTML = results.map(r=>quizCard(r)).join('');
+}
+
+function quizCard(r) {
+  const tc='#9B8BB4';
+  return `<div class="result-row">
+    <div><div class="result-label">ชื่อ / Email</div><div class="result-val">${r.user_name||'—'}</div><div style="font-size:11px;color:var(--charcoal-soft);">${r.user_email||''}</div></div>
+    <div><div class="result-label">Travel Profile</div><div class="result-val">${r.profile_title||'—'}</div><div style="font-size:11px;color:var(--charcoal-soft);">${r.profile_type||''}</div></div>
+    <div><div class="result-label">สรุป</div><div style="font-size:12px;color:var(--charcoal-soft);line-height:1.6;">
+      ${r.top_city?`📍 ${r.top_city} · `:''}${r.destination_scope||''}<br>
+      ${r.mbti?`<span style="color:${tc};font-weight:500;">${r.mbti}</span> · `:''}${r.travel_style||''} · ${r.duration||''}
+    </div></div>
+    <div style="font-size:11px;color:var(--charcoal-soft);text-align:right;">${fmtDate(r.created_at)}</div>
+  </div>`;
+}
+
+function loadLinks() {
+  const base = window.location.href.replace('craftaway-admin.html','');
+  const links = [
+    {icon:'🌿',color:'rgba(107,124,92,0.15)',title:'Craftaway — หน้าหลัก',sub:'Quiz + Pricing + Service ครบ',url:`${base}monemoll-travel.html`},
+    {icon:'🧠',color:'rgba(155,139,180,0.15)',title:'MBTI Test',sub:'60 ข้อ ผล 16 types พร้อม travel insight',url:`${base}craftaway-mbti.html`},
+    {icon:'💬',color:'rgba(107,124,92,0.1)',title:'Demo (AI Chat)',sub:'Landing page แชร์ให้ user ทดสอบ',url:`${base}craftaway-demo.html`},
+    {icon:'✦',color:'rgba(196,149,106,0.15)',title:'Human Design Chart',sub:'ลิงก์ไปที่ staraligns.com',url:'https://staraligns.com/my-chart'},
+  ];
+  document.getElementById('links-grid').innerHTML = links.map(l=>`
+    <div class="link-card">
+      <div class="link-card-header">
+        <div class="link-card-icon" style="background:${l.color};">${l.icon}</div>
+        <div><div class="link-card-title">${l.title}</div><div class="link-card-sub">${l.sub}</div></div>
+      </div>
+      <div class="link-url">${l.url}</div>
+      <div class="link-btn-row">
+        <button class="link-action-btn" onclick="copyLink('${l.url}')">Copy link</button>
+        <a class="link-action-btn primary" href="${l.url}" target="_blank" style="text-align:center;text-decoration:none;">เปิดหน้านี้</a>
+      </div>
+    </div>
+  `).join('');
+}
+
+function renderAllUsers(users) {
+  document.getElementById('user-count').textContent = users.length;
+  const tbody = document.getElementById('all-users-body');
+  if (!users.length) { tbody.innerHTML='<tr><td colspan="7" style="text-align:center;padding:24px;opacity:0.4;">ยังไม่มีผู้ลงทะเบียน</td></tr>'; return; }
+  tbody.innerHTML = users.map(u=>`<tr>
+    <td class="td-name">${u.name||'—'}</td>
+    <td>${u.email||'—'}</td>
+    <td>${u.age||'—'}</td>
+    <td>${u.job||'—'}</td>
+    <td>${u.travel_plan_label||'—'}</td>
+    <td style="text-align:center;">${u.quiz_count||0}</td>
+    <td>${fmtDate(u.joined_at)}</td>
+  </tr>`).join('');
+}
+
+function renderAllQuiz(results) {
+  document.getElementById('quiz-count').textContent = results.length;
+  const c = document.getElementById('all-quiz-cards');
+  if (!results.length) { c.innerHTML='<div class="empty-state"><div class="empty-icon">📊</div><div class="empty-text">ยังไม่มีผลลัพธ์</div></div>'; return; }
+  c.innerHTML = results.map(r=>quizCard(r)).join('');
+}
+
+function renderOrders(orders) {
+  const c = document.getElementById('all-orders-cards');
+  if (!c) return;
+  if (!orders.length) { c.innerHTML='<div class="empty-state"><div class="empty-icon">🛒</div><div class="empty-text">ยังไม่มี orders</div></div>'; return; }
+  c.innerHTML = orders.map(o=>`<div class="result-row" style="grid-template-columns:1fr 1fr 1fr 80px auto;">
+    <div><div class="result-label">ชื่อ / Email</div><div class="result-val">${o.user_name||'—'}</div><div style="font-size:11px;color:var(--charcoal-soft);">${o.user_email||''} ${o.ig_or_line?'· '+o.ig_or_line:''}</div></div>
+    <div><div class="result-label">Tier</div><div class="result-val" style="text-transform:capitalize;">${o.tier||'—'}</div><div style="font-size:11px;">${o.hd_addon?'+ HD add-on':''}</div></div>
+    <div><div class="result-label">ราคา / หมายเหตุ</div><div class="result-val">฿${(o.total_price||0).toLocaleString()}</div><div style="font-size:11px;color:var(--charcoal-soft);">${o.trip_note||''}</div></div>
+    <div><span style="font-size:11px;padding:3px 10px;border-radius:99px;font-weight:500;background:${o.status==='pending'?'rgba(196,149,106,.15)':'rgba(107,124,92,.12)'};color:${o.status==='pending'?'#7A5030':'var(--moss-dark)'};">${o.status}</span></div>
+    <div style="font-size:11px;color:var(--charcoal-soft);text-align:right;">${fmtDate(o.created_at)}</div>
+  </div>`).join('');
+}
+
+function loadSettings() {
+  const s = JSON.parse(localStorage.getItem('craftaway_settings')||'{}');
+  if (s.name) document.getElementById('s-name').value = s.name;
+  if (s.tagline) document.getElementById('s-tagline').value = s.tagline;
+  if (s.ig) document.getElementById('s-ig').value = s.ig;
+  if (s.email) document.getElementById('s-email').value = s.email;
+}
+
+// ─── ACTIONS ───
+function copyLink(url) {
+  navigator.clipboard.writeText(url).then(()=>showToast('Copy แล้ว! 🌿')).catch(()=>{
+    const ta=document.createElement('textarea');ta.value=url;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);
+    showToast('Copy แล้ว! 🌿');
+  });
+}
+
+async function exportCSV() {
+  showToast('กำลัง export...');
+  const users = await sbGet('users?select=*&order=joined_at.desc');
+  if (!users.length) { showToast('ไม่มีข้อมูลให้ export'); return; }
+  const headers=['ชื่อ','Email','อายุ','อาชีพ','แผนเดินทาง','Quiz ที่ทำ','ความฝัน','วันที่สมัคร'];
+  const rows=users.map(u=>[u.name,u.email,u.age,u.job,u.travel_plan_label,u.quiz_count,u.dream,fmtDate(u.joined_at)].map(v=>`"${v||''}"`).join(','));
+  const csv=[headers.join(','),...rows].join('\n');
+  const blob=new Blob(['\uFEFF'+csv],{type:'text/csv;charset=utf-8;'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');a.href=url;a.download='craftaway-users.csv';a.click();URL.revokeObjectURL(url);
+  showToast('Export สำเร็จ!');
+}
+
+function saveSettings() {
+  const s={name:document.getElementById('s-name').value,tagline:document.getElementById('s-tagline').value,ig:document.getElementById('s-ig').value,email:document.getElementById('s-email').value};
+  localStorage.setItem('craftaway_settings',JSON.stringify(s));
+  showToast('บันทึกแล้ว 🌿');
+}
+
+function changePassword() {
+  const old=document.getElementById('s-old-pass').value;
+  const newP=document.getElementById('s-new-pass').value;
+  if(old!==getPass()){showToast('Password ปัจจุบันไม่ถูกต้อง');return;}
+  if(newP.length<8){showToast('Password ใหม่ต้องมีอย่างน้อย 8 ตัวอักษร');return;}
+  localStorage.setItem('craftaway_admin_pass',newP);
+  document.getElementById('s-old-pass').value='';document.getElementById('s-new-pass').value='';
+  showToast('เปลี่ยน password แล้ว 🌿');
+}
+
+function clearAllData() {
+  if(!confirm('ยืนยันการล้างข้อมูลทั้งหมด? ไม่สามารถกู้คืนได้')) return;
+  showToast('ลบข้อมูลใน Supabase ต้องทำผ่าน dashboard โดยตรง');
+}
+
+function showToast(msg) {
+  const t=document.getElementById('toast');
+  t.textContent=msg;t.style.display='block';
+  clearTimeout(t._to);t._to=setTimeout(()=>t.style.display='none',2500);
+}
+</script>
+</body>
+</html>

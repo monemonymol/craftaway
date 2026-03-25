@@ -1,0 +1,1953 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Craftaway — Design your journey, discover yourself</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Sarabun:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --cream: #F5F0E8;
+    --cream-dark: #EDE6D6;
+    --sand: #D4C5A9;
+    --moss: #6B7C5C;
+    --moss-light: #8A9E77;
+    --moss-dark: #4A5840;
+    --earth: #8C6E4B;
+    --earth-light: #B08B68;
+    --charcoal: #2C2C2A;
+    --charcoal-soft: #4A4845;
+    --white: #FEFCF8;
+    --accent: #C4956A;
+    --purple-soft: #9B8BB4;
+    --purple-light: #EDE8F5;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Sarabun', sans-serif;
+    background: var(--cream);
+    color: var(--charcoal);
+    overflow-x: hidden;
+    cursor: default;
+  }
+
+  /* ─── TEXTURE OVERLAY ─── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 0.4;
+  }
+
+  /* ─── HERO ─── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 24px;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 70% 50% at 20% 80%, rgba(107,124,92,0.12) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 40% at 80% 20%, rgba(196,149,106,0.10) 0%, transparent 55%),
+      radial-gradient(ellipse 60% 60% at 50% 50%, rgba(212,197,169,0.15) 0%, transparent 70%);
+  }
+
+  .hero-leaf {
+    position: absolute;
+    opacity: 0.06;
+    font-size: 280px;
+    line-height: 1;
+    top: -40px;
+    right: -40px;
+    transform: rotate(20deg);
+    pointer-events: none;
+    filter: sepia(1);
+  }
+
+  .hero-leaf2 {
+    position: absolute;
+    opacity: 0.05;
+    font-size: 200px;
+    bottom: 20px;
+    left: -30px;
+    transform: rotate(-30deg);
+    pointer-events: none;
+    filter: sepia(1);
+  }
+
+  .hero-tag {
+    font-family: 'Sarabun', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--moss);
+    background: rgba(107,124,92,0.12);
+    padding: 6px 18px;
+    border-radius: 99px;
+    display: inline-block;
+    margin-bottom: 28px;
+    animation: fadeUp 0.8s ease both;
+  }
+
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(38px, 7vw, 80px);
+    font-weight: 400;
+    line-height: 1.15;
+    color: var(--charcoal);
+    margin-bottom: 12px;
+    animation: fadeUp 0.8s 0.1s ease both;
+    max-width: 720px;
+  }
+
+  .hero-title em {
+    font-style: italic;
+    color: var(--moss);
+  }
+
+  .hero-sub {
+    font-size: clamp(15px, 2vw, 18px);
+    font-weight: 300;
+    color: var(--charcoal-soft);
+    line-height: 1.8;
+    max-width: 480px;
+    margin: 0 auto 48px;
+    animation: fadeUp 0.8s 0.2s ease both;
+  }
+
+  .hero-cta {
+    display: flex;
+    gap: 14px;
+    justify-content: center;
+    flex-wrap: wrap;
+    animation: fadeUp 0.8s 0.3s ease both;
+  }
+
+  .btn-primary {
+    background: var(--moss);
+    color: var(--white);
+    font-family: 'Sarabun', sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    padding: 14px 32px;
+    border-radius: 99px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    letter-spacing: 0.03em;
+  }
+
+  .btn-primary:hover {
+    background: var(--moss-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(107,124,92,0.25);
+  }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--charcoal-soft);
+    font-family: 'Sarabun', sans-serif;
+    font-size: 15px;
+    font-weight: 400;
+    padding: 14px 28px;
+    border-radius: 99px;
+    border: 1.5px solid var(--sand);
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .btn-ghost:hover {
+    border-color: var(--moss-light);
+    color: var(--moss);
+    transform: translateY(-2px);
+  }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: 32px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    opacity: 0.4;
+    animation: fadeUp 1s 0.8s ease both;
+  }
+
+  .scroll-hint span { font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; }
+  .scroll-line { width: 1px; height: 40px; background: var(--charcoal); animation: scrollPulse 2s ease-in-out infinite; }
+
+  /* ─── SECTION BASE ─── */
+  section { position: relative; }
+
+  .section-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 80px 24px;
+  }
+
+  .section-label {
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--moss);
+    font-weight: 500;
+    margin-bottom: 16px;
+    display: block;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 4vw, 44px);
+    font-weight: 400;
+    line-height: 1.2;
+    color: var(--charcoal);
+    margin-bottom: 20px;
+  }
+
+  .section-title em { font-style: italic; color: var(--moss); }
+
+  .section-desc {
+    font-size: 16px;
+    font-weight: 300;
+    color: var(--charcoal-soft);
+    line-height: 1.8;
+    max-width: 560px;
+  }
+
+  /* ─── HOW IT WORKS ─── */
+  .how-section { background: var(--white); }
+
+  .how-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 32px;
+    margin-top: 56px;
+  }
+
+  .how-item { position: relative; }
+
+  .how-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 56px;
+    font-weight: 400;
+    color: var(--cream-dark);
+    line-height: 1;
+    margin-bottom: 12px;
+  }
+
+  .how-item-title {
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--charcoal);
+    margin-bottom: 8px;
+  }
+
+  .how-item-desc {
+    font-size: 14px;
+    font-weight: 300;
+    color: var(--charcoal-soft);
+    line-height: 1.7;
+  }
+
+  /* ─── QUIZ / DISCOVER SECTION ─── */
+  .discover-section { background: var(--cream); }
+
+  .quiz-container {
+    background: var(--white);
+    border-radius: 24px;
+    padding: 48px;
+    margin-top: 48px;
+    box-shadow: 0 2px 40px rgba(44,44,42,0.06);
+    border: 1px solid rgba(212,197,169,0.4);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .quiz-container::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--moss), var(--accent), var(--purple-soft));
+  }
+
+  .quiz-step { display: none; }
+  .quiz-step.active { display: block; animation: fadeUp 0.4s ease both; }
+
+  .quiz-progress {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 36px;
+  }
+
+  .progress-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--cream-dark);
+    transition: all 0.3s ease;
+  }
+
+  .progress-dot.active { background: var(--moss); transform: scale(1.3); }
+  .progress-dot.done { background: var(--moss-light); }
+
+  .quiz-q {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(20px, 3vw, 28px);
+    font-weight: 400;
+    color: var(--charcoal);
+    line-height: 1.4;
+    margin-bottom: 8px;
+  }
+
+  .quiz-sub {
+    font-size: 14px;
+    font-weight: 300;
+    color: var(--charcoal-soft);
+    margin-bottom: 32px;
+    line-height: 1.7;
+  }
+
+  .quiz-options {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 12px;
+    margin-bottom: 32px;
+  }
+
+  .quiz-opt {
+    background: var(--cream);
+    border: 1.5px solid transparent;
+    border-radius: 16px;
+    padding: 18px 16px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    text-align: left;
+  }
+
+  .quiz-opt:hover {
+    border-color: var(--moss-light);
+    background: rgba(107,124,92,0.05);
+    transform: translateY(-2px);
+  }
+
+  .quiz-opt.selected {
+    border-color: var(--moss);
+    background: rgba(107,124,92,0.08);
+  }
+
+  .quiz-opt-icon { font-size: 24px; margin-bottom: 8px; }
+
+  .quiz-opt-label {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--charcoal);
+    margin-bottom: 4px;
+  }
+
+  .quiz-opt-desc {
+    font-size: 12px;
+    font-weight: 300;
+    color: var(--charcoal-soft);
+    line-height: 1.5;
+  }
+
+  .quiz-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .quiz-back {
+    background: none;
+    border: none;
+    font-family: 'Sarabun', sans-serif;
+    font-size: 14px;
+    color: var(--charcoal-soft);
+    cursor: pointer;
+    opacity: 0.6;
+    padding: 8px 0;
+    transition: opacity 0.2s;
+  }
+
+  .quiz-back:hover { opacity: 1; }
+  .quiz-back:disabled { opacity: 0; pointer-events: none; }
+
+  /* ─── RESULT CARD ─── */
+  .result-card {
+    background: linear-gradient(135deg, rgba(107,124,92,0.08), rgba(196,149,106,0.06));
+    border: 1px solid rgba(107,124,92,0.2);
+    border-radius: 20px;
+    padding: 32px;
+    margin-bottom: 28px;
+  }
+
+  .result-type {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--moss);
+    font-weight: 500;
+    margin-bottom: 10px;
+  }
+
+  .result-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 26px;
+    font-weight: 400;
+    color: var(--charcoal);
+    margin-bottom: 12px;
+  }
+
+  .result-desc {
+    font-size: 15px;
+    font-weight: 300;
+    color: var(--charcoal-soft);
+    line-height: 1.8;
+    margin-bottom: 20px;
+  }
+
+  .result-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .result-tag {
+    font-size: 12px;
+    padding: 4px 14px;
+    border-radius: 99px;
+    background: rgba(107,124,92,0.1);
+    color: var(--moss-dark);
+    font-weight: 400;
+  }
+
+  /* ─── PRICING SECTION ─── */
+  .pricing-section { background: var(--charcoal); }
+
+  .pricing-section .section-label { color: var(--moss-light); }
+  .pricing-section .section-title { color: var(--white); }
+  .pricing-section .section-title em { color: var(--moss-light); }
+  .pricing-section .section-desc { color: rgba(254,252,248,0.6); }
+
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+    margin-top: 48px;
+  }
+
+  .price-card {
+    background: rgba(254,252,248,0.05);
+    border: 1px solid rgba(254,252,248,0.1);
+    border-radius: 20px;
+    padding: 28px 24px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .price-card:hover {
+    background: rgba(254,252,248,0.08);
+    border-color: rgba(107,124,92,0.5);
+    transform: translateY(-4px);
+  }
+
+  .price-card.featured {
+    background: rgba(107,124,92,0.15);
+    border-color: var(--moss-light);
+  }
+
+  .price-card.featured::before {
+    content: 'แนะนำ';
+    position: absolute;
+    top: 14px; right: 14px;
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--moss-light);
+    background: rgba(107,124,92,0.2);
+    padding: 3px 10px;
+    border-radius: 99px;
+    letter-spacing: 0.05em;
+  }
+
+  .price-tier {
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(254,252,248,0.4);
+    margin-bottom: 10px;
+  }
+
+  .price-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 400;
+    color: var(--white);
+    margin-bottom: 6px;
+  }
+
+  .price-amount {
+    font-size: 32px;
+    font-weight: 300;
+    color: var(--white);
+    margin-bottom: 4px;
+    font-family: 'Playfair Display', serif;
+  }
+
+  .price-amount span { font-size: 16px; }
+
+  .price-note {
+    font-size: 12px;
+    color: rgba(254,252,248,0.4);
+    margin-bottom: 20px;
+  }
+
+  .price-divider {
+    height: 1px;
+    background: rgba(254,252,248,0.08);
+    margin-bottom: 20px;
+  }
+
+  .price-features { list-style: none; }
+
+  .price-features li {
+    font-size: 13px;
+    font-weight: 300;
+    color: rgba(254,252,248,0.7);
+    padding: 6px 0;
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    line-height: 1.5;
+  }
+
+  .price-features li::before {
+    content: '—';
+    color: var(--moss-light);
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .price-btn {
+    width: 100%;
+    margin-top: 24px;
+    padding: 12px;
+    border-radius: 12px;
+    border: 1.5px solid rgba(254,252,248,0.2);
+    background: transparent;
+    color: var(--white);
+    font-family: 'Sarabun', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    letter-spacing: 0.03em;
+  }
+
+  .price-btn:hover {
+    background: var(--moss);
+    border-color: var(--moss);
+  }
+
+  .featured .price-btn {
+    background: var(--moss);
+    border-color: var(--moss);
+  }
+
+  .featured .price-btn:hover {
+    background: var(--moss-dark);
+    border-color: var(--moss-dark);
+  }
+
+  /* ─── HD ADDON ─── */
+  .hd-addon {
+    margin-top: 32px;
+    border: 1.5px dashed rgba(155,139,180,0.4);
+    border-radius: 20px;
+    padding: 28px 24px;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: rgba(155,139,180,0.04);
+  }
+
+  .hd-addon:hover {
+    border-color: var(--purple-soft);
+    background: rgba(155,139,180,0.08);
+  }
+
+  .hd-icon {
+    width: 56px; height: 56px;
+    border-radius: 50%;
+    background: rgba(155,139,180,0.15);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 24px;
+    flex-shrink: 0;
+  }
+
+  .hd-text { flex: 1; min-width: 200px; }
+
+  .hd-label {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--purple-soft);
+    margin-bottom: 6px;
+  }
+
+  .hd-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    color: var(--white);
+    margin-bottom: 6px;
+  }
+
+  .hd-desc {
+    font-size: 13px;
+    font-weight: 300;
+    color: rgba(254,252,248,0.5);
+    line-height: 1.6;
+  }
+
+  .hd-price {
+    text-align: right;
+    flex-shrink: 0;
+  }
+
+  .hd-price-amount {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+    color: var(--purple-soft);
+  }
+
+  .hd-price-note {
+    font-size: 12px;
+    color: rgba(254,252,248,0.4);
+  }
+
+  /* ─── PAYMENT MODAL ─── */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(44,44,42,0.7);
+    backdrop-filter: blur(8px);
+    z-index: 500;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+  }
+
+  .modal-overlay.open { display: flex; animation: fadeIn 0.3s ease both; }
+
+  .modal {
+    background: var(--white);
+    border-radius: 28px;
+    width: 100%;
+    max-width: 560px;
+    max-height: 90vh;
+    overflow-y: auto;
+    padding: 40px;
+    position: relative;
+    animation: slideUp 0.4s ease both;
+  }
+
+  .modal-close {
+    position: absolute;
+    top: 20px; right: 20px;
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    border: none;
+    background: var(--cream);
+    cursor: pointer;
+    font-size: 18px;
+    display: flex; align-items: center; justify-content: center;
+    transition: background 0.2s;
+    color: var(--charcoal-soft);
+  }
+
+  .modal-close:hover { background: var(--cream-dark); }
+
+  .modal-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 26px;
+    font-weight: 400;
+    color: var(--charcoal);
+    margin-bottom: 6px;
+  }
+
+  .modal-sub {
+    font-size: 14px;
+    font-weight: 300;
+    color: var(--charcoal-soft);
+    margin-bottom: 32px;
+    line-height: 1.6;
+  }
+
+  .order-summary {
+    background: var(--cream);
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 28px;
+  }
+
+  .order-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    font-size: 14px;
+  }
+
+  .order-row:not(:last-child) { border-bottom: 1px solid var(--cream-dark); }
+
+  .order-label { color: var(--charcoal-soft); font-weight: 300; }
+
+  .order-val { color: var(--charcoal); font-weight: 500; }
+
+  .order-total { font-size: 18px; }
+
+  .order-total .order-label { font-weight: 500; color: var(--charcoal); }
+
+  .order-total .order-val {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+    color: var(--moss);
+  }
+
+  /* HD toggle in modal */
+  .hd-toggle-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px;
+    background: var(--purple-light);
+    border-radius: 14px;
+    margin-bottom: 24px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: 1.5px solid transparent;
+  }
+
+  .hd-toggle-row:hover { border-color: rgba(155,139,180,0.4); }
+  .hd-toggle-row.checked { border-color: var(--purple-soft); }
+
+  .hd-toggle-info {}
+
+  .hd-toggle-title {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--charcoal);
+    margin-bottom: 2px;
+  }
+
+  .hd-toggle-sub {
+    font-size: 12px;
+    font-weight: 300;
+    color: var(--charcoal-soft);
+  }
+
+  .hd-toggle-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 6px;
+  }
+
+  .toggle-switch {
+    width: 44px; height: 24px;
+    background: var(--sand);
+    border-radius: 99px;
+    position: relative;
+    transition: background 0.3s;
+    flex-shrink: 0;
+  }
+
+  .toggle-switch.on { background: var(--purple-soft); }
+
+  .toggle-switch::after {
+    content: '';
+    position: absolute;
+    top: 3px; left: 3px;
+    width: 18px; height: 18px;
+    border-radius: 50%;
+    background: white;
+    transition: transform 0.3s ease;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+  }
+
+  .toggle-switch.on::after { transform: translateX(20px); }
+
+  .hd-add-price {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--purple-soft);
+  }
+
+  /* Form */
+  .form-label {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--charcoal-soft);
+    display: block;
+    margin-bottom: 8px;
+  }
+
+  .form-input {
+    width: 100%;
+    padding: 14px 16px;
+    border: 1.5px solid var(--cream-dark);
+    border-radius: 12px;
+    font-family: 'Sarabun', sans-serif;
+    font-size: 15px;
+    font-weight: 300;
+    color: var(--charcoal);
+    background: var(--white);
+    outline: none;
+    transition: border-color 0.2s;
+    margin-bottom: 16px;
+  }
+
+  .form-input:focus { border-color: var(--moss); }
+
+  .form-input::placeholder { color: var(--sand); }
+
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+  .mbti-select {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+
+  .mbti-btn {
+    padding: 10px 6px;
+    border: 1.5px solid var(--cream-dark);
+    border-radius: 10px;
+    background: var(--white);
+    font-family: 'Sarabun', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--charcoal-soft);
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: center;
+  }
+
+  .mbti-btn:hover { border-color: var(--moss-light); color: var(--moss); }
+
+  .mbti-btn.selected {
+    border-color: var(--moss);
+    background: rgba(107,124,92,0.08);
+    color: var(--moss-dark);
+  }
+
+  .pay-btn {
+    width: 100%;
+    padding: 16px;
+    background: var(--moss);
+    color: var(--white);
+    font-family: 'Sarabun', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    border: none;
+    border-radius: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 8px;
+    letter-spacing: 0.03em;
+  }
+
+  .pay-btn:hover {
+    background: var(--moss-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(107,124,92,0.3);
+  }
+
+  .pay-secure {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    margin-top: 14px;
+    font-size: 12px;
+    color: var(--charcoal-soft);
+    opacity: 0.5;
+  }
+
+  /* ─── SUCCESS STATE ─── */
+  .success-state {
+    text-align: center;
+    padding: 20px 0;
+    display: none;
+    animation: fadeUp 0.5s ease both;
+  }
+
+  .success-icon {
+    font-size: 56px;
+    margin-bottom: 20px;
+  }
+
+  .success-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 400;
+    color: var(--charcoal);
+    margin-bottom: 12px;
+  }
+
+  .success-desc {
+    font-size: 15px;
+    font-weight: 300;
+    color: var(--charcoal-soft);
+    line-height: 1.8;
+    max-width: 380px;
+    margin: 0 auto 28px;
+  }
+
+  /* ─── FOOTER ─── */
+  .footer {
+    background: var(--charcoal);
+    padding: 48px 24px;
+    text-align: center;
+  }
+
+  .footer-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+    font-weight: 400;
+    font-style: italic;
+    color: var(--white);
+    margin-bottom: 12px;
+  }
+
+  .footer-sub {
+    font-size: 13px;
+    font-weight: 300;
+    color: rgba(254,252,248,0.4);
+    margin-bottom: 24px;
+  }
+
+  .footer-ig {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--moss-light);
+    text-decoration: none;
+    transition: opacity 0.2s;
+  }
+
+  .footer-ig:hover { opacity: 0.7; }
+
+  /* ─── ANIMATIONS ─── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 0.3; transform: scaleY(1); }
+    50% { opacity: 1; transform: scaleY(1.1); }
+  }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 600px) {
+    .quiz-container { padding: 28px 20px; }
+    .quiz-options { grid-template-columns: 1fr 1fr; }
+    .modal { padding: 28px 20px; }
+    .form-row { grid-template-columns: 1fr; }
+    .mbti-select { grid-template-columns: repeat(4, 1fr); }
+    .hd-addon { flex-direction: column; text-align: center; }
+    .hd-price { text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ─── HERO ─── -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-leaf">🌿</div>
+  <div class="hero-leaf2">🌿</div>
+
+  <span class="hero-tag">Craftaway — by monemoll_</span>
+  <h1 class="hero-title"><em>Craftaway</em></h1>
+  <p class="hero-sub" style="font-style:italic; font-family:'Playfair Display',serif; font-size:clamp(16px,2.2vw,20px); margin-bottom:16px; color:var(--moss);">Design your journey, discover yourself</p>
+  <p class="hero-sub" style="margin-bottom:48px;">ทริปที่ดีที่สุดไม่ได้เริ่มจากการจอง แต่เริ่มจากการรู้จักตัวเองก่อน Craftaway คือพื้นที่ช่วยให้คุณออกแบบการเดินทางจากข้างใน</p>
+  <div class="hero-cta">
+    <button class="btn-primary" onclick="document.getElementById('discover').scrollIntoView({behavior:'smooth'})">ค้นหาแบบของคุณ</button>
+    <button class="btn-ghost" onclick="document.getElementById('pricing').scrollIntoView({behavior:'smooth'})">ดู service ทั้งหมด</button>
+  </div>
+  <div class="scroll-hint">
+    <span>scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- ─── HOW IT WORKS ─── -->
+<section class="how-section">
+  <div class="section-inner">
+    <span class="section-label">Craftaway ทำงานยังไง</span>
+    <h2 class="section-title">ทริปที่<em>ตรงใจ</em> เริ่มจากข้างใน</h2>
+    <p class="section-desc">กลับมาเหนื่อยกว่าตอนไป เพราะบางทีเราเลือกทริปจาก feed คนอื่น ไม่ใช่จากสิ่งที่ตัวเองต้องการจริงๆ</p>
+    <div class="how-grid">
+      <div class="how-item">
+        <div class="how-num">01</div>
+        <div class="how-item-title">บอกว่าตอนนี้รู้สึกยังไง</div>
+        <p class="how-item-desc">ไม่ต้องรู้ว่าอยากไปไหน แค่รู้ว่าตอนนี้เป็นยังไง นั่นพอแล้ว</p>
+      </div>
+      <div class="how-item">
+        <div class="how-num">02</div>
+        <div class="how-item-title">รับ Travel Profile ของคุณ</div>
+        <p class="how-item-desc">สไตล์การเดินทาง พลังงานที่ต้องการ และที่ที่น่าจะใช่สำหรับคุณตอนนี้</p>
+      </div>
+      <div class="how-item">
+        <div class="how-num">03</div>
+        <div class="how-item-title">ลึกขึ้นด้วย MBTI + HD</div>
+        <p class="how-item-desc">ถ้าอยากรู้จริงๆ ว่าทริปแบบไหนถึงจะ "ใช่" สำหรับคุณ — เพิ่ม layer นี้เข้าไป</p>
+      </div>
+      <div class="how-item">
+        <div class="how-num">04</div>
+        <div class="how-item-title">ออกไปค้นพบ</div>
+        <p class="how-item-desc">พร้อม guide หรือ itinerary ที่เขียนขึ้นมาสำหรับคุณคนเดียว</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── DISCOVER / QUIZ ─── -->
+<section class="discover-section" id="discover">
+  <div class="section-inner">
+    <span class="section-label">เริ่มจากตรงนี้</span>
+    <h2 class="section-title">ตอนนี้<em>ข้างในคุณ</em>ต้องการอะไร?</h2>
+    <p class="section-desc">11 ข้อ ไม่มีผิดไม่มีถูก แค่ตามความรู้สึกที่มีอยู่ตอนนี้</p>
+
+    <!-- Login bar -->
+    <div id="login-bar" style="margin-bottom:24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;">
+      <p style="font-size:13px;font-weight:300;color:var(--charcoal-soft);">บันทึกผลของคุณไว้ได้เลย — <button onclick="openLoginModal()" style="background:none;border:none;color:var(--moss);font-size:13px;font-weight:500;cursor:pointer;padding:0;font-family:'Sarabun',sans-serif;">สร้าง profile ฟรี →</button></p>
+      <div id="user-bar" style="display:none;align-items:center;gap:10px;">
+        <div id="user-avatar" style="width:32px;height:32px;border-radius:50%;background:rgba(107,124,92,0.15);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:500;color:var(--moss);"></div>
+        <span id="user-greeting" style="font-size:13px;color:var(--charcoal-soft);"></span>
+        <button onclick="openDashboard()" style="background:none;border:1.5px solid var(--sand);border-radius:99px;padding:4px 14px;font-size:12px;font-weight:500;color:var(--charcoal-soft);cursor:pointer;font-family:'Sarabun',sans-serif;transition:all 0.2s;" onmouseover="this.style.borderColor='var(--moss)';this.style.color='var(--moss)'" onmouseout="this.style.borderColor='var(--sand)';this.style.color='var(--charcoal-soft)'">ดู profile ฉัน</button>
+        <button onclick="logoutUser()" style="background:none;border:none;font-size:12px;color:var(--charcoal-soft);opacity:0.4;cursor:pointer;font-family:'Sarabun',sans-serif;">ออก</button>
+      </div>
+    </div>
+
+    <div class="quiz-container">
+      <div class="quiz-progress" id="quiz-progress-dots"></div>
+
+      <!-- 0: mood -->
+      <div class="quiz-step active" id="step-0">
+        <h3 class="quiz-q">ตอนนี้ชีวิตรู้สึกเป็นยังไงบ้าง?</h3>
+        <p class="quiz-sub">เลือกสิ่งที่ตรงกับความรู้สึกตอนนี้มากที่สุด</p>
+        <div class="quiz-options">
+          <div class="quiz-opt" onclick="selectOpt(this,0,'recharge')"><div class="quiz-opt-icon">🌫️</div><div class="quiz-opt-label">เหนื่อย หมดแรง</div><div class="quiz-opt-desc">อยากหายไปนิ่งเงียบๆ</div></div>
+          <div class="quiz-opt" onclick="selectOpt(this,0,'reset')"><div class="quiz-opt-icon">🔄</div><div class="quiz-opt-label">จำเจ อยาก reset</div><div class="quiz-opt-desc">ต้องการอะไรใหม่ๆ</div></div>
+          <div class="quiz-opt" onclick="selectOpt(this,0,'explore')"><div class="quiz-opt-icon">✨</div><div class="quiz-opt-label">อยากลองของใหม่</div><div class="quiz-opt-desc">มีพลัง พร้อม explore</div></div>
+          <div class="quiz-opt" onclick="selectOpt(this,0,'connect')"><div class="quiz-opt-icon">🤍</div><div class="quiz-opt-label">อยากเชื่อมต่อ</div><div class="quiz-opt-desc">กับตัวเองหรือคนอื่น</div></div>
+        </div>
+        <div class="quiz-nav"><button class="quiz-back" disabled>← ย้อนกลับ</button></div>
+      </div>
+
+      <!-- 1: energy -->
+      <div class="quiz-step" id="step-1">
+        <h3 class="quiz-q">คุณชาร์จพลังยังไง?</h3>
+        <p class="quiz-sub">เวลาเหนื่อยหรือล้า คุณทำอะไร?</p>
+        <div class="quiz-options">
+          <div class="quiz-opt" onclick="selectOpt(this,1,'solo')"><div class="quiz-opt-icon">🌙</div><div class="quiz-opt-label">อยู่คนเดียว</div><div class="quiz-opt-desc">สงบ เงียบ ไม่ต้องพูด</div></div>
+          <div class="quiz-opt" onclick="selectOpt(this,1,'nature')"><div class="quiz-opt-icon">🌲</div><div class="quiz-opt-label">อยู่กับธรรมชาติ</div><div class="quiz-opt-desc">ต้นไม้ ลม ทะเล ภูเขา</div></div>
+          <div class="quiz-opt" onclick="selectOpt(this,1,'people')"><div class="quiz-opt-icon">🧡</div><div class="quiz-opt-label">อยู่กับคนที่ใช่</div><div class="quiz-opt-desc">คุยเรื่องดีๆ หัวเราะด้วยกัน</div></div>
+          <div class="quiz-opt" onclick="selectOpt(this,1,'experience')"><div class="quiz-opt-icon">🎨</div><div class="quiz-opt-label">ทำสิ่งที่ชอบ</div><div class="quiz-opt-desc">กิน ดู ฟัง สัมผัสอะไรใหม่</div></div>
+        </div>
+        <div class="quiz-nav"><button class="quiz-back" onclick="goStep(0)">← ย้อนกลับ</button></div>
+      </div>
+
+      <!-- 2: nature type -->
+      <div class="quiz-step" id="step-2">
+        <h3 class="quiz-q">ธรรมชาติแบบไหนที่รู้สึกว่าได้หายใจ?</h3>
+        <p class="quiz-sub">ถ้าได้ยืนอยู่ตรงนั้น ตอนนี้อยากให้เป็นแบบไหน</p>
+        <div class="quiz-options">
+          <div class="quiz-opt" onclick="selectOpt(this,2,'mountain')"><div class="quiz-opt-icon">⛰️</div><div class="quiz-opt-label">ภูเขา & หมอก</div><div class="quiz-opt-desc">อากาศเย็น เงียบ มองลงมาเห็นเมือง</div></div>
+          <div class="quiz-opt" onclick="selectOpt(this,2,'sea')"><div class="quiz-opt-icon">🌊</div><div class="quiz-opt-label">ทะเล & ชายหาด</div><div class="quiz-opt-desc">คลื่น ทราย ลมเค็ม</div></div>
+          <div class="quiz-opt" onclick="selectOpt(this,2,'forest')"><div class="quiz-opt-icon">🌿</div><div class="quiz-opt-label">ป่า & ธรรมชาติรอบข้าง</div><div class="quiz-opt-desc">ต้นไม้ เสียงนก น้ำตก</div></div>
+          <div class="quiz-opt" onclick="selectOpt(this,2,'city')"><div class="quiz-opt-icon">🏙️</div><div class="quiz-opt-label">เมืองที่มีชีวิต</div><div class="quiz-opt-desc">ถนน ไฟ คาเฟ่ ผู้คน</div></div>
+        </div>
+        <div class="quiz-nav"><button class="quiz-back" onclick="goStep(1)">← ย้อนกลับ</button></div>
+      </div>
+
+      <!-- 3: art & culture -->
+      <div class="quiz-step" id="step-3">
+        <h3 class="quiz-q">ศิลปะและวัฒนธรรมแบบไหนที่ดึงดูดคุณ?</h3>
+        <p class="quiz-sub">ในทริป ถ้าได้แวะสักที่ คุณอยากเจออะไร</p>
+        <div class="quiz-options">
+          <div class="quiz-opt" onclick="selectOpt(this,3,'heritage')"><div class="quiz-opt-icon">🏯</div><div class="quiz-opt-label">ประวัติศาสตร์ & วัด</div><div class="quiz-opt-desc">สถาปัตยกรรมเก่า เรื่องราวที่ซ่อนอยู่</div></div>
+          <div class="quiz-opt" onclick="selectOpt(this,3,'contemporary')"><div class="quiz-opt-icon">🖼️</div><div class="quiz-opt-label">ศิลปะร่วมสมัย</div><div class="quiz-opt-desc">แกลเลอรี่ street art งานดีไซน์</div></div>
+          <div class="quiz-opt" onclick="selectOpt(this,3,'food')"><div class="quiz-opt-icon">🍜</div><div class="quiz-opt-label">อาหาร & ตลาด</div><div class="quiz-opt-desc">กินของท้องถิ่น ดูชีวิตจริง</div></div>
+          <div class="quiz-opt" onclick="selectOpt(this,3,'craft')"><div class="quiz-opt-icon">🧵</div><div class="quiz-opt-label">งานฝีมือ & ชุมชน</div><div class="quiz-opt-desc">เรียนรู้จากคนท้องถิ่น</div></div>
+        </div>
+        <div class="quiz-nav"><button class="quiz-back" onclick="goStep(2)">← ย้อนกลับ</button></div>
+      </div>
+
+      <!-- 4: destination scope -->
+      <div class="quiz-step" id="step-4">
+        <h3 class="quiz-q">ครั้งต่อไปอยากออกไปแบบไหน?</h3>
+        <p class="quiz-sub">ในหัวตอนนี้มีภาพประมาณนี้ไหม</p>
+        <div class="quiz-options">
+          <div class="quiz-opt" onclick="selectOpt(this,4,'domestic')"><div class="quiz-opt-icon">🇹🇭</div><div class="quiz-opt-label">ในประเทศ</div><div class="quiz-opt-desc">อยากสำรวจไทยให้ลึกขึ้น</div></div>
+          <div class="quiz-opt" onclick="selectOpt(this,4,'asia')"><div class="quiz-opt-icon">🌏</div><div class="quiz-opt-label">เอเชีย</div><div class="quiz-opt-desc">ใกล้ๆ แต่ต่างบรรยากาศ</div></div>
+          <div class="quiz-opt" onclick="selectOpt(this,4,'far')"><div class="quiz-opt-icon">✈️</div><div class="quiz-opt-label">ยุโรป / ไกลๆ</div><div class="quiz-opt-desc">อยากออกไปไกลสักครั้ง</div></div>
+          <div class="quiz-opt" onclick="selectOpt(this,4,'anywhere')"><div class="quiz-opt-icon">🎲</div><div class="quiz-opt-label">ไปไหนก็ได้</div><div class="quiz-opt-desc">แค่ขอออกไปก็พอ</div></div>
+        </div>
+        <div class="quiz-nav"><button class="quiz-back" onclick="goStep(3)">← ย้อนกลับ</button></div>
+      </div>
+
+      <!-- 5: vibe -->
+      <div class="quiz-step" id="step-5">
+        <h3 class="quiz-q">ทริปในฝันของคุณ vibe ยังไง?</h3>
+        <p class="quiz-sub">ถ้าได้หนีไปสักที อยากได้ feel แบบไหน</p>
+        <div class="quiz-options">
+          <div class="quiz-opt" onclick="selectOpt(this,5,'slow')"><div class="quiz-opt-icon">☕</div><div class="quiz-opt-label">Slow & quiet</div><div class="quiz-opt-desc">ไม่มี schedule แค่ flow</div></div>
+          <div class="quiz-opt" onclick="selectOpt(this,5,'offbeat')"><div class="quiz-opt-icon">🗺️</div><div class="quiz-opt-label">Off the beaten path</div><div class="quiz-opt-desc">ที่ที่ไม่มีใครรู้จัก</div></div>
+          <div class="quiz-opt" onclick="selectOpt(this,5,'cozy')"><div class="quiz-opt-icon">🏡</div><div class="quiz-opt-label">Cozy & local</div><div class="quiz-opt-desc">ร้านเล็กๆ คนท้องถิ่น</div></div>
+          <div class="quiz-opt" onclick="selectOpt(this,5,'wild')"><div class="quiz-opt-icon">🌊</div><div class="quiz-opt-label">Wild & free</div><div class="quiz-opt-desc">เปิดรับทุกอย่างที่เจอ</div></div>
+        </div>
+        <div class="quiz-nav"><button class="quiz-back" onclick="goStep(4)">← ย้อนกลับ</button></div>
+      </div>
+
+      <!-- 6: budget -->
+      <div class="quiz-step" id="step-6">
+        <h3 class="quiz-q">งบที่สบายใจประมาณไหน?</h3>
+        <p class="quiz-sub">ต่อทริป 1 ครั้ง ไม่นับตั๋วเครื่องบิน</p>
+        <div class="quiz-options">
+          <div class="quiz-opt" onclick="selectOpt(this,6,'low')"><div class="quiz-opt-icon">🪙</div><div class="quiz-opt-label">น้อยกว่า 3,000</div><div class="quiz-opt-desc">เที่ยวให้คุ้มทุกบาท</div></div>
+          <div class="quiz-opt" onclick="selectOpt(this,6,'mid')"><div class="quiz-opt-icon">💚</div><div class="quiz-opt-label">3,000 – 8,000</div><div class="quiz-opt-desc">พอมีเผื่อเพลิน</div></div>
+          <div class="quiz-opt" onclick="selectOpt(this,6,'high')"><div class="quiz-opt-icon">🌿</div><div class="quiz-opt-label">8,000 – 20,000</div><div class="quiz-opt-desc">อยากได้ experience ที่ดี</div></div>
+          <div class="quiz-opt" onclick="selectOpt(this,6,'flex')"><div class="quiz-opt-icon">✦</div><div class="quiz-opt-label">ขึ้นอยู่กับที่</div><div class="quiz-opt-desc">ถ้าใช่ก็จ่ายได้</div></div>
+        </div>
+        <div class="quiz-nav"><button class="quiz-back" onclick="goStep(5)">← ย้อนกลับ</button></div>
+      </div>
+
+      <!-- 7: travel style -->
+      <div class="quiz-step" id="step-7">
+        <h3 class="quiz-q">เที่ยวคนเดียวหรือไปกัน?</h3>
+        <p class="quiz-sub">โดยปกติคุณชอบเดินทางแบบไหนมากกว่า</p>
+        <div class="quiz-options">
+          <div class="quiz-opt" onclick="selectOpt(this,7,'solo')"><div class="quiz-opt-icon">🚶</div><div class="quiz-opt-label">คนเดียว</div><div class="quiz-opt-desc">ชอบ pace ของตัวเอง</div></div>
+          <div class="quiz-opt" onclick="selectOpt(this,7,'couple')"><div class="quiz-opt-icon">🫂</div><div class="quiz-opt-label">สองคน</div><div class="quiz-opt-desc">partner หรือเพื่อนสนิท</div></div>
+          <div class="quiz-opt" onclick="selectOpt(this,7,'small')"><div class="quiz-opt-icon">👥</div><div class="quiz-opt-label">กลุ่มเล็ก</div><div class="quiz-opt-desc">3–5 คน สบายดี</div></div>
+          <div class="quiz-opt" onclick="selectOpt(this,7,'flexible')"><div class="quiz-opt-icon">🌀</div><div class="quiz-opt-label">แล้วแต่ทริป</div><div class="quiz-opt-desc">ขึ้นอยู่กับ mood</div></div>
+        </div>
+        <div class="quiz-nav"><button class="quiz-back" onclick="goStep(6)">← ย้อนกลับ</button></div>
+      </div>
+
+      <!-- 8: duration -->
+      <div class="quiz-step" id="step-8">
+        <h3 class="quiz-q">ทริปในฝันกี่วัน?</h3>
+        <p class="quiz-sub">ถ้าจัดได้ตามใจ อยากไปนานแค่ไหน</p>
+        <div class="quiz-options">
+          <div class="quiz-opt" onclick="selectOpt(this,8,'day')"><div class="quiz-opt-icon">🌅</div><div class="quiz-opt-label">1 วัน day trip</div><div class="quiz-opt-desc">ไปเช้า กลับเย็น</div></div>
+          <div class="quiz-opt" onclick="selectOpt(this,8,'weekend')"><div class="quiz-opt-icon">📅</div><div class="quiz-opt-label">2–3 วัน</div><div class="quiz-opt-desc">weekend getaway</div></div>
+          <div class="quiz-opt" onclick="selectOpt(this,8,'week')"><div class="quiz-opt-icon">🗓️</div><div class="quiz-opt-label">4–7 วัน</div><div class="quiz-opt-desc">ทริปจริงจัง</div></div>
+          <div class="quiz-opt" onclick="selectOpt(this,8,'long')"><div class="quiz-opt-icon">🌍</div><div class="quiz-opt-label">มากกว่า 1 สัปดาห์</div><div class="quiz-opt-desc">หนีไปนานๆ</div></div>
+        </div>
+        <div class="quiz-nav"><button class="quiz-back" onclick="goStep(7)">← ย้อนกลับ</button></div>
+      </div>
+
+      <!-- 9: accommodation -->
+      <div class="quiz-step" id="step-9">
+        <h3 class="quiz-q">ที่พักแบบไหนที่รู้สึกว่า "ใช่"?</h3>
+        <p class="quiz-sub">ที่พักที่คุณ feel safe และได้เป็นตัวเอง</p>
+        <div class="quiz-options">
+          <div class="quiz-opt" onclick="selectOpt(this,9,'hostel')"><div class="quiz-opt-icon">🛏️</div><div class="quiz-opt-label">Hostel / บ้านพักราคาดี</div><div class="quiz-opt-desc">เจอคนใหม่ เที่ยวให้คุ้มงบ</div></div>
+          <div class="quiz-opt" onclick="selectOpt(this,9,'guesthouse')"><div class="quiz-opt-icon">🏠</div><div class="quiz-opt-label">Guesthouse / ที่พักเล็กๆ</div><div class="quiz-opt-desc">มี character อบอุ่น</div></div>
+          <div class="quiz-opt" onclick="selectOpt(this,9,'hotel')"><div class="quiz-opt-icon">🏨</div><div class="quiz-opt-label">โรงแรมที่ดีสักหน่อย</div><div class="quiz-opt-desc">สะดวก มีห้องน้ำส่วนตัว</div></div>
+          <div class="quiz-opt" onclick="selectOpt(this,9,'unique')"><div class="quiz-opt-icon">🌸</div><div class="quiz-opt-label">ที่พักที่มี vibe</div><div class="quiz-opt-desc">ออกแบบสวย มีเรื่องเล่า</div></div>
+        </div>
+        <div class="quiz-nav"><button class="quiz-back" onclick="goStep(8)">← ย้อนกลับ</button></div>
+      </div>
+
+      <!-- 10: MBTI -->
+      <div class="quiz-step" id="step-10">
+        <h3 class="quiz-q">รู้ MBTI ของตัวเองไหม?</h3>
+        <p class="quiz-sub">ถ้ารู้ เลือกเลย — ถ้าไม่รู้ กด "ยังไม่รู้" ได้เลย ผลลัพธ์ก็ยังดีอยู่</p>
+        <div class="mbti-select" style="margin-bottom:20px;">
+          <button class="mbti-btn" onclick="selectMBTIQuiz(this,'INTJ')">INTJ</button>
+          <button class="mbti-btn" onclick="selectMBTIQuiz(this,'INTP')">INTP</button>
+          <button class="mbti-btn" onclick="selectMBTIQuiz(this,'ENTJ')">ENTJ</button>
+          <button class="mbti-btn" onclick="selectMBTIQuiz(this,'ENTP')">ENTP</button>
+          <button class="mbti-btn" onclick="selectMBTIQuiz(this,'INFJ')">INFJ</button>
+          <button class="mbti-btn" onclick="selectMBTIQuiz(this,'INFP')">INFP</button>
+          <button class="mbti-btn" onclick="selectMBTIQuiz(this,'ENFJ')">ENFJ</button>
+          <button class="mbti-btn" onclick="selectMBTIQuiz(this,'ENFP')">ENFP</button>
+          <button class="mbti-btn" onclick="selectMBTIQuiz(this,'ISTJ')">ISTJ</button>
+          <button class="mbti-btn" onclick="selectMBTIQuiz(this,'ISFJ')">ISFJ</button>
+          <button class="mbti-btn" onclick="selectMBTIQuiz(this,'ESTJ')">ESTJ</button>
+          <button class="mbti-btn" onclick="selectMBTIQuiz(this,'ESFJ')">ESFJ</button>
+          <button class="mbti-btn" onclick="selectMBTIQuiz(this,'ISTP')">ISTP</button>
+          <button class="mbti-btn" onclick="selectMBTIQuiz(this,'ISFP')">ISFP</button>
+          <button class="mbti-btn" onclick="selectMBTIQuiz(this,'ESTP')">ESTP</button>
+          <button class="mbti-btn" onclick="selectMBTIQuiz(this,'ESFP')">ESFP</button>
+        </div>
+        <p style="font-size:12px;color:var(--charcoal-soft);opacity:0.6;margin-bottom:20px;">ยังไม่รู้ type? <a href="https://www.16personalities.com/" target="_blank" style="color:var(--moss);">ทำ test ที่นี่</a></p>
+        <div class="quiz-nav" style="justify-content:space-between;">
+          <button class="quiz-back" onclick="goStep(9)">← ย้อนกลับ</button>
+          <button class="btn-ghost" style="font-size:13px;padding:8px 20px;" onclick="answers[10]='unknown';goStep(11)">ยังไม่รู้ type →</button>
+        </div>
+      </div>
+
+      <!-- Result (step 11) -->
+      <div class="quiz-step" id="step-11">
+        <h3 class="quiz-q" style="margin-bottom:6px;">นี่คือ travel profile ของคุณ ✦</h3>
+        <p style="font-size:13px;color:var(--charcoal-soft);font-weight:300;margin-bottom:24px;">จาก 11 คำตอบของคุณ</p>
+
+        <!-- Profile card -->
+        <div class="result-card" id="result-card" style="margin-bottom:20px;">
+          <div class="result-type" id="result-type"></div>
+          <div class="result-title" id="result-title"></div>
+          <p class="result-desc" id="result-desc"></p>
+          <div id="mbti-insight" style="display:none;background:rgba(155,139,180,0.08);border-radius:10px;padding:10px 14px;margin:12px 0;font-size:13px;color:var(--charcoal-soft);line-height:1.7;border-left:3px solid var(--purple-soft);"></div>
+        </div>
+
+        <!-- Destination cards -->
+        <div id="dest-section" style="margin-bottom:20px;">
+          <div style="font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--moss);margin-bottom:14px;font-weight:500;">ที่ที่น่าจะ ใช่ สำหรับคุณ</div>
+          <div id="dest-cards" style="display:flex;flex-direction:column;gap:12px;"></div>
+        </div>
+
+        <!-- Summary strip -->
+        <div id="result-summary" style="background:rgba(107,124,92,0.06);border-radius:12px;padding:14px 16px;margin-bottom:20px;font-size:13px;line-height:1.9;color:var(--charcoal-soft);"></div>
+
+        <!-- Tags -->
+        <div class="result-tags" id="result-tags" style="margin-bottom:24px;"></div>
+
+        <p style="font-size:14px;font-weight:300;color:var(--charcoal-soft);line-height:1.7;margin-bottom:20px;">นี่คือ profile เบื้องต้น ถ้าอยากให้ monemoll_ วิเคราะห์ MBTI และออกแบบทริปให้ลึกกว่านี้ — Signature service รอคุณอยู่</p>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;">
+          <button class="btn-primary" onclick="openModal('signature')">อยากรู้ให้ลึกกว่านี้</button>
+          <button class="btn-ghost" onclick="saveResultPrompt()">บันทึก profile นี้</button>
+        </div>
+        <div class="quiz-nav" style="margin-top:20px;">
+          <button class="quiz-back" onclick="goStep(10)">← ย้อนกลับ</button>
+          <button class="quiz-back" onclick="resetQuiz()" style="opacity:0.5;">เริ่มใหม่</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ─── PRICING ─── -->
+<section class="pricing-section" id="pricing">
+  <div class="section-inner">
+    <span class="section-label">เลือกแบบที่ใช่</span>
+    <h2 class="section-title">ลึกแค่ไหน<em>ก็ได้</em></h2>
+    <p class="section-desc">เริ่มฟรีได้เลย หรือจะให้ monemoll_ ช่วยออกแบบทริปให้ก็ได้เหมือนกัน — ไม่มีแรงกดดัน</p>
+
+    <div class="pricing-grid">
+      <!-- Free -->
+      <div class="price-card" onclick="openModal('free')">
+        <div class="price-tier">Free</div>
+        <div class="price-name">Travel Profile</div>
+        <div class="price-amount"><span style="font-size:16px"></span>ฟรี</div>
+        <div class="price-note">รับทันทีหลังทำ quiz</div>
+        <div class="price-divider"></div>
+        <ul class="price-features">
+          <li>Travel profile จาก quiz 3 ข้อ</li>
+          <li>destination แนะนำตาม mood</li>
+          <li>สไตล์ทริปที่น่าจะเหมาะกับตอนนี้</li>
+        </ul>
+        <button class="price-btn" onclick="event.stopPropagation(); document.getElementById('discover').scrollIntoView({behavior:'smooth'})">ทำ quiz เลย</button>
+      </div>
+      <!-- Mini -->
+      <div class="price-card" onclick="openModal('mini')">
+        <div class="price-tier">Starter</div>
+        <div class="price-name">MBTI Travel Card</div>
+        <div class="price-amount"><span>฿</span>129</div>
+        <div class="price-note">download ได้เลย ไม่ต้องรอ</div>
+        <div class="price-divider"></div>
+        <ul class="price-features">
+          <li>การ์ด 1 หน้าตาม MBTI type ของคุณ</li>
+          <li>3 ที่ที่น่าจะตรงกับ type นั้น</li>
+          <li>วิธีเที่ยวที่ชาร์จพลังได้จริง</li>
+        </ul>
+        <button class="price-btn">เริ่มตรงนี้</button>
+      </div>
+
+      <!-- Guide -->
+      <div class="price-card" onclick="openModal('guide')">
+        <div class="price-tier">Essential</div>
+        <div class="price-name">Mood × Trip Guide</div>
+        <div class="price-amount"><span>฿</span>199</div>
+        <div class="price-note">download ได้เลย ไม่ต้องรอ</div>
+        <div class="price-divider"></div>
+        <ul class="price-features">
+          <li>Guide แยกตาม 3 mood จริงๆ</li>
+          <li>เที่ยวยังไงให้คุ้มงบ ไม่ใช่แค่ถูก</li>
+          <li>Checklist เตรียมทริปสั้น</li>
+        </ul>
+        <button class="price-btn">เลือก tier นี้</button>
+      </div>
+
+      <!-- Signature -->
+      <div class="price-card featured" onclick="openModal('signature')">
+        <div class="price-tier">Signature</div>
+        <div class="price-name">MBTI × Trip Design</div>
+        <div class="price-amount"><span>฿</span>1,290</div>
+        <div class="price-note">monemoll_ ทำให้ ส่งใน 3–5 วัน</div>
+        <div class="price-divider"></div>
+        <ul class="price-features">
+          <li>อ่าน MBTI แล้วแปลงเป็น travel profile ของคุณ</li>
+          <li>แนะนำที่ไปและวิธีเที่ยวที่เหมาะ</li>
+          <li>ส่งเป็น PDF เขียนขึ้นมาเพื่อคุณ</li>
+          <li>ถามเพิ่มได้ 1 ข้อ</li>
+        </ul>
+        <button class="price-btn">เลือก tier นี้</button>
+      </div>
+
+      <!-- Premium -->
+      <div class="price-card" onclick="openModal('premium')">
+        <div class="price-tier">Premium</div>
+        <div class="price-name">Trip by Your Design</div>
+        <div class="price-amount"><span>฿</span>2,490</div>
+        <div class="price-note">เปิดรับ 2 คน / เดือน</div>
+        <div class="price-divider"></div>
+        <ul class="price-features">
+          <li>ทุกอย่างใน Signature</li>
+          <li>วาง itinerary จริง ทั้งทริป</li>
+          <li>คุยกัน 30 นาที หลังรับไฟล์</li>
+        </ul>
+        <button class="price-btn">เลือก tier นี้</button>
+      </div>
+    </div>
+
+    <!-- HD Addon -->
+    <div class="hd-addon" onclick="openModal('signature', true)">
+      <div class="hd-icon">✦</div>
+      <div class="hd-text">
+        <div class="hd-label">เสริมได้ใน Signature / Premium</div>
+        <div class="hd-title">+ Human Design Layer</div>
+        <div class="hd-desc">ถ้า MBTI คือ "แบบที่คุณคิด" — Human Design คือ "แบบที่คุณถูกออกแบบมา" เพิ่ม layer นี้เข้าไป แล้วทริปจะไม่ใช่แค่ที่ที่คุณอยากไป แต่คือที่ที่ energy ของคุณจะไปได้ดีจริงๆ</div>
+      </div>
+      <div class="hd-price">
+        <div class="hd-price-amount">+฿500</div>
+        <div class="hd-price-note">เพิ่มตอน checkout</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer class="footer">
+  <div class="footer-logo">Craftaway</div>
+  <div class="footer-sub" style="font-style:italic; font-family:'Playfair Display',serif; margin-bottom:6px; color:rgba(254,252,248,0.5);">Design your journey, discover yourself</div>
+  <div class="footer-sub">by monemoll_</div>
+  <a href="https://instagram.com/monemoll_" class="footer-ig" target="_blank">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+    @monemoll_
+  </a>
+</footer>
+
+<!-- ─── LOGIN MODAL ─── -->
+<div class="modal-overlay" id="login-modal" onclick="closeLoginOutside(event)">
+  <div class="modal" id="login-modal-inner" style="max-width:460px;">
+    <button class="modal-close" onclick="closeLoginModal()">×</button>
+    <div id="login-form-state">
+      <div class="modal-title">สร้าง profile ของคุณ</div>
+      <p class="modal-sub" style="margin-bottom:28px;">บันทึกผล quiz และติดตามการเดินทางของคุณ — ฟรี ไม่มีค่าใช้จ่าย</p>
+      <label class="form-label">ชื่อที่ใช้เรียก</label>
+      <input class="form-input" id="login-name" type="text" placeholder="เรียกว่าอะไรดี?">
+      <div class="form-row">
+        <div>
+          <label class="form-label">อายุ</label>
+          <input class="form-input" id="login-age" type="number" min="13" max="99" placeholder="25">
+        </div>
+        <div>
+          <label class="form-label">อาชีพ</label>
+          <select class="form-input" id="login-job" style="cursor:pointer;">
+            <option value="">เลือก</option>
+            <option>นักเรียน / นักศึกษา</option>
+            <option>พนักงานบริษัท</option>
+            <option>Freelance</option>
+            <option>เจ้าของธุรกิจ</option>
+            <option>อื่นๆ</option>
+          </select>
+        </div>
+      </div>
+      <label class="form-label">Email</label>
+      <input class="form-input" id="login-email" type="email" placeholder="your@email.com">
+      <label class="form-label">แผนการเดินทาง</label>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px;">
+        <div class="quiz-opt" id="plan-domestic" onclick="selectPlan('domestic')" style="padding:14px 12px;">
+          <div class="quiz-opt-icon" style="font-size:20px;">🇹🇭</div>
+          <div class="quiz-opt-label" style="font-size:13px;">ในประเทศ</div>
+        </div>
+        <div class="quiz-opt" id="plan-international" onclick="selectPlan('international')" style="padding:14px 12px;">
+          <div class="quiz-opt-icon" style="font-size:20px;">✈️</div>
+          <div class="quiz-opt-label" style="font-size:13px;">นอกประเทศ</div>
+        </div>
+        <div class="quiz-opt" id="plan-both" onclick="selectPlan('both')" style="padding:14px 12px;">
+          <div class="quiz-opt-icon" style="font-size:20px;">🌏</div>
+          <div class="quiz-opt-label" style="font-size:13px;">ทั้งสองอย่าง</div>
+        </div>
+        <div class="quiz-opt" id="plan-undecided" onclick="selectPlan('undecided')" style="padding:14px 12px;">
+          <div class="quiz-opt-icon" style="font-size:20px;">🎲</div>
+          <div class="quiz-opt-label" style="font-size:13px;">ยังไม่แน่ใจ</div>
+        </div>
+      </div>
+      <label class="form-label">ความฝันในการเดินทาง <span style="font-weight:300;text-transform:none;letter-spacing:0;">(optional)</span></label>
+      <textarea class="form-input" id="login-dream" style="min-height:70px;resize:vertical;" placeholder="เช่น อยากไปญี่ปุ่นคนเดียวซักครั้ง หรืออยากเที่ยวทะเลแบบไม่รีบ..."></textarea>
+      <button class="pay-btn" onclick="saveLogin()" style="margin-top:4px;">สร้าง profile ฟรี</button>
+    </div>
+    <div id="login-success-state" style="display:none;text-align:center;padding:20px 0;animation:fadeUp 0.4s ease both;">
+      <div style="font-size:48px;margin-bottom:16px;">🌿</div>
+      <div class="modal-title" id="login-welcome">ยินดีต้อนรับ!</div>
+      <p class="modal-sub" style="margin-bottom:24px;">Profile ของคุณพร้อมแล้ว ทำ quiz ต่อเพื่อรับ travel profile ได้เลย</p>
+      <button class="btn-primary" onclick="closeLoginModal(); document.getElementById('discover').scrollIntoView({behavior:'smooth'})">เริ่ม quiz เลย</button>
+    </div>
+  </div>
+</div>
+
+<!-- ─── DASHBOARD MODAL ─── -->
+<div class="modal-overlay" id="dashboard-modal" onclick="closeDashOutside(event)">
+  <div class="modal" id="dashboard-modal-inner" style="max-width:520px;">
+    <button class="modal-close" onclick="closeDashboard()">×</button>
+    <div style="display:flex;align-items:center;gap:14px;margin-bottom:28px;">
+      <div id="dash-avatar" style="width:48px;height:48px;border-radius:50%;background:rgba(107,124,92,0.15);display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:500;color:var(--moss);flex-shrink:0;"></div>
+      <div>
+        <div class="modal-title" id="dash-name" style="font-size:22px;margin-bottom:2px;"></div>
+        <p style="font-size:13px;font-weight:300;color:var(--charcoal-soft);margin:0;" id="dash-email"></p>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:24px;">
+      <div style="background:var(--cream);border-radius:var(--border-radius-md);padding:14px 12px;text-align:center;">
+        <div style="font-family:'Playfair Display',serif;font-size:22px;color:var(--moss);margin-bottom:4px;" id="dash-age">—</div>
+        <div style="font-size:11px;color:var(--charcoal-soft);letter-spacing:0.05em;">อายุ</div>
+      </div>
+      <div style="background:var(--cream);border-radius:var(--border-radius-md);padding:14px 12px;text-align:center;">
+        <div style="font-family:'Playfair Display',serif;font-size:22px;color:var(--moss);margin-bottom:4px;" id="dash-quiz-count">0</div>
+        <div style="font-size:11px;color:var(--charcoal-soft);letter-spacing:0.05em;">quiz ที่ทำแล้ว</div>
+      </div>
+      <div style="background:var(--cream);border-radius:var(--border-radius-md);padding:14px 12px;text-align:center;">
+        <div style="font-family:'Playfair Display',serif;font-size:15px;color:var(--moss);margin-bottom:4px;" id="dash-plan">—</div>
+        <div style="font-size:11px;color:var(--charcoal-soft);letter-spacing:0.05em;">แผนเดินทาง</div>
+      </div>
+    </div>
+
+    <div id="dash-profile-section" style="display:none;background:rgba(107,124,92,0.06);border-radius:16px;padding:20px;margin-bottom:20px;">
+      <div style="font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:var(--moss);margin-bottom:8px;">Travel Profile ล่าสุด</div>
+      <div style="font-family:'Playfair Display',serif;font-size:18px;color:var(--charcoal);margin-bottom:6px;" id="dash-profile-name"></div>
+      <p style="font-size:13px;font-weight:300;color:var(--charcoal-soft);line-height:1.7;margin-bottom:12px;" id="dash-profile-desc"></p>
+      <div id="dash-profile-tags" style="display:flex;flex-wrap:wrap;gap:6px;"></div>
+    </div>
+
+    <div id="dash-dream-section" style="display:none;margin-bottom:20px;">
+      <div style="font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:var(--charcoal-soft);margin-bottom:8px;">ความฝันในการเดินทาง</div>
+      <p style="font-size:14px;font-weight:300;color:var(--charcoal);line-height:1.7;font-style:italic;border-left:3px solid var(--moss-light);padding-left:14px;border-radius:0;" id="dash-dream"></p>
+    </div>
+
+    <div style="display:flex;gap:10px;flex-wrap:wrap;">
+      <button class="btn-primary" style="flex:1;" onclick="closeDashboard();document.getElementById('discover').scrollIntoView({behavior:'smooth'})">ทำ quiz อีกครั้ง</button>
+      <button class="btn-ghost" style="flex:1;" onclick="closeDashboard();openModal('signature')">อัปเกรด service</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal" onclick="closeModalOutside(event)">
+  <div class="modal" id="modal-inner">
+    <button class="modal-close" onclick="closeModal()">×</button>
+
+    <!-- Form state -->
+    <div id="modal-form">
+      <div class="modal-title" id="modal-title">MBTI × Trip Design</div>
+      <p class="modal-sub" id="modal-sub">กรอกข้อมูลเพื่อให้ monemoll_ ออกแบบทริปที่ใช่สำหรับคุณ</p>
+
+      <!-- Order Summary -->
+      <div class="order-summary" id="order-summary">
+        <div class="order-row">
+          <span class="order-label" id="order-product-name">MBTI × Trip Design</span>
+          <span class="order-val" id="order-product-price">฿1,290</span>
+        </div>
+        <div class="order-row" id="hd-order-row" style="display:none">
+          <span class="order-label">+ Human Design Layer</span>
+          <span class="order-val">฿500</span>
+        </div>
+        <div class="order-row order-total">
+          <span class="order-label">รวม</span>
+          <span class="order-val" id="order-total">฿1,290</span>
+        </div>
+      </div>
+
+      <!-- HD Toggle (shown for Signature and Premium) -->
+      <div class="hd-toggle-row" id="hd-toggle-row" onclick="toggleHD()" style="display:none">
+        <div class="hd-toggle-info">
+          <div class="hd-toggle-title">✦ เพิ่ม Human Design Layer</div>
+          <div class="hd-toggle-sub">วิเคราะห์ Energy Type + Strategy + Authority</div>
+        </div>
+        <div class="hd-toggle-right">
+          <div class="toggle-switch" id="hd-switch"></div>
+          <div class="hd-add-price">+฿500</div>
+        </div>
+      </div>
+
+      <!-- MBTI Input (shown for mini and signature) -->
+      <div id="mbti-section" style="margin-bottom:20px; display:none">
+        <label class="form-label">MBTI Type ของคุณ</label>
+        <div class="mbti-select">
+          <button class="mbti-btn" onclick="selectMBTI(this)">INTJ</button>
+          <button class="mbti-btn" onclick="selectMBTI(this)">INTP</button>
+          <button class="mbti-btn" onclick="selectMBTI(this)">ENTJ</button>
+          <button class="mbti-btn" onclick="selectMBTI(this)">ENTP</button>
+          <button class="mbti-btn" onclick="selectMBTI(this)">INFJ</button>
+          <button class="mbti-btn" onclick="selectMBTI(this)">INFP</button>
+          <button class="mbti-btn" onclick="selectMBTI(this)">ENFJ</button>
+          <button class="mbti-btn" onclick="selectMBTI(this)">ENFP</button>
+          <button class="mbti-btn" onclick="selectMBTI(this)">ISTJ</button>
+          <button class="mbti-btn" onclick="selectMBTI(this)">ISFJ</button>
+          <button class="mbti-btn" onclick="selectMBTI(this)">ESTJ</button>
+          <button class="mbti-btn" onclick="selectMBTI(this)">ESFJ</button>
+          <button class="mbti-btn" onclick="selectMBTI(this)">ISTP</button>
+          <button class="mbti-btn" onclick="selectMBTI(this)">ISFP</button>
+          <button class="mbti-btn" onclick="selectMBTI(this)">ESTP</button>
+          <button class="mbti-btn" onclick="selectMBTI(this)">ESFP</button>
+        </div>
+        <p style="font-size:12px; color:var(--charcoal-soft); opacity:0.6; font-weight:300;">ยังไม่รู้ type? <a href="https://www.16personalities.com/" target="_blank" style="color:var(--moss);">ทำ test ที่นี่</a></p>
+      </div>
+
+      <!-- HD Input (shown when HD toggled) -->
+      <div id="hd-input-section" style="margin-bottom:20px; display:none">
+        <label class="form-label">Human Design Type</label>
+        <select class="form-input" style="cursor:pointer">
+          <option value="">เลือก Energy Type</option>
+          <option>Manifestor</option>
+          <option>Generator</option>
+          <option>Manifesting Generator</option>
+          <option>Projector</option>
+          <option>Reflector</option>
+        </select>
+        <p style="font-size:12px; color:var(--charcoal-soft); opacity:0.6; font-weight:300; margin-top:-10px; margin-bottom:16px;">ยังไม่รู้ HD chart? <a href="https://www.mybodygraph.com/" target="_blank" style="color:var(--moss);">ทำได้ที่นี่ฟรี</a></p>
+      </div>
+
+      <!-- Contact info -->
+      <div>
+        <label class="form-label">ชื่อ</label>
+        <input class="form-input" type="text" placeholder="ชื่อที่ใช้เรียก">
+        <div class="form-row">
+          <div>
+            <label class="form-label">Email</label>
+            <input class="form-input" type="email" placeholder="your@email.com">
+          </div>
+          <div>
+            <label class="form-label">IG / Line ID</label>
+            <input class="form-input" type="text" placeholder="@username">
+          </div>
+        </div>
+        <label class="form-label">อยากได้ทริปแบบไหน? (optional)</label>
+        <textarea class="form-input" style="min-height:80px; resize:vertical;" placeholder="เช่น อยากหนีไปคนเดียว งบ 3,000 มีเวลา 2 วัน..."></textarea>
+      </div>
+
+      <button class="pay-btn" id="pay-btn-main" onclick="handlePay()">ชำระเงิน <span id="pay-btn-price">฿1,290</span></button>
+      <div class="pay-secure">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+        ชำระผ่านช่องทางปลอดภัย
+      </div>
+    </div>
+
+    <!-- Success state -->
+    <div class="success-state" id="modal-success">
+      <div class="success-icon">🌿</div>
+      <div class="success-title" id="success-title">ได้รับแล้ว ขอบคุณนะ</div>
+      <p class="success-desc" id="success-desc">monemoll_ จะส่งผลให้คุณภายใน 3–5 วัน ทาง email หรือ DM ที่ระบุไว้</p>
+      <button class="btn-primary" onclick="closeModal()">กลับ</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  const SUPA_URL='https://tcbtdlnksfytnixeandw.supabase.co';
+  const SUPA_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRjYnRkbG5rc2Z5dG5peGVhbmR3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ0MjY4NTMsImV4cCI6MjA5MDAwMjg1M30.Z6_5pNrGr4LPMI4i1sFI7EpxiiiPZvQKIkbv1StNp2Q';
+  const H={'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY,'Content-Type':'application/json','Prefer':'return=minimal'};
+  async function sbPost(table,body){
+    try{
+      const r=await fetch(SUPA_URL+'/rest/v1/'+table,{method:'POST',headers:H,body:JSON.stringify(body)});
+      return r.ok;
+    }catch(e){console.warn('DB:',e);return false;}
+  }
+  async function sbPatch(table,filter,body){
+    try{
+      const r=await fetch(SUPA_URL+'/rest/v1/'+table+'?'+filter,{method:'PATCH',headers:H,body:JSON.stringify(body)});
+      return r.ok;
+    }catch(e){return false;}
+  }
+  async function sbGet(path){
+    try{
+      const r=await fetch(SUPA_URL+'/rest/v1/'+path,{headers:{...H,'Prefer':'return=representation'}});
+      return r.ok?r.json():[];
+    }catch(e){return [];}
+  }
+
+  const TOTAL_STEPS = 11;
+  const dotsEl = document.getElementById('quiz-progress-dots');
+  for (let i = 0; i <= TOTAL_STEPS; i++) {
+    const d = document.createElement('div');
+    d.className = 'progress-dot' + (i===0?' active':'');
+    d.id = 'dot-'+i;
+    dotsEl.appendChild(d);
+  }
+
+  const answers = {};
+  let currentStep = 0;
+  let selectedMBTI = '';
+
+  function selectOpt(el, step, value) {
+    el.closest('.quiz-options').querySelectorAll('.quiz-opt').forEach(o=>o.classList.remove('selected'));
+    el.classList.add('selected');
+    answers[step] = value;
+    setTimeout(()=>goStep(step+1), 350);
+  }
+
+  function selectMBTIQuiz(btn, type) {
+    btn.closest('.mbti-select').querySelectorAll('.mbti-btn').forEach(b=>b.classList.remove('selected'));
+    btn.classList.add('selected');
+    selectedMBTI = type;
+    answers[10] = type;
+    setTimeout(()=>goStep(11), 400);
+  }
+
+  function goStep(n) {
+    document.getElementById('step-'+currentStep).classList.remove('active');
+    document.getElementById('dot-'+currentStep).classList.remove('active');
+    document.getElementById('dot-'+currentStep).classList.add('done');
+    currentStep = n;
+    document.getElementById('step-'+n).classList.add('active');
+    document.getElementById('dot-'+n).classList.add('active');
+    if (n===TOTAL_STEPS) showResult();
+  }
+
+  const destinations = {
+    nan:{ country:'ไทย',city:'น่าน',flag:'🇹🇭', desc:'เมืองเก่าที่เดินช้าๆ ได้ทุกวัน วัดภูมินมีจิตรกรรมฝาผนังที่หาที่ไหนไม่ได้อีกแล้ว', nature:['mountain','forest'],art:['heritage','craft'],vibe:['slow','cozy'],scope:['domestic'],budget:['low','mid'], itinerary:['วันที่ 1 — เดินเมืองเก่า เช้าที่ตลาดนัด กาแฟริมน้ำน่าน','วันที่ 2 — วัดภูมิน ดูจิตรกรรม · ขับรถไปดอยภูคา','วันที่ 3 — ตลาดเช้าบ้านผาถ่าน · เดินทางกลับ']},
+    chiangrai:{ country:'ไทย',city:'เชียงราย',flag:'🇹🇭', desc:'มากกว่าวัดขาว — เชียงรายมีชุมชนชาติพันธุ์ ไร่ชา และหมอกยามเช้าที่ทำให้ลืมปฏิทิน', nature:['mountain','forest'],art:['heritage','contemporary','craft'],vibe:['offbeat','slow'],scope:['domestic'],budget:['low','mid'], itinerary:['วันที่ 1 — ดอยตุง · สวนแม่ฟ้าหลวง · กาแฟดอยช้าง','วันที่ 2 — วัดร่องขุ่น · วัดร่องเสือเต้น · ตลาดไนท์บาซาร์','วันที่ 3 — บ้านดำ · ชายแดนแม่สาย']},
+    kanchanaburi:{ country:'ไทย',city:'กาญจนบุรี',flag:'🇹🇭', desc:'ใกล้กรุงเทพแต่ vibe ต่างกันสิ้น แม่น้ำแควที่เงียบและประวัติศาสตร์ที่ยังมีลมหายใจ', nature:['forest'],art:['heritage','food'],vibe:['slow','cozy'],scope:['domestic'],budget:['low','mid'], itinerary:['วันที่ 1 — สะพานข้ามแม่น้ำแคว · พิพิธภัณฑ์สงคราม · นอนบนแพ','วันที่ 2 — น้ำตกเอราวัณ · ถ้ำ · กินข้าวริมน้ำ']},
+    kohsamui:{ country:'ไทย',city:'เกาะสมุย',flag:'🇹🇭', desc:'ทะเลใต้ที่ยังมีมุมเงียบ ถ้าหลีกเลี่ยงช่วง peak ได้จะเจอเกาะที่รู้สึกว่ามีไว้สำหรับคุณ', nature:['sea'],art:['food'],vibe:['slow','wild'],scope:['domestic'],budget:['mid','high'], itinerary:['วันที่ 1 — หาดเฉวงตอนเช้า · ตลาดฟิชเชอร์แมน','วันที่ 2 — หาดบ่อผุด · น้ำตกนาเมือง · sunset หัวหิน','วันที่ 3 — Ang Thong Marine Park day trip']},
+    maehongson:{ country:'ไทย',city:'แม่ฮ่องสอน',flag:'🇹🇭', desc:'เมืองที่ห่างไกลที่สุดของไทย — หมอก ชาวเขา และชีวิตที่เดินช้ากว่าที่อื่น', nature:['mountain','forest'],art:['heritage','craft'],vibe:['offbeat','slow'],scope:['domestic'],budget:['low','mid'], itinerary:['วันที่ 1 — วัดจองคำ · ทะเลสาบจองกลาง · ตลาดเช้า','วันที่ 2 — บ้านรักไทย · ปาย รอบเช้า','วันที่ 3 — ปาย · คาเฟ่ริมน้ำ']},
+    kyoto:{ country:'ญี่ปุ่น',city:'เกียวโต',flag:'🇯🇵', desc:'เมืองที่สอนให้เดินช้า มองตรงหน้า ไม่รีบ มีวัด ป่าไผ่ และร้านชาที่อยากกลับมาอีก', nature:['forest','mountain'],art:['heritage','craft','contemporary'],vibe:['slow','cozy'],scope:['asia'],budget:['mid','high'], itinerary:['วันที่ 1 — Arashiyama bamboo grove เช้าตรู่ · วัด Tenryu-ji · ย่าน Sagano','วันที่ 2 — Fushimi Inari เช้า · Gion เย็น · Nishiki Market','วันที่ 3 — Philosopher\'s Path · Nanzen-ji · Higashiyama']},
+    tokyo:{ country:'ญี่ปุ่น',city:'โตเกียว',flag:'🇯🇵', desc:'เมืองที่มีทุกอย่างอยู่ในที่เดียว — ยิ่งหลงยิ่งเจอของดี', nature:['city'],art:['contemporary','food','craft'],vibe:['wild','offbeat'],scope:['asia'],budget:['mid','high'], itinerary:['วันที่ 1 — Shimokitazawa · ร้านมือสอง · live house เล็กๆ','วันที่ 2 — Yanaka ย่านเก่า · Ueno Museum','วันที่ 3 — Harajuku · Meiji Shrine · Nakameguro canal']},
+    bali:{ country:'อินโดนีเซีย',city:'บาหลี (Ubud)',flag:'🇮🇩', desc:'Ubud ยังมีนาขั้นบันได วัด และชุมชนศิลปะที่ทำให้อยากอยู่ต่อ', nature:['forest','mountain','sea'],art:['craft','heritage','contemporary'],vibe:['slow','cozy'],scope:['asia'],budget:['low','mid'], itinerary:['วันที่ 1 — Tegalalang Rice Terrace เช้า · Ubud Market · Kecak dance','วันที่ 2 — Tirta Empul · Campuhan Ridge Walk · นวดแผนโบราณ','วันที่ 3 — Seminyak beach · sunset Tanah Lot']},
+    hanoi:{ country:'เวียดนาม',city:'ฮานอย',flag:'🇻🇳', desc:'เมืองหลวงที่ยังมีวิญญาณ เดินในย่านเก่า กิน Pho ตั้งแต่เช้า ดูชีวิตจริงของผู้คน', nature:['city'],art:['heritage','food'],vibe:['offbeat','cozy'],scope:['asia'],budget:['low','mid'], itinerary:['วันที่ 1 — Old Quarter · Ho Hoan Kiem · Train Street','วันที่ 2 — Temple of Literature · Hoan Kiem Lake เช้า · Beer corner','วันที่ 3 — Ha Long Bay day trip']},
+    seoul:{ country:'เกาหลี',city:'โซล',flag:'🇰🇷', desc:'โซลไม่ได้มีแค่ Myeongdong — Bukchon และ Hongdae มีชีวิตอีกแบบที่น่าค้นพบ', nature:['city','mountain'],art:['contemporary','food','craft'],vibe:['wild','cozy'],scope:['asia'],budget:['mid','high'], itinerary:['วันที่ 1 — Bukchon Hanok · Insadong · Gyeongbokgung','วันที่ 2 — Hongdae · Sinchon · street food tour','วันที่ 3 — Namsan Tower · Han River picnic']},
+    hoi_an:{ country:'เวียดนาม',city:'ฮอยอัน',flag:'🇻🇳', desc:'เมืองเก่าที่เดินได้ทั้งวัน โคมไฟส่องแม่น้ำยามค่ำ และร้านตัดผ้าที่ทำให้อยากซื้อเสื้อผ้าใหม่', nature:['sea','city'],art:['heritage','craft','food'],vibe:['slow','cozy'],scope:['asia'],budget:['low','mid'], itinerary:['วันที่ 1 — Ancient Town เดินเท้า · Japanese Bridge · ล่องเรือ','วันที่ 2 — Cooking class · ตลาดเช้า · ชายหาด An Bang','วันที่ 3 — My Son Sanctuary · ร้านตัดเสื้อ']},
+    lisbon:{ country:'โปรตุเกส',city:'ลิสบอน',flag:'🇵🇹', desc:'เมืองที่รู้สึกเหมือน "ค้นพบ" ได้ทุกวัน เนินเขา ราง tram เก่า Fado และอาหารทะเลที่ดีที่สุดในยุโรป', nature:['city','sea'],art:['heritage','contemporary','food'],vibe:['slow','offbeat'],scope:['far'],budget:['mid','high','flex'], itinerary:['วันที่ 1 — Alfama เดินเท้า · Castelo de São Jorge · Fado bar','วันที่ 2 — Belém · Pastéis de Belém · LX Factory','วันที่ 3 — Sintra day trip · Pena Palace · หาด Cascais']},
+    amsterdam:{ country:'เนเธอร์แลนด์',city:'อัมสเตอร์ดัม',flag:'🇳🇱', desc:'เมืองจักรยานและคลอง ที่ทุกย่านมีบุคลิกเป็นของตัวเอง — museum ที่ไม่น่าเบื่อเลย', nature:['city'],art:['contemporary','heritage'],vibe:['cozy','offbeat'],scope:['far'],budget:['high','flex'], itinerary:['วันที่ 1 — Rijksmuseum · Vondelpark · Jordaan','วันที่ 2 — Van Gogh Museum · Nine Streets · canal cruise','วันที่ 3 — NDSM Wharf street art · Haarlem day trip']},
+    tbilisi:{ country:'จอร์เจีย',city:'ทบิลิซี',flag:'🇬🇪', desc:'เมืองที่ยัง overtourism ยังไปไม่ถึง — สถาปัตยกรรมเก่า ไวน์ local และคนที่ warm มาก', nature:['mountain','city'],art:['heritage','craft','food'],vibe:['offbeat','cozy'],scope:['far'],budget:['low','mid'], itinerary:['วันที่ 1 — Old Town เดินเท้า · Narikala Fortress · อาบน้ำกำมะถัน','วันที่ 2 — Wine tasting · Mtatsminda Park · Fabrika market','วันที่ 3 — Kazbegi day trip · Trinity Church บนเขา']},
+    barcelona:{ country:'สเปน',city:'บาร์เซโลนา',flag:'🇪🇸', desc:'Gaudí ทำให้เมืองนี้ดูเหมือนหลุดออกจากจินตนาการ และ La Boqueria ทำให้กลับมาอีก', nature:['sea','city'],art:['contemporary','heritage','food'],vibe:['wild','slow'],scope:['far'],budget:['high','flex'], itinerary:['วันที่ 1 — Sagrada Família เช้า · Park Güell · El Born','วันที่ 2 — La Boqueria · Las Ramblas · Barceloneta beach','วันที่ 3 — Montjuïc · MNAC museum · tapas tour']},
+  };
+
+  const mbtiInsights = {
+    INTJ:'INTJ ชาร์จพลังในที่เงียบและมีความหมาย ทริปที่ดีสำหรับคุณคือมีเวลาคิดคนเดียว ที่พักที่ดี และ itinerary ที่ไม่แน่นจนเกินไป',
+    INTP:'INTP ชอบสำรวจแบบ open-ended ทริปที่ดีคือมีโครงสร้างหลวมๆ และมีเวลาให้หลงในย่านที่น่าสนใจ',
+    ENTJ:'ENTJ ต้องการทริปที่ efficient และ worth it ชอบวางแผน แต่ก็ open รับ experience ใหม่ที่ท้าทาย',
+    ENTP:'ENTP ชอบความตื่นเต้นและ spontaneous ทริปที่ดีคือไม่วางแผนมากเกินไป เปิดรับสิ่งที่ไม่คาดคิด',
+    INFJ:'INFJ เดินทางเพื่อหาความหมาย คุณจะชอบที่ที่มีเรื่องราวลึกๆ วัฒนธรรมจริงใจ และพื้นที่สำหรับ reflection',
+    INFP:'INFP มองหาความงามในสิ่งเล็กๆ ทริปที่ดีคือที่ที่ไม่ต้องแสดงให้ใครเห็น แค่ได้รู้สึกด้วยตัวเอง',
+    ENFJ:'ENFJ ชาร์จพลังจากการเชื่อมต่อกับผู้คนและวัฒนธรรม คุณจะได้ประโยชน์จากทริปที่มีปฏิสัมพันธ์กับคนท้องถิ่น',
+    ENFP:'ENFP ชอบ vibe มากกว่า itinerary ทริปที่ดีคือที่ที่รู้สึก alive และมีพลังงานดีๆ รอบตัว',
+    ISTJ:'ISTJ ชอบทริปที่มีแผนและรู้ว่าจะเจออะไร ที่พักดี ข้อมูลชัด และไม่ต้องลุ้น',
+    ISFJ:'ISFJ ชาร์จพลังจากความ familiar และความอบอุ่น ทริปที่ดีคือที่ที่รู้สึกปลอดภัยและ cozy',
+    ESTJ:'ESTJ ต้องการทริปที่ organized และ worth it ชอบวางแผนล่วงหน้าและรู้ว่าจะได้อะไรกลับมา',
+    ESFJ:'ESFJ ชอบทริปที่ทุกคนมีความสุข เน้นการกิน การเชื่อมต่อ และ experience ที่แชร์กันได้',
+    ISTP:'ISTP ชอบ freedom และ hands-on ทริปที่ดีคือมีพื้นที่สำรวจด้วยตัวเอง ไม่มีคนตาม',
+    ISFP:'ISFP มองหาความงามและความสงบ ทริปที่ดีคือที่ที่ได้ชาร์จพลังงานโดยไม่ต้องอธิบายตัวเองให้ใคร',
+    ESTP:'ESTP ชอบ action และ spontaneous ทริปที่ดีคือมีอะไรให้ทำตลอด ไม่หยุดนิ่ง',
+    ESFP:'ESFP ต้องการพลังงานสนุก ผู้คน และประสบการณ์ที่จำได้ไปตลอดชีวิต',
+  };
+
+  function scoreDestination(key, dest) {
+    let score = 0;
+    const nat=answers[2], art=answers[3], scope=answers[4], vibe=answers[5], budget=answers[6];
+    if (dest.scope.includes(scope)||scope==='anywhere') score+=3;
+    if (nat && dest.nature.includes(nat)) score+=2;
+    if (art && dest.art.includes(art)) score+=2;
+    if (vibe && dest.vibe.includes(vibe)) score+=2;
+    if (budget && (dest.budget.includes(budget)||budget==='flex')) score+=1;
+    return score;
+  }
+
+  function getTopDestinations(n=3) {
+    return Object.entries(destinations)
+      .map(([k,v])=>({key:k,...v,score:scoreDestination(k,v)}))
+      .sort((a,b)=>b.score-a.score)
+      .slice(0,n);
+  }
+
+  const profiles = {
+    recharge:{type:'The Quiet Wanderer',title:'นักเดินทางผู้เงียบงาม',desc:'คุณเดินทางเพื่อ restore ไม่ใช่เพื่อ check-in ทริปที่ใช่คือที่ที่ไม่ต้องรีบ ไม่ต้องอธิบาย แค่ได้เป็นตัวเอง'},
+    reset:{type:'The Gentle Reset',title:'นักหนีชีวิตฉบับ soft',desc:'คุณไม่ได้อยากหนีทุกอย่าง แค่อยากออกไปหายใจ ทริปสั้น 2–3 วันที่ vibe ดี กินอาหารอร่อย เปลี่ยนวิว นั่นพอแล้ว'},
+    explore:{type:'The Curious Soul',title:'นักสำรวจตัวจริง',desc:'คุณชาร์จพลังด้วยประสบการณ์ใหม่ๆ อยากค้นพบที่ที่ไม่มีใครรู้จัก ลองอาหารที่ไม่มีในเมนู และพูดคุยกับคนแปลกหน้า'},
+    connect:{type:'The Heartful Traveler',title:'นักเดินทางแห่งการเชื่อมต่อ',desc:'คุณเดินทางเพื่อสัมผัสชีวิตจริงของที่นั่น ผู้คน อาหาร เรื่องราว ทริปที่ดีทำให้รู้สึกว่าได้รู้จักอะไรบางอย่างที่แท้จริง'},
+  };
+
+  const budgetLabels={low:'น้อยกว่า 3,000',mid:'3,000–8,000',high:'8,000–20,000',flex:'ขึ้นอยู่กับที่'};
+  const styleLabels={solo:'คนเดียว',couple:'สองคน',small:'กลุ่มเล็ก',flexible:'แล้วแต่ทริป'};
+  const durationLabels={day:'1 วัน',weekend:'2–3 วัน',week:'4–7 วัน',long:'มากกว่า 1 สัปดาห์'};
+  const scopeLabels={domestic:'ในประเทศ',asia:'เอเชีย',far:'ยุโรป/ไกลๆ',anywhere:'ทุกที่'};
+  const natureLabels={mountain:'ภูเขา & หมอก',sea:'ทะเล & ชายหาด',forest:'ป่า & ธรรมชาติ',city:'เมืองที่มีชีวิต'};
+  const artLabels={heritage:'ประวัติศาสตร์ & วัด',contemporary:'ศิลปะร่วมสมัย',food:'อาหาร & ตลาด',craft:'งานฝีมือ & ชุมชน'};
+
+  function showResult() {
+    const key=answers[0]||'explore';
+    const p=profiles[key];
+    document.getElementById('result-type').textContent=p.type;
+    document.getElementById('result-title').textContent=p.title;
+    document.getElementById('result-desc').textContent=p.desc;
+
+    const mbti=answers[10];
+    const mbtiEl=document.getElementById('mbti-insight');
+    if (mbti&&mbti!=='unknown'&&mbtiInsights[mbti]) {
+      mbtiEl.style.display='block';
+      mbtiEl.innerHTML=`<b style="color:var(--purple-soft);font-weight:500;">${mbti}</b> — ${mbtiInsights[mbti]}`;
+    } else { mbtiEl.style.display='none'; }
+
+    const tops=getTopDestinations(3);
+    const destCards=document.getElementById('dest-cards');
+    destCards.innerHTML='';
+    const dayCount=answers[8]==='day'?1:answers[8]==='weekend'?2:3;
+    tops.forEach((d,i)=>{
+      const card=document.createElement('div');
+      card.style.cssText='background:var(--white);border:1px solid rgba(212,197,169,0.5);border-radius:16px;padding:18px;transition:all 0.2s;';
+      const itinHtml=d.itinerary?d.itinerary.slice(0,dayCount).map(s=>`<li style="padding:4px 0;border-bottom:1px solid rgba(212,197,169,0.2);font-size:12px;font-weight:300;list-style:none;color:var(--charcoal-soft);">${s}</li>`).join(''):'';
+      card.innerHTML=`
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:10px;">
+          <div style="display:flex;align-items:center;gap:10px;">
+            <span style="font-size:22px;">${d.flag}</span>
+            <div>
+              <div style="font-family:'Playfair Display',serif;font-size:18px;font-weight:400;color:var(--charcoal);">${d.city}</div>
+              <div style="font-size:12px;color:var(--charcoal-soft);opacity:0.6;">${d.country}</div>
+            </div>
+          </div>
+          ${i===0?'<span style="font-size:11px;background:rgba(107,124,92,0.12);color:var(--moss-dark);padding:3px 12px;border-radius:99px;font-weight:500;white-space:nowrap;">เหมาะที่สุด ✦</span>':''}
+        </div>
+        <p style="font-size:13px;font-weight:300;color:var(--charcoal-soft);line-height:1.65;margin-bottom:${itinHtml?'12px':'0'};">${d.desc}</p>
+        ${itinHtml?`<div style="margin-top:4px;"><div style="font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--moss);margin-bottom:6px;font-weight:500;">Itinerary ง่ายๆ</div><ul style="margin:0;padding:0;">${itinHtml}</ul></div>`:''}
+      `;
+      destCards.appendChild(card);
+    });
+
+    const summaryParts=[
+      answers[4]?`<span style="color:var(--moss-dark);">${scopeLabels[answers[4]]}</span>`:'',
+      answers[2]?`ธรรมชาติ: <span style="color:var(--moss-dark);">${natureLabels[answers[2]]}</span>`:'',
+      answers[3]?`ชอบ: <span style="color:var(--moss-dark);">${artLabels[answers[3]]}</span>`:'',
+      answers[6]?`งบ: <span style="color:var(--moss-dark);">${budgetLabels[answers[6]]}</span>`:'',
+      answers[7]?`ไป<span style="color:var(--moss-dark);">${styleLabels[answers[7]]}</span>`:'',
+      answers[8]?`<span style="color:var(--moss-dark);">${durationLabels[answers[8]]}</span>`:'',
+      mbti&&mbti!=='unknown'?`MBTI: <span style="color:var(--purple-soft);">${mbti}</span>`:'',
+    ].filter(Boolean);
+    document.getElementById('result-summary').innerHTML='<b style="font-weight:500;color:var(--charcoal);">สรุปแบบของคุณ</b> · '+summaryParts.join(' · ');
+
+    const tags=[tops[0]?.city,tops[1]?.city,p.type,styleLabels[answers[7]]||''].filter(Boolean);
+    document.getElementById('result-tags').innerHTML=tags.map(t=>`<span class="result-tag">${t}</span>`).join('');
+
+    const user=getUser();
+    if (user) {
+      user.quizCount=(user.quizCount||0)+1;
+      user.lastProfile={...p,dest:scopeLabels[answers[4]]||'—',budget:budgetLabels[answers[6]]||'—',style:styleLabels[answers[7]]||'—',duration:durationLabels[answers[8]]||'—',mbti:mbti||'—',topCity:tops[0]?.city||'—',date:new Date().toLocaleDateString('th-TH')};
+      saveUser(user);
+      sbPost('quiz_results',{user_email:user.email,user_name:user.name,profile_type:p.type,profile_title:p.title,mbti:mbti||null,top_city:tops[0]?.city||null,destination_scope:scopeLabels[answers[4]]||null,budget:budgetLabels[answers[6]]||null,travel_style:styleLabels[answers[7]]||null,duration:durationLabels[answers[8]]||null,nature_type:answers[2]||null,art_type:answers[3]||null,accommodation:answers[9]||null});
+    }
+  }
+
+  function saveResultPrompt() { const user=getUser(); if(!user) openLoginModal(); else openDashboard(); }
+
+  function resetQuiz() {
+    Object.keys(answers).forEach(k=>delete answers[k]);
+    selectedMBTI='';
+    for(let i=0;i<=TOTAL_STEPS;i++){const d=document.getElementById('dot-'+i);if(d){d.classList.remove('active','done');if(i===0)d.classList.add('active');}}
+    document.querySelectorAll('.quiz-opt').forEach(o=>o.classList.remove('selected'));
+    document.querySelectorAll('.mbti-btn').forEach(b=>b.classList.remove('selected'));
+    document.getElementById('step-'+currentStep).classList.remove('active');
+    currentStep=0;
+    document.getElementById('step-0').classList.add('active');
+  }
+
+  function getUser(){try{return JSON.parse(localStorage.getItem('craftaway_user'));}catch{return null;}}
+  function saveUser(u){
+    localStorage.setItem('craftaway_user',JSON.stringify(u));
+    sbPost('users?on_conflict=email',{name:u.name,email:u.email,age:u.age?parseInt(u.age):null,job:u.job||null,travel_plan:u.plan||null,travel_plan_label:u.planLabel||null,dream:u.dream||null,quiz_count:u.quizCount||0});
+    renderUserBar();
+  }
+
+  let selectedPlan='';
+  function selectPlan(plan){selectedPlan=plan;['domestic','international','both','undecided'].forEach(p=>{document.getElementById('plan-'+p).classList.toggle('selected',p===plan);});}
+
+  function openLoginModal(){document.getElementById('login-form-state').style.display='block';document.getElementById('login-success-state').style.display='none';document.getElementById('login-modal').classList.add('open');document.body.style.overflow='hidden';}
+  function closeLoginModal(){document.getElementById('login-modal').classList.remove('open');document.body.style.overflow='';}
+  function closeLoginOutside(e){if(e.target===document.getElementById('login-modal'))closeLoginModal();}
+
+  function saveLogin(){
+    const name=document.getElementById('login-name').value.trim();
+    const email=document.getElementById('login-email').value.trim();
+    const age=document.getElementById('login-age').value;
+    const job=document.getElementById('login-job').value;
+    const dream=document.getElementById('login-dream').value.trim();
+    if(!name||!email){alert('ใส่ชื่อและ email ก่อนนะ');return;}
+    const planLabels={domestic:'ในประเทศ',international:'นอกประเทศ',both:'ทั้งสองอย่าง',undecided:'ยังไม่แน่ใจ'};
+    const user={name,email,age,job,plan:selectedPlan,planLabel:planLabels[selectedPlan]||'—',dream,quizCount:0,joined:new Date().toLocaleDateString('th-TH')};
+    saveUser(user);
+    document.getElementById('login-welcome').textContent='ยินดีต้อนรับ '+name+' 🌿';
+    document.getElementById('login-form-state').style.display='none';
+    document.getElementById('login-success-state').style.display='block';
+  }
+
+  function logoutUser(){localStorage.removeItem('craftaway_user');renderUserBar();}
+
+  function renderUserBar(){
+    const user=getUser();
+    const bar=document.getElementById('user-bar');
+    const loginBtn=document.getElementById('login-bar').querySelector('p');
+    if(user){bar.style.display='flex';loginBtn.style.display='none';document.getElementById('user-avatar').textContent=user.name.charAt(0).toUpperCase();document.getElementById('user-greeting').textContent='สวัสดี '+user.name;}
+    else{bar.style.display='none';loginBtn.style.display='block';}
+  }
+
+  function openDashboard(){
+    const user=getUser();if(!user){openLoginModal();return;}
+    document.getElementById('dash-avatar').textContent=user.name.charAt(0).toUpperCase();
+    document.getElementById('dash-name').textContent=user.name;
+    document.getElementById('dash-email').textContent=user.email+(user.job?' · '+user.job:'');
+    document.getElementById('dash-age').textContent=user.age||'—';
+    document.getElementById('dash-quiz-count').textContent=user.quizCount||0;
+    document.getElementById('dash-plan').textContent=user.planLabel||'—';
+    if(user.lastProfile){
+      document.getElementById('dash-profile-section').style.display='block';
+      document.getElementById('dash-profile-name').textContent=user.lastProfile.title;
+      document.getElementById('dash-profile-desc').textContent=[user.lastProfile.topCity,user.lastProfile.dest,'งบ '+user.lastProfile.budget,user.lastProfile.style,user.lastProfile.duration,user.lastProfile.mbti&&user.lastProfile.mbti!=='—'?'MBTI: '+user.lastProfile.mbti:''].filter(Boolean).join(' · ');
+      document.getElementById('dash-profile-tags').innerHTML=[user.lastProfile.topCity,user.lastProfile.type].filter(Boolean).map(t=>`<span class="result-tag">${t}</span>`).join('');
+    }
+    if(user.dream){document.getElementById('dash-dream-section').style.display='block';document.getElementById('dash-dream').textContent=user.dream;}
+    document.getElementById('dashboard-modal').classList.add('open');
+    document.body.style.overflow='hidden';
+  }
+  function closeDashboard(){document.getElementById('dashboard-modal').classList.remove('open');document.body.style.overflow='';}
+  function closeDashOutside(e){if(e.target===document.getElementById('dashboard-modal'))closeDashboard();}
+
+  const tiers={
+    free:{title:'Travel Profile',sub:'ผลจาก quiz ของคุณ — ฟรี ไม่มีค่าใช้จ่าย',price:0,showMBTI:false,showHD:false,free:true},
+    mini:{title:'MBTI Travel Card',sub:'การ์ด 1 หน้าตาม MBTI type — download ได้ทันที',price:129,showMBTI:true,showHD:false},
+    guide:{title:'Mood × Trip Guide',sub:'PDF guide แยกตาม travel mood — download ได้ทันที',price:199,showMBTI:false,showHD:false},
+    signature:{title:'MBTI × Trip Design',sub:'monemoll_ อ่าน MBTI แล้วออกแบบทริปเฉพาะคุณ',price:1290,showMBTI:true,showHD:true},
+    premium:{title:'Trip by Your Design',sub:'Full experience — itinerary จริง + คุยกัน 30 นาที',price:2490,showMBTI:true,showHD:true},
+  };
+  let currentTier='signature',hdAdded=false;
+
+  function openModal(tier,withHD=false){
+    currentTier=tier;hdAdded=false;
+    const t=tiers[tier];
+    document.getElementById('modal-title').textContent=t.title;
+    document.getElementById('modal-sub').textContent=t.sub;
+    document.getElementById('order-product-name').textContent=t.title;
+    const pl=t.price===0?'ฟรี':'฿'+t.price.toLocaleString();
+    document.getElementById('order-product-price').textContent=pl;
+    document.getElementById('order-total').textContent=pl;
+    const payBtn=document.getElementById('pay-btn-main');
+    if(t.free){payBtn.textContent='รับผล Travel Profile';}
+    else{payBtn.innerHTML='ชำระเงิน <span id="pay-btn-price">'+pl+'</span>';}
+    document.getElementById('order-summary').style.display=t.free?'none':'block';
+    document.getElementById('hd-toggle-row').style.display=t.showHD?'flex':'none';
+    document.getElementById('mbti-section').style.display=t.showMBTI?'block':'none';
+    document.getElementById('hd-order-row').style.display='none';
+    document.getElementById('hd-input-section').style.display='none';
+    document.getElementById('hd-switch').classList.remove('on');
+    document.getElementById('hd-toggle-row').classList.remove('checked');
+    document.getElementById('modal-form').style.display='block';
+    document.getElementById('modal-success').style.display='none';
+    if(withHD&&t.showHD)setTimeout(toggleHD,300);
+    document.getElementById('modal').classList.add('open');
+    document.body.style.overflow='hidden';
+  }
+  function closeModal(){document.getElementById('modal').classList.remove('open');document.body.style.overflow='';}
+  function closeModalOutside(e){if(e.target===document.getElementById('modal'))closeModal();}
+
+  function toggleHD(){
+    hdAdded=!hdAdded;
+    document.getElementById('hd-switch').classList.toggle('on',hdAdded);
+    document.getElementById('hd-toggle-row').classList.toggle('checked',hdAdded);
+    document.getElementById('hd-input-section').style.display=hdAdded?'block':'none';
+    document.getElementById('hd-order-row').style.display=hdAdded?'flex':'none';
+    const total=hdAdded?tiers[currentTier].price+500:tiers[currentTier].price;
+    document.getElementById('order-total').textContent='฿'+total.toLocaleString();
+    const pp=document.getElementById('pay-btn-price');if(pp)pp.textContent='฿'+total.toLocaleString();
+  }
+
+  function selectMBTI(btn){btn.closest('.mbti-select').querySelectorAll('.mbti-btn').forEach(b=>b.classList.remove('selected'));btn.classList.add('selected');}
+
+  function handlePay(){
+    const t=tiers[currentTier];
+    const nameEl=document.querySelector('#modal-form input[placeholder="ชื่อที่ใช้เรียก"]');
+    const emailEl=document.querySelector('#modal-form input[type="email"]');
+    const igEl=document.querySelector('#modal-form input[placeholder="@username"]');
+    const noteEl=document.querySelector('#modal-form textarea');
+    const mbtiSelected=document.querySelector('#mbti-section .mbti-btn.selected');
+    const hdTypeEl=document.querySelector('#hd-input-section select');
+    const total=hdAdded?t.price+500:t.price;
+    if(!t.free){
+      sbPost('orders',{
+        user_name:nameEl?.value||null,
+        user_email:emailEl?.value||null,
+        ig_or_line:igEl?.value||null,
+        tier:currentTier,
+        tier_price:t.price,
+        hd_addon:hdAdded,
+        total_price:total,
+        mbti_type:mbtiSelected?.textContent||null,
+        hd_type:hdTypeEl?.value||null,
+        trip_note:noteEl?.value||null,
+        status:'pending'
+      });
+    }
+    document.getElementById('modal-form').style.display='none';
+    document.getElementById('modal-success').style.display='block';
+    if(t.free){document.getElementById('success-title').textContent='เย้ ได้ profile แล้ว!';document.getElementById('success-desc').textContent='ลองเลื่อนขึ้นไปดู travel profile ของคุณได้เลย';}
+    else{document.getElementById('success-title').textContent='ได้รับแล้ว ขอบคุณนะ';document.getElementById('success-desc').textContent='monemoll_ จะส่งผลให้คุณภายใน 3–5 วัน ทาง email หรือ DM ที่ระบุไว้';}
+  }
+
+  renderUserBar();
+</script>
+
+</body>
+</html>

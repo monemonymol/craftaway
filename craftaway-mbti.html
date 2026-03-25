@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MBTI Test — Craftaway</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Sarabun:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --cream: #F5F0E8;
+  --cream-dark: #EDE6D6;
+  --sand: #D4C5A9;
+  --moss: #6B7C5C;
+  --moss-light: #8A9E77;
+  --moss-dark: #4A5840;
+  --charcoal: #2C2C2A;
+  --charcoal-soft: #4A4845;
+  --white: #FEFCF8;
+  --accent: #C4956A;
+  --purple-soft: #9B8BB4;
+  --purple-light: #EDE8F5;
+  --purple-dark: #6B5A8A;
+  --E: #5D8A6B; --I: #7A6B9B;
+  --S: #8A7B5A; --N: #5A7A8A;
+  --T: #6B5A4A; --F: #9B6B7A;
+  --J: #5A6B7A; --P: #7A8A5A;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Sarabun', sans-serif;
+  background: var(--cream);
+  color: var(--charcoal);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none; z-index: 999; opacity: 0.4;
+}
+
+/* ─── SCREENS ─── */
+.screen { display: none; min-height: 100vh; }
+.screen.active { display: flex; flex-direction: column; animation: fadeIn 0.4s ease both; }
+
+@keyframes fadeIn { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:translateY(0)} }
+@keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+@keyframes barFill { from{width:0} to{width:var(--target)} }
+@keyframes pulse { 0%,100%{opacity:0.6} 50%{opacity:1} }
+
+/* ─── NAV ─── */
+nav {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(245,240,232,0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 0.5px solid var(--cream-dark);
+  padding: 0 24px;
+  height: 56px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+
+.nav-logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 18px; font-weight: 400; font-style: italic;
+  color: var(--charcoal);
+  text-decoration: none;
+}
+
+.nav-right { display: flex; align-items: center; gap: 16px; }
+
+.nav-link {
+  font-size: 13px; font-weight: 400; color: var(--charcoal-soft);
+  text-decoration: none; transition: color 0.2s;
+}
+.nav-link:hover { color: var(--moss); }
+
+.nav-hd-btn {
+  font-size: 13px; font-weight: 500;
+  color: var(--white);
+  background: var(--purple-soft);
+  padding: 7px 16px;
+  border-radius: 99px;
+  text-decoration: none;
+  transition: all 0.25s;
+  display: flex; align-items: center; gap: 6px;
+}
+.nav-hd-btn:hover { background: var(--purple-dark); transform: translateY(-1px); }
+
+/* ─── INTRO SCREEN ─── */
+.intro-wrap {
+  flex: 1;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  padding: 60px 24px;
+  text-align: center;
+  position: relative;
+}
+
+.intro-tag {
+  font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--moss); font-weight: 500;
+  background: rgba(107,124,92,0.1);
+  padding: 6px 18px; border-radius: 99px;
+  display: inline-block; margin-bottom: 28px;
+}
+
+.intro-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(36px, 7vw, 72px);
+  font-weight: 400; line-height: 1.1;
+  color: var(--charcoal);
+  margin-bottom: 8px;
+}
+
+.intro-title em { font-style: italic; color: var(--moss); }
+
+.intro-tagline {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(14px, 2vw, 18px);
+  font-style: italic; color: var(--moss);
+  margin-bottom: 20px;
+}
+
+.intro-desc {
+  font-size: 16px; font-weight: 300; color: var(--charcoal-soft);
+  line-height: 1.8; max-width: 520px; margin: 0 auto 40px;
+}
+
+.intro-meta {
+  display: flex; gap: 32px; justify-content: center;
+  flex-wrap: wrap; margin-bottom: 40px;
+}
+
+.meta-item { text-align: center; }
+.meta-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 32px; color: var(--moss); line-height: 1;
+}
+.meta-label { font-size: 12px; color: var(--charcoal-soft); margin-top: 4px; }
+
+.btn-start {
+  background: var(--moss); color: var(--white);
+  font-family: 'Sarabun', sans-serif;
+  font-size: 16px; font-weight: 500;
+  padding: 16px 48px; border-radius: 99px; border: none;
+  cursor: pointer; transition: all 0.3s;
+  letter-spacing: 0.03em;
+}
+.btn-start:hover { background: var(--moss-dark); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(107,124,92,0.25); }
+
+.hd-invite {
+  margin-top: 32px;
+  padding: 20px 28px;
+  border: 1.5px dashed rgba(155,139,180,0.4);
+  border-radius: 16px;
+  background: rgba(155,139,180,0.04);
+  max-width: 440px;
+  transition: all 0.3s;
+}
+.hd-invite:hover { border-color: var(--purple-soft); background: rgba(155,139,180,0.08); }
+.hd-invite-label { font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--purple-soft); margin-bottom: 8px; font-weight: 500; }
+.hd-invite-title { font-family: 'Playfair Display', serif; font-size: 17px; color: var(--charcoal); margin-bottom: 6px; }
+.hd-invite-desc { font-size: 13px; font-weight: 300; color: var(--charcoal-soft); line-height: 1.6; margin-bottom: 12px; }
+.hd-invite-btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 13px; font-weight: 500;
+  color: var(--purple-soft); text-decoration: none;
+  border: 1.5px solid rgba(155,139,180,0.4);
+  padding: 7px 18px; border-radius: 99px; transition: all 0.2s;
+}
+.hd-invite-btn:hover { background: var(--purple-soft); color: var(--white); border-color: var(--purple-soft); }
+
+/* ─── QUIZ SCREEN ─── */
+.quiz-wrap { flex: 1; max-width: 720px; margin: 0 auto; padding: 40px 24px 80px; width: 100%; }
+
+.progress-header { margin-bottom: 32px; }
+
+.progress-info {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 10px;
+}
+
+.progress-label { font-size: 12px; font-weight: 500; color: var(--charcoal-soft); letter-spacing: 0.05em; }
+.progress-count { font-size: 13px; color: var(--charcoal-soft); }
+.progress-count span { font-weight: 500; color: var(--moss); }
+
+.progress-track {
+  height: 4px; background: var(--cream-dark); border-radius: 99px; overflow: hidden;
+}
+.progress-fill {
+  height: 100%; background: var(--moss); border-radius: 99px;
+  transition: width 0.4s ease;
+}
+
+/* Dimension indicators */
+.dim-indicators {
+  display: flex; gap: 8px; margin-top: 12px; flex-wrap: wrap;
+}
+.dim-pill {
+  font-size: 11px; font-weight: 500; padding: 3px 10px; border-radius: 99px;
+  letter-spacing: 0.04em;
+}
+
+.question-block { animation: fadeUp 0.35s ease both; }
+
+.q-num {
+  font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--charcoal-soft); opacity: 0.5; margin-bottom: 12px;
+}
+
+.q-text {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(20px, 3.5vw, 28px);
+  font-weight: 400; line-height: 1.4;
+  color: var(--charcoal); margin-bottom: 32px;
+}
+
+.q-context {
+  font-size: 14px; font-weight: 300; color: var(--charcoal-soft);
+  font-style: italic; margin-top: -20px; margin-bottom: 28px; line-height: 1.6;
+}
+
+/* Scale slider */
+.scale-wrap { margin-bottom: 36px; }
+
+.scale-labels {
+  display: flex; justify-content: space-between; margin-bottom: 16px;
+}
+
+.scale-label-left, .scale-label-right {
+  max-width: 42%; font-size: 14px; font-weight: 400; line-height: 1.5;
+  color: var(--charcoal-soft);
+}
+.scale-label-right { text-align: right; }
+.scale-label-left strong, .scale-label-right strong {
+  display: block; font-size: 15px; font-weight: 500; color: var(--charcoal); margin-bottom: 2px;
+}
+
+.scale-options {
+  display: flex; gap: 8px; justify-content: center; align-items: center;
+}
+
+.scale-btn {
+  border: 1.5px solid var(--cream-dark);
+  background: var(--white);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+
+.scale-btn:nth-child(1), .scale-btn:nth-child(7) { width: 44px; height: 44px; }
+.scale-btn:nth-child(2), .scale-btn:nth-child(6) { width: 40px; height: 40px; }
+.scale-btn:nth-child(3), .scale-btn:nth-child(5) { width: 36px; height: 36px; }
+.scale-btn:nth-child(4) { width: 32px; height: 32px; background: var(--cream); border-color: var(--sand); }
+
+.scale-btn:hover { border-color: var(--moss); transform: scale(1.1); }
+.scale-btn.selected-left { background: var(--moss); border-color: var(--moss); }
+.scale-btn.selected-right { background: var(--accent); border-color: var(--accent); }
+.scale-btn.selected-neutral { background: var(--sand); border-color: var(--sand); }
+
+.scale-axis {
+  display: flex; justify-content: space-between; margin-top: 10px;
+  padding: 0 4px;
+}
+.scale-axis span { font-size: 11px; color: var(--charcoal-soft); opacity: 0.5; }
+
+.quiz-nav-btns {
+  display: flex; justify-content: space-between; align-items: center; margin-top: 8px;
+}
+.btn-prev {
+  background: none; border: none; font-family: 'Sarabun', sans-serif;
+  font-size: 14px; color: var(--charcoal-soft); cursor: pointer; opacity: 0.5;
+  padding: 8px 0; transition: opacity 0.2s;
+}
+.btn-prev:hover { opacity: 1; }
+.btn-prev:disabled { opacity: 0.2; pointer-events: none; }
+.btn-skip {
+  background: none; border: none; font-family: 'Sarabun', sans-serif;
+  font-size: 13px; color: var(--charcoal-soft); cursor: pointer; opacity: 0.4;
+  padding: 8px; transition: opacity 0.2s;
+}
+.btn-skip:hover { opacity: 0.8; }
+
+/* ─── RESULT SCREEN ─── */
+.result-wrap { flex: 1; max-width: 760px; margin: 0 auto; padding: 48px 24px 80px; width: 100%; }
+
+.result-hero {
+  text-align: center; margin-bottom: 40px;
+}
+
+.result-type-badge {
+  display: inline-flex; gap: 6px; margin-bottom: 20px;
+}
+
+.type-letter {
+  width: 52px; height: 52px; border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Playfair Display', serif;
+  font-size: 22px; font-weight: 400; color: white;
+  animation: fadeUp 0.4s ease both;
+}
+.type-letter:nth-child(2) { animation-delay: 0.05s; }
+.type-letter:nth-child(3) { animation-delay: 0.1s; }
+.type-letter:nth-child(4) { animation-delay: 0.15s; }
+
+.result-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(28px, 5vw, 48px);
+  font-weight: 400; color: var(--charcoal);
+  margin-bottom: 6px;
+  animation: fadeUp 0.5s 0.2s ease both;
+}
+.result-subtitle {
+  font-family: 'Playfair Display', serif;
+  font-size: 18px; font-style: italic; color: var(--moss);
+  margin-bottom: 16px;
+  animation: fadeUp 0.5s 0.25s ease both;
+}
+.result-desc {
+  font-size: 16px; font-weight: 300; color: var(--charcoal-soft);
+  line-height: 1.85; max-width: 560px; margin: 0 auto;
+  animation: fadeUp 0.5s 0.3s ease both;
+}
+
+/* Dimension bars */
+.dim-bars {
+  background: var(--white); border-radius: 20px;
+  padding: 28px 32px; margin-bottom: 24px;
+  border: 0.5px solid var(--cream-dark);
+  animation: fadeUp 0.5s 0.35s ease both;
+}
+.dim-bars-title {
+  font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--charcoal-soft); margin-bottom: 20px; font-weight: 500;
+}
+.dim-row { margin-bottom: 18px; }
+.dim-row:last-child { margin-bottom: 0; }
+.dim-row-header {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 8px;
+}
+.dim-letters { display: flex; gap: 6px; align-items: center; }
+.dim-letter-badge {
+  font-size: 14px; font-weight: 500; padding: 2px 10px;
+  border-radius: 99px; letter-spacing: 0.04em;
+}
+.dim-vs { font-size: 12px; color: var(--charcoal-soft); opacity: 0.4; }
+.dim-pct { font-size: 13px; font-weight: 500; color: var(--charcoal); }
+.dim-track { height: 8px; background: var(--cream-dark); border-radius: 99px; overflow: hidden; position: relative; }
+.dim-bar { height: 100%; border-radius: 99px; transition: width 1s ease; }
+
+/* Travel × MBTI section */
+.travel-section {
+  background: linear-gradient(135deg, rgba(107,124,92,0.06), rgba(196,149,106,0.04));
+  border: 1px solid rgba(107,124,92,0.15);
+  border-radius: 20px; padding: 28px;
+  margin-bottom: 24px;
+  animation: fadeUp 0.5s 0.45s ease both;
+}
+.section-label {
+  font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--moss); font-weight: 500; margin-bottom: 14px;
+}
+.travel-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; }
+.travel-card {
+  background: var(--white); border-radius: 14px;
+  padding: 14px 16px; border: 0.5px solid var(--cream-dark);
+}
+.travel-card-icon { font-size: 20px; margin-bottom: 8px; }
+.travel-card-title { font-size: 13px; font-weight: 500; color: var(--charcoal); margin-bottom: 4px; }
+.travel-card-desc { font-size: 12px; font-weight: 300; color: var(--charcoal-soft); line-height: 1.5; }
+
+/* Destination tags */
+.dest-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+.dest-tag {
+  font-size: 12px; padding: 4px 14px; border-radius: 99px;
+  background: rgba(107,124,92,0.1); color: var(--moss-dark); font-weight: 400;
+}
+
+/* HD section */
+.hd-cta-section {
+  background: var(--charcoal); border-radius: 20px;
+  padding: 28px; text-align: center;
+  animation: fadeUp 0.5s 0.5s ease both;
+  margin-bottom: 24px;
+}
+.hd-cta-top { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(254,252,248,0.5); margin-bottom: 14px; }
+.hd-cta-title { font-family: 'Playfair Display', serif; font-size: 22px; color: var(--white); margin-bottom: 10px; }
+.hd-cta-desc { font-size: 14px; font-weight: 300; color: rgba(254,252,248,0.6); line-height: 1.7; margin-bottom: 20px; max-width: 440px; margin-left: auto; margin-right: auto; }
+.hd-cta-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--purple-soft); color: var(--white);
+  font-family: 'Sarabun', sans-serif; font-size: 15px; font-weight: 500;
+  padding: 14px 32px; border-radius: 99px; text-decoration: none;
+  transition: all 0.3s;
+}
+.hd-cta-btn:hover { background: var(--purple-dark); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(107,60,138,0.3); }
+
+.result-actions {
+  display: flex; gap: 12px; flex-wrap: wrap;
+  animation: fadeUp 0.5s 0.55s ease both;
+}
+.btn-retake {
+  flex: 1; min-width: 160px;
+  background: none; border: 1.5px solid var(--sand);
+  font-family: 'Sarabun', sans-serif; font-size: 15px; font-weight: 400;
+  color: var(--charcoal-soft); padding: 14px 24px; border-radius: 99px;
+  cursor: pointer; transition: all 0.25s;
+}
+.btn-retake:hover { border-color: var(--moss); color: var(--moss); }
+.btn-back-craftaway {
+  flex: 1; min-width: 160px;
+  background: var(--moss); border: none;
+  font-family: 'Sarabun', sans-serif; font-size: 15px; font-weight: 500;
+  color: var(--white); padding: 14px 24px; border-radius: 99px;
+  cursor: pointer; transition: all 0.3s; text-decoration: none;
+  display: flex; align-items: center; justify-content: center;
+}
+.btn-back-craftaway:hover { background: var(--moss-dark); transform: translateY(-2px); }
+
+/* Responsive */
+@media (max-width: 600px) {
+  .intro-meta { gap: 20px; }
+  .scale-options { gap: 6px; }
+  .scale-btn:nth-child(1), .scale-btn:nth-child(7) { width: 40px; height: 40px; }
+  .type-letter { width: 44px; height: 44px; font-size: 20px; }
+  .dim-bars { padding: 20px; }
+  .result-actions { flex-direction: column; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="monemoll-travel.html">Craftaway</a>
+  <div class="nav-right">
+    <a class="nav-link" href="monemoll-travel.html">← กลับหน้าหลัก</a>
+    <a class="nav-hd-btn" href="https://staraligns.com/my-chart" target="_blank">
+      ✦ Human Design Chart
+    </a>
+  </div>
+</nav>
+
+<!-- SCREEN 1: INTRO -->
+<div class="screen active" id="screen-intro">
+  <div class="intro-wrap">
+    <span class="intro-tag">Craftaway × Self Discovery</span>
+    <h1 class="intro-title">รู้จักตัวเองผ่าน<br><em>MBTI</em></h1>
+    <p class="intro-tagline">ก้าวแรกของการออกแบบการเดินทาง คือการรู้ว่าคุณเป็นใคร</p>
+    <p class="intro-desc">คำถาม 60 ข้อที่ไม่มีผิดไม่มีถูก — ตอบตามที่เป็นจริง ไม่ใช่ที่อยากเป็น ผลลัพธ์จะบอกว่าคุณควรเที่ยวแบบไหน</p>
+    <div class="intro-meta">
+      <div class="meta-item"><div class="meta-num">60</div><div class="meta-label">คำถาม</div></div>
+      <div class="meta-item"><div class="meta-num">10</div><div class="meta-label">นาที</div></div>
+      <div class="meta-item"><div class="meta-num">16</div><div class="meta-label">types</div></div>
+    </div>
+    <button class="btn-start" onclick="startQuiz()">เริ่มทำ test เลย →</button>
+
+    <div class="hd-invite">
+      <div class="hd-invite-label">✦ เสริม Layer ลึกกว่า MBTI</div>
+      <div class="hd-invite-title">Human Design Chart</div>
+      <div class="hd-invite-desc">ถ้า MBTI คือ "วิธีที่คุณคิด" — Human Design คือ "พลังงานที่คุณมีตั้งแต่เกิด" ลองดู chart ฟรีที่นี่เลย</div>
+      <a class="hd-invite-btn" href="https://staraligns.com/my-chart" target="_blank">ดู Human Design Chart ฟรี →</a>
+    </div>
+  </div>
+</div>
+
+<!-- SCREEN 2: QUIZ -->
+<div class="screen" id="screen-quiz">
+  <div class="quiz-wrap">
+    <div class="progress-header">
+      <div class="progress-info">
+        <span class="progress-label" id="dim-label">E — I</span>
+        <span class="progress-count">ข้อ <span id="q-current">1</span> จาก 60</span>
+      </div>
+      <div class="progress-track">
+        <div class="progress-fill" id="progress-fill" style="width:0%"></div>
+      </div>
+      <div class="dim-indicators" id="dim-indicators"></div>
+    </div>
+
+    <div class="question-block" id="question-block">
+      <div class="q-num" id="q-num">01</div>
+      <div class="q-text" id="q-text"></div>
+      <div class="q-context" id="q-context" style="display:none;"></div>
+
+      <div class="scale-wrap">
+        <div class="scale-labels">
+          <div class="scale-label-left" id="label-a"></div>
+          <div class="scale-label-right" id="label-b"></div>
+        </div>
+        <div class="scale-options" id="scale-options">
+          <button class="scale-btn" onclick="selectAnswer(0)"></button>
+          <button class="scale-btn" onclick="selectAnswer(1)"></button>
+          <button class="scale-btn" onclick="selectAnswer(2)"></button>
+          <button class="scale-btn" onclick="selectAnswer(3)"></button>
+          <button class="scale-btn" onclick="selectAnswer(4)"></button>
+          <button class="scale-btn" onclick="selectAnswer(5)"></button>
+          <button class="scale-btn" onclick="selectAnswer(6)"></button>
+        </div>
+        <div class="scale-axis">
+          <span>เห็นด้วยอย่างยิ่ง</span>
+          <span>เฉยๆ</span>
+          <span>เห็นด้วยอย่างยิ่ง</span>
+        </div>
+      </div>
+
+      <div class="quiz-nav-btns">
+        <button class="btn-prev" id="btn-prev" onclick="prevQuestion()" disabled>← ย้อนกลับ</button>
+        <button class="btn-skip" onclick="skipQuestion()">ข้ามคำถามนี้</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SCREEN 3: RESULT -->
+<div class="screen" id="screen-result">
+  <div class="result-wrap">
+    <div class="result-hero">
+      <div class="result-type-badge" id="type-badge"></div>
+      <h1 class="result-title" id="result-title"></h1>
+      <p class="result-subtitle" id="result-subtitle"></p>
+      <p class="result-desc" id="result-desc"></p>
+    </div>
+
+    <div class="dim-bars">
+      <div class="dim-bars-title">สัดส่วนในแต่ละมิติ</div>
+      <div id="dim-bars-content"></div>
+    </div>
+
+    <div class="travel-section">
+      <div class="section-label">คุณควรเที่ยวยังไง</div>
+      <div class="travel-grid" id="travel-grid"></div>
+      <div class="dest-tags" id="dest-tags"></div>
+    </div>
+
+    <div class="hd-cta-section">
+      <div class="hd-cta-top">✦ อยากรู้ให้ลึกกว่านี้?</div>
+      <div class="hd-cta-title">เสริม Human Design Layer</div>
+      <div class="hd-cta-desc">MBTI บอกว่าคุณคิดยังไง — Human Design บอกว่าคุณมีพลังงานแบบไหน และควรตัดสินใจยังไง เพิ่ม layer นี้เพื่อทริปที่ "ใช่" จริงๆ</div>
+      <a class="hd-cta-btn" href="https://staraligns.com/my-chart" target="_blank">
+        ✦ ดู Human Design Chart ฟรี →
+      </a>
+    </div>
+
+    <div class="result-actions">
+      <button class="btn-retake" onclick="retakeQuiz()">ทำ test อีกครั้ง</button>
+      <a class="btn-back-craftaway" href="monemoll-travel.html">กลับ Craftaway →</a>
+    </div>
+  </div>
+</div>
+
+<script>
+// ─── QUESTIONS ───
+// dim: 0=EI, 1=SN, 2=TF, 3=JP
+// side: 'a'=E/S/T/J, 'b'=I/N/F/P
+const questions = [
+  // E vs I (0)
+  {dim:0, text:'ในงานสังสรรค์ คุณมักเป็นคนที่...', a:{label:'เริ่มคุยกับคนแปลกหน้าเองได้สบาย', short:'ชอบพบปะผู้คน'}, b:{label:'รอให้คนอื่นมาทักก่อน หรืออยู่กับคนที่รู้จักแล้ว', short:'ชอบวงเล็กที่สนิท'}},
+  {dim:0, text:'หลังวันที่เหนื่อยมาก สิ่งที่ช่วยชาร์จพลังให้คุณได้จริงคือ...', a:{label:'ออกไปเจอเพื่อน คุย หัวเราะ', short:'ชาร์จพลังจากคน'}, b:{label:'อยู่คนเดียว เงียบๆ ไม่ต้องพูด', short:'ชาร์จพลังในความเงียบ'}},
+  {dim:0, text:'คุณมักคิดหาคำตอบ...', a:{label:'โดยพูดออกมาดังๆ หรือคุยกับคนอื่น', short:'คิดผ่านการพูด'}, b:{label:'ในหัวก่อน แล้วค่อยบอก', short:'คิดคนเดียวก่อน'}},
+  {dim:0, text:'ในทริปกับกลุ่ม คุณมักเป็นคนที่...', a:{label:'ชวนทุกคน เติม energy ให้กลุ่ม', short:'ขับเคลื่อนกลุ่ม'}, b:{label:'ตามไปด้วยได้ แต่ต้องการเวลาส่วนตัวบ้าง', short:'ต้องการพื้นที่คนเดียว'}},
+  {dim:0, text:'เวลาเจอปัญหา คุณมักจะ...', a:{label:'ขอความเห็นจากคนอื่นก่อน', short:'ปรึกษาคนอื่น'}, b:{label:'ขบคิดคนเดียวก่อน', short:'คิดคนเดียวก่อน'}},
+  {dim:0, text:'สภาพแวดล้อมที่คุณทำงานได้ดีที่สุดคือ...', a:{label:'มีคนรอบข้าง บรรยากาศสนุก', short:'ชอบบรรยากาศคึกคัก'}, b:{label:'เงียบ ไม่มีคนรบกวน', short:'ชอบความเงียบ'}},
+  {dim:0, text:'เพื่อนๆ มักบอกว่าคุณ...', a:{label:'เปิดเผย พูดคุยง่าย ไปกับทุกคนได้', short:'เข้าสังคมได้ดี'}, b:{label:'เป็นคนลึก คิดมาก แต่ถ้าสนิทแล้วดีมาก', short:'ลึกและคิดมาก'}},
+  {dim:0, text:'ในการเที่ยว คุณชอบ...', a:{label:'เจอคนใหม่ ฟัง local story', short:'ชอบพบปะคน'}, b:{label:'สังเกตบรรยากาศและสิ่งรอบข้างคนเดียว', short:'ชอบสังเกตคนเดียว'}},
+  {dim:0, text:'เวลาโทรศัพท์ คุณ...', a:{label:'โทรทั้งวัน ชอบคุย', short:'ชอบโทรหาคน'}, b:{label:'พิมพ์ดีกว่า ไม่ชอบรบกวน', short:'ชอบพิมพ์มากกว่า'}},
+  {dim:0, text:'ถ้าต้องนำเสนองานต่อหน้าคน คุณรู้สึก...', a:{label:'ตื่นเต้นและมีพลัง', short:'ชอบนำเสนอ'}, b:{label:'เตรียมตัวดีๆ แต่ก็ยังเกร็งอยู่บ้าง', short:'เกร็งแต่ทำได้'}},
+  {dim:0, text:'เวลาอยู่คนเดียวนานๆ คุณ...', a:{label:'เริ่มอยากออกไปหาคน', short:'ต้องการคนรอบข้าง'}, b:{label:'รู้สึกสงบและมีพลังมากขึ้น', short:'ชาร์จพลังในความเงียบ'}},
+  {dim:0, text:'ในการประชุม คุณมักจะ...', a:{label:'พูดบ่อย แสดงความคิดเห็นเยอะ', short:'แสดงความเห็นบ่อย'}, b:{label:'ฟังมากกว่าพูด พูดเฉพาะเมื่อพร้อม', short:'ฟังก่อนแล้วค่อยพูด'}},
+  {dim:0, text:'ถ้าต้องเที่ยวคนเดียว 1 สัปดาห์ คุณ...', a:{label:'สนุกมาก แต่อาจคิดถึงเพื่อน', short:'เที่ยวคนเดียวได้แต่ต้องการคน'}, b:{label:'สนุกมาก บางทีดีกว่าไปกับคนอื่นด้วยซ้ำ', short:'ชอบเที่ยวคนเดียว'}},
+  {dim:0, text:'คุณมักได้ยินประโยคนี้จากคนรอบข้างบ่อยๆ...', a:{label:'"โอ้โห ออกพบปะผู้คนมาก"', short:'คนรู้จักเยอะ'}, b:{label:'"ไม่รู้ว่าคิดอะไรอยู่เลย"', short:'ดูเป็นปริศนา'}},
+  {dim:0, text:'ระหว่างงานปาร์ตี้ยาวๆ คุณ...', a:{label:'ยิ่งดึกยิ่ง hype', short:'พลังงานเพิ่มขึ้นยิ่งดึก'}, b:{label:'เริ่มล้าและอยากกลับบ้านหลังผ่านไปสักพัก', short:'เริ่มล้าและอยากกลับบ้าน'}},
+
+  // S vs N (1)
+  {dim:1, text:'เวลาเดินในย่านใหม่ที่ไม่รู้จัก คุณมักสังเกต...', a:{label:'สิ่งที่อยู่ตรงหน้า ป้าย ร้าน สี กลิ่น', short:'สังเกตสิ่งรอบตัว'}, b:{label:'บรรยากาศโดยรวม ความรู้สึก เรื่องราวที่ซ่อนอยู่', short:'รับ vibe และความรู้สึก'}},
+  {dim:1, text:'เวลาเรียนรู้อะไรใหม่ คุณชอบเริ่มจาก...', a:{label:'ขั้นตอนชัดเจน ทีละขั้น', short:'ชอบขั้นตอนที่ชัดเจน'}, b:{label:'ภาพรวมก่อน แล้วค่อยหาเหตุผล', short:'ชอบเห็นภาพรวมก่อน'}},
+  {dim:1, text:'คุณไว้วางใจ...', a:{label:'สิ่งที่จับต้องได้ พิสูจน์ได้', short:'ข้อมูลที่พิสูจน์ได้'}, b:{label:'ความรู้สึกและสัญชาตญาณ', short:'สัญชาตญาณและ intuition'}},
+  {dim:1, text:'ในการวางแผนทริป คุณ...', a:{label:'วางแผนละเอียด จองทุกอย่างล่วงหน้า', short:'วางแผนละเอียด'}, b:{label:'วางแค่กรอบหลวมๆ เปิดรับสิ่งที่เจอ', short:'ชอบความไม่แน่นอน'}},
+  {dim:1, text:'เวลาอ่านหนังสือหรือดูหนัง คุณมักชอบ...', a:{label:'เรื่องที่ realistic มีรายละเอียดจริงๆ', short:'ชอบเรื่องที่ realistic'}, b:{label:'เรื่องที่มี concept ลึกๆ ให้คิดต่อ', short:'ชอบ concept ที่ลึก'}},
+  {dim:1, text:'เวลาคุยกัน คุณมักถามว่า...', a:{label:'"แล้วมันเกิดขึ้นยังไง? รายละเอียดคืออะไร?"', short:'อยากรู้รายละเอียด'}, b:{label:'"มันหมายความว่าอะไร? มีนัยอะไรไหม?"', short:'ชอบถามความหมาย'}},
+  {dim:1, text:'ถ้าเห็นพระอาทิตย์ตก คุณจะ...', a:{label:'สังเกตสีสัน รายละเอียดของท้องฟ้า', short:'สังเกตรายละเอียดชัดเจน'}, b:{label:'รู้สึกบางอย่างและเริ่มคิดเรื่องต่างๆ', short:'รับความรู้สึกและคิดต่อ'}},
+  {dim:1, text:'คุณมักถูกมองว่า...', a:{label:'ปฏิบัติ realistic ทำได้จริง', short:'ดูเป็นคนที่ practical'}, b:{label:'ฝันไกล คิดเยอะ มองโลกแตกต่าง', short:'ดูเป็นคนฝันไกล'}},
+  {dim:1, text:'ระหว่างประสบการณ์ใหม่ คุณสนใจ...', a:{label:'เรียนรู้ทักษะจริงๆ ทำให้เป็น', short:'ชอบเรียนรู้ทักษะ'}, b:{label:'เข้าใจว่าทำไม และมันเชื่อมกับอะไรบ้าง', short:'ชอบเข้าใจความเชื่อมโยง'}},
+  {dim:1, text:'ถ้าต้องเลือก destination คุณจะเลือกจาก...', a:{label:'รีวิว ข้อมูลจริง สิ่งที่คนบอกว่าดี', short:'ดูจากข้อมูลจริง'}, b:{label:'ความรู้สึกที่มีต่อที่นั้น ว่ามัน "ใช่" ไหม', short:'ดูจากความรู้สึก'}},
+  {dim:1, text:'คุณมักเบื่อเมื่อ...', a:{label:'ไม่มีอะไรทำ ว่างเกินไป', short:'เบื่อเมื่อว่าง'}, b:{label:'ต้องทำสิ่งเดิมซ้ำๆ ไม่มีความท้าทาย', short:'เบื่อเมื่อซ้ำซาก'}},
+  {dim:1, text:'เวลาพูดถึงอนาคต คุณมักพูดถึง...', a:{label:'แผนที่ชัดเจน ทำได้จริง', short:'ชอบวางแผนที่ชัดเจน'}, b:{label:'ความเป็นไปได้ที่น่าตื่นเต้น', short:'ชอบจินตนาการถึงอนาคต'}},
+  {dim:1, text:'ในทริป สิ่งที่คุณจำได้ดีที่สุดคือ...', a:{label:'รายละเอียด ของที่กิน ที่พัก สถานที่ที่ไป', short:'จำรายละเอียดได้ชัด'}, b:{label:'ความรู้สึก บรรยากาศ และความหมายของมัน', short:'จำความรู้สึกได้ชัด'}},
+  {dim:1, text:'เวลาแก้ปัญหา คุณเชื่อใน...', a:{label:'วิธีที่พิสูจน์มาแล้วว่าได้ผล', short:'วิธีที่ทดสอบมาแล้ว'}, b:{label:'การคิดนอกกรอบ ลองวิธีใหม่ๆ', short:'คิดนอกกรอบ'}},
+  {dim:1, text:'เมื่อต้องตัดสินใจเร่งด่วน คุณ...', a:{label:'ใช้ข้อมูลที่มีตอนนั้น ตัดสินใจเลย', short:'ตัดสินใจจากข้อมูลที่มี'}, b:{label:'รับรู้บางอย่างจาก gut feeling', short:'ฟัง gut feeling'}},
+
+  // T vs F (2)
+  {dim:2, text:'เมื่อต้องตัดสินใจสำคัญ คุณให้น้ำหนักกับ...', a:{label:'เหตุผล ตรรกะ ข้อดีข้อเสีย', short:'ใช้เหตุผลและตรรกะ'}, b:{label:'ความรู้สึกของตัวเองและผลกระทบต่อคนอื่น', short:'ใช้ความรู้สึกและคนรอบข้าง'}},
+  {dim:2, text:'เมื่อเพื่อนมาปรึกษาปัญหา คุณมักจะ...', a:{label:'ให้คำแนะนำตรงๆ ว่าควรทำยังไง', short:'ให้คำแนะนำตรงๆ'}, b:{label:'รับฟัง เข้าใจความรู้สึก ให้กำลังใจ', short:'รับฟังและให้กำลังใจ'}},
+  {dim:2, text:'ถ้าต้องวิจารณ์งานของคนอื่น คุณจะ...', a:{label:'พูดตรงๆ ว่าต้องปรับอะไรบ้าง', short:'พูดตรงๆ'}, b:{label:'หาวิธีพูดที่ไม่ทำให้เขาเจ็บปวด', short:'ระมัดระวังความรู้สึกคนฟัง'}},
+  {dim:2, text:'คุณให้ความสำคัญกับ...', a:{label:'ความยุติธรรม ทุกคนได้เท่ากัน', short:'ความยุติธรรม'}, b:{label:'ความสัมพันธ์ ทุกคนรู้สึกดี', short:'ความสัมพันธ์ที่ดี'}},
+  {dim:2, text:'เวลาดูข่าวสาร คุณมักสนใจ...', a:{label:'ข้อเท็จจริง เหตุและผล', short:'สนใจข้อเท็จจริง'}, b:{label:'ผลกระทบต่อผู้คน ความรู้สึก', short:'สนใจผลกระทบต่อคน'}},
+  {dim:2, text:'ในทริป เวลาเกิดข้อขัดแย้งในกลุ่ม คุณมักเป็นคน...', a:{label:'วิเคราะห์สถานการณ์และหาทางออกเชิง logic', short:'หาทางออกแบบมีเหตุผล'}, b:{label:'ประสานความรู้สึกของทุกคนให้ดีขึ้น', short:'ประสานความรู้สึก'}},
+  {dim:2, text:'เวลาอ่านรีวิวที่พัก คุณให้ความสำคัญกับ...', a:{label:'ข้อมูลเฉพาะ ราคา สิ่งอำนวยความสะดวก', short:'ดูข้อมูลเฉพาะ'}, b:{label:'บรรยากาศ ความรู้สึก vibe', short:'ดู vibe และบรรยากาศ'}},
+  {dim:2, text:'คุณมักถูกบอกว่า...', a:{label:'"เธอพูดตรงไปตรงมามาก"', short:'คนบอกว่าพูดตรงไปตรงมา'}, b:{label:'"เธอใจดีและเข้าอกเข้าใจมาก"', short:'คนบอกว่าใจดีและเข้าใจ'}},
+  {dim:2, text:'เมื่อต้องเลือกระหว่างความถูกต้องและความสัมพันธ์ คุณมักเลือก...', a:{label:'ความถูกต้อง แม้จะกระทบความสัมพันธ์', short:'เลือกความถูกต้อง'}, b:{label:'รักษาความสัมพันธ์ไว้ก่อน', short:'รักษาความสัมพันธ์'}},
+  {dim:2, text:'เวลาดูภาพยนตร์ คุณมักซาบซึ้งกับ...', a:{label:'พล็อตที่ฉลาด ตรรกะที่แน่น', short:'ชอบพล็อตที่ฉลาด'}, b:{label:'ความสัมพันธ์ของตัวละคร ความรู้สึก', short:'ชอบความสัมพันธ์ของตัวละคร'}},
+  {dim:2, text:'เวลาเดินทาง คุณตัดสินใจร้านอาหารจาก...', a:{label:'รีวิว ดาว ชื่อเสียง ข้อมูลชัดๆ', short:'ตัดสินใจจากข้อมูล'}, b:{label:'บรรยากาศ ความรู้สึกตอนเดินผ่าน', short:'ตัดสินใจจากบรรยากาศ'}},
+  {dim:2, text:'ถ้าต้องเลือกระหว่าง...', a:{label:'ทริปที่ efficient ไปได้เยอะ คุ้มค่า', short:'เน้นความคุ้มค่า'}, b:{label:'ทริปที่ meaningful แม้จะไปน้อยที่', short:'เน้นความ meaningful'}},
+  {dim:2, text:'คุณเชื่อว่า...', a:{label:'ความจริงสำคัญกว่าความรู้สึก', short:'ให้ความสำคัญความจริง'}, b:{label:'ความรู้สึกก็เป็นความจริงชนิดหนึ่ง', short:'ให้ความสำคัญความรู้สึก'}},
+  {dim:2, text:'ในกลุ่มเพื่อน คุณมักเป็นคน...', a:{label:'ที่ทุกคนมาถามความเห็น เพราะพูดตรง', short:'คนมาถามเพราะพูดตรง'}, b:{label:'ที่ทุกคนมาระบาย เพราะรับฟังดี', short:'คนมาระบายเพราะรับฟังดี'}},
+  {dim:2, text:'เวลาโต้เถียง คุณ...', a:{label:'ชอบหาว่าใคร "ถูก" กันแน่', short:'ต้องการความชัดเจนว่าใครถูก'}, b:{label:'อยากให้ทุกคนรู้สึกได้รับการรับฟัง', short:'อยากให้ทุกคนรู้สึกดี'}},
+
+  // J vs P (3)
+  {dim:3, text:'สไตล์ชีวิตของคุณโดยทั่วไปคือ...', a:{label:'มีแผน ตารางเวลา ชอบความแน่นอน', short:'ชอบแผนและความแน่นอน'}, b:{label:'ยืดหยุ่น เปิดรับสิ่งใหม่ ปรับได้ตลอด', short:'ยืดหยุ่นและ spontaneous'}},
+  {dim:3, text:'เวลาเที่ยว คุณ...', a:{label:'จองล่วงหน้า วางแผนครบ รู้ว่าจะทำอะไรแต่ละวัน', short:'วางแผนทุกอย่างล่วงหน้า'}, b:{label:'ปล่อยให้มัน flow ไปตามโอกาส', short:'ปล่อย flow ตามโอกาส'}},
+  {dim:3, text:'Deadline ทำให้คุณ...', a:{label:'ทำงานมีระเบียบมากขึ้น ตรงเวลาเสมอ', short:'ชอบ deadline ชัดเจน'}, b:{label:'กดดัน แต่ก็ทำได้ตอนใกล้วัน', short:'ทำดีสุดตอนกดดัน'}},
+  {dim:3, text:'เวลาซื้อของ คุณมักจะ...', a:{label:'ตัดสินใจเร็ว รู้ว่าอยากได้อะไร', short:'ตัดสินใจได้เร็ว'}, b:{label:'ดูอยู่นาน เปรียบเทียบ ยังไม่แน่ใจ', short:'ใช้เวลาตัดสินใจนาน'}},
+  {dim:3, text:'ห้องหรือพื้นที่ส่วนตัวของคุณ...', a:{label:'เป็นระเบียบ มีที่วางของแน่นอน', short:'เป็นระเบียบ'}, b:{label:'อาจดูรกนิด แต่คุณรู้ว่าของอยู่ที่ไหน', short:'อาจดูรก แต่รู้ว่าของอยู่ที่ไหน'}},
+  {dim:3, text:'ถ้าแผนเปลี่ยนกะทันหัน คุณ...', a:{label:'รู้สึกเครียดหรือหงุดหงิดนิด', short:'เครียดเมื่อแผนเปลี่ยน'}, b:{label:'ปรับตัวได้ดี บางทีตื่นเต้นด้วยซ้ำ', short:'ปรับตัวได้ดีเมื่อแผนเปลี่ยน'}},
+  {dim:3, text:'เวลาทำงานกลุ่ม คุณมักชอบ...', a:{label:'แบ่งหน้าที่ชัดเจน มี timeline', short:'ชอบแบ่งหน้าที่ชัดเจน'}, b:{label:'ทุกคนทำหลายอย่าง ยืดหยุ่นได้', short:'ชอบความยืดหยุ่น'}},
+  {dim:3, text:'เวลาเจอทางเลือก คุณ...', a:{label:'ตัดสินใจและไม่ค่อยกลับไปคิดใหม่', short:'ตัดสินใจและไม่กลับใจ'}, b:{label:'อยากเก็บ option ไว้ก่อน เผื่อเปลี่ยน', short:'ชอบเก็บ option ไว้'}},
+  {dim:3, text:'ในทริป คุณมักรู้สึกดีเมื่อ...', a:{label:'ทำได้ตามแผนครบทุก item', short:'ทำได้ตามแผน'}, b:{label:'เจอสิ่งที่ไม่ได้วางแผนและกลับเป็นไฮไลต์', short:'เจอสิ่งไม่คาดคิด'}},
+  {dim:3, text:'คุณรู้สึก satisfied เมื่อ...', a:{label:'ได้ตัดสินใจและจบ', short:'ชอบสรุปและตัดสินใจ'}, b:{label:'มีความเป็นไปได้อีกมากให้สำรวจ', short:'ชอบมี option เยอะๆ'}},
+  {dim:3, text:'ถ้าต้องเลือกระหว่าง...', a:{label:'งานเสร็จก่อน แล้วค่อยเล่น', short:'เสร็จงานก่อนเล่น'}, b:{label:'เล่นระหว่างทำงานก็ได้', short:'ชอบทำหลายอย่างพร้อมกัน'}},
+  {dim:3, text:'เวลาว่าง คุณมักจะ...', a:{label:'มีแผนไว้ล่วงหน้าว่าจะทำอะไร', short:'วางแผนวันหยุดล่วงหน้า'}, b:{label:'ตื่นมาแล้วดูว่าอยากทำอะไร', short:'ตื่นมาแล้วค่อยตัดสินใจ'}},
+  {dim:3, text:'คุณมักรู้สึกดีที่สุดตอน...', a:{label:'ทุกอย่างเรียบร้อย จัดการเสร็จสิ้น', short:'เมื่อจัดการทุกอย่างเสร็จ'}, b:{label:'กำลังสำรวจและค้นพบอะไรบางอย่าง', short:'เมื่อกำลังค้นพบอะไรใหม่'}},
+  {dim:3, text:'ถ้าเพื่อนชวนเที่ยวพรุ่งนี้เลย คุณ...', a:{label:'ต้องดูตารางก่อน และเตรียมตัวให้พร้อม', short:'ต้องดูตารางและเตรียมตัว'}, b:{label:'โอเค ไปเลย!', short:'โอเค ไปเลย!'}},
+  {dim:3, text:'ในชีวิตประจำวัน คุณ...', a:{label:'ชอบ routine มีระเบียบ ทำให้ชีวิตสบาย', short:'ชอบ routine'}, b:{label:'ชอบ variety เบื่อถ้าทำซ้ำๆ', short:'ชอบ variety'}},
+];
+
+// ─── TYPE DATA ───
+const typeData = {
+  INTJ: {
+    name:'INTJ', title:'The Architect', subtitle:'นักวางแผนเชิงกลยุทธ์', emoji:'🏛️',
+    desc:'คุณเดินทางด้วยเหตุผล ทุกทริปต้องมีความหมาย คุณชอบสำรวจอย่างลึกซึ้งมากกว่ากว้าง ไม่ต้องการคนเยอะ แต่ต้องการที่พักดี แผนที่ชัด และพื้นที่คิดคนเดียว',
+    colors:['#3A4A5C','#4A5A6C','#5A6A7C','#3A4A5C'],
+    travel:[ {icon:'🗺️',title:'วางแผนเอง',desc:'คุณจะ research ทุกอย่างด้วยตัวเองได้ดีกว่าทัวร์'}, {icon:'🔍',title:'ลงลึก 1 ที่',desc:'ดีกว่าวิ่งเยอะๆ ที่แบบผิวเผิน'}, {icon:'🤫',title:'เที่ยวคนเดียว',desc:'ไม่ต้องรอใคร ทำตาม pace ตัวเอง'}, {icon:'📚',title:'เรียนรู้จากทริป',desc:'ชอบประวัติศาสตร์ สถาปัตยกรรม ความหมายลึกๆ'} ],
+    destinations:['เกียวโต','ลิสบอน','เชียงราย','อิสตันบูล','น่าน'],
+  },
+  INTP: {
+    name:'INTP', title:'The Thinker', subtitle:'นักคิดอิสระ', emoji:'🔬',
+    desc:'คุณเที่ยวเพื่อหาคำตอบใหม่ๆ คุณชอบทริปที่ไม่มีแผนแน่นเกิน เพราะชอบแวะเข้าไปในอะไรที่ดึงดูดความสนใจโดยไม่ได้ตั้งใจ',
+    colors:['#3A5A4C','#4A6A5C','#5A7A6C','#3A5A4C'],
+    travel:[ {icon:'🎲',title:'แผนหลวมๆ',desc:'ปล่อยให้ความสนใจพาไป'}, {icon:'🏛️',title:'Museum & ย่านเก่า',desc:'หาข้อมูลเพิ่มเติมระหว่างเดินได้ตลอด'}, {icon:'☕',title:'คาเฟ่ + คิด',desc:'ชอบนั่งสังเกตผู้คนและคิดเรื่องต่างๆ'}, {icon:'🌐',title:'วัฒนธรรมต่างๆ',desc:'อยากเข้าใจว่าทำไมคนที่นั่นเป็นแบบนั้น'} ],
+    destinations:['โตเกียว','อัมสเตอร์ดัม','เบอร์ลิน','เชียงใหม่','ปราก'],
+  },
+  ENTJ: {
+    name:'ENTJ', title:'The Commander', subtitle:'ผู้นำที่เกิดมา', emoji:'⚡',
+    desc:'คุณเที่ยวอย่างมีประสิทธิภาพ ทุกวันต้องได้อะไรคืนมา คุณวางแผนทริปเหมือนวางแผนงาน — มี objective ชัด',
+    colors:['#5C3A2C','#6C4A3C','#7C5A4C','#5C3A2C'],
+    travel:[ {icon:'⚡',title:'Efficient',desc:'ไม่เสียเวลา ทุกชั่วโมงมีค่า'}, {icon:'🎯',title:'เป้าหมายชัด',desc:'อยากได้ experience อะไรจากทริปนี้?'}, {icon:'🌍',title:'ต่างประเทศ',desc:'ชอบ exposure ใหม่ๆ ที่ขยาย worldview'}, {icon:'🤝',title:'Network ระหว่างทาง',desc:'ได้เจอคนน่าสนใจจากทริปบ่อย'} ],
+    destinations:['โตเกียว','สิงคโปร์','นิวยอร์ก','ฮ่องกง','ลอนดอน'],
+  },
+  ENTP: {
+    name:'ENTP', title:'The Debater', subtitle:'นักถกเถียงที่หลงใหล', emoji:'💡',
+    desc:'คุณชอบทริปที่ไม่รู้ว่าจะเจออะไร คุณ thrive ในความไม่แน่นอน และมักพบ hidden gem ที่คนอื่นพลาดไป',
+    colors:['#5C5A2C','#6C6A3C','#7C7A4C','#5C5A2C'],
+    travel:[ {icon:'🎲',title:'Spontaneous',desc:'best memories มาจากสิ่งที่ไม่ได้วางแผน'}, {icon:'💬',title:'คุยกับ locals',desc:'ได้เรื่องราวที่หาจาก Google ไม่เจอ'}, {icon:'🔀',title:'ผสมหลาย type',desc:'เที่ยวธรรมชาติ + เมือง + ชุมชน ในทริปเดียว'}, {icon:'🌶️',title:'ลองของแปลก',desc:'ยิ่งแปลกยิ่งสนุก'} ],
+    destinations:['ฮานอย','กัวลาลัมเปอร์','ทบิลิซี','บาร์เซโลนา','เชียงราย'],
+  },
+  INFJ: {
+    name:'INFJ', title:'The Advocate', subtitle:'นักฝันผู้มีพันธกิจ', emoji:'🌙',
+    desc:'คุณเที่ยวเพื่อหาความหมาย แต่ละทริปต้องทิ้งอะไรบางอย่างไว้ให้คุณ คุณชอบสถานที่ที่มีเรื่องราวลึกๆ และคนที่จริงใจ',
+    colors:['#4A3A6C','#5A4A7C','#6A5A8C','#4A3A6C'],
+    travel:[ {icon:'🌙',title:'Slow travel',desc:'ไปน้อยที่แต่อยู่นาน ซึมซับให้ลึก'}, {icon:'📖',title:'ประวัติศาสตร์',desc:'ชอบสถานที่ที่มีเรื่องเล่าลึกๆ'}, {icon:'🌿',title:'ธรรมชาติ',desc:'recharge ได้ดีในที่เงียบและธรรมชาติ'}, {icon:'🤲',title:'ชุมชนจริงๆ',desc:'ชอบเชื่อมต่อกับคนท้องถิ่นที่แท้จริง'} ],
+    destinations:['น่าน','เกียวโต','ฮอยอัน','ลิสบอน','เชียงราย'],
+  },
+  INFP: {
+    name:'INFP', title:'The Mediator', subtitle:'นักฝันผู้อ่อนโยน', emoji:'🌸',
+    desc:'คุณเที่ยวเพื่อค้นพบตัวเองและรู้สึกถึงชีวิต คุณไม่ต้องการ itinerary แน่นๆ แค่ขอพื้นที่สำหรับความรู้สึกของตัวเอง',
+    colors:['#6C3A5A','#7C4A6A','#8C5A7A','#6C3A5A'],
+    travel:[ {icon:'🌸',title:'Solo trip',desc:'ไม่ต้องอธิบายตัวเอง ทำสิ่งที่อยากทำ'}, {icon:'🎨',title:'ศิลปะและ vibe',desc:'ร้านที่มีบุคลิก งานศิลปะ บรรยากาศ'}, {icon:'📝',title:'เขียน-บันทึก',desc:'journaling ระหว่างทริปช่วยให้ process ความรู้สึก'}, {icon:'🌿',title:'ธรรมชาติ',desc:'recharge ในที่เงียบและสวยงาม'} ],
+    destinations:['น่าน','บาหลี (Ubud)','เกียวโต','ฮอยอัน','แม่ฮ่องสอน'],
+  },
+  ENFJ: {
+    name:'ENFJ', title:'The Protagonist', subtitle:'ผู้นำที่ใส่ใจผู้คน', emoji:'🌟',
+    desc:'คุณเที่ยวเพื่อเชื่อมต่อกับผู้คนและวัฒนธรรม ทริปที่ดีที่สุดของคุณคือที่ที่ได้ทำให้คนอื่นมีความสุขด้วยกัน',
+    colors:['#5C4A2C','#6C5A3C','#7C6A4C','#5C4A2C'],
+    travel:[ {icon:'🌍',title:'Cultural immersion',desc:'เรียนรู้วัฒนธรรมอย่างลึกซึ้ง'}, {icon:'👥',title:'กลุ่มเพื่อน',desc:'ทริปกับคนที่ใช่คือ best experience'}, {icon:'🤝',title:'Local community',desc:'ชอบ homestay หรือกิจกรรมกับชุมชน'}, {icon:'🎭',title:'เทศกาลและงาน',desc:'ชอบ experience ที่มีพลังงานสูง'} ],
+    destinations:['เชียงใหม่','โซล','บาหลี','ฮอยอัน','บาร์เซโลนา'],
+  },
+  ENFP: {
+    name:'ENFP', title:'The Campaigner', subtitle:'นักสำรวจชีวิตผู้ร่าเริง', emoji:'🌈',
+    desc:'คุณเต็มเปี่ยมด้วยพลังงาน และทริปคือการต่อยอดพลังนั้น คุณชาร์จจากประสบการณ์ใหม่ๆ และคนน่าสนใจที่เจอระหว่างทาง',
+    colors:['#3A6C4A','#4A7C5A','#5A8C6A','#3A6C4A'],
+    travel:[ {icon:'🌈',title:'Variety',desc:'ผสมหลายประสบการณ์ในทริปเดียว'}, {icon:'🗺️',title:'ค้นพบด้วยตัวเอง',desc:'ชอบหลุดออกนอกเส้นทางและเจอของใหม่'}, {icon:'💬',title:'เจอคนใหม่',desc:'เพื่อนใหม่ระหว่างทริปคือ bonus'}, {icon:'📸',title:'เก็บ moment',desc:'ทุก moment น่าจดจำ'} ],
+    destinations:['โตเกียว','บาร์เซโลนา','เชียงใหม่','โซล','บาหลี'],
+  },
+  ISTJ: {
+    name:'ISTJ', title:'The Logistician', subtitle:'ผู้จัดการที่เชื่อถือได้', emoji:'📋',
+    desc:'คุณเที่ยวอย่างมีระเบียบ จองล่วงหน้า วางแผนครบ และทุกอย่างเรียบร้อย คุณ enjoy ได้ดีที่สุดเมื่อรู้ว่าจะเกิดอะไรขึ้น',
+    colors:['#3A4C5A','#4A5C6A','#5A6C7A','#3A4C5A'],
+    travel:[ {icon:'📋',title:'วางแผนครบ',desc:'รู้ว่าจะทำอะไรแต่ละวัน comfortable'}, {icon:'🏨',title:'ที่พักดี',desc:'ความสะดวกสบายช่วยให้ enjoy ได้เต็มที่'}, {icon:'🗺️',title:'สถานที่ iconic',desc:'ของที่ต้องไปดูให้ครบ'}, {icon:'📌',title:'ตรงเวลา',desc:'ไม่ชอบรีบหรือรอ ชอบ flow ที่ smooth'} ],
+    destinations:['ญี่ปุ่น','สิงคโปร์','เชียงใหม่','กาญจนบุรี','โซล'],
+  },
+  ISFJ: {
+    name:'ISFJ', title:'The Defender', subtitle:'ผู้พิทักษ์ผู้อ่อนโยน', emoji:'🛡️',
+    desc:'คุณเที่ยวเพื่อสัมผัสความอบอุ่นและความ familiar ในที่ใหม่ คุณชอบที่พักที่ cozy ร้านอาหาร local และความรู้สึกว่าคุณ "เป็นส่วนหนึ่ง" ของที่นั้น',
+    colors:['#4A5C3A','#5A6C4A','#6A7C5A','#4A5C3A'],
+    travel:[ {icon:'🏡',title:'Cozy & familiar',desc:'ที่พักที่รู้สึก homey'}, {icon:'🍜',title:'Local food',desc:'กินร้านชาวบ้าน ไม่ต้องดัง'}, {icon:'🚶',title:'เดินช้าๆ',desc:'ไม่ต้องรีบ ดูสิ่งรอบข้าง'}, {icon:'📷',title:'เก็บ memory',desc:'ชอบถ่ายภาพเพื่อเก็บความทรงจำ'} ],
+    destinations:['น่าน','เชียงราย','ฮอยอัน','เกียวโต','กาญจนบุรี'],
+  },
+  ESTJ: {
+    name:'ESTJ', title:'The Executive', subtitle:'ผู้บริหารที่จัดระเบียบ', emoji:'🏢',
+    desc:'คุณเที่ยวอย่างมีประสิทธิภาพ ทุกวันต้องคุ้มค่า คุณเป็นคนวางแผนของกลุ่ม และทุกคนก็ไว้วางใจให้คุณทำ',
+    colors:['#5A3C2C','#6A4C3C','#7A5C4C','#5A3C2C'],
+    travel:[ {icon:'🎯',title:'เป้าหมายชัด',desc:'รู้ว่าอยากเห็นอะไร ทำอะไร'}, {icon:'📊',title:'Value for money',desc:'ต้องคุ้มทุกบาทที่จ่าย'}, {icon:'🏆',title:'Must-see places',desc:'ชอบไปที่ที่ควรไปให้ครบ'}, {icon:'👍',title:'Review-based',desc:'ตัดสินใจจากข้อมูลชัดเจน'} ],
+    destinations:['โตเกียว','สิงคโปร์','กาญจนบุรี','เชียงใหม่','โซล'],
+  },
+  ESFJ: {
+    name:'ESFJ', title:'The Consul', subtitle:'ผู้ดูแลที่ใส่ใจ', emoji:'💝',
+    desc:'คุณ shine ที่สุดเมื่อทุกคนในทริปมีความสุข คุณเป็นคนที่ทำให้ทริปกลุ่มลื่นไหล และจำได้ว่าใครชอบอะไร',
+    colors:['#6C3A4A','#7C4A5A','#8C5A6A','#6C3A4A'],
+    travel:[ {icon:'👨‍👩‍👧',title:'ทริปกลุ่ม',desc:'enjoy ที่สุดเมื่ออยู่กับคนที่รัก'}, {icon:'🍽️',title:'กินด้วยกัน',desc:'ประสบการณ์อาหารคือ highlight'}, {icon:'📸',title:'ถ่ายภาพกลุ่ม',desc:'เก็บ memory ร่วมกัน'}, {icon:'🗓️',title:'จัดการทริป',desc:'ชอบเป็นคนดูแลให้ทุกอย่างราบรื่น'} ],
+    destinations:['เชียงใหม่','บาหลี','โซล','ฮอยอัน','โตเกียว'],
+  },
+  ISTP: {
+    name:'ISTP', title:'The Virtuoso', subtitle:'ช่างฝีมือผู้เงียบขรึม', emoji:'🔧',
+    desc:'คุณเที่ยวด้วย hands-on approach อยาก explore ด้วยตัวเอง ไม่ต้องมีใครนำทาง และชอบทริปที่ให้คุณได้สัมผัสจริงๆ',
+    colors:['#3C4C5A','#4C5C6A','#5C6C7A','#3C4C5A'],
+    travel:[ {icon:'🏍️',title:'Active & hands-on',desc:'ขับรถ trekking ดำน้ำ — ลงมือทำ'}, {icon:'🛠️',title:'DIY trip',desc:'ไม่ต้องทัวร์ จัดการเองทุกอย่าง'}, {icon:'🗺️',title:'Off-road',desc:'ชอบสายที่ไม่ค่อยมีคน'}, {icon:'⚡',title:'Flexible',desc:'เปลี่ยนแผนกะทันหันได้ตลอด'} ],
+    destinations:['แม่ฮ่องสอน','เชียงราย','เกาะเล็กๆ','ตาก','บาหลี'],
+  },
+  ISFP: {
+    name:'ISFP', title:'The Adventurer', subtitle:'ศิลปินผู้เงียบงาม', emoji:'🎨',
+    desc:'คุณเที่ยวเพื่อรู้สึก ไม่ใช่เพื่อถ่ายรูป ทริปที่ดีสำหรับคุณคือที่ที่ความงามอยู่ในทุก detail เล็กๆ',
+    colors:['#5A3C6A','#6A4C7A','#7A5C8A','#5A3C6A'],
+    travel:[ {icon:'🎨',title:'ความงามทุก detail',desc:'ชอบสถาปัตยกรรม สี พื้นผิว'}, {icon:'🌿',title:'ธรรมชาติและสงบ',desc:'recharge ในที่เงียบสวยงาม'}, {icon:'📸',title:'ถ่ายภาพ',desc:'มองโลกผ่าน lens'}, {icon:'🚶',title:'ไม่รีบ',desc:'ดูดีกว่าไปเยอะๆ ผิวเผิน'} ],
+    destinations:['น่าน','เกียวโต','บาหลี (Ubud)','ฮอยอัน','ลิสบอน'],
+  },
+  ESTP: {
+    name:'ESTP', title:'The Entrepreneur', subtitle:'นักผจญภัยผู้กล้าหาญ', emoji:'🏄',
+    desc:'คุณ thrive ในความตื่นเต้น ทริปของคุณต้องมี action ทริปสั้นแต่เข้มข้นดีกว่าทริปยาวแต่ boring',
+    colors:['#6A3A2C','#7A4A3C','#8A5A4C','#6A3A2C'],
+    travel:[ {icon:'🏄',title:'Adventure activities',desc:'อยาก do มากกว่า see'}, {icon:'⚡',title:'Fast-paced',desc:'อยากทำเยอะๆ ในเวลาน้อยๆ'}, {icon:'🎉',title:'Local nightlife',desc:'ชอบ experience ที่มีพลังงาน'}, {icon:'🗺️',title:'Spontaneous',desc:'ไม่ต้องวางแผน ออกไปเลย'} ],
+    destinations:['บาหลี','เชียงใหม่','พัทยา','บาร์เซโลนา','โตเกียว'],
+  },
+  ESFP: {
+    name:'ESFP', title:'The Entertainer', subtitle:'ผู้สร้างความสนุก', emoji:'🎪',
+    desc:'คุณคือชีวิตของทริป ทุกที่ที่คุณไปมีพลังงาน คุณสร้าง memory ให้กับทุกคนในกลุ่ม',
+    colors:['#6A2C4A','#7A3C5A','#8A4C6A','#6A2C4A'],
+    travel:[ {icon:'🎉',title:'ทริปกลุ่ม',desc:'ยิ่งเพื่อนเยอะยิ่งสนุก'}, {icon:'🎶',title:'เทศกาลและงาน',desc:'ชอบ atmosphere ที่มีชีวิต'}, {icon:'📸',title:'Content creator',desc:'ทุกที่ถ่ายรูปได้หมด'}, {icon:'🌈',title:'Colorful experiences',desc:'ชอบที่ที่ visual สวยและสนุก'} ],
+    destinations:['โซล','บาร์เซโลนา','บาหลี','โตเกียว','เชียงใหม่'],
+  },
+};
+
+// ─── STATE ───
+let currentQ = 0;
+let scores = [{a:0,b:0},{a:0,b:0},{a:0,b:0},{a:0,b:0}]; // EI SN TF JP
+const userAnswers = new Array(60).fill(null);
+
+// ─── SCREEN MANAGEMENT ───
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0,0);
+}
+
+function startQuiz() {
+  currentQ = 0;
+  scores = [{a:0,b:0},{a:0,b:0},{a:0,b:0},{a:0,b:0}];
+  userAnswers.fill(null);
+  showScreen('screen-quiz');
+  renderQuestion();
+}
+
+// ─── QUIZ ───
+function renderQuestion() {
+  const q = questions[currentQ];
+  const block = document.getElementById('question-block');
+  block.style.animation = 'none';
+  block.offsetHeight;
+  block.style.animation = 'fadeUp 0.35s ease both';
+
+  document.getElementById('q-num').textContent = String(currentQ+1).padStart(2,'0');
+  document.getElementById('q-current').textContent = currentQ+1;
+  document.getElementById('q-text').textContent = q.text;
+
+  const ctxEl = document.getElementById('q-context');
+  ctxEl.style.display = 'none';
+
+  const dimNames = ['E vs I','S vs N','T vs F','J vs P'];
+  document.getElementById('dim-label').textContent = dimNames[q.dim];
+
+  document.getElementById('progress-fill').style.width = ((currentQ/60)*100)+'%';
+
+  const laEl = document.getElementById('label-a');
+  const lbEl = document.getElementById('label-b');
+  laEl.innerHTML = `<strong>${questions[currentQ].a.short}</strong>${questions[currentQ].a.label}`;
+  lbEl.innerHTML = `<strong>${questions[currentQ].b.short}</strong>${questions[currentQ].b.label}`;
+
+  const btns = document.querySelectorAll('.scale-btn');
+  btns.forEach((btn,i)=>{
+    btn.classList.remove('selected-left','selected-right','selected-neutral');
+    const saved = userAnswers[currentQ];
+    if (saved !== null) {
+      if (saved === i) {
+        if (i <= 2) btn.classList.add('selected-left');
+        else if (i === 3) btn.classList.add('selected-neutral');
+        else btn.classList.add('selected-right');
+      }
+    }
+  });
+
+  document.getElementById('btn-prev').disabled = currentQ === 0;
+  renderDimIndicators();
+}
+
+function renderDimIndicators() {
+  const dimLabels = [['E','I'],['S','N'],['T','F'],['J','P']];
+  const dimColors = [['#5D8A6B','#7A6B9B'],['#8A7B5A','#5A7A8A'],['#6B5A4A','#9B6B7A'],['#5A6B7A','#7A8A5A']];
+  const container = document.getElementById('dim-indicators');
+  container.innerHTML = '';
+  scores.forEach((s,i)=>{
+    const total = s.a + s.b;
+    if (total === 0) return;
+    const aPct = Math.round((s.a/total)*100);
+    const winner = aPct >= 50 ? dimLabels[i][0] : dimLabels[i][1];
+    const color = aPct >= 50 ? dimColors[i][0] : dimColors[i][1];
+    const pill = document.createElement('span');
+    pill.className = 'dim-pill';
+    pill.style.cssText = `background:${color}22;color:${color};border:1px solid ${color}44;`;
+    pill.textContent = winner;
+    container.appendChild(pill);
+  });
+}
+
+const weights = [3,2,1,0,1,2,3]; // outer = strong, center = neutral
+
+function selectAnswer(idx) {
+  const q = questions[currentQ];
+  userAnswers[currentQ] = idx;
+
+  const btns = document.querySelectorAll('.scale-btn');
+  btns.forEach((btn,i)=>{
+    btn.classList.remove('selected-left','selected-right','selected-neutral');
+    if (i === idx) {
+      if (i <= 2) btn.classList.add('selected-left');
+      else if (i === 3) btn.classList.add('selected-neutral');
+      else btn.classList.add('selected-right');
+    }
+  });
+
+  const w = weights[idx];
+  if (idx <= 2) { scores[q.dim].a += w; }
+  else if (idx === 3) { /* neutral */ }
+  else { scores[q.dim].b += w; }
+
+  setTimeout(()=>{
+    if (currentQ < questions.length - 1) {
+      currentQ++;
+      renderQuestion();
+    } else {
+      showResult();
+    }
+  }, 280);
+}
+
+function prevQuestion() {
+  if (currentQ > 0) {
+    const q = questions[currentQ];
+    const saved = userAnswers[currentQ];
+    if (saved !== null) {
+      const w = weights[saved];
+      if (saved <= 2) scores[q.dim].a -= w;
+      else if (saved !== 3) scores[q.dim].b -= w;
+      userAnswers[currentQ] = null;
+    }
+    currentQ--;
+    renderQuestion();
+  }
+}
+
+function skipQuestion() {
+  userAnswers[currentQ] = null;
+  if (currentQ < questions.length - 1) {
+    currentQ++;
+    renderQuestion();
+  } else {
+    showResult();
+  }
+}
+
+// ─── RESULT ───
+function calcType() {
+  const letters = scores.map((s,i)=>{
+    const pairs = [['E','I'],['S','N'],['T','F'],['J','P']];
+    return s.a >= s.b ? pairs[i][0] : pairs[i][1];
+  });
+  return letters.join('');
+}
+
+function showResult() {
+  const type = calcType();
+  const data = typeData[type] || typeData['INFP'];
+
+  // Type badge
+  const badge = document.getElementById('type-badge');
+  badge.innerHTML = '';
+  type.split('').forEach((letter,i)=>{
+    const el = document.createElement('div');
+    el.className = 'type-letter';
+    el.style.cssText = `background:${data.colors[i]};animation-delay:${i*0.05}s`;
+    el.textContent = letter;
+    badge.appendChild(el);
+  });
+
+  document.getElementById('result-title').textContent = `${type} · ${data.title}`;
+  document.getElementById('result-subtitle').textContent = data.subtitle;
+  document.getElementById('result-desc').textContent = data.desc;
+
+  // Dim bars
+  const barsHtml = scores.map((s,i)=>{
+    const pairs = [['E','I'],['S','N'],['T','F'],['J','P']];
+    const colors = [['#5D8A6B','#7A6B9B'],['#8A7B5A','#5A7A8A'],['#6B5A4A','#9B6B7A'],['#5A6B7A','#7A8A5A']];
+    const total = s.a + s.b || 1;
+    const aPct = Math.round((s.a/total)*100);
+    const bPct = 100-aPct;
+    const winner = aPct >= 50 ? pairs[i][0] : pairs[i][1];
+    const winnerPct = aPct >= 50 ? aPct : bPct;
+    const winColor = aPct >= 50 ? colors[i][0] : colors[i][1];
+    const loseColor = aPct >= 50 ? colors[i][1] : colors[i][0];
+    return `<div class="dim-row">
+      <div class="dim-row-header">
+        <div class="dim-letters">
+          <span class="dim-letter-badge" style="background:${colors[i][0]}22;color:${colors[i][0]};">${pairs[i][0]}</span>
+          <span class="dim-vs">vs</span>
+          <span class="dim-letter-badge" style="background:${colors[i][1]}22;color:${colors[i][1]};">${pairs[i][1]}</span>
+        </div>
+        <span class="dim-pct" style="color:${winColor};">${winner} ${winnerPct}%</span>
+      </div>
+      <div class="dim-track">
+        <div class="dim-bar" style="width:${aPct}%;background:linear-gradient(90deg,${colors[i][0]},${colors[i][1]});"></div>
+      </div>
+    </div>`;
+  }).join('');
+  document.getElementById('dim-bars-content').innerHTML = barsHtml;
+
+  // Travel cards
+  const travelHtml = data.travel.map(t=>`
+    <div class="travel-card">
+      <div class="travel-card-icon">${t.icon}</div>
+      <div class="travel-card-title">${t.title}</div>
+      <div class="travel-card-desc">${t.desc}</div>
+    </div>
+  `).join('');
+  document.getElementById('travel-grid').innerHTML = travelHtml;
+
+  // Destination tags
+  document.getElementById('dest-tags').innerHTML = data.destinations.map(d=>`<span class="dest-tag">📍 ${d}</span>`).join('');
+
+  showScreen('screen-result');
+}
+
+function retakeQuiz() {
+  startQuiz();
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Craftaway — ลองเล่น Demo</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Sarabun:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --cream:#F5F0E8;--cream-dark:#EDE6D6;--sand:#D4C5A9;
+  --moss:#6B7C5C;--moss-light:#8A9E77;--moss-dark:#4A5840;
+  --charcoal:#2C2C2A;--charcoal-soft:#4A4845;
+  --white:#FEFCF8;--purple:#9B8BB4;--purple-dark:#6B5A8A;
+  --accent:#C4956A;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Sarabun',sans-serif;background:var(--cream);color:var(--charcoal);min-height:100vh;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:999;opacity:.4}
+
+/* NAV */
+nav{background:rgba(245,240,232,.94);backdrop-filter:blur(12px);border-bottom:.5px solid var(--cream-dark);height:56px;display:flex;align-items:center;justify-content:space-between;padding:0 24px;position:sticky;top:0;z-index:100}
+.nav-logo{font-family:'Playfair Display',serif;font-size:18px;font-style:italic;color:var(--charcoal);text-decoration:none}
+.nav-links{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.nav-link{font-size:13px;color:var(--charcoal-soft);text-decoration:none;padding:6px 14px;border-radius:99px;border:1px solid var(--cream-dark);transition:all .2s;white-space:nowrap}
+.nav-link:hover{border-color:var(--moss);color:var(--moss)}
+.nav-link.hd{background:var(--purple);color:var(--white);border-color:var(--purple)}
+.nav-link.hd:hover{background:var(--purple-dark)}
+
+/* HERO */
+.hero{min-height:88vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:60px 24px;text-align:center;position:relative;overflow:hidden}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 70% 50% at 20% 80%,rgba(107,124,92,.12),transparent 60%),radial-gradient(ellipse 50% 40% at 80% 20%,rgba(196,149,106,.10),transparent 55%)}
+.hero-leaf{position:absolute;opacity:.05;font-size:260px;top:-30px;right:-30px;transform:rotate(20deg);pointer-events:none}
+.hero-leaf2{position:absolute;opacity:.04;font-size:180px;bottom:20px;left:-20px;transform:rotate(-30deg);pointer-events:none}
+.pill{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--moss);background:rgba(107,124,92,.1);padding:6px 18px;border-radius:99px;display:inline-block;margin-bottom:24px;animation:up .7s ease both}
+h1{font-family:'Playfair Display',serif;font-size:clamp(40px,8vw,84px);font-weight:400;line-height:1.1;color:var(--charcoal);margin-bottom:8px;animation:up .7s .08s ease both}
+h1 em{font-style:italic;color:var(--moss)}
+.tagline{font-family:'Playfair Display',serif;font-size:clamp(15px,2.2vw,20px);font-style:italic;color:var(--moss);margin-bottom:18px;animation:up .7s .12s ease both}
+.hero-desc{font-size:16px;font-weight:300;color:var(--charcoal-soft);line-height:1.8;max-width:500px;margin:0 auto 40px;animation:up .7s .16s ease both}
+.hero-cta{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;animation:up .7s .2s ease both}
+.btn-primary{background:var(--moss);color:var(--white);font-family:'Sarabun',sans-serif;font-size:15px;font-weight:500;padding:14px 36px;border-radius:99px;border:none;cursor:pointer;transition:all .3s}
+.btn-primary:hover{background:var(--moss-dark);transform:translateY(-2px);box-shadow:0 8px 24px rgba(107,124,92,.25)}
+.btn-ghost{background:transparent;color:var(--charcoal-soft);font-family:'Sarabun',sans-serif;font-size:15px;padding:14px 28px;border-radius:99px;border:1.5px solid var(--sand);cursor:pointer;transition:all .3s;text-decoration:none;display:inline-flex;align-items:center}
+.btn-ghost:hover{border-color:var(--moss);color:var(--moss);transform:translateY(-2px)}
+
+/* LINKS SECTION */
+.section{max-width:920px;margin:0 auto;padding:64px 24px}
+.section-label{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--moss);font-weight:500;margin-bottom:14px;display:block}
+.section-title{font-family:'Playfair Display',serif;font-size:clamp(26px,4vw,42px);font-weight:400;color:var(--charcoal);margin-bottom:8px}
+.section-title em{font-style:italic;color:var(--moss)}
+.section-desc{font-size:15px;font-weight:300;color:var(--charcoal-soft);line-height:1.8;max-width:520px;margin-bottom:36px}
+
+.pages-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-bottom:48px}
+.page-card{background:var(--white);border:.5px solid var(--cream-dark);border-radius:20px;padding:24px;transition:all .25s;cursor:pointer;text-decoration:none;display:block}
+.page-card:hover{transform:translateY(-4px);box-shadow:0 12px 32px rgba(44,44,42,.08);border-color:var(--moss-light)}
+.page-card.featured{border:2px solid var(--moss)}
+.page-icon{font-size:28px;margin-bottom:14px}
+.page-name{font-family:'Playfair Display',serif;font-size:18px;font-weight:400;color:var(--charcoal);margin-bottom:6px}
+.page-desc{font-size:13px;font-weight:300;color:var(--charcoal-soft);line-height:1.6;margin-bottom:14px}
+.page-tag{font-size:11px;padding:3px 10px;border-radius:99px;font-weight:500;display:inline-block}
+.tag-free{background:rgba(107,124,92,.12);color:var(--moss-dark)}
+.tag-mbti{background:rgba(155,139,180,.12);color:var(--purple-dark)}
+.tag-hd{background:rgba(196,149,106,.12);color:#7A5030}
+.tag-demo{background:rgba(44,44,42,.08);color:var(--charcoal-soft)}
+
+/* AI CHAT SECTION */
+.chat-section{background:var(--charcoal);padding:64px 0}
+.chat-inner{max-width:760px;margin:0 auto;padding:0 24px}
+.chat-section .section-label{color:rgba(254,252,248,.5)}
+.chat-section .section-title{color:var(--white)}
+.chat-section .section-title em{color:rgba(139,158,119,1)}
+.chat-section .section-desc{color:rgba(254,252,248,.55)}
+
+.chat-box{background:rgba(254,252,248,.05);border:1px solid rgba(254,252,248,.1);border-radius:20px;overflow:hidden}
+.chat-messages{padding:24px;min-height:220px;max-height:420px;overflow-y:auto;display:flex;flex-direction:column;gap:14px}
+.msg{max-width:82%;line-height:1.65;font-size:14px;font-weight:300;padding:12px 16px;border-radius:16px;animation:up .3s ease both}
+.msg.ai{background:rgba(107,124,92,.15);color:rgba(254,252,248,.9);border-radius:16px 16px 16px 4px;align-self:flex-start}
+.msg.user{background:var(--moss);color:var(--white);border-radius:16px 16px 4px 16px;align-self:flex-end}
+.msg.thinking{opacity:.6;font-style:italic}
+.msg b{font-weight:500}
+
+.chat-input-row{display:flex;gap:8px;padding:14px 16px;border-top:1px solid rgba(254,252,248,.08)}
+.chat-input{flex:1;background:rgba(254,252,248,.08);border:1px solid rgba(254,252,248,.15);border-radius:12px;padding:12px 16px;font-family:'Sarabun',sans-serif;font-size:14px;color:var(--white);outline:none;transition:border .2s}
+.chat-input::placeholder{color:rgba(254,252,248,.3)}
+.chat-input:focus{border-color:rgba(139,158,119,.6)}
+.chat-send{background:var(--moss);color:var(--white);border:none;border-radius:10px;padding:12px 20px;font-family:'Sarabun',sans-serif;font-size:14px;font-weight:500;cursor:pointer;transition:all .2s;white-space:nowrap}
+.chat-send:hover{background:var(--moss-dark)}
+.chat-send:disabled{opacity:.4;cursor:not-allowed}
+
+.quick-btns{display:flex;gap:8px;flex-wrap:wrap;padding:0 16px 14px}
+.quick-btn{font-size:12px;padding:6px 14px;border-radius:99px;border:1px solid rgba(254,252,248,.2);background:none;color:rgba(254,252,248,.6);cursor:pointer;font-family:'Sarabun',sans-serif;transition:all .2s;white-space:nowrap}
+.quick-btn:hover{border-color:rgba(139,158,119,.6);color:rgba(254,252,248,.9)}
+
+/* HOW */
+.how-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:28px;margin-top:40px}
+.how-num{font-family:'Playfair Display',serif;font-size:48px;color:var(--cream-dark);line-height:1;margin-bottom:10px}
+.how-title{font-size:15px;font-weight:500;color:var(--charcoal);margin-bottom:6px}
+.how-desc{font-size:13px;font-weight:300;color:var(--charcoal-soft);line-height:1.7}
+
+/* FOOTER */
+footer{background:var(--charcoal);padding:40px 24px;text-align:center}
+.foot-logo{font-family:'Playfair Display',serif;font-size:22px;font-style:italic;color:var(--white);margin-bottom:6px}
+.foot-tag{font-size:13px;font-style:italic;font-family:'Playfair Display',serif;color:rgba(254,252,248,.4);margin-bottom:16px}
+.foot-ig{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--moss-light);text-decoration:none}
+.foot-ig:hover{opacity:.7}
+
+@keyframes up{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:600px){.hero{padding:48px 20px}.nav-links .nav-link:not(.hd){display:none}.chat-input-row{flex-direction:column}.quick-btns{padding:0 12px 12px}}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="#">Craftaway</a>
+  <div class="nav-links">
+    <a class="nav-link" href="monemoll-travel.html" target="_blank">🌿 หน้าหลัก</a>
+    <a class="nav-link" href="craftaway-mbti.html" target="_blank">🧠 MBTI Test</a>
+    <a class="nav-link hd" href="https://staraligns.com/my-chart" target="_blank">✦ Human Design</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-leaf">🌿</div>
+  <div class="hero-leaf2">🌿</div>
+  <span class="pill">Demo — ลองเล่นก่อนได้เลย</span>
+  <h1><em>Craftaway</em></h1>
+  <p class="tagline">Design your journey, discover yourself</p>
+  <p class="hero-desc">ทริปที่ดีที่สุดไม่ได้เริ่มจากการจอง แต่เริ่มจากการรู้จักตัวเองก่อน ลองคุยกับ AI เพื่อค้นหาทริปที่ใช่สำหรับคุณ</p>
+  <div class="hero-cta">
+    <button class="btn-primary" onclick="scrollToChat()">คุยกับ AI เลย →</button>
+    <a class="btn-ghost" href="craftaway-mbti.html" target="_blank">ทำ MBTI Test</a>
+  </div>
+</section>
+
+<!-- PAGES SECTION -->
+<div class="section">
+  <span class="section-label">เลือก service</span>
+  <h2 class="section-title">ทุก<em>ลิงก์</em>ที่ต้องรู้</h2>
+  <p class="section-desc">3 หน้าที่เชื่อมกัน — ทำตั้งแต่ค้นหาตัวเองไปจนถึงซื้อ service</p>
+
+  <div class="pages-grid">
+    <a class="page-card featured" href="monemoll-travel.html" target="_blank">
+      <div class="page-icon">🌿</div>
+      <div class="page-name">Craftaway — หน้าหลัก</div>
+      <div class="page-desc">Quiz ค้นหาตัวเอง + ผล Travel Profile + ซื้อ service ทุก tier ตั้งแต่ฟรี ถึง Premium</div>
+      <span class="page-tag tag-free">Quiz ฟรี · ฿129 – ฿2,490</span>
+    </a>
+
+    <a class="page-card" href="craftaway-mbti.html" target="_blank">
+      <div class="page-icon">🧠</div>
+      <div class="page-name">MBTI Test</div>
+      <div class="page-desc">60 คำถาม วัด 4 มิติ แสดงผล 16 types พร้อม travel insight เฉพาะ type ของคุณ</div>
+      <span class="page-tag tag-mbti">ฟรี · 10 นาที</span>
+    </a>
+
+    <a class="page-card" href="https://staraligns.com/my-chart" target="_blank">
+      <div class="page-icon">✦</div>
+      <div class="page-name">Human Design Chart</div>
+      <div class="page-desc">ดู HD chart ฟรีที่ staraligns.com แล้วนำ Energy Type มาเสริมใน Signature service</div>
+      <span class="page-tag tag-hd">ฟรี · ต้องการวัน/เวลา/สถานที่เกิด</span>
+    </a>
+
+    <div class="page-card" onclick="scrollToChat()">
+      <div class="page-icon">💬</div>
+      <div class="page-name">AI Travel Chat (Demo)</div>
+      <div class="page-desc">คุยกับ AI เพื่อค้นหาทริปที่ใช่ — บอก mood งบ และอยากได้อะไร แล้ว AI จะแนะนำให้</div>
+      <span class="page-tag tag-demo">Demo ฟรี · ด้านล่าง</span>
+    </div>
+  </div>
+
+  <!-- HOW IT WORKS -->
+  <span class="section-label">วิธีที่มันทำงาน</span>
+  <h2 class="section-title">4 ขั้นตอน<em>เท่านั้น</em></h2>
+  <div class="how-grid">
+    <div><div class="how-num">01</div><div class="how-title">ทำ Quiz หรือคุยกับ AI</div><div class="how-desc">บอกว่าตอนนี้รู้สึกยังไง อยากได้ทริปแบบไหน งบเท่าไหร่</div></div>
+    <div><div class="how-num">02</div><div class="how-title">รับ Travel Profile</div><div class="how-desc">ผลที่บอกว่าคุณเป็น "นักเดินทางแบบไหน" พร้อม destination ที่น่าจะใช่</div></div>
+    <div><div class="how-num">03</div><div class="how-title">เสริม MBTI + HD</div><div class="how-desc">ยิ่งรู้จักตัวเองลึกเท่าไหร่ ทริปก็ยิ่งตรงกับพลังงานของคุณมากขึ้น</div></div>
+    <div><div class="how-num">04</div><div class="how-title">ให้ monemoll_ ออกแบบ</div><div class="how-desc">เลือก Signature หรือ Premium แล้ว monemoll_ จะออกแบบทริปให้เฉพาะคุณ</div></div>
+  </div>
+</div>
+
+<!-- AI CHAT -->
+<section class="chat-section" id="chat-section">
+  <div class="chat-inner">
+    <span class="section-label">ลองคุยก่อนได้เลย</span>
+    <h2 class="section-title" style="margin-bottom:8px">บอก AI ว่า<em>ตอนนี้คุณรู้สึกยังไง</em></h2>
+    <p class="section-desc">AI จะถามและช่วยค้นหาว่าทริปแบบไหนถึงจะ "ใช่" สำหรับคุณตอนนี้</p>
+
+    <div class="chat-box">
+      <div class="chat-messages" id="chat-messages">
+        <div class="msg ai">สวัสดีนะ 🌿 ฉันคือ Craftaway AI — ช่วยค้นหาทริปที่ตรงกับตัวคุณ<br><br>เริ่มง่ายๆ เลย <b>ตอนนี้รู้สึกยังไงกับชีวิตบ้าง?</b> หรือจะบอกว่าอยากเที่ยวแบบไหนก็ได้เลย</div>
+      </div>
+      <div class="quick-btns">
+        <button class="quick-btn" onclick="sendQuick('เหนื่อยมาก อยากหนีไปซักที')">😮‍💨 เหนื่อยมาก อยากหนี</button>
+        <button class="quick-btn" onclick="sendQuick('อยากเที่ยวคนเดียวงบไม่เยอะ')">🚶 Solo trip งบน้อย</button>
+        <button class="quick-btn" onclick="sendQuick('อยากไปต่างประเทศครั้งแรก')">✈️ ต่างประเทศครั้งแรก</button>
+        <button class="quick-btn" onclick="sendQuick('อยากรู้ว่าควรเที่ยวที่ไหนตาม MBTI ของฉัน')">🧠 เที่ยวตาม MBTI</button>
+      </div>
+      <div class="chat-input-row">
+        <input class="chat-input" id="chat-input" placeholder="พิมพ์อะไรก็ได้ที่อยู่ในหัวตอนนี้..." onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendMsg()}">
+        <button class="chat-send" id="chat-send" onclick="sendMsg()">ส่ง →</button>
+      </div>
+    </div>
+
+    <p style="font-size:12px;color:rgba(254,252,248,.3);margin-top:12px;text-align:center;">Powered by Claude AI · ข้อมูลไม่ถูกเก็บ · by monemoll_</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot-logo">Craftaway</div>
+  <div class="foot-tag">Design your journey, discover yourself</div>
+  <a class="foot-ig" href="https://instagram.com/monemoll_" target="_blank">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+    @monemoll_
+  </a>
+</footer>
+
+<script>
+const SYSTEM_PROMPT = `คุณคือ Craftaway AI — travel advisor ของ monemoll_ ที่ช่วยให้คนค้นหาทริปที่ตรงกับพลังงานและตัวตนของตัวเอง
+
+สไตล์การตอบ:
+- ภาษาไทย เป็นธรรมชาติ อบอุ่น ไม่ formal ไม่ใช้ bullet point เยอะเกินไป
+- ตอบสั้นกระชับ อ่านง่าย ไม่เกิน 3-4 ประโยคต่อข้อความ
+- ใช้ emoji เล็กน้อย แต่ไม่เยอะ
+- อย่าใช้คำว่า "แน่นอน" "ยินดี" "เข้าใจ" หรือคำ formal แบบ AI ทั่วไป
+
+วิธีช่วยเหลือ:
+1. ถามสั้นๆ เพื่อเข้าใจ mood และความต้องการของคน
+2. แนะนำ destination จริงๆ พร้อมบอกว่าทำไมถึงเหมาะ
+3. ถ้าถามเรื่อง MBTI ให้บอก travel style ตาม type นั้น
+4. ถ้าถามเรื่อง Human Design ให้ส่งไปที่ https://staraligns.com/my-chart และแนะนำ Signature service
+5. ถ้าคนอยากได้ทริปที่ personalized จริงๆ ให้แนะนำ Signature service (฿1,290) ที่ monemoll_ จะวิเคราะห์ MBTI + HD แล้วออกแบบทริปให้
+
+Destinations ที่แนะนำได้:
+ไทย: น่าน, เชียงราย, แม่ฮ่องสอน, กาญจนบุรี, เกาะสมุย
+เอเชีย: เกียวโต, โตเกียว, บาหลี (Ubud), ฮานอย, ฮอยอัน, โซล
+ยุโรป/ไกล: ลิสบอน, ทบิลิซี, บาร์เซโลนา, อัมสเตอร์ดัม
+
+Service ของ monemoll_:
+- ฟรี: Quiz + Travel Profile (ที่ monemoll-travel.html)
+- ฿129: MBTI Travel Card
+- ฿199: Mood x Trip Guide  
+- ฿1,290: Signature — MBTI x Trip Design (แนะนำ!)
+- ฿2,490: Premium — Full itinerary + call 30 นาที
+- เสริม +฿500: Human Design Layer`;
+
+const history = [];
+
+async function callClaude(userMsg) {
+  history.push({ role: 'user', content: userMsg });
+  const res = await fetch('https://api.anthropic.com/v1/messages', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      model: 'claude-sonnet-4-20250514',
+      max_tokens: 400,
+      system: SYSTEM_PROMPT,
+      messages: history.slice(-10)
+    })
+  });
+  const data = await res.json();
+  const reply = data.content?.[0]?.text || 'ขอโทษนะ ลองพิมพ์ใหม่อีกทีได้เลย';
+  history.push({ role: 'assistant', content: reply });
+  return reply;
+}
+
+function addMsg(text, role) {
+  const el = document.createElement('div');
+  el.className = `msg ${role}`;
+  el.innerHTML = text.replace(/\n/g, '<br>').replace(/\*\*(.*?)\*\*/g, '<b>$1</b>');
+  document.getElementById('chat-messages').appendChild(el);
+  document.getElementById('chat-messages').scrollTop = 99999;
+  return el;
+}
+
+async function sendMsg() {
+  const input = document.getElementById('chat-input');
+  const btn = document.getElementById('chat-send');
+  const text = input.value.trim();
+  if (!text) return;
+  input.value = '';
+  input.disabled = true;
+  btn.disabled = true;
+
+  addMsg(text, 'user');
+  const thinking = addMsg('กำลังคิด...', 'ai thinking');
+
+  try {
+    const reply = await callClaude(text);
+    thinking.remove();
+    addMsg(reply, 'ai');
+  } catch(e) {
+    thinking.remove();
+    addMsg('เน็ตมีปัญหานิดหน่อย ลองใหม่อีกทีได้เลยนะ 🌿', 'ai');
+  }
+
+  input.disabled = false;
+  btn.disabled = false;
+  input.focus();
+}
+
+function sendQuick(text) {
+  document.getElementById('chat-input').value = text;
+  sendMsg();
+}
+
+function scrollToChat() {
+  document.getElementById('chat-section').scrollIntoView({ behavior: 'smooth' });
+  setTimeout(() => document.getElementById('chat-input').focus(), 600);
+}
+</script>
+</body>
+</html>
