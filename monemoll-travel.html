@@ -457,8 +457,8 @@
   }
 
   .price-card {
-    background: rgba(254,252,248,0.05);
-    border: 1px solid rgba(254,252,248,0.1);
+    background: var(--white);
+    border: 1px solid rgba(212,197,169,0.4);
     border-radius: 20px;
     padding: 28px 24px;
     transition: all 0.3s ease;
@@ -468,14 +468,15 @@
   }
 
   .price-card:hover {
-    background: rgba(254,252,248,0.08);
-    border-color: rgba(107,124,92,0.5);
+    background: var(--cream);
+    border-color: var(--moss-light);
     transform: translateY(-4px);
   }
 
   .price-card.featured {
-    background: rgba(107,124,92,0.15);
-    border-color: var(--moss-light);
+    background: var(--cream);
+    border-color: var(--moss);
+    border-width: 2px;
   }
 
   .price-card.featured::before {
@@ -484,8 +485,8 @@
     top: 14px; right: 14px;
     font-size: 11px;
     font-weight: 500;
-    color: var(--moss-light);
-    background: rgba(107,124,92,0.2);
+    color: var(--moss-dark);
+    background: rgba(107,124,92,0.15);
     padding: 3px 10px;
     border-radius: 99px;
     letter-spacing: 0.05em;
@@ -495,22 +496,23 @@
     font-size: 11px;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: rgba(254,252,248,0.4);
+    color: var(--moss);
     margin-bottom: 10px;
+    font-weight: 500;
   }
 
   .price-name {
     font-family: 'Playfair Display', serif;
     font-size: 20px;
     font-weight: 400;
-    color: var(--white);
+    color: var(--charcoal);
     margin-bottom: 6px;
   }
 
   .price-amount {
     font-size: 32px;
     font-weight: 300;
-    color: var(--white);
+    color: var(--charcoal);
     margin-bottom: 4px;
     font-family: 'Playfair Display', serif;
   }
@@ -519,13 +521,13 @@
 
   .price-note {
     font-size: 12px;
-    color: rgba(254,252,248,0.4);
+    color: var(--charcoal-soft);
     margin-bottom: 20px;
   }
 
   .price-divider {
     height: 1px;
-    background: rgba(254,252,248,0.08);
+    background: rgba(212,197,169,0.4);
     margin-bottom: 20px;
   }
 
@@ -534,17 +536,18 @@
   .price-features li {
     font-size: 13px;
     font-weight: 300;
-    color: rgba(254,252,248,0.7);
+    color: var(--charcoal-soft);
     padding: 6px 0;
     display: flex;
     gap: 10px;
     align-items: flex-start;
-    line-height: 1.5;
+    line-height: 1.6;
+    border-bottom: 1px solid rgba(212,197,169,0.2);
   }
 
   .price-features li::before {
     content: '—';
-    color: var(--moss-light);
+    color: var(--moss);
     flex-shrink: 0;
     margin-top: 1px;
   }
@@ -554,9 +557,9 @@
     margin-top: 24px;
     padding: 12px;
     border-radius: 12px;
-    border: 1.5px solid rgba(254,252,248,0.2);
+    border: 1.5px solid var(--moss);
     background: transparent;
-    color: var(--white);
+    color: var(--moss-dark);
     font-family: 'Sarabun', sans-serif;
     font-size: 14px;
     font-weight: 500;
@@ -568,11 +571,13 @@
   .price-btn:hover {
     background: var(--moss);
     border-color: var(--moss);
+    color: var(--white);
   }
 
   .featured .price-btn {
     background: var(--moss);
     border-color: var(--moss);
+    color: var(--white);
   }
 
   .featured .price-btn:hover {
@@ -1275,10 +1280,42 @@
         </div>
       </div>
 
-      <!-- Result (step 13) -->
+      <!-- 13: Music -->
       <div class="quiz-step" id="step-13">
+        <h3 class="quiz-q">ตอนเดินทาง ชอบฟัง music แบบไหน?</h3>
+        <p class="quiz-sub">เสียงที่ใช่บอกอะไรได้เยอะมาก</p>
+        <div class="quiz-options">
+          <div class="quiz-opt" onclick="selectOpt(this,13,'acoustic')"><div class="quiz-opt-icon">🎸</div><div class="quiz-opt-label">Acoustic / Folk / Indie</div><div class="quiz-opt-desc">เบาๆ อบอุ่น มีเรื่องราว</div></div>
+          <div class="quiz-opt" onclick="selectOpt(this,13,'ambient')"><div class="quiz-opt-icon">🌊</div><div class="quiz-opt-label">Ambient / Lofi / Instrumental</div><div class="quiz-opt-desc">ไม่มีเนื้อร้อง ลอยไปกับบรรยากาศ</div></div>
+          <div class="quiz-opt" onclick="selectOpt(this,13,'pop')"><div class="quiz-opt-icon">🎵</div><div class="quiz-opt-label">Pop / R&B / Soul</div><div class="quiz-opt-desc">ฟังง่าย มีพลังงาน ร้องตามได้</div></div>
+          <div class="quiz-opt" onclick="selectOpt(this,13,'silence')"><div class="quiz-opt-icon">🤫</div><div class="quiz-opt-label">เงียบๆ ไม่ฟังเพลง</div><div class="quiz-opt-desc">รับเสียงรอบข้างดีกว่า</div></div>
+        </div>
+        <div class="quiz-nav" style="justify-content:space-between;">
+          <button class="quiz-back" onclick="goStep(12)">← ย้อนกลับ</button>
+          <button class="btn-ghost" style="font-size:13px;padding:8px 20px;" onclick="answers[13]='unknown';goStep(14)">ข้าม →</button>
+        </div>
+      </div>
+
+      <!-- 14: Drinks -->
+      <div class="quiz-step" id="step-14">
+        <h3 class="quiz-q">ทริปในฝัน มีอะไรในแก้ว?</h3>
+        <p class="quiz-sub">บอก vibe ได้มากกว่าที่คิด</p>
+        <div class="quiz-options">
+          <div class="quiz-opt" onclick="selectOpt(this,14,'coffee')"><div class="quiz-opt-icon">☕</div><div class="quiz-opt-label">กาแฟ</div><div class="quiz-opt-desc">คาเฟ่ดีๆ คือ highlight ของทริป</div></div>
+          <div class="quiz-opt" onclick="selectOpt(this,14,'wine')"><div class="quiz-opt-icon">🍷</div><div class="quiz-opt-label">Wine / เครื่องดื่มแอลกอฮอล์</div><div class="quiz-opt-desc">คืนที่ดี ต้องมีดื่มนิดหน่อย</div></div>
+          <div class="quiz-opt" onclick="selectOpt(this,14,'tea')"><div class="quiz-opt-icon">🍵</div><div class="quiz-opt-label">ชา / เครื่องดื่ม local</div><div class="quiz-opt-desc">อยากลองของที่นั่นจริงๆ</div></div>
+          <div class="quiz-opt" onclick="selectOpt(this,14,'water')"><div class="quiz-opt-icon">💧</div><div class="quiz-opt-label">น้ำเปล่า / ไม่ดื่มแอล</div><div class="quiz-opt-desc">ไม่ดื่ม หรือเน้นสุขภาพ</div></div>
+        </div>
+        <div class="quiz-nav" style="justify-content:space-between;">
+          <button class="quiz-back" onclick="goStep(13)">← ย้อนกลับ</button>
+          <button class="btn-ghost" style="font-size:13px;padding:8px 20px;" onclick="answers[14]='unknown';goStep(15)">ข้าม →</button>
+        </div>
+      </div>
+
+      <!-- Result (step 15) -->
+      <div class="quiz-step" id="step-15">
         <h3 class="quiz-q" style="margin-bottom:6px;">นี่คือ travel profile ของคุณ ✦</h3>
-        <p style="font-size:13px;color:var(--charcoal-soft);font-weight:300;margin-bottom:24px;">จาก 11 คำตอบของคุณ</p>
+        <p style="font-size:13px;color:var(--charcoal-soft);font-weight:300;margin-bottom:24px;">จาก 15 คำตอบของคุณ</p>
 
         <!-- Profile card — teaser (เห็นได้ทุกคน) -->
         <div class="result-card" id="result-card" style="margin-bottom:20px;overflow:hidden;">
@@ -1320,6 +1357,8 @@
             <div style="font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--moss);margin-bottom:14px;font-weight:500;">ที่ที่น่าจะ ใช่ สำหรับคุณ</div>
             <div id="dest-cards" style="display:flex;flex-direction:column;gap:12px;"></div>
           </div>
+          <div id="music-section" style="display:none;margin-bottom:20px;"></div>
+          <div id="venue-section" style="display:none;margin-bottom:20px;"></div>
           <div id="result-summary" style="background:rgba(107,124,92,0.06);border-radius:12px;padding:14px 16px;margin-bottom:20px;font-size:13px;line-height:1.9;color:var(--charcoal-soft);"></div>
           <div class="result-tags" id="result-tags" style="margin-bottom:24px;"></div>
         </div>
@@ -1330,7 +1369,7 @@
           <a class="btn-ghost" href="craftaway-demo.html" style="text-decoration:none;display:inline-flex;align-items:center;gap:6px;">💬 คุยกับ Craftaway</a>
         </div>
         <div class="quiz-nav" style="margin-top:20px;">
-          <button class="quiz-back" onclick="goStep(12)">← ย้อนกลับ</button>
+          <button class="quiz-back" onclick="goStep(14)">← ย้อนกลับ</button>
           <button class="quiz-back" onclick="resetQuiz()" style="opacity:0.5;">เริ่มใหม่</button>
         </div>
       </div>
@@ -1377,8 +1416,8 @@
           <li>destination ที่เหมาะกับ energy type และจังหวะชีวิตตอนนี้</li>
           <li>PDF เขียนขึ้นเพื่อคุณคนเดียว ไม่ใช่ template</li>
         </ul>
-        <div style="margin-top:12px;background:rgba(107,124,92,0.07);border-radius:10px;padding:10px 12px;border-left:3px solid var(--moss);">
-          <div style="font-size:12px;font-weight:300;color:var(--charcoal-soft);line-height:1.7;font-style:italic;">"ไม่ใช่แค่บอกว่าควรไปที่ไหน แต่อธิบายว่าทำไมที่นั้นถึงใช่สำหรับพลังงานของคุณ"</div>
+        <div style="margin-top:12px;background:rgba(107,124,92,0.1);border-radius:10px;padding:10px 12px;border-left:3px solid var(--moss);">
+          <div style="font-size:12px;font-weight:400;color:var(--charcoal);line-height:1.7;font-style:italic;">"ไม่ใช่แค่บอกว่าควรไปที่ไหน แต่อธิบายว่าทำไมที่นั้นถึงใช่สำหรับพลังงานของคุณ"</div>
         </div>
         <button class="price-btn">เลือก</button>
       </div>
@@ -1398,8 +1437,8 @@
           <li>itinerary จริงทั้งทริป พร้อมเหตุผลว่าทำไมแต่ละที่ถึงใช่</li>
           <li>PDF ที่เขียนเพื่อคุณคนเดียว ไม่มีคนอื่นได้แบบเดียวกัน</li>
         </ul>
-        <div style="margin-top:12px;background:rgba(196,149,106,0.1);border-radius:10px;padding:10px 12px;border-left:3px solid var(--accent);">
-          <div style="font-size:11px;font-weight:500;color:var(--accent);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:4px;">✦ รวม Astrocartography</div>
+        <div style="margin-top:12px;background:rgba(196,149,106,0.12);border-radius:10px;padding:10px 12px;border-left:3px solid var(--accent);">
+          <div style="font-size:11px;font-weight:600;color:#7A5030;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:4px;">✦ รวม Astrocartography</div>
           <div style="font-size:12px;font-weight:300;color:var(--charcoal-soft);line-height:1.6;">ดูว่าพลังงานของคุณไปได้ดีกับประเทศและเมืองไหนในโลกจริงๆ</div>
         </div>
         <button class="price-btn">เลือก</button>
@@ -1686,7 +1725,7 @@
     }catch(e){return [];}
   }
 
-  const TOTAL_STEPS = 13;
+  const TOTAL_STEPS = 15;
   const dotsEl = document.getElementById('quiz-progress-dots');
   for (let i = 0; i <= TOTAL_STEPS; i++) {
     const d = document.createElement('div');
@@ -1859,6 +1898,135 @@
   const artLabels={heritage:'ประวัติศาสตร์ & วัด',contemporary:'ศิลปะร่วมสมัย',food:'อาหาร & ตลาด',craft:'งานฝีมือ & ชุมชน'};
   const hdLabels={manifestor:'Manifestor',generator:'Generator/MG',projector:'Projector',reflector:'Reflector',unknown:''};
 
+  const venueDatabase = [
+    {name:'Bar Benfiddich',type:'Bar',cityKey:'tokyo',cityName:'โตเกียว',location:'Shinjuku, Tokyo',desc:'ไม่มีเมนู บาร์เทนเดอร์ผสมเครื่องดื่มจากวัตถุดิบตามฤดูกาล บรรยากาศลึกลับส่วนตัวมาก',mbti:["INFJ", "INTJ", "ISFP"],hd:["Reflector", "Projector"],price:'💰💰💰',priceLevel:3},
+    {name:'Virtù — Four Seasons Otemachi',type:'Bar',cityKey:'tokyo',cityName:'โตเกียว',location:'Otemachi, Tokyo',desc:'วิวสกายไลน์โตเกียว 360° ค็อกเทลฝรั่งเศส-ญี่ปุ่น บรรยากาศหรูหราระดับโลก',mbti:["ENFJ", "ENTJ", "ESFJ"],hd:["Manifestor", "Generator"],price:'💰💰💰💰',priceLevel:4},
+    {name:'Golden Gai — Bar Alleyway Crawl',type:'Bar',cityKey:'tokyo',cityName:'โตเกียว',location:'Shinjuku, Tokyo',desc:'ตรอกซอย 70+ บาร์จิ๋ว แต่ละที่ theme ของตัวเอง ชวน stranger มาคุย',mbti:["ENFP", "ENTP", "ESTP"],hd:["Generator", "Manifesting Generator"],price:'💰',priceLevel:1},
+    {name:'Punch Room Tokyo — Edition Ginza',type:'Bar',cityKey:'tokyo',cityName:'โตเกียว',location:'Ginza, Tokyo',desc:'สไตล์ gentlemen\'s club บรรยากาศ relax มี punch bowl share กัน',mbti:["ISTP", "ISTJ", "ESTJ"],hd:["Projector", "Manifestor"],price:'💰💰💰',priceLevel:3},
+    {name:'Zoetrope',type:'Bar',cityKey:'tokyo',cityName:'โตเกียว',location:'Shinjuku, Tokyo',desc:'บาร์วิสกี้เล็กๆ เจ้าของเปิดเพลง soundtrack หนัง เลือก whisky ตามที่ชอบ',mbti:["INTP", "ISTP", "INFP"],hd:["Projector", "Reflector"],price:'💰💰',priceLevel:2},
+    {name:'Florilège',type:'Restaurant',cityKey:'tokyo',cityName:'โตเกียว',location:'Minami-Aoyama, Tokyo',desc:'Fine dining French-Japanese counter ดูเชฟทำอาหาร theatrical มาก World\'s 50 Best',mbti:["ENFJ", "INTJ", "INFJ"],hd:["Projector", "Manifestor"],price:'💰💰💰💰',priceLevel:4},
+    {name:'Ichiran Ramen',type:'Restaurant',cityKey:'tokyo',cityName:'โตเกียว',location:'ทั่ว Tokyo',desc:'กินคนเดียวในบูธส่วนตัว โฟกัสรสชาติ 100% ไม่ต้องพูดกับใคร customize ได้ทุกอย่าง',mbti:["INTJ", "INTP", "ISTJ", "INFJ"],hd:["Projector", "Reflector"],price:'💰',priceLevel:1},
+    {name:'Dry Wave Cocktail Studio',type:'Bar',cityKey:'bangkok',cityName:'กรุงเทพ',location:'Thonglor, Bangkok',desc:'Best Bar in Thailand 2025 ค็อกเทลได้แรงบันดาลจากธรรมชาติ ผนังลายคลื่น marble bar',mbti:["INFP", "ISFP", "ENFP"],hd:["Reflector", "Generator"],price:'💰💰💰',priceLevel:3},
+    {name:'Vesper',type:'Bar',cityKey:'bangkok',cityName:'กรุงเทพ',location:'Silom, Bangkok',desc:'Asia\'s 50 Best Bars คลาสสิกและ creative ไปพร้อมกัน บรรยากาศหรูแต่ไม่ uptight',mbti:["ENTJ", "ESTJ", "ENFJ"],hd:["Manifestor", "Generator"],price:'💰💰💰',priceLevel:3},
+    {name:'Tropic City',type:'Bar',cityKey:'bangkok',cityName:'กรุงเทพ',location:'Charoen Krung, Bangkok',desc:'Tiki cocktail ระดับ Asia\'s 50 Best DJ เปิดดึก neighbourhood vibe craft สูงมาก',mbti:["ESFP", "ENFP", "ESTP"],hd:["Manifesting Generator", "Generator"],price:'💰💰',priceLevel:2},
+    {name:'Bar Not Found',type:'Bar',cityKey:'bangkok',cityName:'กรุงเทพ',location:'Bangkok',desc:'ต้องตามหาประตูที่ถูกต้องเองก่อนเข้า speakeasy ซ่อนใน building เก่า บรรยากาศลึกลับมาก',mbti:["INTJ", "INFJ", "INTP"],hd:["Projector", "Reflector"],price:'💰💰💰',priceLevel:3},
+    {name:'TEP BAR',type:'Bar',cityKey:'bangkok',cityName:'กรุงเทพ',location:'Rattanakosin, Bangkok',desc:'Cultural Bar of Thailand ค็อกเทลไทย ดนตรีไทย อาร์ทไทย บรรยากาศ authentic สุดๆ',mbti:["ISFJ", "ESFJ", "ENFJ", "INFJ"],hd:["Generator", "Manifesting Generator"],price:'💰💰',priceLevel:2},
+    {name:'Above Eleven',type:'Bar',cityKey:'bangkok',cityName:'กรุงเทพ',location:'Sukhumvit 11, Bangkok',desc:'Rooftop ชั้น 33 Japanese-Peruvian fusion DJ ทุกวัน วิวสวย party atmosphere',mbti:["ESFP", "ESTP", "ENFP"],hd:["Manifesting Generator", "Generator"],price:'💰💰💰',priceLevel:3},
+    {name:'Nusara',type:'Restaurant',cityKey:'bangkok',cityName:'กรุงเทพ',location:'Tha Tien, Bangkok',desc:'Fine dining ไทย มอง Wat Pho 12-course tasting menu โดย Chef Ton บรรยากาศ intimate',mbti:["INFJ", "ENFJ", "ISFJ"],hd:["Projector", "Reflector"],price:'💰💰💰💰',priceLevel:4},
+    {name:'The Bamboo Bar',type:'Bar',cityKey:'bangkok',cityName:'กรุงเทพ',location:'Riverside, Bangkok',desc:'Jazz bar ตั้งแต่ปี 1953 บรรยากาศ 1950s ริมน้ำ sultry elegant ไม่มีอะไรเหมือน',mbti:["INFP", "ISFP", "ENFJ", "INFJ"],hd:["Projector", "Reflector"],price:'💰💰💰💰',priceLevel:4},
+    {name:'Danico',type:'Bar',cityKey:'paris',cityName:'ปารีส',location:'Galerie Vivienne, Paris',desc:'Speakeasy ซ่อนใน gallery เก่าสไตล์ Jean Paul Gaultier เมนูเปลี่ยนตาม country theme',mbti:["ENFP", "ENTP", "INFP"],hd:["Generator", "Manifesting Generator"],price:'💰💰💰',priceLevel:3},
+    {name:'Angelita Madrid',type:'Bar',cityKey:'madrid',cityName:'มาดริด',location:'Madrid',desc:'Wine bar ด้านบน 500+ labels ค็อกเทล farm-to-glass ด้านล่าง World\'s 50 Best Bars',mbti:["ISTP", "INTP", "INTJ"],hd:["Projector", "Reflector"],price:'💰💰💰',priceLevel:3},
+    {name:'Jerry Thomas Speakeasy',type:'Bar',cityKey:'rome',cityName:'โรม',location:'Rome',desc:'ต้อง knock รหัสถึงเข้าได้ บรรยากาศ 1920s อิตาลี ค็อกเทลคลาสสิก World\'s 50 Best',mbti:["INTJ", "INFJ", "ISTJ"],hd:["Projector", "Manifestor"],price:'💰💰💰',priceLevel:3},
+    {name:'Trèsind Studio',type:'Restaurant',cityKey:'dubai',cityName:'ดูไบ',location:'Palm Jumeirah, Dubai',desc:'World\'s 50 Best #27 แค่ 20 ที่นั่ง เคลื่อนที่ไปแต่ละ zone ตาม course Indian haute cuisine',mbti:["ENTJ", "ENFJ", "INTJ"],hd:["Manifestor", "Projector"],price:'💰💰💰💰',priceLevel:4},
+    {name:'Orfali Bros Bistro',type:'Restaurant',cityKey:'dubai',cityName:'ดูไบ',location:'Dubai',desc:'Syrian + Pan-Asian + European ผสมกัน 3 พี่น้องจาก Aleppo World\'s 50 Best #37',mbti:["ENTP", "ENFP", "INFP"],hd:["Generator", "Manifesting Generator"],price:'💰💰💰',priceLevel:3},
+    {name:'Mimi Kakushi',type:'Bar',cityKey:'dubai',cityName:'ดูไบ',location:'Four Seasons, Dubai',desc:'Osaka 1920s art deco บรรยากาศ jazz ค็อกเทล Japanese-inspired อิงหนัง vintage',mbti:["ISFP", "INFP", "ENFJ"],hd:["Projector", "Reflector"],price:'💰💰💰💰',priceLevel:4},
+    {name:'BOCA',type:'Restaurant',cityKey:'dubai',cityName:'ดูไบ',location:'DIFC, Dubai',desc:'Spanish modern cuisine Michelin Green Star wine cellar สุดเจ๋ง vibe Madrid-meets-NYC',mbti:["ESTJ", "ENFJ", "ENTJ"],hd:["Manifestor", "Generator"],price:'💰💰💰',priceLevel:3},
+    {name:'Superbueno',type:'Bar',cityKey:'nyc',cityName:'นิวยอร์ก',location:'East Village, NYC',desc:'Mexican-American party bar นีออน swinging globe lights festive ค็อกเทลสร้างสรรค์ World\'s 50 Best',mbti:["ESFP", "ESTP", "ENFP"],hd:["Manifesting Generator", "Generator"],price:'💰💰',priceLevel:2},
+    {name:'Attaboy',type:'Bar',cityKey:'nyc',cityName:'นิวยอร์ก',location:'Lower East Side, NYC',desc:'No menu bar บาร์เทนเดอร์ถามแล้วทำให้ บรรยากาศ intimate dim ค็อกเทล World\'s 50 Best',mbti:["INFJ", "INFP", "ISFP"],hd:["Projector", "Reflector"],price:'💰💰💰',priceLevel:3},
+    {name:'Schmuck',type:'Bar',cityKey:'nyc',cityName:'นิวยอร์ก',location:'East Village, NYC',desc:'New kid on the block 2025 พลังงานสูง สีสัน funky ฮิตสุดในนิวยอร์กขณะนี้',mbti:["ENTP", "ESFP", "ESTP"],hd:["Manifesting Generator", "Generator"],price:'💰💰',priceLevel:2},
+  ];
+
+  function getVenueRecommendations(topCities, mbti, hdType) {
+    const mbtiList = mbti && mbti !== "unknown" ? [mbti] : [];
+    const hdList = hdType ? [hdType] : [];
+    const cityKeys = topCities.map(c => {
+      const n = c.toLowerCase();
+      if (n.includes("โตเกียว") || n.includes("tokyo")) return "tokyo";
+      if (n.includes("กรุงเทพ") || n.includes("bangkok")) return "bangkok";
+      if (n.includes("ปารีส") || n.includes("paris")) return "paris";
+      if (n.includes("มาดริด") || n.includes("madrid")) return "madrid";
+      if (n.includes("โรม") || n.includes("rome")) return "rome";
+      if (n.includes("ดูไบ") || n.includes("dubai")) return "dubai";
+      if (n.includes("นิวยอร์ก") || n.includes("nyc")) return "nyc";
+      return null;
+    }).filter(Boolean);
+
+    return venueDatabase.filter(v => {
+      const cityMatch = cityKeys.includes(v.cityKey);
+      const mbtiMatch = mbtiList.length === 0 || v.mbti.some(m => mbtiList.includes(m));
+      const hdMatch = hdList.length === 0 || v.hd.some(h => hdList.some(hd => h.toLowerCase().includes(hd.toLowerCase())));
+      return cityMatch && (mbtiMatch || hdMatch);
+    }).slice(0, 5);
+  }
+
+  const musicVenues = {
+    acoustic: {
+      label: 'Acoustic & Indie',
+      icon: '🎸',
+      desc: 'สถานที่ที่เสียงดนตรี live ช้าๆ และบรรยากาศ intimate คือชีวิต',
+      places: {
+        nan:      ['Nan Cafe House — คาเฟ่เล็กๆ ริมน้ำที่มี acoustic session วันเสาร์'],
+        chiangmai:['Zoe in Yellow — ย่านกลางคืนที่มี live acoustic ทุกคืน','Writer\'s Club & Wine Bar — bar เงียบๆ มีดนตรีสด indie'],
+        chiangrai:['Baryard — rooftop bar มี acoustic ทุกศุกร์'],
+        bangkok:  ['Watergate Pavilion — โรงแรม old school มี live jazz acoustic','Studio Lam — bar ที่เปิดเพลง vintage folk/world music'],
+        kyoto:    ['Jittoku — bar เก่าแก่ใน machiya มี live folk และ acoustic ทุกสัปดาห์'],
+        tokyo:    ['Shimokitazawa — ย่านที่เต็มไปด้วย live house indie ขนาดเล็ก','Shibuya Duo Music Exchange — venue acoustic/indie กลางใจเมือง'],
+        seoul:    ['Hongdae Live Club — ย่านที่มี indie acoustic เกือบทุกคืน','Brown Sugar — jazz bar ที่มีดนตรีสดทุกวัน'],
+        hanoi:    ['Tadioto — bar ของศิลปิน มีดนตรี live และงาน open mic','Nola — rooftop ใน Hanoi Old Quarter มี acoustic set'],
+        lisbon:   ['Senhor Vinho — Fado house ที่ดีที่สุดในลิสบอน','Tasca do Chico — Fado กลางย่าน Mouraria ฟังได้ใกล้ชิดมาก'],
+        tbilisi:  ['Mtkvarze — bar ริมแม่น้ำ มีดนตรีสด folk Georgian'],
+      }
+    },
+    ambient: {
+      label: 'Ambient & Lofi',
+      icon: '🌊',
+      desc: 'สถานที่ที่บรรยากาศคือเสียง — bar เงียบ คาเฟ่ที่เปิดเพลงได้เรื่อยๆ',
+      places: {
+        nan:      ['คาเฟ่ริมน้ำน่าน — นั่งฟังเสียงน้ำ ไม่ต้องมีเพลงก็ได้'],
+        chiangmai:['Ristr8to Lab — คาเฟ่กาแฟที่เงียบและ curated playlist ดีมาก','Graph Cafe — ออกแบบสวย เสียงเบา บรรยากาศ minimal'],
+        bali:     ['Outpost Ubud — co-working/cafe ambient vibe ตลอดวัน','Potato Head Beach Club — ambient electronic ริมทะเล'],
+        kyoto:    ['Arabica Kyoto Higashiyama — คาเฟ่ที่เสียงเงียบมาก วิวดี','Walden Woods Kyoto — library cafe ไม่มีเสียงดัง ambient sound ธรรมชาติ'],
+        tokyo:    ['Blue Bottle Coffee Shibuya — minimal ambient playlist','Fuglen Tokyo — Scandinavian cafe เสียงเบา บรรยากาศนิ่ง'],
+        amsterdam:['Bocca Coffee — specialty coffee ambient และเงียบ'],
+        lisbon:   ['Wish Slow Coffee House — slow bar เงียบ curated ambient'],
+      }
+    },
+    pop: {
+      label: 'Pop, R&B & Soul',
+      icon: '🎵',
+      desc: 'Bar ที่ดนตรีดังพอดี เต้นได้บ้าง ร้องตามได้ และมีพลังงานดี',
+      places: {
+        chiangmai:['Roots — bar แนว soul/R&B มีดนตรีสดและ DJ set','Zoe in Yellow — popular bar หลายย่าน มีทุก genre'],
+        bangkok:  ['Sing Sing Theater — art deco bar ดนตรีดี R&B/soul','Saxophone Pub — Bangkok classic มีดนตรีสดทุกคืนมา 30+ ปี'],
+        tokyo:    ['Contact Tokyo — underground club ที่ดีที่สุดสำหรับ electronic/R&B','Bar Martha Shibuya — soul bar ที่เปิดเพลง vinyl'],
+        seoul:    ['Octagon Seoul — ถ้าอยาก dance floor จริงๆ','Vinyl & Plastic — record bar เปิด soul/R&B vinyl ทั้งคืน'],
+        hanoi:    ['Bia Hoi Corner — ไม่มีดนตรีสด แต่พลังงานข้างถนนดีที่สุดในโลก'],
+        barcelona:['Razzmatazz — 5 floors แต่ละชั้น genre ต่างกัน pop/R&B/electronic','Marula Cafe Barcelona — R&B/funk bar ชั้นเดียว cozy'],
+        amsterdam:['Paradiso — venue legendary ที่ทุก genre มาเล่น'],
+      }
+    },
+    silence: {
+      label: 'สุนทรียะของความเงียบ',
+      icon: '🤫',
+      desc: 'สถานที่ที่เสียงธรรมชาติและความเงียบคือดนตรีที่ดีที่สุด',
+      places: {
+        nan:      ['ดอยภูคา ยามเช้า — ฟังเสียงป่าและหมอก ไม่มีอะไรดีกว่า'],
+        maehongson:['บ้านรักไทย ตอนเช้า — หมอกและความเงียบที่ลึกมาก'],
+        loei:     ['ยอดภูกระดึง ยามอรุณ — เงียบที่สุดในไทย'],
+        kyoto:    ['Ryoan-ji Garden — สวนหินที่เงียบที่สุดในญี่ปุ่น','Kurama Onsen — แช่น้ำร้อนในป่าเขา ฟังแค่ลมและน้ำ'],
+        bali:     ['Tirta Empul เช้าตรู่ — ก่อนนักท่องเที่ยวมา เงียบและศักดิ์สิทธิ์'],
+        tbilisi:  ['Narikala Fortress ยามเย็น — นั่งมองเมืองโดยไม่ต้องพูดอะไร'],
+        reykjavik:['ทุ่งหญ้า Þingvellir — เงียบที่สุดในชีวิต ฟังแค่ลมไอซ์แลนด์'],
+      }
+    }
+  };
+
+  function getMusicVenues(musicType, topCities) {
+    const mv = musicVenues[musicType];
+    if (!mv || !topCities.length) return null;
+    const venues = [];
+    topCities.forEach(city => {
+      const key = city.toLowerCase().replace(/[^a-z]/g,'').substring(0,10);
+      // Match by city key
+      Object.entries(mv.places).forEach(([k, v]) => {
+        if (city.includes(k) || k.includes(city.toLowerCase().replace(/\s/g,'').substring(0,6))) {
+          venues.push(...v.map(p => ({city, place: p})));
+        }
+      });
+    });
+    return { ...mv, venues };
+  }
+
   function getWatercolor(profileKey) {
     const w = {
       recharge: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 120" preserveAspectRatio="xMidYMid slice"><defs><filter id="blur1"><feGaussianBlur stdDeviation="8"/></filter></defs><rect width="600" height="120" fill="#E8EFF5"/><ellipse cx="120" cy="80" rx="160" ry="90" fill="#B8D4E8" opacity="0.5" filter="url(#blur1)"/><ellipse cx="350" cy="40" rx="200" ry="70" fill="#9BB8CC" opacity="0.4" filter="url(#blur1)"/><ellipse cx="500" cy="90" rx="120" ry="60" fill="#7BA8C4" opacity="0.35" filter="url(#blur1)"/><text x="50%" y="58%" text-anchor="middle" font-family="Georgia,serif" font-size="11" fill="#4A7A94" opacity="0.5" letter-spacing="4">THE QUIET WANDERER</text></svg>',
@@ -1905,15 +2073,82 @@
     const destCards=document.getElementById('dest-cards');
     destCards.innerHTML='';
     const dayCount=answers[8]==='day'?1:answers[8]==='weekend'?2:3;
+    const musicType2 = answers[13];
+    const mv2 = musicType2 && musicType2!=='unknown' ? musicVenues[musicType2] : null;
     tops.forEach((d,i)=>{
       const card=document.createElement('div');
       card.style.cssText='background:var(--white);border:1px solid rgba(212,197,169,0.5);border-radius:16px;padding:18px;transition:all 0.2s;';
       const itinHtml=d.itinerary?d.itinerary.slice(0,dayCount).map(s=>'<li style="padding:4px 0;border-bottom:1px solid rgba(212,197,169,0.2);font-size:12px;font-weight:300;list-style:none;color:var(--charcoal-soft);">'+s+'</li>').join(''):'';
-      card.innerHTML='<div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:10px;"><div style="display:flex;align-items:center;gap:10px;"><span style="font-size:22px;">'+d.flag+'</span><div><div style="font-family:\'Playfair Display\',serif;font-size:18px;font-weight:400;color:var(--charcoal);">'+d.city+'</div><div style="font-size:12px;color:var(--charcoal-soft);opacity:0.6;">'+d.country+'</div></div></div>'+(i===0?'<span style="font-size:11px;background:rgba(107,124,92,0.12);color:var(--moss-dark);padding:3px 12px;border-radius:99px;font-weight:500;white-space:nowrap;">เหมาะที่สุด ✦</span>':'')+'</div><p style="font-size:13px;font-weight:300;color:var(--charcoal-soft);line-height:1.65;margin-bottom:'+(itinHtml?'12px':'0')+';">'+d.desc+'</p>'+(itinHtml?'<div style="margin-top:4px;"><div style="font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--moss);margin-bottom:6px;font-weight:500;">Itinerary ง่ายๆ</div><ul style="margin:0;padding:0;">'+itinHtml+'</ul></div>':'');
+      // Find music tip for this city
+      let musicTip = '';
+      if (mv2) {
+        Object.entries(mv2.places).forEach(([k, v]) => {
+          if (d.city.toLowerCase().includes(k) || k.includes(d.city.toLowerCase().replace(/\s/g,'').substring(0,5))) {
+            musicTip = v[0];
+          }
+        });
+      }
+      const musicHtml = musicTip ? '<div style="margin-top:10px;background:rgba(155,139,180,0.07);border-radius:10px;padding:8px 12px;font-size:12px;color:var(--charcoal-soft);line-height:1.6;border-left:2px solid var(--purple-soft);">' + mv2.icon + ' <b style="color:var(--charcoal);font-weight:500;">'+mv2.label+'</b> — ' + musicTip + '</div>' : '';
+      card.innerHTML='<div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:10px;"><div style="display:flex;align-items:center;gap:10px;"><span style="font-size:22px;">'+d.flag+'</span><div><div style="font-family:\'Playfair Display\',serif;font-size:18px;font-weight:400;color:var(--charcoal);">'+d.city+'</div><div style="font-size:12px;color:var(--charcoal-soft);opacity:0.6;">'+d.country+'</div></div></div>'+(i===0?'<span style="font-size:11px;background:rgba(107,124,92,0.12);color:var(--moss-dark);padding:3px 12px;border-radius:99px;font-weight:500;white-space:nowrap;">เหมาะที่สุด ✦</span>':'')+'</div><p style="font-size:13px;font-weight:300;color:var(--charcoal-soft);line-height:1.65;margin-bottom:'+(itinHtml||musicHtml?'12px':'0')+';">'+d.desc+'</p>'+(itinHtml?'<div style="margin-top:4px;"><div style="font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--moss);margin-bottom:6px;font-weight:500;">Itinerary ง่ายๆ</div><ul style="margin:0;padding:0;">'+itinHtml+'</ul></div>':'')+musicHtml;
       destCards.appendChild(card);
     });
 
     const hdType = answers[11] && answers[11]!=='unknown' ? hdLabels[answers[11]]||answers[11] : '';
+
+    // Venue recommendations from database
+    const venueEl = document.getElementById('venue-section');
+    const userMbti = answers[10] && answers[10] !== 'unknown' ? answers[10] : null;
+    const userHd = answers[11] && answers[11] !== 'unknown' ? answers[11] : null;
+    const topCityNames = tops.map(d => d.city);
+    const venues = getVenueRecommendations(topCityNames, userMbti, userHd);
+    if (venues.length > 0) {
+      venueEl.style.display = 'block';
+      const priceIcon = (n) => '💰'.repeat(n);
+      venueEl.innerHTML = '<div style="font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--accent);margin-bottom:12px;font-weight:500;">🍸 ร้านอาหาร · บาร์ที่แนะนำสำหรับคุณ</div>'
+        + venues.map(v =>
+          '<div style="background:var(--white);border:1px solid rgba(212,197,169,0.4);border-radius:14px;padding:14px 16px;margin-bottom:8px;">'
+          + '<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px;">'
+          + '<div><div style="font-size:14px;font-weight:500;color:var(--charcoal);">' + v.name + '</div>'
+          + '<div style="font-size:11px;color:var(--charcoal-soft);margin-top:2px;">' + v.type + ' · ' + v.cityName + ' · ' + v.location + '</div></div>'
+          + '<div style="font-size:12px;white-space:nowrap;margin-left:8px;">' + v.price + '</div></div>'
+          + '<div style="font-size:12px;font-weight:300;color:var(--charcoal-soft);line-height:1.65;">' + v.desc + '</div>'
+          + '<div style="margin-top:8px;display:flex;gap:6px;flex-wrap:wrap;">'
+          + v.mbti.slice(0,3).map(m => '<span style="font-size:10px;background:rgba(155,139,180,0.12);color:var(--purple-dark);padding:2px 8px;border-radius:99px;">' + m + '</span>').join('')
+          + v.hd.slice(0,2).map(h => '<span style="font-size:10px;background:rgba(196,149,106,0.12);color:#7A5030;padding:2px 8px;border-radius:99px;">' + h + '</span>').join('')
+          + '</div></div>'
+        ).join('');
+    } else {
+      venueEl.style.display = 'none';
+    }
+    const musicType = answers[13];
+    const musicEl = document.getElementById('music-section');
+    if (musicType && musicType !== 'unknown') {
+      const mv = musicVenues[musicType];
+      const topCityNames = tops.map(d => d.city);
+      const venuesList = [];
+      topCityNames.forEach(cityName => {
+        Object.entries(mv.places).forEach(([k, v]) => {
+          if (cityName.toLowerCase().includes(k) || k.includes(cityName.toLowerCase().replace(/\s/g,'').substring(0,5))) {
+            v.forEach(p => venuesList.push({city: cityName, place: p}));
+          }
+        });
+      });
+      if (venuesList.length > 0) {
+        musicEl.style.display = 'block';
+        musicEl.innerHTML = '<div style="font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--moss);margin-bottom:12px;font-weight:500;">' + mv.icon + ' สถานที่แนะนำตาม music taste</div>'
+          + '<div style="background:rgba(155,139,180,0.06);border-radius:14px;padding:16px;border-left:3px solid var(--purple-soft);">'
+          + '<div style="font-size:13px;font-weight:500;color:var(--charcoal);margin-bottom:4px;">' + mv.label + '</div>'
+          + '<div style="font-size:12px;color:var(--charcoal-soft);margin-bottom:12px;line-height:1.6;">' + mv.desc + '</div>'
+          + venuesList.slice(0,4).map(v => '<div style="font-size:13px;color:var(--charcoal-soft);padding:6px 0;border-bottom:1px solid rgba(212,197,169,0.2);line-height:1.6;">'
+            + '<span style="font-size:10px;color:var(--moss);font-weight:500;text-transform:uppercase;letter-spacing:0.08em;">' + v.city + '</span><br>'
+            + v.place + '</div>').join('')
+          + '</div>';
+      } else {
+        musicEl.style.display = 'none';
+      }
+    } else {
+      musicEl.style.display = 'none';
+    }
     const summaryParts=[
       answers[4]?'<span style="color:var(--moss-dark);">'+scopeLabels[answers[4]]+'</span>':'',
       answers[2]?'ธรรมชาติ: <span style="color:var(--moss-dark);">'+natureLabels[answers[2]]+'</span>':'',
