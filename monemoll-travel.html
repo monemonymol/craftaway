@@ -1323,6 +1323,7 @@
           <div class="result-type" id="result-type"></div>
           <div class="result-title" id="result-title"></div>
           <p class="result-desc" id="result-desc"></p>
+          <div id="result-extra" style="display:none;margin-top:14px;display:flex;flex-direction:column;gap:8px;"></div>
         </div>
 
         <!-- LOCKED section — blur gate -->
@@ -1881,13 +1882,48 @@
   }
 
   const profiles = {
-    recharge: {type:'The Quiet Wanderer',title:'นักเดินทางผู้เงียบงาม',desc:'คุณเดินทางเพื่อ restore ไม่ใช่เพื่อ check-in ทริปที่ใช่คือที่ที่ไม่ต้องรีบ ไม่ต้องอธิบาย แค่ได้เป็นตัวเอง'},
-    reset:    {type:'The Gentle Reset',title:'นักหนีชีวิตฉบับ soft',desc:'คุณไม่ได้อยากหนีทุกอย่าง แค่อยากออกไปหายใจ ทริปสั้น 2–3 วันที่ vibe ดี กินอาหารอร่อย เปลี่ยนวิว นั่นพอแล้ว'},
-    explore:  {type:'The Curious Soul',title:'นักสำรวจตัวจริง',desc:'คุณชาร์จพลังด้วยประสบการณ์ใหม่ๆ อยากค้นพบที่ที่ไม่มีใครรู้จัก ลองอาหารที่ไม่มีในเมนู และพูดคุยกับคนแปลกหน้า'},
-    connect:  {type:'The Heartful Traveler',title:'นักเดินทางแห่งการเชื่อมต่อ',desc:'คุณเดินทางเพื่อสัมผัสชีวิตจริงของที่นั่น ผู้คน อาหาร เรื่องราว ทริปที่ดีทำให้รู้สึกว่าได้รู้จักอะไรบางอย่างที่แท้จริง'},
-    still:    {type:'The Still Seeker',title:'นักเดินทางแห่งความเงียบภายใน',desc:'คุณไม่ได้มองหาที่ใหม่ แต่มองหาตัวเองใหม่ในที่เดิม ทริปที่ดีที่สุดของคุณคือที่ที่ไม่มีเสียง ไม่มีแผน แค่นั่งอยู่กับตัวเองได้จริงๆ'},
-    transform:{type:'The Transformer',title:'นักเปลี่ยนผ่านตัวเอง',desc:'คุณรู้ว่าตัวเองกำลังอยู่ในช่วงเปลี่ยน และทริปคือพื้นที่ปลอดภัยสำหรับการเป็นคนใหม่ คุณไม่ได้หนีจากอะไร คุณกำลังเดินเข้าหาอะไรบางอย่าง'},
-    drift:    {type:'The Free Drifter',title:'นักปล่อยวางผู้กล้า',desc:'คุณชาร์จพลังด้วยการไม่รู้ว่าวันพรุ่งนี้จะเป็นยังไง ทริปที่ดีที่สุดของคุณคือที่ที่ไม่มีแผน มีแค่ตั๋วและความอยากรู้'},
+    recharge: {
+      type:'The Quiet Wanderer', title:'นักเดินทางผู้เงียบงาม',
+      desc:'คุณเดินทางเพื่อ restore ไม่ใช่เพื่อ check-in ทริปที่ใช่คือที่ที่ไม่ต้องรีบ ไม่ต้องอธิบาย แค่ได้เป็นตัวเอง',
+      takeaway:'ความสงบที่หายไปนาน กลับมาได้ในทริปเดียว คุณจะกลับบ้านมาพร้อมพลังงานที่ชาร์จจนเต็ม และรู้ว่าตัวเองต้องการอะไรในชีวิตมากขึ้น',
+      warning:'ระวังการ over-plan — ถ้า itinerary แน่นเกินไป ทริปนี้จะไม่ต่างจากที่ทำงาน ปล่อยให้มีช่องว่างไว้บ้าง',
+    },
+    reset: {
+      type:'The Gentle Reset', title:'นักหนีชีวิตฉบับ soft',
+      desc:'คุณไม่ได้อยากหนีทุกอย่าง แค่อยากออกไปหายใจ ทริปสั้น 2–3 วันที่ vibe ดี กินอาหารอร่อย เปลี่ยนวิว นั่นพอแล้ว',
+      takeaway:'ความรู้สึกว่า "โอเค ยังไปต่อได้" — ไม่ต้องได้คำตอบใหญ่ แค่ได้หยุดหายใจและรู้สึกดีขึ้นก็เพียงพอแล้วสำหรับทริปนี้',
+      warning:'อย่าคาดหวังให้ทริปแก้ทุกอย่าง ถ้าปัญหาที่บ้านใหญ่มาก ทริปช่วยได้แค่พักชั่วคราว ไม่ใช่ทางออกถาวร',
+    },
+    explore: {
+      type:'The Curious Soul', title:'นักสำรวจตัวจริง',
+      desc:'คุณชาร์จพลังด้วยประสบการณ์ใหม่ๆ อยากค้นพบที่ที่ไม่มีใครรู้จัก ลองอาหารที่ไม่มีในเมนู และพูดคุยกับคนแปลกหน้า',
+      takeaway:'มุมมองใหม่ที่เปลี่ยนวิธีคิดเรื่องบางอย่างในชีวิต และเรื่องราวที่เล่าได้ตลอดชีวิต',
+      warning:'ระวัง FOMO — อยากไปทุกที่จนไม่ได้หยุดพักจริงๆ บางทีการนั่งอยู่ที่เดิมนานๆ คือ experience ที่ลึกที่สุด',
+    },
+    connect: {
+      type:'The Heartful Traveler', title:'นักเดินทางแห่งการเชื่อมต่อ',
+      desc:'คุณเดินทางเพื่อสัมผัสชีวิตจริงของที่นั่น ผู้คน อาหาร เรื่องราว ทริปที่ดีทำให้รู้สึกว่าได้รู้จักอะไรบางอย่างที่แท้จริง',
+      takeaway:'ความรู้สึกว่าโลกนี้ใหญ่และมีคนดีอยู่ทุกมุม — และบางทีการเชื่อมต่อกับคนแปลกหน้าทำให้เข้าใจตัวเองมากขึ้น',
+      warning:'ระวังใส่ใจคนอื่นมากจนลืมว่าตัวเองต้องการอะไร ทริปนี้ควรมีเวลาส่วนตัวบ้างด้วย',
+    },
+    still: {
+      type:'The Still Seeker', title:'นักเดินทางแห่งความเงียบภายใน',
+      desc:'คุณไม่ได้มองหาที่ใหม่ แต่มองหาตัวเองใหม่ในที่เดิม ทริปที่ดีที่สุดของคุณคือที่ที่ไม่มีเสียง ไม่มีแผน แค่นั่งอยู่กับตัวเองได้จริงๆ',
+      takeaway:'ความเงียบภายในที่หายาก — คุณจะกลับมาพร้อมกับรู้ว่าเสียงในหัวอันไหนเป็นของจริง อันไหนเป็นแค่ noise',
+      warning:'ระวังโดดเดี่ยวตัวเองมากเกินไปจนกลายเป็นการหนีแทนที่จะเป็นการหา บางทีความเงียบที่ดีต้องการคนสักคนข้างๆ ด้วย',
+    },
+    transform: {
+      type:'The Transformer', title:'นักเปลี่ยนผ่านตัวเอง',
+      desc:'คุณรู้ว่าตัวเองกำลังอยู่ในช่วงเปลี่ยน และทริปคือพื้นที่ปลอดภัยสำหรับการเป็นคนใหม่ คุณไม่ได้หนีจากอะไร คุณกำลังเดินเข้าหาอะไรบางอย่าง',
+      takeaway:'ความกล้าที่จะเปลี่ยน — ทริปนี้จะช่วยยืนยันว่าสิ่งที่คุณรู้สึกอยู่นั้นจริง และบางอย่างในชีวิตกำลังจะเปลี่ยนไปอย่างถาวร',
+      warning:'ระวังคาดหวังให้ทริปเดียวเปลี่ยนทุกอย่าง — transformation เป็น process ไม่ใช่ moment ทริปนี้เป็นแค่จุดเริ่มต้น',
+    },
+    drift: {
+      type:'The Free Drifter', title:'นักปล่อยวางผู้กล้า',
+      desc:'คุณชาร์จพลังด้วยการไม่รู้ว่าวันพรุ่งนี้จะเป็นยังไง ทริปที่ดีที่สุดของคุณคือที่ที่ไม่มีแผน มีแค่ตั๋วและความอยากรู้',
+      takeaway:'ความเชื่อมั่นในตัวเองว่าไม่ว่าจะเกิดอะไรก็รับมือได้ — และเรื่องราวที่ไม่มีใครเชื่อว่าเกิดขึ้นจริง',
+      warning:'ระวัง spontaneous จนกลายเป็น irresponsible — มีแผน backup สักนิดไม่ใช่การ over-plan แต่เป็นการดูแลตัวเอง',
+    },
   };
 
   const budgetLabels={low:'น้อยกว่า 3,000',mid:'3,000–8,000',high:'8,000–20,000',flex:'ขึ้นอยู่กับที่'};
@@ -1926,27 +1962,39 @@
     {name:'Schmuck',type:'Bar',cityKey:'nyc',cityName:'นิวยอร์ก',location:'East Village, NYC',desc:'New kid on the block 2025 พลังงานสูง สีสัน funky ฮิตสุดในนิวยอร์กขณะนี้',mbti:["ENTP", "ESFP", "ESTP"],hd:["Manifesting Generator", "Generator"],price:'💰💰',priceLevel:2},
   ];
 
-  function getVenueRecommendations(topCities, mbti, hdType) {
-    const mbtiList = mbti && mbti !== "unknown" ? [mbti] : [];
+  function getVenueRecommendations(topCities, mbti, hdType, scope) {
+    const mbtiList = mbti && mbti !== 'unknown' ? [mbti] : [];
     const hdList = hdType ? [hdType] : [];
     const cityKeys = topCities.map(c => {
       const n = c.toLowerCase();
-      if (n.includes("โตเกียว") || n.includes("tokyo")) return "tokyo";
-      if (n.includes("กรุงเทพ") || n.includes("bangkok")) return "bangkok";
-      if (n.includes("ปารีส") || n.includes("paris")) return "paris";
-      if (n.includes("มาดริด") || n.includes("madrid")) return "madrid";
-      if (n.includes("โรม") || n.includes("rome")) return "rome";
-      if (n.includes("ดูไบ") || n.includes("dubai")) return "dubai";
-      if (n.includes("นิวยอร์ก") || n.includes("nyc")) return "nyc";
+      if (n.includes('โตเกียว') || n.includes('tokyo') || n.includes('osaka') || n.includes('โอซาก้า') || n.includes('kyoto') || n.includes('เกียวโต') || n.includes('hokkaido') || n.includes('ฮอกไกโด') || n.includes('okinawa') || n.includes('โอกินาว่า') || n.includes('hiroshima') || n.includes('ฮิโรชิมา') || n.includes('kanazawa') || n.includes('คานาซาวะ')) return 'tokyo';
+      if (n.includes('กรุงเทพ') || n.includes('bangkok')) return 'bangkok';
+      if (n.includes('ปารีส') || n.includes('paris')) return 'paris';
+      if (n.includes('มาดริด') || n.includes('madrid')) return 'madrid';
+      if (n.includes('โรม') || n.includes('rome')) return 'rome';
+      if (n.includes('ดูไบ') || n.includes('dubai')) return 'dubai';
+      if (n.includes('นิวยอร์ก') || n.includes('nyc')) return 'nyc';
       return null;
     }).filter(Boolean);
 
-    return venueDatabase.filter(v => {
+    // ถ้าเลือก domestic แต่ไม่มีกรุงเทพใน top cities → เพิ่ม bangkok เสมอ
+    if ((scope === 'domestic' || scope === 'anywhere') && !cityKeys.includes('bangkok')) {
+      cityKeys.push('bangkok');
+    }
+
+    let results = venueDatabase.filter(v => {
       const cityMatch = cityKeys.includes(v.cityKey);
       const mbtiMatch = mbtiList.length === 0 || v.mbti.some(m => mbtiList.includes(m));
       const hdMatch = hdList.length === 0 || v.hd.some(h => hdList.some(hd => h.toLowerCase().includes(hd.toLowerCase())));
       return cityMatch && (mbtiMatch || hdMatch);
-    }).slice(0, 5);
+    });
+
+    // ถ้ายังไม่มี match เลย → แสดงตาม MBTI อย่างเดียว ไม่จำกัดเมือง
+    if (results.length === 0 && mbtiList.length > 0) {
+      results = venueDatabase.filter(v => v.mbti.some(m => mbtiList.includes(m)));
+    }
+
+    return results.slice(0, 5);
   }
 
   const musicVenues = {
@@ -2062,6 +2110,19 @@
     document.getElementById('result-desc').textContent=p.desc;
     document.getElementById('result-watercolor').innerHTML=getWatercolor(key);
 
+    // Takeaway + Warning
+    const extraEl = document.getElementById('result-extra');
+    if (extraEl && p.takeaway) {
+      extraEl.style.display='block';
+      extraEl.innerHTML =
+        '<div style="margin-bottom:10px;background:rgba(107,124,92,0.07);border-radius:12px;padding:12px 14px;border-left:3px solid var(--moss);">'
+        + '<div style="font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--moss);font-weight:500;margin-bottom:5px;">✦ สิ่งที่จะได้กลับบ้านมา</div>'
+        + '<div style="font-size:13px;font-weight:300;color:var(--charcoal);line-height:1.7;">'+p.takeaway+'</div></div>'
+        + '<div style="background:rgba(196,149,106,0.08);border-radius:12px;padding:12px 14px;border-left:3px solid var(--accent);">'
+        + '<div style="font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--accent);font-weight:500;margin-bottom:5px;">⚠ คำเตือน</div>'
+        + '<div style="font-size:13px;font-weight:300;color:var(--charcoal);line-height:1.7;">'+p.warning+'</div></div>';
+    }
+
     const mbti=answers[10];
     const mbtiEl=document.getElementById('mbti-insight');
     if (mbti&&mbti!=='unknown'&&mbtiInsights[mbti]) {
@@ -2100,7 +2161,7 @@
     const userMbti = answers[10] && answers[10] !== 'unknown' ? answers[10] : null;
     const userHd = answers[11] && answers[11] !== 'unknown' ? answers[11] : null;
     const topCityNames = tops.map(d => d.city);
-    const venues = getVenueRecommendations(topCityNames, userMbti, userHd);
+    const venues = getVenueRecommendations(topCityNames, userMbti, userHd, answers[4]);
     if (venues.length > 0) {
       venueEl.style.display = 'block';
       const priceIcon = (n) => '💰'.repeat(n);
