@@ -1073,7 +1073,7 @@
   <div class="section-inner">
     <span class="section-label">เริ่มจากตรงนี้</span>
     <h2 class="section-title">ตอนนี้<em>ข้างในคุณ</em>ต้องการอะไร?</h2>
-    <p class="section-desc">11 ข้อ ไม่มีผิดไม่มีถูก แค่ตามความรู้สึกที่มีอยู่ตอนนี้</p>
+    <p class="section-desc">ไม่มีผิดไม่มีถูก แค่ตามความรู้สึกที่มีอยู่ตอนนี้</p>
 
     <!-- Login bar -->
     <div id="login-bar" style="margin-bottom:24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;">
@@ -1086,7 +1086,47 @@
       </div>
     </div>
 
-    <div class="quiz-container">
+    <!-- WARM-UP SCREEN -->
+    <div id="warmup-screen" style="padding:32px 24px;text-align:center;max-width:540px;margin:0 auto;">
+      <div style="font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--moss);font-weight:500;margin-bottom:16px;">ก่อนเริ่ม quiz</div>
+      <h2 style="font-family:'Playfair Display',serif;font-size:clamp(24px,5vw,36px);font-weight:400;color:var(--charcoal);line-height:1.3;margin-bottom:10px;">ตอนนี้คุณ<em style="font-style:italic;color:var(--moss);">อยู่ในช่วงชีวิตไหน</em>?</h2>
+      <p style="font-size:15px;font-weight:300;color:var(--charcoal-soft);line-height:1.8;margin-bottom:32px;">ไม่มีคำตอบถูกหรือผิด — แค่บอกว่าตอนนี้เป็นยังไง quiz จะ personalized ให้เหมาะกับช่วงนี้ของคุณ</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:24px;">
+        <div onclick="selectWarmup('bloom')" style="background:var(--white);border:1.5px solid var(--cream-dark);border-radius:16px;padding:16px;cursor:pointer;text-align:left;transition:all 0.2s;" onmouseover="this.style.borderColor='var(--moss)';this.style.background='rgba(107,124,92,0.05)'" onmouseout="this.style.borderColor='var(--cream-dark)';this.style.background='var(--white)'">
+          <div style="font-size:24px;margin-bottom:8px;">🌱</div>
+          <div style="font-size:14px;font-weight:500;color:var(--charcoal);margin-bottom:4px;">กำลังเติบโต</div>
+          <div style="font-size:12px;font-weight:300;color:var(--charcoal-soft);line-height:1.5;">เรียนรู้ ลองสิ่งใหม่ ชีวิตกำลังเปิด</div>
+        </div>
+        <div onclick="selectWarmup('stuck')" style="background:var(--white);border:1.5px solid var(--cream-dark);border-radius:16px;padding:16px;cursor:pointer;text-align:left;transition:all 0.2s;" onmouseover="this.style.borderColor='var(--moss)';this.style.background='rgba(107,124,92,0.05)'" onmouseout="this.style.borderColor='var(--cream-dark)';this.style.background='var(--white)'">
+          <div style="font-size:24px;margin-bottom:8px;">🌀</div>
+          <div style="font-size:14px;font-weight:500;color:var(--charcoal);margin-bottom:4px;">รู้สึกติดอยู่</div>
+          <div style="font-size:12px;font-weight:300;color:var(--charcoal-soft);line-height:1.5;">วนซ้ำ ไม่รู้จะไปทางไหน</div>
+        </div>
+        <div onclick="selectWarmup('healing')" style="background:var(--white);border:1.5px solid var(--cream-dark);border-radius:16px;padding:16px;cursor:pointer;text-align:left;transition:all 0.2s;" onmouseover="this.style.borderColor='var(--moss)';this.style.background='rgba(107,124,92,0.05)'" onmouseout="this.style.borderColor='var(--cream-dark)';this.style.background='var(--white)'">
+          <div style="font-size:24px;margin-bottom:8px;">🌸</div>
+          <div style="font-size:14px;font-weight:500;color:var(--charcoal);margin-bottom:4px;">กำลังฟื้นตัว</div>
+          <div style="font-size:12px;font-weight:300;color:var(--charcoal-soft);line-height:1.5;">ผ่านอะไรมา กำลัง recover</div>
+        </div>
+        <div onclick="selectWarmup('seeking')" style="background:var(--white);border:1.5px solid var(--cream-dark);border-radius:16px;padding:16px;cursor:pointer;text-align:left;transition:all 0.2s;" onmouseover="this.style.borderColor='var(--moss)';this.style.background='rgba(107,124,92,0.05)'" onmouseout="this.style.borderColor='var(--cream-dark)';this.style.background='var(--white)'">
+          <div style="font-size:24px;margin-bottom:8px;">🔭</div>
+          <div style="font-size:14px;font-weight:500;color:var(--charcoal);margin-bottom:4px;">กำลังค้นหา</div>
+          <div style="font-size:12px;font-weight:300;color:var(--charcoal-soft);line-height:1.5;">อยากรู้ว่าตัวเองต้องการอะไรจริงๆ</div>
+        </div>
+        <div onclick="selectWarmup('transition')" style="background:var(--white);border:1.5px solid var(--cream-dark);border-radius:16px;padding:16px;cursor:pointer;text-align:left;transition:all 0.2s;" onmouseover="this.style.borderColor='var(--moss)';this.style.background='rgba(107,124,92,0.05)'" onmouseout="this.style.borderColor='var(--cream-dark)';this.style.background='var(--white)'">
+          <div style="font-size:24px;margin-bottom:8px;">🦋</div>
+          <div style="font-size:14px;font-weight:500;color:var(--charcoal);margin-bottom:4px;">อยู่ในช่วงเปลี่ยน</div>
+          <div style="font-size:12px;font-weight:300;color:var(--charcoal-soft);line-height:1.5;">งาน ความสัมพันธ์ หรือตัวตนกำลังเปลี่ยน</div>
+        </div>
+        <div onclick="selectWarmup('good')" style="background:var(--white);border:1.5px solid var(--cream-dark);border-radius:16px;padding:16px;cursor:pointer;text-align:left;transition:all 0.2s;" onmouseover="this.style.borderColor='var(--moss)';this.style.background='rgba(107,124,92,0.05)'" onmouseout="this.style.borderColor='var(--cream-dark)';this.style.background='var(--white)'">
+          <div style="font-size:24px;margin-bottom:8px;">☀️</div>
+          <div style="font-size:14px;font-weight:500;color:var(--charcoal);margin-bottom:4px;">ดีอยู่แล้ว</div>
+          <div style="font-size:12px;font-weight:300;color:var(--charcoal-soft);line-height:1.5;">แค่อยากเติมอะไรให้ชีวิต</div>
+        </div>
+      </div>
+      <p style="font-size:12px;color:var(--charcoal-soft);opacity:0.5;">ข้อมูลนี้ใช้เพื่อ personalize ผลลัพธ์ของคุณเท่านั้น</p>
+    </div>
+
+    <div class="quiz-container" style="display:none;" id="quiz-main">
       <div class="quiz-progress" id="quiz-progress-dots"></div>
 
       <!-- 0: mood -->
@@ -1098,6 +1138,7 @@
           <div class="quiz-opt" onclick="selectOpt(this,0,'reset')"><div class="quiz-opt-icon">🔄</div><div class="quiz-opt-label">จำเจ อยาก reset</div><div class="quiz-opt-desc">ต้องการอะไรใหม่ๆ</div></div>
           <div class="quiz-opt" onclick="selectOpt(this,0,'explore')"><div class="quiz-opt-icon">✨</div><div class="quiz-opt-label">อยากลองของใหม่</div><div class="quiz-opt-desc">มีพลัง พร้อม explore</div></div>
           <div class="quiz-opt" onclick="selectOpt(this,0,'connect')"><div class="quiz-opt-icon">🤍</div><div class="quiz-opt-label">อยากเชื่อมต่อ</div><div class="quiz-opt-desc">กับตัวเองหรือคนอื่น</div></div>
+          <div class="quiz-opt" onclick="selectOpt(this,0,'drift')"><div class="quiz-opt-icon">🌊</div><div class="quiz-opt-label">แค่อยากหายไปซักที</div><div class="quiz-opt-desc">ไม่มีเหตุผล แค่อยากไป</div></div>
         </div>
         <div class="quiz-nav"><button class="quiz-back" disabled>← ย้อนกลับ</button></div>
       </div>
@@ -1111,6 +1152,7 @@
           <div class="quiz-opt" onclick="selectOpt(this,1,'nature')"><div class="quiz-opt-icon">🌲</div><div class="quiz-opt-label">อยู่กับธรรมชาติ</div><div class="quiz-opt-desc">ต้นไม้ ลม ทะเล ภูเขา</div></div>
           <div class="quiz-opt" onclick="selectOpt(this,1,'people')"><div class="quiz-opt-icon">🧡</div><div class="quiz-opt-label">อยู่กับคนที่ใช่</div><div class="quiz-opt-desc">คุยเรื่องดีๆ หัวเราะด้วยกัน</div></div>
           <div class="quiz-opt" onclick="selectOpt(this,1,'experience')"><div class="quiz-opt-icon">🎨</div><div class="quiz-opt-label">ทำสิ่งที่ชอบ</div><div class="quiz-opt-desc">กิน ดู ฟัง สัมผัสอะไรใหม่</div></div>
+          <div class="quiz-opt" onclick="selectOpt(this,1,'move')"><div class="quiz-opt-icon">🏃</div><div class="quiz-opt-label">ขยับร่างกาย</div><div class="quiz-opt-desc">เดิน วิ่ง ออกกำลัง ใช้พลังงาน</div></div>
         </div>
         <div class="quiz-nav"><button class="quiz-back" onclick="goStep(0)">← ย้อนกลับ</button></div>
       </div>
@@ -1163,6 +1205,7 @@
           <div class="quiz-opt" onclick="selectOpt(this,5,'offbeat')"><div class="quiz-opt-icon">🗺️</div><div class="quiz-opt-label">Off the beaten path</div><div class="quiz-opt-desc">ที่ที่ไม่มีใครรู้จัก</div></div>
           <div class="quiz-opt" onclick="selectOpt(this,5,'cozy')"><div class="quiz-opt-icon">🏡</div><div class="quiz-opt-label">Cozy & local</div><div class="quiz-opt-desc">ร้านเล็กๆ คนท้องถิ่น</div></div>
           <div class="quiz-opt" onclick="selectOpt(this,5,'wild')"><div class="quiz-opt-icon">🌊</div><div class="quiz-opt-label">Wild & free</div><div class="quiz-opt-desc">เปิดรับทุกอย่างที่เจอ</div></div>
+          <div class="quiz-opt" onclick="selectOpt(this,5,'social')"><div class="quiz-opt-icon">🎉</div><div class="quiz-opt-label">Social & vibrant</div><div class="quiz-opt-desc">บาร์ ดนตรี ผู้คน พลังงานสูง</div></div>
         </div>
         <div class="quiz-nav"><button class="quiz-back" onclick="goStep(4)">← ย้อนกลับ</button></div>
       </div>
@@ -1176,6 +1219,16 @@
           <div class="quiz-opt" onclick="selectOpt(this,6,'mid')"><div class="quiz-opt-icon">💚</div><div class="quiz-opt-label">3,000 – 8,000</div><div class="quiz-opt-desc">พอมีเผื่อเพลิน</div></div>
           <div class="quiz-opt" onclick="selectOpt(this,6,'high')"><div class="quiz-opt-icon">🌿</div><div class="quiz-opt-label">8,000 – 20,000</div><div class="quiz-opt-desc">อยากได้ experience ที่ดี</div></div>
           <div class="quiz-opt" onclick="selectOpt(this,6,'flex')"><div class="quiz-opt-icon">✦</div><div class="quiz-opt-label">ขึ้นอยู่กับที่</div><div class="quiz-opt-desc">ถ้าใช่ก็จ่ายได้</div></div>
+        </div>
+        <div style="margin-top:16px;padding-top:16px;border-top:1px solid rgba(212,197,169,0.3);">
+          <p style="font-size:12px;color:var(--charcoal-soft);margin-bottom:8px;">หรือกรอกงบที่มีจริงๆ (บาท)</p>
+          <div style="display:flex;gap:8px;align-items:center;">
+            <input id="budget-custom" type="number" placeholder="เช่น 5000" min="0"
+              style="flex:1;padding:10px 14px;border:1px solid rgba(212,197,169,0.6);border-radius:12px;font-family:'Sarabun',sans-serif;font-size:14px;background:var(--white);color:var(--charcoal);outline:none;"
+              oninput="handleCustomBudget(this.value)"
+              onfocus="this.style.borderColor='var(--moss)'" onblur="this.style.borderColor='rgba(212,197,169,0.6)'">
+            <span style="font-size:14px;color:var(--charcoal-soft);">฿</span>
+          </div>
         </div>
         <div class="quiz-nav"><button class="quiz-back" onclick="goStep(5)">← ย้อนกลับ</button></div>
       </div>
@@ -1315,7 +1368,7 @@
       <!-- Result (step 15) -->
       <div class="quiz-step" id="step-15">
         <h3 class="quiz-q" style="margin-bottom:6px;">นี่คือ travel profile ของคุณ ✦</h3>
-        <p style="font-size:13px;color:var(--charcoal-soft);font-weight:300;margin-bottom:24px;">จาก 15 คำตอบของคุณ</p>
+        <p style="font-size:13px;color:var(--charcoal-soft);font-weight:300;margin-bottom:24px;">มาตอบคำถามให้กับตัวเองเพื่อค้นหาทริปที่ตรงใจและพลังงาน</p>
 
         <!-- Profile card — teaser (เห็นได้ทุกคน) -->
         <div class="result-card" id="result-card" style="margin-bottom:20px;overflow:hidden;">
@@ -1370,7 +1423,7 @@
           <a class="btn-ghost" href="craftaway-demo.html" style="text-decoration:none;display:inline-flex;align-items:center;gap:6px;">💬 คุยกับ Craftaway</a>
         </div>
         <div class="quiz-nav" style="margin-top:20px;">
-          <button class="quiz-back" onclick="goStep(14)">← ย้อนกลับ</button>
+          <button class="quiz-back" onclick="resetToWarmup()">← กลับต้น</button>
           <button class="quiz-back" onclick="resetQuiz()" style="opacity:0.5;">เริ่มใหม่</button>
         </div>
       </div>
@@ -1404,7 +1457,7 @@
       </div>
 
       <!-- 5999 -->
-      <div class="price-card featured" onclick="openModal('signature')">
+      <div class="price-card featured">
         <div class="price-tier">Signature</div>
         <div class="price-name">Design Your Journey</div>
         <div class="price-amount"><span>฿</span>5,999</div>
@@ -1420,11 +1473,16 @@
         <div style="margin-top:12px;background:rgba(107,124,92,0.1);border-radius:10px;padding:10px 12px;border-left:3px solid var(--moss);">
           <div style="font-size:12px;font-weight:400;color:var(--charcoal);line-height:1.7;font-style:italic;">"ไม่ใช่แค่บอกว่าควรไปที่ไหน แต่อธิบายว่าทำไมที่นั้นถึงใช่สำหรับพลังงานของคุณ"</div>
         </div>
-        <button class="price-btn">เลือก</button>
+        <div style="margin-top:16px;background:rgba(107,124,92,0.06);border-radius:12px;padding:14px;">
+          <div style="font-size:11px;font-weight:500;color:var(--moss);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:10px;">✦ เข้า Waitlist</div>
+          <input id="waitlist-sig-name" type="text" placeholder="ชื่อ" style="width:100%;padding:9px 12px;border:1px solid rgba(212,197,169,0.6);border-radius:10px;font-family:'Sarabun',sans-serif;font-size:13px;margin-bottom:8px;background:var(--white);color:var(--charcoal);outline:none;box-sizing:border-box;">
+          <input id="waitlist-sig-contact" type="text" placeholder="Email หรือ IG @username" style="width:100%;padding:9px 12px;border:1px solid rgba(212,197,169,0.6);border-radius:10px;font-family:'Sarabun',sans-serif;font-size:13px;margin-bottom:10px;background:var(--white);color:var(--charcoal);outline:none;box-sizing:border-box;">
+          <button onclick="joinWaitlist('signature','waitlist-sig-name','waitlist-sig-contact')" class="price-btn" style="margin-top:0;">แจ้งความสนใจ →</button>
+        </div>
       </div>
 
       <!-- 9999 -->
-      <div class="price-card" onclick="openModal('premium')">
+      <div class="price-card">
         <div class="price-tier">Full Reading</div>
         <div class="price-name">Discover Yourself</div>
         <div class="price-amount"><span>฿</span>9,999</div>
@@ -1442,7 +1500,12 @@
           <div style="font-size:11px;font-weight:600;color:#7A5030;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:4px;">✦ รวม Astrocartography</div>
           <div style="font-size:12px;font-weight:300;color:var(--charcoal-soft);line-height:1.6;">ดูว่าพลังงานของคุณไปได้ดีกับประเทศและเมืองไหนในโลกจริงๆ</div>
         </div>
-        <button class="price-btn">เลือก</button>
+        <div style="margin-top:16px;background:rgba(196,149,106,0.06);border-radius:12px;padding:14px;">
+          <div style="font-size:11px;font-weight:500;color:var(--accent);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:10px;">✦ เข้า Waitlist</div>
+          <input id="waitlist-pre-name" type="text" placeholder="ชื่อ" style="width:100%;padding:9px 12px;border:1px solid rgba(212,197,169,0.6);border-radius:10px;font-family:'Sarabun',sans-serif;font-size:13px;margin-bottom:8px;background:var(--white);color:var(--charcoal);outline:none;box-sizing:border-box;">
+          <input id="waitlist-pre-contact" type="text" placeholder="Email หรือ IG @username" style="width:100%;padding:9px 12px;border:1px solid rgba(212,197,169,0.6);border-radius:10px;font-family:'Sarabun',sans-serif;font-size:13px;margin-bottom:10px;background:var(--white);color:var(--charcoal);outline:none;box-sizing:border-box;">
+          <button onclick="joinWaitlist('premium','waitlist-pre-name','waitlist-pre-contact')" class="price-btn" style="margin-top:0;">แจ้งความสนใจ →</button>
+        </div>
       </div>
     </div>
 
@@ -1738,6 +1801,36 @@
   const answers = {};
   let currentStep = 0;
   let selectedMBTI = '';
+  let warmupLife = '';
+
+  function selectWarmup(value) {
+    warmupLife = value;
+    answers['warmup'] = value;
+    // Highlight selected
+    document.querySelectorAll('#warmup-screen .quiz-opt').forEach(o => o.classList.remove('selected'));
+    event.currentTarget.classList.add('selected');
+    // Transition to quiz
+    setTimeout(() => {
+      document.getElementById('warmup-screen').style.display = 'none';
+      document.getElementById('quiz-main').style.display = 'block';
+    }, 350);
+  }
+
+  function handleCustomBudget(val) {
+    const n = parseInt(val);
+    if (!n || n <= 0) return;
+    // Deselect options
+    document.querySelectorAll('#step-6 .quiz-opt').forEach(o => o.classList.remove('selected'));
+    // Map to budget category
+    if (n < 3000) answers[6] = 'low';
+    else if (n < 8000) answers[6] = 'mid';
+    else if (n < 20000) answers[6] = 'high';
+    else answers[6] = 'flex';
+    answers['budgetCustom'] = n;
+    // Auto advance after short delay
+    clearTimeout(window._budgetTimer);
+    window._budgetTimer = setTimeout(() => goStep(7), 800);
+  }
 
   function selectOpt(el, step, value) {
     el.closest('.quiz-options').querySelectorAll('.quiz-opt').forEach(o=>o.classList.remove('selected'));
@@ -1766,19 +1859,19 @@
 
   const destinations = {
     // ─── ไทย เหนือ ───
-    nan:{country:'ไทย',city:'น่าน',flag:'🇹🇭',desc:'เมืองเก่าที่เดินช้าๆ ได้ทุกวัน วัดภูมินมีจิตรกรรมฝาผนังที่หาที่ไหนไม่ได้',nature:['mountain','forest'],art:['heritage','craft'],vibe:['slow','cozy'],scope:['domestic'],budget:['low','mid'],itinerary:['วันที่ 1 — เดินเมืองเก่า · กาแฟริมน้ำน่าน','วันที่ 2 — วัดภูมิน · ดอยภูคา','วันที่ 3 — ตลาดเช้าบ้านผาถ่าน']},
-    chiangmai:{country:'ไทย',city:'เชียงใหม่',flag:'🇹🇭',desc:'เมืองที่มีคาเฟ่ทุกมุม นิมมาน วัดเก่า และตลาดกลางคืนที่ทำให้เดินได้ทั้งคืน',nature:['mountain','forest'],art:['heritage','contemporary','food'],vibe:['cozy','slow'],scope:['domestic'],budget:['low','mid'],itinerary:['วันที่ 1 — นิมมานเหมินท์ · ดอยสุเทพ','วันที่ 2 — วัดเจดีย์หลวง · ตลาดวโรรส','วันที่ 3 — ดอยอินทนนท์']},
-    chiangrai:{country:'ไทย',city:'เชียงราย',flag:'🇹🇭',desc:'มากกว่าวัดขาว — ชุมชนชาติพันธุ์ ไร่ชา และหมอกยามเช้าที่ทำให้ลืมปฏิทิน',nature:['mountain','forest'],art:['heritage','contemporary','craft'],vibe:['offbeat','slow'],scope:['domestic'],budget:['low','mid'],itinerary:['วันที่ 1 — ดอยตุง · สวนแม่ฟ้าหลวง','วันที่ 2 — วัดร่องขุ่น · ไนท์บาซาร์','วันที่ 3 — บ้านดำ · แม่สาย']},
-    maehongson:{country:'ไทย',city:'แม่ฮ่องสอน',flag:'🇹🇭',desc:'เมืองที่ห่างไกลที่สุดของไทย — หมอก ชาวเขา และชีวิตที่เดินช้ากว่าที่อื่น',nature:['mountain','forest'],art:['heritage','craft'],vibe:['offbeat','slow'],scope:['domestic'],budget:['low','mid'],itinerary:['วันที่ 1 — วัดจองคำ · ทะเลสาบจองกลาง','วันที่ 2 — บ้านรักไทย · ปายรอบเช้า','วันที่ 3 — ปาย · คาเฟ่ริมน้ำ']},
-    lampang:{country:'ไทย',city:'ลำปาง',flag:'🇹🇭',desc:'เมืองรถม้าที่ยังมีชีวิต สถาปัตยกรรมล้านนาที่ไม่ถูก overtourism',nature:['city','forest'],art:['heritage','craft'],vibe:['slow','cozy'],scope:['domestic'],budget:['low','mid'],itinerary:['วันที่ 1 — วัดพระธาตุลำปางหลวง · ขี่รถม้า','วันที่ 2 — ย่านกาดกองต้า · คาเฟ่ริมน้ำวัง']},
+    nan:{country:'ไทย',city:'น่าน',flag:'🇹🇭',desc:'เมืองเก่าที่เดินช้าๆ ได้ทุกวัน วัดภูมินมีจิตรกรรมฝาผนังที่หาที่ไหนไม่ได้',season:'ต.ค.–ก.พ.',budgetEst:'฿2,500–4,000',nature:['mountain','forest'],art:['heritage','craft'],vibe:['slow','cozy'],scope:['domestic'],budget:['low','mid'],itinerary:['วันที่ 1 — เดินเมืองเก่า · กาแฟริมน้ำน่าน','วันที่ 2 — วัดภูมิน · ดอยภูคา','วันที่ 3 — ตลาดเช้าบ้านผาถ่าน']},
+    chiangmai:{country:'ไทย',city:'เชียงใหม่',flag:'🇹🇭',desc:'เมืองที่มีคาเฟ่ทุกมุม นิมมาน วัดเก่า และตลาดกลางคืนที่ทำให้เดินได้ทั้งคืน',season:'พ.ย.–ก.พ.',budgetEst:'฿3,000–6,000',nature:['mountain','forest'],art:['heritage','contemporary','food'],vibe:['cozy','slow'],scope:['domestic'],budget:['low','mid'],itinerary:['วันที่ 1 — นิมมานเหมินท์ · ดอยสุเทพ','วันที่ 2 — วัดเจดีย์หลวง · ตลาดวโรรส','วันที่ 3 — ดอยอินทนนท์']},
+    chiangrai:{country:'ไทย',city:'เชียงราย',flag:'🇹🇭',desc:'มากกว่าวัดขาว — ชุมชนชาติพันธุ์ ไร่ชา และหมอกยามเช้าที่ทำให้ลืมปฏิทิน',season:'พ.ย.–ก.พ.',budgetEst:'฿2,500–5,000',nature:['mountain','forest'],art:['heritage','contemporary','craft'],vibe:['offbeat','slow'],scope:['domestic'],budget:['low','mid'],itinerary:['วันที่ 1 — ดอยตุง · สวนแม่ฟ้าหลวง','วันที่ 2 — วัดร่องขุ่น · ไนท์บาซาร์','วันที่ 3 — บ้านดำ · แม่สาย']},
+    maehongson:{country:'ไทย',city:'แม่ฮ่องสอน',flag:'🇹🇭',desc:'เมืองที่ห่างไกลที่สุดของไทย — หมอก ชาวเขา และชีวิตที่เดินช้ากว่าที่อื่น',season:'พ.ย.–ม.ค.',budgetEst:'฿2,500–4,500',nature:['mountain','forest'],art:['heritage','craft'],vibe:['offbeat','slow'],scope:['domestic'],budget:['low','mid'],itinerary:['วันที่ 1 — วัดจองคำ · ทะเลสาบจองกลาง','วันที่ 2 — บ้านรักไทย · ปายรอบเช้า','วันที่ 3 — ปาย · คาเฟ่ริมน้ำ']},
+    lampang:{country:'ไทย',city:'ลำปาง',flag:'🇹🇭',desc:'เมืองรถม้าที่ยังมีชีวิต สถาปัตยกรรมล้านนาที่ไม่ถูก overtourism',season:'ต.ค.–ก.พ.',budgetEst:'฿2,000–3,500',nature:['city','forest'],art:['heritage','craft'],vibe:['slow','cozy'],scope:['domestic'],budget:['low','mid'],itinerary:['วันที่ 1 — วัดพระธาตุลำปางหลวง · ขี่รถม้า','วันที่ 2 — ย่านกาดกองต้า · คาเฟ่ริมน้ำวัง']},
     lamphun:{country:'ไทย',city:'ลำพูน',flag:'🇹🇭',desc:'เมืองเล็กที่งามเงียบ วัดพระธาตุหริภุญชัย และลำไยหวานที่ดีที่สุดในไทย',nature:['city','forest'],art:['heritage'],vibe:['slow','cozy'],scope:['domestic'],budget:['low'],itinerary:['วันที่ 1 — วัดพระธาตุหริภุญชัย · พิพิธภัณฑสถาน','วันที่ 2 — ตลาดเช้า · ไร่ลำไย']},
     phrae:{country:'ไทย',city:'แพร่',flag:'🇹🇭',desc:'เมืองเก่าที่ยังไม่ถูกค้นพบ บ้านวงศ์บุรี และบรรยากาศที่เหมือนหยุดเวลาไว้',nature:['city','forest'],art:['heritage','craft'],vibe:['slow','offbeat'],scope:['domestic'],budget:['low'],itinerary:['วันที่ 1 — บ้านวงศ์บุรี · วัดหลวง · เดินเมืองเก่า','วันที่ 2 — วัดพระธาตุช่อแฮ']},
     nan2:{country:'ไทย',city:'พะเยา',flag:'🇹🇭',desc:'กว๊านพะเยา ทะเลสาบน้ำจืดที่ใหญ่ที่สุดในไทยภาคเหนือ และวัดติลอกอาราม กลางน้ำ',nature:['mountain','forest'],art:['heritage'],vibe:['slow','cozy'],scope:['domestic'],budget:['low'],itinerary:['วันที่ 1 — กว๊านพะเยา · วัดติลอกอาราม','วันที่ 2 — ดอยหลวง · คาเฟ่ริมกว๊าน']},
     uttaradit:{country:'ไทย',city:'อุตรดิตถ์',flag:'🇹🇭',desc:'ลางสาด ทุเรียน และเขื่อนสิริกิติ์ที่สวยงาม เมืองเงียบที่หลายคนยังไม่รู้จัก',nature:['mountain','forest'],art:['food','heritage'],vibe:['slow','offbeat'],scope:['domestic'],budget:['low'],itinerary:['วันที่ 1 — เขื่อนสิริกิติ์ · น้ำตกแม่พูล','วันที่ 2 — ตลาดเช้า · ลางสาดสวนท้องถิ่น']},
     // ─── ไทย กลาง ───
-    ayutthaya:{country:'ไทย',city:'พระนครศรีอยุธยา',flag:'🇹🇭',desc:'อดีตราชธานีที่ยังหายใจอยู่ ขี่จักรยานผ่านวัดพังๆ และรู้สึกถึงความยิ่งใหญ่',nature:['city'],art:['heritage'],vibe:['slow','cozy'],scope:['domestic'],budget:['low','mid'],itinerary:['วันที่ 1 — วัดมหาธาตุ · วัดพระศรีสรรเพชญ์ · ขี่จักรยาน','วันที่ 2 — วัดใหญ่ชัยมงคล · ตลาดน้ำ']},
-    kanchanaburi:{country:'ไทย',city:'กาญจนบุรี',flag:'🇹🇭',desc:'ใกล้กรุงเทพแต่ vibe ต่างกันสิ้น แม่น้ำแควที่เงียบและประวัติศาสตร์ที่ยังมีลมหายใจ',nature:['forest'],art:['heritage','food'],vibe:['slow','cozy'],scope:['domestic'],budget:['low','mid'],itinerary:['วันที่ 1 — สะพานข้ามแม่น้ำแคว · นอนบนแพ','วันที่ 2 — น้ำตกเอราวัณ · ถ้ำ']},
-    khaoyai:{country:'ไทย',city:'เขาใหญ่',flag:'🇹🇭',desc:'ป่ามรดกโลกใกล้กรุงเทพ น้ำตก ช้างป่า คาเฟ่สไตล์ยุโรปและอากาศดีตลอดปี',nature:['forest','mountain'],art:['food','contemporary'],vibe:['slow','cozy'],scope:['domestic'],budget:['mid','high'],itinerary:['วันที่ 1 — อุทยานเขาใหญ่ · ดูสัตว์ป่า','วันที่ 2 — น้ำตกเหวนรก · คาเฟ่ริมป่า']},
+    ayutthaya:{country:'ไทย',city:'พระนครศรีอยุธยา',flag:'🇹🇭',desc:'อดีตราชธานีที่ยังหายใจอยู่ ขี่จักรยานผ่านวัดพังๆ และรู้สึกถึงความยิ่งใหญ่',season:'ต.ค.–ก.พ.',budgetEst:'฿1,000–2,000',nature:['city'],art:['heritage'],vibe:['slow','cozy'],scope:['domestic'],budget:['low','mid'],itinerary:['วันที่ 1 — วัดมหาธาตุ · วัดพระศรีสรรเพชญ์ · ขี่จักรยาน','วันที่ 2 — วัดใหญ่ชัยมงคล · ตลาดน้ำ']},
+    kanchanaburi:{country:'ไทย',city:'กาญจนบุรี',flag:'🇹🇭',desc:'ใกล้กรุงเทพแต่ vibe ต่างกันสิ้น แม่น้ำแควที่เงียบและประวัติศาสตร์ที่ยังมีลมหายใจ',season:'พ.ย.–ก.พ.',budgetEst:'฿1,500–3,000',nature:['forest'],art:['heritage','food'],vibe:['slow','cozy'],scope:['domestic'],budget:['low','mid'],itinerary:['วันที่ 1 — สะพานข้ามแม่น้ำแคว · นอนบนแพ','วันที่ 2 — น้ำตกเอราวัณ · ถ้ำ']},
+    khaoyai:{country:'ไทย',city:'เขาใหญ่',flag:'🇹🇭',desc:'ป่ามรดกโลกใกล้กรุงเทพ น้ำตก ช้างป่า คาเฟ่สไตล์ยุโรปและอากาศดีตลอดปี',season:'ต.ค.–ก.พ.',budgetEst:'฿3,000–6,000',nature:['forest','mountain'],art:['food','contemporary'],vibe:['slow','cozy'],scope:['domestic'],budget:['mid','high'],itinerary:['วันที่ 1 — อุทยานเขาใหญ่ · ดูสัตว์ป่า','วันที่ 2 — น้ำตกเหวนรก · คาเฟ่ริมป่า']},
     phetchaburi:{country:'ไทย',city:'เพชรบุรี',flag:'🇹🇭',desc:'เมืองขนมหวานที่มีประวัติศาสตร์ยาวนาน พระนครคีรี และชายหาดชะอำใกล้ๆ',nature:['sea','mountain'],art:['heritage','food'],vibe:['slow','cozy'],scope:['domestic'],budget:['low','mid'],itinerary:['วันที่ 1 — พระนครคีรี · เดินย่านเมืองเก่า','วันที่ 2 — ถ้ำเขาหลวง · ชายหาดชะอำ']},
     samutsongkhram:{country:'ไทย',city:'สมุทรสงคราม',flag:'🇹🇭',desc:'แม่กลอง ตลาดร่มหุบ ดอกกุหลาบ และชีวิตริมน้ำที่เงียบสงบใกล้กรุงเทพ',nature:['city'],art:['food','heritage'],vibe:['slow','cozy'],scope:['domestic'],budget:['low'],itinerary:['วันที่ 1 — ตลาดร่มหุบ · ตลาดน้ำอัมพวา','วันที่ 2 — ดูหิ่งห้อยยามเย็น · วัดอัมพวาเจติยาราม']},
     suphan:{country:'ไทย',city:'สุพรรณบุรี',flag:'🇹🇭',desc:'เมืองประวัติศาสตร์คู่บ้านคู่เมือง อนุสาวรีย์ดอนเจดีย์ และพิพิธภัณฑ์ไม้มงคล',nature:['city'],art:['heritage'],vibe:['slow','cozy'],scope:['domestic'],budget:['low'],itinerary:['วันที่ 1 — อนุสาวรีย์ดอนเจดีย์ · วัดป่าเลไลยก์','วันที่ 2 — ล่องเรือแม่น้ำสุพรรณ']},
@@ -1788,56 +1881,56 @@
     chanthaburi:{country:'ไทย',city:'จันทบุรี',flag:'🇹🇭',desc:'เมืองอัญมณีที่มีย่านเก่าริมน้ำสวยงาม โบสถ์ฝรั่งเศส และผลไม้ดีที่สุดของไทย',nature:['forest','mountain'],art:['heritage','food'],vibe:['slow','offbeat'],scope:['domestic'],budget:['low','mid'],itinerary:['วันที่ 1 — ย่านเมืองเก่า · โบสถ์คาทอลิก · ตลาดอัญมณี','วันที่ 2 — น้ำตกพลิ้ว · สวนผลไม้']},
     trat:{country:'ไทย',city:'ตราด',flag:'🇹🇭',desc:'เกาะช้าง เกาะกูด ทะเลอ่าวไทยที่ยังสวยงามและไม่แออัดเกินไป',nature:['sea','forest'],art:['food'],vibe:['slow','wild'],scope:['domestic'],budget:['mid'],itinerary:['วันที่ 1 — เกาะช้าง · หาดไก่แบ้','วันที่ 2 — ดำน้ำ · ป่าชายเลน']},
     // ─── ไทย อีสาน ───
-    loei:{country:'ไทย',city:'เลย',flag:'🇹🇭',desc:'ภูกระดึง ภูหินร่องกล้า และอากาศหนาวที่สุดในไทย สำหรับคนอยากรู้สึกว่าไม่ได้อยู่ในไทย',nature:['mountain','forest'],art:['heritage'],vibe:['offbeat','slow'],scope:['domestic'],budget:['low','mid'],itinerary:['วันที่ 1 — ภูกระดึง เดินทางขึ้น','วันที่ 2 — เดินชมธรรมชาติบนภู','วันที่ 3 — เดินลง']},
-    khonkaen:{country:'ไทย',city:'ขอนแก่น',flag:'🇹🇭',desc:'เมืองมหาวิทยาลัยที่มีพลังงานดี อาหารอีสานจริงๆ และทะเลสาบที่นั่งเล่นได้ทั้งวัน',nature:['city'],art:['food','contemporary'],vibe:['cozy','slow'],scope:['domestic'],budget:['low','mid'],itinerary:['วันที่ 1 — บึงแก่นนคร · ตลาดกลางคืน','วันที่ 2 — พิพิธภัณฑ์ไดโนเสาร์ · วัดหนองแวง']},
-    ubonratchathani:{country:'ไทย',city:'อุบลราชธานี',flag:'🇹🇭',desc:'ปลายทางของแม่น้ำโขง แกรนด์แคนยอนไทย และวัฒนธรรมอีสานที่ยังดิบอยู่',nature:['forest','mountain'],art:['heritage','craft','food'],vibe:['offbeat','slow'],scope:['domestic'],budget:['low','mid'],itinerary:['วันที่ 1 — ผาแต้ม · พระอาทิตย์ขึ้นเหนือโขง','วันที่ 2 — สามพันโบก · แกรนด์แคนยอนไทย']},
-    nakhonratchasima:{country:'ไทย',city:'นครราชสีมา',flag:'🇹🇭',desc:'ประตูสู่อีสาน อุทยานเขาใหญ่ และย่านเก่าที่มีเรื่องราวของย่าโม',nature:['forest','mountain'],art:['heritage','food'],vibe:['slow','cozy'],scope:['domestic'],budget:['low','mid'],itinerary:['วันที่ 1 — เขาใหญ่ · ดูสัตว์ป่า','วันที่ 2 — อนุสาวรีย์ย่าโม · เมืองเก่า']},
+    loei:{country:'ไทย',city:'เลย',flag:'🇹🇭',desc:'ภูกระดึง ภูหินร่องกล้า และอากาศหนาวที่สุดในไทย สำหรับคนอยากรู้สึกว่าไม่ได้อยู่ในไทย',season:'ต.ค.–ก.พ.',budgetEst:'฿2,000–4,000',nature:['mountain','forest'],art:['heritage'],vibe:['offbeat','slow'],scope:['domestic'],budget:['low','mid'],itinerary:['วันที่ 1 — ภูกระดึง เดินทางขึ้น','วันที่ 2 — เดินชมธรรมชาติบนภู','วันที่ 3 — เดินลง']},
+    khonkaen:{country:'ไทย',city:'ขอนแก่น',flag:'🇹🇭',desc:'เมืองมหาวิทยาลัยที่มีพลังงานดี อาหารอีสานจริงๆ และทะเลสาบที่นั่งเล่นได้ทั้งวัน',season:'ต.ค.–ก.พ.',budgetEst:'฿2,000–3,500',nature:['city'],art:['food','contemporary'],vibe:['cozy','slow'],scope:['domestic'],budget:['low','mid'],itinerary:['วันที่ 1 — บึงแก่นนคร · ตลาดกลางคืน','วันที่ 2 — พิพิธภัณฑ์ไดโนเสาร์ · วัดหนองแวง']},
+    ubonratchathani:{country:'ไทย',city:'อุบลราชธานี',flag:'🇹🇭',desc:'ปลายทางของแม่น้ำโขง แกรนด์แคนยอนไทย และวัฒนธรรมอีสานที่ยังดิบอยู่',season:'ต.ค.–ม.ค.',budgetEst:'฿2,500–4,500',nature:['forest','mountain'],art:['heritage','craft','food'],vibe:['offbeat','slow'],scope:['domestic'],budget:['low','mid'],itinerary:['วันที่ 1 — ผาแต้ม · พระอาทิตย์ขึ้นเหนือโขง','วันที่ 2 — สามพันโบก · แกรนด์แคนยอนไทย']},
+    nakhonratchasima:{country:'ไทย',city:'นครราชสีมา',flag:'🇹🇭',desc:'ประตูสู่อีสาน อุทยานเขาใหญ่ และย่านเก่าที่มีเรื่องราวของย่าโม',season:'ต.ค.–ก.พ.',budgetEst:'฿2,000–4,000',nature:['forest','mountain'],art:['heritage','food'],vibe:['slow','cozy'],scope:['domestic'],budget:['low','mid'],itinerary:['วันที่ 1 — เขาใหญ่ · ดูสัตว์ป่า','วันที่ 2 — อนุสาวรีย์ย่าโม · เมืองเก่า']},
     nongkhai:{country:'ไทย',city:'หนองคาย',flag:'🇹🇭',desc:'ริมโขงที่ quiet ที่สุด วัดอาฮงศิลาวาส บั้งไฟพญานาค และข้ามไปเวียงจันทน์ได้ง่าย',nature:['city'],art:['heritage','food'],vibe:['slow','cozy'],scope:['domestic'],budget:['low'],itinerary:['วันที่ 1 — ริมโขง · วัดอาฮงศิลาวาส · ตลาดท่าเสด็จ','วันที่ 2 — ข้ามไปเวียงจันทน์ ลาว']},
     sakonnakon:{country:'ไทย',city:'สกลนคร',flag:'🇹🇭',desc:'หนองหาร วัดพระธาตุเชิงชุม และเส้นทางธรรมชาติที่ยังไม่มีนักท่องเที่ยว',nature:['city','forest'],art:['heritage'],vibe:['slow','offbeat'],scope:['domestic'],budget:['low'],itinerary:['วันที่ 1 — วัดพระธาตุเชิงชุม · หนองหาร','วันที่ 2 — วัดป่า · ธรรมชาติโดยรอบ']},
     surin:{country:'ไทย',city:'สุรินทร์',flag:'🇹🇭',desc:'เมืองช้าง ปราสาทขอมที่สวยงาม และผ้าไหมที่ดีที่สุดของอีสาน',nature:['city'],art:['heritage','craft'],vibe:['slow','offbeat'],scope:['domestic'],budget:['low'],itinerary:['วันที่ 1 — ปราสาทศีขรภูมิ · หมู่บ้านช้าง','วันที่ 2 — ตลาดผ้าไหม · ปราสาทบ้านพลวง']},
     roi_et:{country:'ไทย',city:'ร้อยเอ็ด',flag:'🇹🇭',desc:'เมืองร้อยเอ็ดประตู บึงพลาญชัย และดอกบัวสาย ธรรมชาติอีสานที่เงียบงาม',nature:['city'],art:['heritage','food'],vibe:['slow','cozy'],scope:['domestic'],budget:['low'],itinerary:['วันที่ 1 — บึงพลาญชัย · ดอกบัวสาย','วันที่ 2 — วัดบูรพาภิราม · ตลาดเช้า']},
     // ─── ไทย ใต้ ───
-    kohsamui:{country:'ไทย',city:'เกาะสมุย',flag:'🇹🇭',desc:'ทะเลใต้ที่ยังมีมุมเงียบ ถ้าหลีกเลี่ยงช่วง peak ได้จะเจอเกาะที่รู้สึกว่ามีไว้สำหรับคุณ',nature:['sea'],art:['food'],vibe:['slow','wild'],scope:['domestic'],budget:['mid','high'],itinerary:['วันที่ 1 — หาดเฉวงตอนเช้า · ตลาดฟิชเชอร์แมน','วันที่ 2 — หาดบ่อผุด · น้ำตกนาเมือง','วันที่ 3 — Ang Thong Marine Park']},
-    krabi:{country:'ไทย',city:'กระบี่',flag:'🇹🇭',desc:'หน้าผาหินปูนที่สวยที่สุดในโลก เกาะพีพี และหาดไร่เลย์ที่ไปได้แค่ทางเรือ',nature:['sea','mountain'],art:['food'],vibe:['wild','slow'],scope:['domestic'],budget:['mid','high'],itinerary:['วันที่ 1 — อ่าวนาง · ล่องเรือเที่ยวเกาะ','วันที่ 2 — ไร่เลย์ · ถ้ำพระนาง','วันที่ 3 — เกาะพีพี']},
-    kohphangan:{country:'ไทย',city:'เกาะพะงัน',flag:'🇹🇭',desc:'มากกว่า Full Moon Party — หาดเงียบๆ น้ำตกในป่า และ vibe ที่สบายกว่าที่คิด',nature:['sea','forest'],art:['food'],vibe:['wild','offbeat'],scope:['domestic'],budget:['low','mid'],itinerary:['วันที่ 1 — หาดทองนาย · ธรรมชาติบนเกาะ','วันที่ 2 — น้ำตกธารปาหลัน · สนอร์เกิ้ล']},
-    trang:{country:'ไทย',city:'ตรัง',flag:'🇹🇭',desc:'ทะเลอันดามันที่ยังไม่ถูกรุกราน หาดสวย ถ้ำทะเล และอาหารใต้ที่ดีที่สุด',nature:['sea','forest'],art:['food','heritage'],vibe:['offbeat','slow'],scope:['domestic'],budget:['low','mid'],itinerary:['วันที่ 1 — เกาะเชือก · ถ้ำมรกต','วันที่ 2 — หาดปากเมง · อาหารเช้าสไตล์ตรัง']},
-    songkhla:{country:'ไทย',city:'สงขลา',flag:'🇹🇭',desc:'เมืองเก่าที่ไม่ค่อยมีคนรู้จัก street art มีชีวิต ทะเลสาบสงขลา และอาหารต่างจากที่อื่น',nature:['sea','city'],art:['contemporary','heritage','food'],vibe:['offbeat','cozy'],scope:['domestic'],budget:['low','mid'],itinerary:['วันที่ 1 — เมืองเก่าสงขลา · street art','วันที่ 2 — หาดสมิหลา · ทะเลสาบสงขลา']},
+    kohsamui:{country:'ไทย',city:'เกาะสมุย',flag:'🇹🇭',desc:'ทะเลใต้ที่ยังมีมุมเงียบ ถ้าหลีกเลี่ยงช่วง peak ได้จะเจอเกาะที่รู้สึกว่ามีไว้สำหรับคุณ',season:'มิ.ย.–ก.ย.',budgetEst:'฿4,000–8,000',nature:['sea'],art:['food'],vibe:['slow','wild'],scope:['domestic'],budget:['mid','high'],itinerary:['วันที่ 1 — หาดเฉวงตอนเช้า · ตลาดฟิชเชอร์แมน','วันที่ 2 — หาดบ่อผุด · น้ำตกนาเมือง','วันที่ 3 — Ang Thong Marine Park']},
+    krabi:{country:'ไทย',city:'กระบี่',flag:'🇹🇭',desc:'หน้าผาหินปูนที่สวยที่สุดในโลก เกาะพีพี และหาดไร่เลย์ที่ไปได้แค่ทางเรือ',season:'พ.ย.–เม.ย.',budgetEst:'฿3,500–7,000',nature:['sea','mountain'],art:['food'],vibe:['wild','slow'],scope:['domestic'],budget:['mid','high'],itinerary:['วันที่ 1 — อ่าวนาง · ล่องเรือเที่ยวเกาะ','วันที่ 2 — ไร่เลย์ · ถ้ำพระนาง','วันที่ 3 — เกาะพีพี']},
+    kohphangan:{country:'ไทย',city:'เกาะพะงัน',flag:'🇹🇭',desc:'มากกว่า Full Moon Party — หาดเงียบๆ น้ำตกในป่า และ vibe ที่สบายกว่าที่คิด',season:'มิ.ย.–ก.ย.',budgetEst:'฿2,500–5,000',nature:['sea','forest'],art:['food'],vibe:['wild','offbeat'],scope:['domestic'],budget:['low','mid'],itinerary:['วันที่ 1 — หาดทองนาย · ธรรมชาติบนเกาะ','วันที่ 2 — น้ำตกธารปาหลัน · สนอร์เกิ้ล']},
+    trang:{country:'ไทย',city:'ตรัง',flag:'🇹🇭',desc:'ทะเลอันดามันที่ยังไม่ถูกรุกราน หาดสวย ถ้ำทะเล และอาหารใต้ที่ดีที่สุด',season:'ม.ค.–เม.ย.',budgetEst:'฿2,500–5,000',nature:['sea','forest'],art:['food','heritage'],vibe:['offbeat','slow'],scope:['domestic'],budget:['low','mid'],itinerary:['วันที่ 1 — เกาะเชือก · ถ้ำมรกต','วันที่ 2 — หาดปากเมง · อาหารเช้าสไตล์ตรัง']},
+    songkhla:{country:'ไทย',city:'สงขลา',flag:'🇹🇭',desc:'เมืองเก่าที่ไม่ค่อยมีคนรู้จัก street art มีชีวิต ทะเลสาบสงขลา และอาหารต่างจากที่อื่น',season:'ม.ค.–เม.ย.',budgetEst:'฿2,000–3,500',nature:['sea','city'],art:['contemporary','heritage','food'],vibe:['offbeat','cozy'],scope:['domestic'],budget:['low','mid'],itinerary:['วันที่ 1 — เมืองเก่าสงขลา · street art','วันที่ 2 — หาดสมิหลา · ทะเลสาบสงขลา']},
     satun:{country:'ไทย',city:'สตูล',flag:'🇹🇭',desc:'เกาะตะรุเตา อุทยานแห่งชาติทางทะเลที่ไม่มีไฟฟ้า และความป่าที่หาไม่ได้อีกแล้ว',nature:['sea','forest'],art:['food'],vibe:['offbeat','wild'],scope:['domestic'],budget:['low','mid'],itinerary:['วันที่ 1 — เกาะตะรุเตา · ชายหาดดิบ','วันที่ 2 — เกาะอาดัง · ดำน้ำ']},
     phattalung:{country:'ไทย',city:'พัทลุง',flag:'🇹🇭',desc:'ทะเลน้อย นกน้ำ และบรรยากาศอีสานใต้ที่คนไม่ค่อยรู้จัก เงียบสงบจริงๆ',nature:['city','forest'],art:['food','heritage'],vibe:['slow','cozy'],scope:['domestic'],budget:['low'],itinerary:['วันที่ 1 — ทะเลน้อย · ดูนกยามเช้า','วันที่ 2 — เขาอกทะลุ · ตลาดชุมชน']},
     nakhonsithammarat:{country:'ไทย',city:'นครศรีธรรมราช',flag:'🇹🇭',desc:'วัดพระมหาธาตุ หนังตะลุง และอาหารใต้รสแท้ที่หาไม่ได้ที่ไหน',nature:['mountain','forest'],art:['heritage','craft','food'],vibe:['slow','cozy'],scope:['domestic'],budget:['low','mid'],itinerary:['วันที่ 1 — วัดพระมหาธาตุ · ย่านเมืองเก่า','วันที่ 2 — เขาหลวง · ผักเหนาะ']},
     chumphon:{country:'ไทย',city:'ชุมพร',flag:'🇹🇭',desc:'ประตูสู่เกาะเต่า เกาะทะลุ และอาหารทะเลสดๆ ก่อนจะข้ามไปฝั่งอ่าวหรืออันดามัน',nature:['sea'],art:['food'],vibe:['slow','wild'],scope:['domestic'],budget:['low','mid'],itinerary:['วันที่ 1 — หาดทุ่งวัวแล่น · อาหารทะเลตลาดเช้า','วันที่ 2 — เกาะทะลุ · ดำน้ำ']},
     ranong:{country:'ไทย',city:'ระนอง',flag:'🇹🇭',desc:'บ่อน้ำร้อนธรรมชาติ ป่าชายเลนที่ใหญ่ที่สุดในไทย และเกาะที่ยังไม่มีใครไป',nature:['forest','sea'],art:['food'],vibe:['offbeat','slow'],scope:['domestic'],budget:['low'],itinerary:['วันที่ 1 — บ่อน้ำร้อน · ป่าชายเลน','วันที่ 2 — เกาะพยาม · หาดเงียบ']},
     phangnga:{country:'ไทย',city:'พังงา',flag:'🇹🇭',desc:'เขาตาปู (James Bond Island) อ่าวพังงา และถ้ำลอดที่สวยที่สุดในไทย',nature:['sea','mountain'],art:['heritage','food'],vibe:['slow','wild'],scope:['domestic'],budget:['mid'],itinerary:['วันที่ 1 — อ่าวพังงา · เขาตาปู · ถ้ำลอด','วันที่ 2 — เกาะยาว · ชุมชนประมง']},
-    phuket:{country:'ไทย',city:'ภูเก็ต',flag:'🇹🇭',desc:'ชายหาดสวย ย่านเมืองเก่า Sino-Portuguese และ sunset ที่ดีที่สุดในไทย',nature:['sea','city'],art:['heritage','food','contemporary'],vibe:['wild','slow'],scope:['domestic'],budget:['mid','high'],itinerary:['วันที่ 1 — ย่านเก่าภูเก็ต · วัดฉลอง','วันที่ 2 — หาดกะรน · sunset แหลมพรหมเทพ','วันที่ 3 — เกาะเฮ · ดำน้ำ']},
+    phuket:{country:'ไทย',city:'ภูเก็ต',flag:'🇹🇭',desc:'ชายหาดสวย ย่านเมืองเก่า Sino-Portuguese และ sunset ที่ดีที่สุดในไทย',season:'พ.ย.–เม.ย.',budgetEst:'฿5,000–12,000',nature:['sea','city'],art:['heritage','food','contemporary'],vibe:['wild','slow'],scope:['domestic'],budget:['mid','high'],itinerary:['วันที่ 1 — ย่านเก่าภูเก็ต · วัดฉลอง','วันที่ 2 — หาดกะรน · sunset แหลมพรหมเทพ','วันที่ 3 — เกาะเฮ · ดำน้ำ']},
     // ─── ญี่ปุ่น ───
-    kyoto:{country:'ญี่ปุ่น',city:'เกียวโต',flag:'🇯🇵',desc:'เมืองที่สอนให้เดินช้า มองตรงหน้า ไม่รีบ มีวัด ป่าไผ่ และร้านชาที่อยากกลับมาอีก',nature:['forest','mountain'],art:['heritage','craft','contemporary'],vibe:['slow','cozy'],scope:['asia'],budget:['mid','high'],itinerary:['วันที่ 1 — Arashiyama bamboo grove · วัด Tenryu-ji','วันที่ 2 — Fushimi Inari · Gion · Nishiki Market','วันที่ 3 — Philosopher Path · Nanzen-ji']},
-    tokyo:{country:'ญี่ปุ่น',city:'โตเกียว',flag:'🇯🇵',desc:'เมืองที่มีทุกอย่างอยู่ในที่เดียว — ยิ่งหลงยิ่งเจอของดี',nature:['city'],art:['contemporary','food','craft'],vibe:['wild','offbeat'],scope:['asia'],budget:['mid','high'],itinerary:['วันที่ 1 — Shimokitazawa · ร้านมือสอง','วันที่ 2 — Yanaka ย่านเก่า · Ueno Museum','วันที่ 3 — Harajuku · Meiji Shrine']},
-    osaka:{country:'ญี่ปุ่น',city:'โอซาก้า',flag:'🇯🇵',desc:'เมืองที่คนกินเก่งที่สุดในญี่ปุ่น Dotonbori ไฟสว่างตลอดคืน และ takoyaki ทุกมุม',nature:['city'],art:['food','contemporary'],vibe:['wild','cozy'],scope:['asia'],budget:['mid','high'],itinerary:['วันที่ 1 — Dotonbori · Shinsaibashi','วันที่ 2 — Osaka Castle · Kuromon Market','วันที่ 3 — Nara day trip']},
-    okinawa:{country:'ญี่ปุ่น',city:'โอกินาว่า',flag:'🇯🇵',desc:'ญี่ปุ่นที่ไม่เหมือนญี่ปุ่น ทะเลใสเขียว วัฒนธรรม Ryukyu และอาหารที่ต่างจากแผ่นดินใหญ่',nature:['sea'],art:['heritage','food','craft'],vibe:['slow','wild'],scope:['asia'],budget:['mid','high'],itinerary:['วันที่ 1 — Shurijo Castle · Kokusai Street','วันที่ 2 — Churaumi Aquarium · หาดมันซา','วันที่ 3 — เกาะมิยาโกะ · ทะเลใส']},
-    hokkaido:{country:'ญี่ปุ่น',city:'ฮอกไกโด (ซัปโปโร)',flag:'🇯🇵',desc:'ญี่ปุ่นฝั่งเหนือ หิมะลึก สกี Niseko ปูยักษ์ และดอกลาเวนเดอร์ที่ Furano',nature:['mountain','forest'],art:['food','craft'],vibe:['slow','wild'],scope:['asia'],budget:['mid','high'],itinerary:['วันที่ 1 — Odori Park · Sapporo Beer Museum','วันที่ 2 — Furano ทุ่งลาเวนเดอร์ · Biei','วันที่ 3 — Niseko หรือ Otaru คลอง']},
+    kyoto:{country:'ญี่ปุ่น',city:'เกียวโต',flag:'🇯🇵',desc:'เมืองที่สอนให้เดินช้า มองตรงหน้า ไม่รีบ มีวัด ป่าไผ่ และร้านชาที่อยากกลับมาอีก',season:'มี.ค.–พ.ค. / ต.ค.–พ.ย.',budgetEst:'฿25,000–40,000',nature:['forest','mountain'],art:['heritage','craft','contemporary'],vibe:['slow','cozy'],scope:['asia'],budget:['mid','high'],itinerary:['วันที่ 1 — Arashiyama bamboo grove · วัด Tenryu-ji','วันที่ 2 — Fushimi Inari · Gion · Nishiki Market','วันที่ 3 — Philosopher Path · Nanzen-ji']},
+    tokyo:{country:'ญี่ปุ่น',city:'โตเกียว',flag:'🇯🇵',desc:'เมืองที่มีทุกอย่างอยู่ในที่เดียว — ยิ่งหลงยิ่งเจอของดี',season:'มี.ค.–พ.ค. / ก.ย.–พ.ย.',budgetEst:'฿25,000–45,000',nature:['city'],art:['contemporary','food','craft'],vibe:['wild','offbeat'],scope:['asia'],budget:['mid','high'],itinerary:['วันที่ 1 — Shimokitazawa · ร้านมือสอง','วันที่ 2 — Yanaka ย่านเก่า · Ueno Museum','วันที่ 3 — Harajuku · Meiji Shrine']},
+    osaka:{country:'ญี่ปุ่น',city:'โอซาก้า',flag:'🇯🇵',desc:'เมืองที่คนกินเก่งที่สุดในญี่ปุ่น Dotonbori ไฟสว่างตลอดคืน และ takoyaki ทุกมุม',season:'มี.ค.–พ.ค. / ต.ค.–พ.ย.',budgetEst:'฿20,000–35,000',nature:['city'],art:['food','contemporary'],vibe:['wild','cozy'],scope:['asia'],budget:['mid','high'],itinerary:['วันที่ 1 — Dotonbori · Shinsaibashi','วันที่ 2 — Osaka Castle · Kuromon Market','วันที่ 3 — Nara day trip']},
+    okinawa:{country:'ญี่ปุ่น',city:'โอกินาว่า',flag:'🇯🇵',desc:'ญี่ปุ่นที่ไม่เหมือนญี่ปุ่น ทะเลใสเขียว วัฒนธรรม Ryukyu และอาหารที่ต่างจากแผ่นดินใหญ่',season:'พ.ค.–ก.ย.',budgetEst:'฿20,000–35,000',nature:['sea'],art:['heritage','food','craft'],vibe:['slow','wild'],scope:['asia'],budget:['mid','high'],itinerary:['วันที่ 1 — Shurijo Castle · Kokusai Street','วันที่ 2 — Churaumi Aquarium · หาดมันซา','วันที่ 3 — เกาะมิยาโกะ · ทะเลใส']},
+    hokkaido:{country:'ญี่ปุ่น',city:'ฮอกไกโด (ซัปโปโร)',flag:'🇯🇵',desc:'ญี่ปุ่นฝั่งเหนือ หิมะลึก สกี Niseko ปูยักษ์ และดอกลาเวนเดอร์ที่ Furano',season:'ก.พ.–มี.ค. / ก.ค.–ส.ค.',budgetEst:'฿25,000–45,000',nature:['mountain','forest'],art:['food','craft'],vibe:['slow','wild'],scope:['asia'],budget:['mid','high'],itinerary:['วันที่ 1 — Odori Park · Sapporo Beer Museum','วันที่ 2 — Furano ทุ่งลาเวนเดอร์ · Biei','วันที่ 3 — Niseko หรือ Otaru คลอง']},
     hiroshima:{country:'ญี่ปุ่น',city:'ฮิโรชิมา',flag:'🇯🇵',desc:'เมืองที่ฟื้นจากความเจ็บปวดได้อย่างงดงาม สวนสันติภาพ และเกาะ Miyajima ที่ torii ลอยน้ำ',nature:['sea','city'],art:['heritage','food'],vibe:['slow','cozy'],scope:['asia'],budget:['mid','high'],itinerary:['วันที่ 1 — Peace Memorial Park · Atomic Bomb Dome','วันที่ 2 — เกาะ Miyajima · Itsukushima Shrine','วันที่ 3 — Okonomiyaki ท้องถิ่น']},
     kanazawa:{country:'ญี่ปุ่น',city:'คานาซาวะ',flag:'🇯🇵',desc:'เกียวโตน้อยที่ไม่มีใครแออัด ย่าน geisha ที่ยังมีชีวิต และ Kenroku-en สวนที่สวยที่สุดในญี่ปุ่น',nature:['city','forest'],art:['heritage','craft','food'],vibe:['slow','cozy'],scope:['asia'],budget:['mid','high'],itinerary:['วันที่ 1 — Kenroku-en Garden · Kanazawa Castle','วันที่ 2 — Higashi Chaya ย่าน geisha · ตลาด Omicho','วันที่ 3 — Nishi Chaya · พิพิธภัณฑ์ศิลปะ']},
     nikko:{country:'ญี่ปุ่น',city:'นิกโก้',flag:'🇯🇵',desc:'วัดทองสีสดใส Toshogu ภูเขาหิมะ และน้ำตก Kegon ที่สูงที่สุดในญี่ปุ่น',nature:['mountain','forest'],art:['heritage'],vibe:['slow','cozy'],scope:['asia'],budget:['mid'],itinerary:['วันที่ 1 — Toshogu Shrine · วัดและเจดีย์','วันที่ 2 — Kegon Waterfall · ทะเลสาบ Chuzenji']},
     // ─── เอเชีย งบน้อย ───
-    hanoi:{country:'เวียดนาม',city:'ฮานอย',flag:'🇻🇳',desc:'เมืองหลวงที่ยังมีวิญญาณ เดินในย่านเก่า กิน Pho ตั้งแต่เช้า ดูชีวิตจริงของผู้คน',nature:['city'],art:['heritage','food'],vibe:['offbeat','cozy'],scope:['asia'],budget:['low','mid'],itinerary:['วันที่ 1 — Old Quarter · Hoan Kiem · Train Street','วันที่ 2 — Temple of Literature · Beer corner','วันที่ 3 — Ha Long Bay day trip']},
-    hoi_an:{country:'เวียดนาม',city:'ฮอยอัน',flag:'🇻🇳',desc:'เมืองเก่าที่เดินได้ทั้งวัน โคมไฟส่องแม่น้ำยามค่ำ และร้านตัดผ้าที่ทำให้อยากซื้อใหม่',nature:['sea','city'],art:['heritage','craft','food'],vibe:['slow','cozy'],scope:['asia'],budget:['low','mid'],itinerary:['วันที่ 1 — Ancient Town · Japanese Bridge · ล่องเรือ','วันที่ 2 — Cooking class · ชายหาด An Bang','วันที่ 3 — My Son Sanctuary']},
-    bali:{country:'อินโดนีเซีย',city:'บาหลี (Ubud)',flag:'🇮🇩',desc:'Ubud ยังมีนาขั้นบันได วัด และชุมชนศิลปะที่ทำให้อยากอยู่ต่อ',nature:['forest','mountain','sea'],art:['craft','heritage','contemporary'],vibe:['slow','cozy'],scope:['asia'],budget:['low','mid'],itinerary:['วันที่ 1 — Tegalalang Rice Terrace · Ubud Market','วันที่ 2 — Tirta Empul · Campuhan Ridge Walk','วันที่ 3 — Seminyak · sunset Tanah Lot']},
-    luangprabang:{country:'ลาว',city:'หลวงพระบาง',flag:'🇱🇦',desc:'เมืองมรดกโลกที่เวลาเดินช้ากว่าที่อื่น ตักบาตรยามเช้า น้ำตกกวางสี และแม่น้ำโขง',nature:['forest','mountain'],art:['heritage','craft','food'],vibe:['slow','cozy'],scope:['asia'],budget:['low','mid'],itinerary:['วันที่ 1 — ตักบาตรยามเช้า · วัดเชียงทอง','วันที่ 2 — น้ำตกกวางสี · ล่องเรือโขง','วันที่ 3 — ถ้ำปากอู']},
+    hanoi:{country:'เวียดนาม',city:'ฮานอย',flag:'🇻🇳',desc:'เมืองหลวงที่ยังมีวิญญาณ เดินในย่านเก่า กิน Pho ตั้งแต่เช้า ดูชีวิตจริงของผู้คน',season:'ต.ค.–เม.ย.',budgetEst:'฿8,000–15,000',nature:['city'],art:['heritage','food'],vibe:['offbeat','cozy'],scope:['asia'],budget:['low','mid'],itinerary:['วันที่ 1 — Old Quarter · Hoan Kiem · Train Street','วันที่ 2 — Temple of Literature · Beer corner','วันที่ 3 — Ha Long Bay day trip']},
+    hoi_an:{country:'เวียดนาม',city:'ฮอยอัน',flag:'🇻🇳',desc:'เมืองเก่าที่เดินได้ทั้งวัน โคมไฟส่องแม่น้ำยามค่ำ และร้านตัดผ้าที่ทำให้อยากซื้อใหม่',season:'ก.พ.–ส.ค.',budgetEst:'฿8,000–15,000',nature:['sea','city'],art:['heritage','craft','food'],vibe:['slow','cozy'],scope:['asia'],budget:['low','mid'],itinerary:['วันที่ 1 — Ancient Town · Japanese Bridge · ล่องเรือ','วันที่ 2 — Cooking class · ชายหาด An Bang','วันที่ 3 — My Son Sanctuary']},
+    bali:{country:'อินโดนีเซีย',city:'บาหลี (Ubud)',flag:'🇮🇩',desc:'Ubud ยังมีนาขั้นบันได วัด และชุมชนศิลปะที่ทำให้อยากอยู่ต่อ',season:'พ.ค.–ก.ย.',budgetEst:'฿12,000–25,000',nature:['forest','mountain','sea'],art:['craft','heritage','contemporary'],vibe:['slow','cozy'],scope:['asia'],budget:['low','mid'],itinerary:['วันที่ 1 — Tegalalang Rice Terrace · Ubud Market','วันที่ 2 — Tirta Empul · Campuhan Ridge Walk','วันที่ 3 — Seminyak · sunset Tanah Lot']},
+    luangprabang:{country:'ลาว',city:'หลวงพระบาง',flag:'🇱🇦',desc:'เมืองมรดกโลกที่เวลาเดินช้ากว่าที่อื่น ตักบาตรยามเช้า น้ำตกกวางสี และแม่น้ำโขง',season:'พ.ย.–ก.พ.',budgetEst:'฿10,000–18,000',nature:['forest','mountain'],art:['heritage','craft','food'],vibe:['slow','cozy'],scope:['asia'],budget:['low','mid'],itinerary:['วันที่ 1 — ตักบาตรยามเช้า · วัดเชียงทอง','วันที่ 2 — น้ำตกกวางสี · ล่องเรือโขง','วันที่ 3 — ถ้ำปากอู']},
     yangon:{country:'พม่า',city:'ย่างกุ้ง',flag:'🇲🇲',desc:'เมืองที่ยังมีชั้นประวัติศาสตร์อยู่ครบ เจดีย์ชเวดากอง และย่านเก่าที่รอคนมาสำรวจ',nature:['city'],art:['heritage','food'],vibe:['offbeat','slow'],scope:['asia'],budget:['low','mid'],itinerary:['วันที่ 1 — เจดีย์ชเวดากอง · ย่านเมืองเก่า','วันที่ 2 — Circular Train · ตลาด Bogyoke']},
     danang:{country:'เวียดนาม',city:'ดานัง',flag:'🇻🇳',desc:'เมืองใหม่ที่ผสม resort กับ local ได้ดี หาดมีลาน Ba Na Hills และสะพาน Golden Hand',nature:['sea','mountain'],art:['contemporary','food'],vibe:['wild','slow'],scope:['asia'],budget:['low','mid'],itinerary:['วันที่ 1 — หาดมีลาน · Marble Mountains','วันที่ 2 — Ba Na Hills · Golden Bridge','วันที่ 3 — ล่องเรือแม่น้ำ Han']},
     kathmandu:{country:'เนปาล',city:'กาฐมาณฑุ',flag:'🇳🇵',desc:'เมืองที่ทุกหัวมุมมีวัด กลิ่นไม้หอม และพลังงานที่ไม่มีที่ไหนเหมือน ก่อนขึ้น Himalayas',nature:['mountain'],art:['heritage','craft','food'],vibe:['offbeat','slow'],scope:['asia'],budget:['low','mid'],itinerary:['วันที่ 1 — Pashupatinath · Boudhanath Stupa','วันที่ 2 — Durbar Square · ย่าน Thamel','วันที่ 3 — Nagarkot ชมเทือกเขาหิมาลัย']},
     // ─── เอเชีย งบกลาง ───
-    seoul:{country:'เกาหลี',city:'โซล',flag:'🇰🇷',desc:'โซลไม่ได้มีแค่ Myeongdong — Bukchon และ Hongdae มีชีวิตอีกแบบที่น่าค้นพบ',nature:['city','mountain'],art:['contemporary','food','craft'],vibe:['wild','cozy'],scope:['asia'],budget:['mid','high'],itinerary:['วันที่ 1 — Bukchon Hanok · Gyeongbokgung','วันที่ 2 — Hongdae · street food tour','วันที่ 3 — Namsan Tower · Han River']},
-    taipei:{country:'ไต้หวัน',city:'ไทเป',flag:'🇹🇼',desc:'เมืองที่กิน street food ได้ทุก 10 เมตร คนดีมาก ระบบขนส่งดีที่สุดในเอเชีย',nature:['city','mountain'],art:['contemporary','food','heritage'],vibe:['cozy','offbeat'],scope:['asia'],budget:['mid','high'],itinerary:['วันที่ 1 — Jiufen · ทะเลสาบ Ruifang','วันที่ 2 — Shilin Night Market · Taipei 101','วันที่ 3 — Elephant Mountain · Da an Park']},
-    singapore:{country:'สิงคโปร์',city:'สิงคโปร์',flag:'🇸🇬',desc:'เมืองที่สะอาดที่สุด อาหารดีที่สุด และ hawker center ที่ทำให้ไม่อยากกลับบ้าน',nature:['city'],art:['contemporary','food','heritage'],vibe:['cozy','wild'],scope:['asia'],budget:['mid','high'],itinerary:['วันที่ 1 — Gardens by the Bay · Marina Bay','วันที่ 2 — Chinatown · Maxwell Hawker','วันที่ 3 — Sentosa · Haji Lane']},
+    seoul:{country:'เกาหลี',city:'โซล',flag:'🇰🇷',desc:'โซลไม่ได้มีแค่ Myeongdong — Bukchon และ Hongdae มีชีวิตอีกแบบที่น่าค้นพบ',season:'มี.ค.–พ.ค. / ก.ย.–พ.ย.',budgetEst:'฿18,000–30,000',nature:['city','mountain'],art:['contemporary','food','craft'],vibe:['wild','cozy'],scope:['asia'],budget:['mid','high'],itinerary:['วันที่ 1 — Bukchon Hanok · Gyeongbokgung','วันที่ 2 — Hongdae · street food tour','วันที่ 3 — Namsan Tower · Han River']},
+    taipei:{country:'ไต้หวัน',city:'ไทเป',flag:'🇹🇼',desc:'เมืองที่กิน street food ได้ทุก 10 เมตร คนดีมาก ระบบขนส่งดีที่สุดในเอเชีย',season:'มี.ค.–พ.ค. / ก.ย.–พ.ย.',budgetEst:'฿15,000–25,000',nature:['city','mountain'],art:['contemporary','food','heritage'],vibe:['cozy','offbeat'],scope:['asia'],budget:['mid','high'],itinerary:['วันที่ 1 — Jiufen · ทะเลสาบ Ruifang','วันที่ 2 — Shilin Night Market · Taipei 101','วันที่ 3 — Elephant Mountain · Da an Park']},
+    singapore:{country:'สิงคโปร์',city:'สิงคโปร์',flag:'🇸🇬',desc:'เมืองที่สะอาดที่สุด อาหารดีที่สุด และ hawker center ที่ทำให้ไม่อยากกลับบ้าน',season:'ตลอดปี',budgetEst:'฿15,000–30,000',nature:['city'],art:['contemporary','food','heritage'],vibe:['cozy','wild'],scope:['asia'],budget:['mid','high'],itinerary:['วันที่ 1 — Gardens by the Bay · Marina Bay','วันที่ 2 — Chinatown · Maxwell Hawker','วันที่ 3 — Sentosa · Haji Lane']},
     kualalumpur:{country:'มาเลเซีย',city:'กัวลาลัมเปอร์',flag:'🇲🇾',desc:'Petronas Towers ย่าน Bukit Bintang และอาหาร Mamak ที่ดีที่สุดในโลก',nature:['city'],art:['contemporary','food','heritage'],vibe:['wild','cozy'],scope:['asia'],budget:['low','mid'],itinerary:['วันที่ 1 — Petronas Towers · KLCC Park','วันที่ 2 — Bukit Bintang · Petaling Street · Mamak','วันที่ 3 — Batu Caves · Forest Research Institute']},
     penang:{country:'มาเลเซีย',city:'ปีนัง',flag:'🇲🇾',desc:'George Town มรดกโลก street art ชื่อดัง และอาหาร Nyonya ที่ดีที่สุดในเอเชียตะวันออกเฉียงใต้',nature:['sea','city'],art:['contemporary','heritage','food'],vibe:['offbeat','cozy'],scope:['asia'],budget:['low','mid'],itinerary:['วันที่ 1 — George Town · street art · Little India','วันที่ 2 — Penang Hill · Kek Lok Si Temple','วันที่ 3 — ชายหาด Batu Ferringhi']},
     // ─── ยุโรป / ไกล ───
-    lisbon:{country:'โปรตุเกส',city:'ลิสบอน',flag:'🇵🇹',desc:'เมืองที่รู้สึกเหมือน "ค้นพบ" ได้ทุกวัน เนินเขา ราง tram เก่า Fado และอาหารทะเล',nature:['city','sea'],art:['heritage','contemporary','food'],vibe:['slow','offbeat'],scope:['far'],budget:['mid','high','flex'],itinerary:['วันที่ 1 — Alfama · Castelo · Fado bar','วันที่ 2 — Belem · LX Factory','วันที่ 3 — Sintra day trip']},
-    amsterdam:{country:'เนเธอร์แลนด์',city:'อัมสเตอร์ดัม',flag:'🇳🇱',desc:'เมืองจักรยานและคลอง ที่ทุกย่านมีบุคลิกเป็นของตัวเอง — museum ที่ไม่น่าเบื่อเลย',nature:['city'],art:['contemporary','heritage'],vibe:['cozy','offbeat'],scope:['far'],budget:['high','flex'],itinerary:['วันที่ 1 — Rijksmuseum · Vondelpark · Jordaan','วันที่ 2 — Van Gogh Museum · canal cruise','วันที่ 3 — NDSM Wharf · Haarlem']},
-    prague:{country:'เช็กเกีย',city:'ปราก',flag:'🇨🇿',desc:'เมืองเทพนิยายที่สะพานชาร์ลส์และปราสาทโกธิคยังงดงามทุกเช้า งบไม่แพงเมื่อเทียบกับยุโรปตะวันตก',nature:['city'],art:['heritage','contemporary','food'],vibe:['slow','cozy'],scope:['far'],budget:['mid','high'],itinerary:['วันที่ 1 — Old Town Square · Charles Bridge','วันที่ 2 — Prague Castle · Lesser Town','วันที่ 3 — Vinohrady ย่าน local']},
-    barcelona:{country:'สเปน',city:'บาร์เซโลนา',flag:'🇪🇸',desc:'Gaudi ทำให้เมืองนี้ดูเหมือนหลุดออกจากจินตนาการ และ La Boqueria ทำให้กลับมาอีก',nature:['sea','city'],art:['contemporary','heritage','food'],vibe:['wild','slow'],scope:['far'],budget:['high','flex'],itinerary:['วันที่ 1 — Sagrada Familia · Park Guell','วันที่ 2 — La Boqueria · Barceloneta beach','วันที่ 3 — Montjuic · tapas tour']},
-    tbilisi:{country:'จอร์เจีย',city:'ทบิลิซี',flag:'🇬🇪',desc:'เมืองที่ overtourism ยังไปไม่ถึง — สถาปัตยกรรมเก่า ไวน์ local และคนที่ warm มาก',nature:['mountain','city'],art:['heritage','craft','food'],vibe:['offbeat','cozy'],scope:['far'],budget:['low','mid'],itinerary:['วันที่ 1 — Old Town · Narikala · อาบน้ำกำมะถัน','วันที่ 2 — Wine tasting · Fabrika market','วันที่ 3 — Kazbegi day trip']},
+    lisbon:{country:'โปรตุเกส',city:'ลิสบอน',flag:'🇵🇹',desc:'เมืองที่รู้สึกเหมือน "ค้นพบ" ได้ทุกวัน เนินเขา ราง tram เก่า Fado และอาหารทะเล',season:'มี.ค.–พ.ค. / ก.ย.–ต.ค.',budgetEst:'฿35,000–60,000',nature:['city','sea'],art:['heritage','contemporary','food'],vibe:['slow','offbeat'],scope:['far'],budget:['mid','high','flex'],itinerary:['วันที่ 1 — Alfama · Castelo · Fado bar','วันที่ 2 — Belem · LX Factory','วันที่ 3 — Sintra day trip']},
+    amsterdam:{country:'เนเธอร์แลนด์',city:'อัมสเตอร์ดัม',flag:'🇳🇱',desc:'เมืองจักรยานและคลอง ที่ทุกย่านมีบุคลิกเป็นของตัวเอง — museum ที่ไม่น่าเบื่อเลย',season:'เม.ย.–ก.ย.',budgetEst:'฿40,000–70,000',nature:['city'],art:['contemporary','heritage'],vibe:['cozy','offbeat'],scope:['far'],budget:['high','flex'],itinerary:['วันที่ 1 — Rijksmuseum · Vondelpark · Jordaan','วันที่ 2 — Van Gogh Museum · canal cruise','วันที่ 3 — NDSM Wharf · Haarlem']},
+    prague:{country:'เช็กเกีย',city:'ปราก',flag:'🇨🇿',desc:'เมืองเทพนิยายที่สะพานชาร์ลส์และปราสาทโกธิคยังงดงามทุกเช้า งบไม่แพงเมื่อเทียบกับยุโรปตะวันตก',season:'พ.ค.–ก.ย.',budgetEst:'฿30,000–55,000',nature:['city'],art:['heritage','contemporary','food'],vibe:['slow','cozy'],scope:['far'],budget:['mid','high'],itinerary:['วันที่ 1 — Old Town Square · Charles Bridge','วันที่ 2 — Prague Castle · Lesser Town','วันที่ 3 — Vinohrady ย่าน local']},
+    barcelona:{country:'สเปน',city:'บาร์เซโลนา',flag:'🇪🇸',desc:'Gaudi ทำให้เมืองนี้ดูเหมือนหลุดออกจากจินตนาการ และ La Boqueria ทำให้กลับมาอีก',season:'พ.ค.–มิ.ย. / ก.ย.',budgetEst:'฿35,000–65,000',nature:['sea','city'],art:['contemporary','heritage','food'],vibe:['wild','slow'],scope:['far'],budget:['high','flex'],itinerary:['วันที่ 1 — Sagrada Familia · Park Guell','วันที่ 2 — La Boqueria · Barceloneta beach','วันที่ 3 — Montjuic · tapas tour']},
+    tbilisi:{country:'จอร์เจีย',city:'ทบิลิซี',flag:'🇬🇪',desc:'เมืองที่ overtourism ยังไปไม่ถึง — สถาปัตยกรรมเก่า ไวน์ local และคนที่ warm มาก',season:'พ.ค.–ต.ค.',budgetEst:'฿20,000–35,000',nature:['mountain','city'],art:['heritage','craft','food'],vibe:['offbeat','cozy'],scope:['far'],budget:['low','mid'],itinerary:['วันที่ 1 — Old Town · Narikala · อาบน้ำกำมะถัน','วันที่ 2 — Wine tasting · Fabrika market','วันที่ 3 — Kazbegi day trip']},
     baku:{country:'อาเซอร์ไบจาน',city:'บากู',flag:'🇦🇿',desc:'เมืองที่ผสมสถาปัตยกรรม medieval กับ ultra-modern ได้อย่างน่าตะลึง และสนามกีฬา F1',nature:['city','sea'],art:['heritage','contemporary'],vibe:['offbeat','wild'],scope:['far'],budget:['mid','high'],itinerary:['วันที่ 1 — Icheri Sheher (Old City) · Maiden Tower','วันที่ 2 — Flame Towers · Baku Boulevard','วันที่ 3 — Gobustan National Park']},
     reykjavik:{country:'ไอซ์แลนด์',city:'เรคยาวิก',flag:'🇮🇸',desc:'แสงเหนือ น้ำพุร้อน ฟยอร์ด และธรรมชาติที่ดูเหมือนมาจากดาวอื่น',nature:['mountain','sea'],art:['contemporary','food'],vibe:['wild','slow'],scope:['far'],budget:['flex'],itinerary:['วันที่ 1 — Blue Lagoon · เมือง Reykjavik','วันที่ 2 — Golden Circle: Geysir · Gullfoss','วันที่ 3 — Northern Lights tour']},
     marrakech:{country:'โมร็อกโก',city:'มาร์ราเกช',flag:'🇲🇦',desc:'เมืองสีชมพูที่ Medina เก่า souk ที่ขายทุกอย่าง และพระอาทิตย์ตกในทะเลทราย',nature:['mountain','city'],art:['heritage','craft','food'],vibe:['offbeat','wild'],scope:['far'],budget:['mid','high'],itinerary:['วันที่ 1 — Djemaa el-Fna · Souk · Bahia Palace','วันที่ 2 — Majorelle Garden · Medina เดินเท้า','วันที่ 3 — Sahara Desert day trip']},
@@ -1935,51 +2028,125 @@
   const hdLabels={manifestor:'Manifestor',generator:'Generator/MG',projector:'Projector',reflector:'Reflector',unknown:''};
 
   const venueDatabase = [
-    {name:'Bar Benfiddich',type:'Bar',cityKey:'tokyo',cityName:'โตเกียว',location:'Shinjuku, Tokyo',desc:'ไม่มีเมนู บาร์เทนเดอร์ผสมเครื่องดื่มจากวัตถุดิบตามฤดูกาล บรรยากาศลึกลับส่วนตัวมาก',mbti:["INFJ", "INTJ", "ISFP"],hd:["Reflector", "Projector"],price:'💰💰💰',priceLevel:3},
-    {name:'Virtù — Four Seasons Otemachi',type:'Bar',cityKey:'tokyo',cityName:'โตเกียว',location:'Otemachi, Tokyo',desc:'วิวสกายไลน์โตเกียว 360° ค็อกเทลฝรั่งเศส-ญี่ปุ่น บรรยากาศหรูหราระดับโลก',mbti:["ENFJ", "ENTJ", "ESFJ"],hd:["Manifestor", "Generator"],price:'💰💰💰💰',priceLevel:4},
-    {name:'Golden Gai — Bar Alleyway Crawl',type:'Bar',cityKey:'tokyo',cityName:'โตเกียว',location:'Shinjuku, Tokyo',desc:'ตรอกซอย 70+ บาร์จิ๋ว แต่ละที่ theme ของตัวเอง ชวน stranger มาคุย',mbti:["ENFP", "ENTP", "ESTP"],hd:["Generator", "Manifesting Generator"],price:'💰',priceLevel:1},
-    {name:'Punch Room Tokyo — Edition Ginza',type:'Bar',cityKey:'tokyo',cityName:'โตเกียว',location:'Ginza, Tokyo',desc:'สไตล์ gentlemen\'s club บรรยากาศ relax มี punch bowl share กัน',mbti:["ISTP", "ISTJ", "ESTJ"],hd:["Projector", "Manifestor"],price:'💰💰💰',priceLevel:3},
-    {name:'Zoetrope',type:'Bar',cityKey:'tokyo',cityName:'โตเกียว',location:'Shinjuku, Tokyo',desc:'บาร์วิสกี้เล็กๆ เจ้าของเปิดเพลง soundtrack หนัง เลือก whisky ตามที่ชอบ',mbti:["INTP", "ISTP", "INFP"],hd:["Projector", "Reflector"],price:'💰💰',priceLevel:2},
-    {name:'Florilège',type:'Restaurant',cityKey:'tokyo',cityName:'โตเกียว',location:'Minami-Aoyama, Tokyo',desc:'Fine dining French-Japanese counter ดูเชฟทำอาหาร theatrical มาก World\'s 50 Best',mbti:["ENFJ", "INTJ", "INFJ"],hd:["Projector", "Manifestor"],price:'💰💰💰💰',priceLevel:4},
-    {name:'Ichiran Ramen',type:'Restaurant',cityKey:'tokyo',cityName:'โตเกียว',location:'ทั่ว Tokyo',desc:'กินคนเดียวในบูธส่วนตัว โฟกัสรสชาติ 100% ไม่ต้องพูดกับใคร customize ได้ทุกอย่าง',mbti:["INTJ", "INTP", "ISTJ", "INFJ"],hd:["Projector", "Reflector"],price:'💰',priceLevel:1},
-    {name:'Dry Wave Cocktail Studio',type:'Bar',cityKey:'bangkok',cityName:'กรุงเทพ',location:'Thonglor, Bangkok',desc:'Best Bar in Thailand 2025 ค็อกเทลได้แรงบันดาลจากธรรมชาติ ผนังลายคลื่น marble bar',mbti:["INFP", "ISFP", "ENFP"],hd:["Reflector", "Generator"],price:'💰💰💰',priceLevel:3},
-    {name:'Vesper',type:'Bar',cityKey:'bangkok',cityName:'กรุงเทพ',location:'Silom, Bangkok',desc:'Asia\'s 50 Best Bars คลาสสิกและ creative ไปพร้อมกัน บรรยากาศหรูแต่ไม่ uptight',mbti:["ENTJ", "ESTJ", "ENFJ"],hd:["Manifestor", "Generator"],price:'💰💰💰',priceLevel:3},
-    {name:'Tropic City',type:'Bar',cityKey:'bangkok',cityName:'กรุงเทพ',location:'Charoen Krung, Bangkok',desc:'Tiki cocktail ระดับ Asia\'s 50 Best DJ เปิดดึก neighbourhood vibe craft สูงมาก',mbti:["ESFP", "ENFP", "ESTP"],hd:["Manifesting Generator", "Generator"],price:'💰💰',priceLevel:2},
-    {name:'Bar Not Found',type:'Bar',cityKey:'bangkok',cityName:'กรุงเทพ',location:'Bangkok',desc:'ต้องตามหาประตูที่ถูกต้องเองก่อนเข้า speakeasy ซ่อนใน building เก่า บรรยากาศลึกลับมาก',mbti:["INTJ", "INFJ", "INTP"],hd:["Projector", "Reflector"],price:'💰💰💰',priceLevel:3},
-    {name:'TEP BAR',type:'Bar',cityKey:'bangkok',cityName:'กรุงเทพ',location:'Rattanakosin, Bangkok',desc:'Cultural Bar of Thailand ค็อกเทลไทย ดนตรีไทย อาร์ทไทย บรรยากาศ authentic สุดๆ',mbti:["ISFJ", "ESFJ", "ENFJ", "INFJ"],hd:["Generator", "Manifesting Generator"],price:'💰💰',priceLevel:2},
-    {name:'Above Eleven',type:'Bar',cityKey:'bangkok',cityName:'กรุงเทพ',location:'Sukhumvit 11, Bangkok',desc:'Rooftop ชั้น 33 Japanese-Peruvian fusion DJ ทุกวัน วิวสวย party atmosphere',mbti:["ESFP", "ESTP", "ENFP"],hd:["Manifesting Generator", "Generator"],price:'💰💰💰',priceLevel:3},
-    {name:'Nusara',type:'Restaurant',cityKey:'bangkok',cityName:'กรุงเทพ',location:'Tha Tien, Bangkok',desc:'Fine dining ไทย มอง Wat Pho 12-course tasting menu โดย Chef Ton บรรยากาศ intimate',mbti:["INFJ", "ENFJ", "ISFJ"],hd:["Projector", "Reflector"],price:'💰💰💰💰',priceLevel:4},
-    {name:'The Bamboo Bar',type:'Bar',cityKey:'bangkok',cityName:'กรุงเทพ',location:'Riverside, Bangkok',desc:'Jazz bar ตั้งแต่ปี 1953 บรรยากาศ 1950s ริมน้ำ sultry elegant ไม่มีอะไรเหมือน',mbti:["INFP", "ISFP", "ENFJ", "INFJ"],hd:["Projector", "Reflector"],price:'💰💰💰💰',priceLevel:4},
-    {name:'Danico',type:'Bar',cityKey:'paris',cityName:'ปารีส',location:'Galerie Vivienne, Paris',desc:'Speakeasy ซ่อนใน gallery เก่าสไตล์ Jean Paul Gaultier เมนูเปลี่ยนตาม country theme',mbti:["ENFP", "ENTP", "INFP"],hd:["Generator", "Manifesting Generator"],price:'💰💰💰',priceLevel:3},
-    {name:'Angelita Madrid',type:'Bar',cityKey:'madrid',cityName:'มาดริด',location:'Madrid',desc:'Wine bar ด้านบน 500+ labels ค็อกเทล farm-to-glass ด้านล่าง World\'s 50 Best Bars',mbti:["ISTP", "INTP", "INTJ"],hd:["Projector", "Reflector"],price:'💰💰💰',priceLevel:3},
-    {name:'Jerry Thomas Speakeasy',type:'Bar',cityKey:'rome',cityName:'โรม',location:'Rome',desc:'ต้อง knock รหัสถึงเข้าได้ บรรยากาศ 1920s อิตาลี ค็อกเทลคลาสสิก World\'s 50 Best',mbti:["INTJ", "INFJ", "ISTJ"],hd:["Projector", "Manifestor"],price:'💰💰💰',priceLevel:3},
-    {name:'Trèsind Studio',type:'Restaurant',cityKey:'dubai',cityName:'ดูไบ',location:'Palm Jumeirah, Dubai',desc:'World\'s 50 Best #27 แค่ 20 ที่นั่ง เคลื่อนที่ไปแต่ละ zone ตาม course Indian haute cuisine',mbti:["ENTJ", "ENFJ", "INTJ"],hd:["Manifestor", "Projector"],price:'💰💰💰💰',priceLevel:4},
-    {name:'Orfali Bros Bistro',type:'Restaurant',cityKey:'dubai',cityName:'ดูไบ',location:'Dubai',desc:'Syrian + Pan-Asian + European ผสมกัน 3 พี่น้องจาก Aleppo World\'s 50 Best #37',mbti:["ENTP", "ENFP", "INFP"],hd:["Generator", "Manifesting Generator"],price:'💰💰💰',priceLevel:3},
-    {name:'Mimi Kakushi',type:'Bar',cityKey:'dubai',cityName:'ดูไบ',location:'Four Seasons, Dubai',desc:'Osaka 1920s art deco บรรยากาศ jazz ค็อกเทล Japanese-inspired อิงหนัง vintage',mbti:["ISFP", "INFP", "ENFJ"],hd:["Projector", "Reflector"],price:'💰💰💰💰',priceLevel:4},
-    {name:'BOCA',type:'Restaurant',cityKey:'dubai',cityName:'ดูไบ',location:'DIFC, Dubai',desc:'Spanish modern cuisine Michelin Green Star wine cellar สุดเจ๋ง vibe Madrid-meets-NYC',mbti:["ESTJ", "ENFJ", "ENTJ"],hd:["Manifestor", "Generator"],price:'💰💰💰',priceLevel:3},
-    {name:'Superbueno',type:'Bar',cityKey:'nyc',cityName:'นิวยอร์ก',location:'East Village, NYC',desc:'Mexican-American party bar นีออน swinging globe lights festive ค็อกเทลสร้างสรรค์ World\'s 50 Best',mbti:["ESFP", "ESTP", "ENFP"],hd:["Manifesting Generator", "Generator"],price:'💰💰',priceLevel:2},
-    {name:'Attaboy',type:'Bar',cityKey:'nyc',cityName:'นิวยอร์ก',location:'Lower East Side, NYC',desc:'No menu bar บาร์เทนเดอร์ถามแล้วทำให้ บรรยากาศ intimate dim ค็อกเทล World\'s 50 Best',mbti:["INFJ", "INFP", "ISFP"],hd:["Projector", "Reflector"],price:'💰💰💰',priceLevel:3},
-    {name:'Schmuck',type:'Bar',cityKey:'nyc',cityName:'นิวยอร์ก',location:'East Village, NYC',desc:'New kid on the block 2025 พลังงานสูง สีสัน funky ฮิตสุดในนิวยอร์กขณะนี้',mbti:["ENTP", "ESFP", "ESTP"],hd:["Manifesting Generator", "Generator"],price:'💰💰',priceLevel:2},
+    {name:'Bar Benfiddich',type:'Bar',cityKey:'tokyo',cityName:'โตเกียว',location:'Shinjuku, Tokyo',desc:'ไม่มีเมนู ผสมจากวัตถุดิบตามฤดูกาลเฉพาะตัว บรรยากาศลึกลับส่วนตัว World\'s 50 Best #18',mbti:["INFJ", "INTJ", "ISFP"],hd:["Reflector", "Projector"],price:'💰💰💰',priceLevel:3},
+    {name:'Virtù — Four Seasons Otemachi',type:'Bar',cityKey:'tokyo',cityName:'โตเกียว',location:'Otemachi, Tokyo',desc:'วิวสกายไลน์ 360° ค็อกเทล French-Japanese luxury World\'s 50 Best #45',mbti:["ENFJ", "ENTJ", "ESFJ"],hd:["Manifestor", "Generator"],price:'💰💰💰💰',priceLevel:4},
+    {name:'Golden Gai',type:'Bar',cityKey:'tokyo',cityName:'โตเกียว',location:'Shinjuku, Tokyo',desc:'ตรอกซอย 70+ บาร์จิ๋วแต่ละที่มี theme ของตัวเอง ชวน stranger มาคุย',mbti:["ENFP", "ENTP", "ESTP"],hd:["Generator", "Manifesting Generator"],price:'💰',priceLevel:1},
+    {name:'Punch Room Tokyo',type:'Bar',cityKey:'tokyo',cityName:'โตเกียว',location:'Ginza, Tokyo',desc:'สไตล์ gentlemen\'s club บรรยากาศ relax punch bowl share กัน',mbti:["ISTP", "ISTJ", "ESTJ"],hd:["Projector", "Manifestor"],price:'💰💰💰',priceLevel:3},
+    {name:'Zoetrope',type:'Bar',cityKey:'tokyo',cityName:'โตเกียว',location:'Shinjuku, Tokyo',desc:'บาร์วิสกี้จิ๋ว เจ้าของเปิด film soundtrack ทั้งคืน ไม่เกิน 4 คน',mbti:["INTP", "ISTP", "INFP"],hd:["Projector", "Reflector"],price:'💰💰',priceLevel:2},
+    {name:'Bar Trench',type:'Bar',cityKey:'tokyo',cityName:'โตเกียว',location:'Ebisu, Tokyo',desc:'absinthe bar สไตล์ Belle Époque cocktail European แต่ทำแบบ Japanese World\'s 50 Best #94',mbti:["INTJ", "INFP", "ISFP"],hd:["Projector", "Reflector"],price:'💰💰💰',priceLevel:3},
+    {name:'The SG Club',type:'Bar',cityKey:'tokyo',cityName:'โตเกียว',location:'Shibuya, Tokyo',desc:'2 floors: ชั้นบน craft cocktail เงียบๆ ชั้นล่าง dive bar มีเพลง World\'s 50 Best #65',mbti:["ENFP", "ENTP", "ESFP"],hd:["Manifesting Generator", "Generator"],price:'💰💰💰',priceLevel:3},
+    {name:'Florilège',type:'Restaurant',cityKey:'tokyo',cityName:'โตเกียว',location:'Minami-Aoyama, Tokyo',desc:'Fine dining French-Japanese counter ดูเชฟทำ theatrical World\'s 50 Best Restaurants',mbti:["ENFJ", "INTJ", "INFJ"],hd:["Projector", "Manifestor"],price:'💰💰💰💰',priceLevel:4},
+    {name:'Ichiran Ramen',type:'Restaurant',cityKey:'tokyo',cityName:'โตเกียว',location:'ทั่ว Tokyo',desc:'กินคนเดียวในบูธส่วนตัว โฟกัส 100% ไม่ต้องพูดกับใคร',mbti:["INTJ", "INTP", "ISTJ", "INFJ"],hd:["Projector", "Reflector"],price:'💰',priceLevel:1},
+    {name:'FURANSU Cocktail Bar',type:'Bar',cityKey:'kanazawa',cityName:'คานาซาวะ',location:'Kiguramachi, Kanazawa',desc:'2 พี่น้องครึ่งญี่ปุ่นครึ่งฝรั่งเศส ค็อกเทล creative สูง เช่น gin topped cotton candy whisky + rosemary บรรยากาศ art-filled welcoming',mbti:["ENFP", "ENFJ", "INFP"],hd:["Generator", "Manifesting Generator"],price:'💰💰',priceLevel:2},
+    {name:'Bar Wasuremono',type:'Bar',cityKey:'kanazawa',cityName:'คานาซาวะ',location:'Katamachi, Kanazawa',desc:'Hidden gem บรรยากาศอบอุ่น staff เป็นมิตร cocktail subtle และ delicious',mbti:["INFP", "ISFP", "INFJ"],hd:["Projector", "Reflector"],price:'💰💰',priceLevel:2},
+    {name:'Fukumitsuya Sake Bar',type:'Bar',cityKey:'kanazawa',cityName:'คานาซาวะ',location:'Kanazawa Station',desc:'Sake bar ในสถานีรถไฟ 8 ที่นั่ง sake sommelier คอยช่วยเลือก อยู่ใจกลาง Kanazawa',mbti:["ISTJ", "ISFJ", "INTJ"],hd:["Reflector", "Projector"],price:'💰💰',priceLevel:2},
+    {name:'The Nikka Bar',type:'Bar',cityKey:'sapporo',cityName:'ซัปโปโร',location:'Susukino, Sapporo',desc:'Flagship whisky bar ของ Nikka เดียวในประเทศ whisky Yoichi/Taketsuru หายากมาก บรรยากาศหรูในตึก Showa',mbti:["INTJ", "ISTP", "ISTJ"],hd:["Projector", "Reflector"],price:'💰💰💰',priceLevel:3},
+    {name:'Karasuno Shosai',type:'Bar',cityKey:'sapporo',cityName:'ซัปโปโร',location:'Susukino, Sapporo',desc:'Bar อ่านหนังสือ บรรยากาศ dim เต็มไปด้วย bookshelf cocktail เปลี่ยนตามฤดูกาล เช่น grilled corn, miso, sesame',mbti:["INTP", "INFP", "INTJ"],hd:["Reflector", "Projector"],price:'💰💰',priceLevel:2},
+    {name:'Kinoole',type:'Bar',cityKey:'sapporo',cityName:'ซัปโปโร',location:'Susukino, Sapporo',desc:'Gin bar เฉพาะทาง craft gin ญี่ปุ่น rare local options hidden ขึ้นบันได floor 2',mbti:["ISTP", "INTP", "ENFP"],hd:["Projector", "Generator"],price:'💰💰',priceLevel:2},
+    {name:'Old Saloon 1934',type:'Bar',cityKey:'sapporo',cityName:'ซัปโปโร',location:'Sapporo Grand Hotel',desc:'Jazz bar antique décor cocktail 500+ รายการ live jazz 4 รอบต่อวัน birthday cocktail 366 วัน',mbti:["ISFP", "INFP", "ENFJ"],hd:["Projector", "Generator"],price:'💰💰💰',priceLevel:3},
+    {name:'One Shot Bar Keith',type:'Bar',cityKey:'osaka',cityName:'โอซาก้า',location:'Osaka',desc:'Japanese whisky specialty bar 400+ expressions บ้านเกิด whisky ญี่ปุ่น ที่ Yamazaki distillery',mbti:["INTJ", "ISTP", "INTP"],hd:["Projector", "Reflector"],price:'💰💰💰',priceLevel:3},
+    {name:'Bar Cordon Noir',type:'Bar',cityKey:'osaka',cityName:'โอซาก้า',location:'Kyoto Nightlife Hub',desc:'Whisky bar 36 ที่นั่ง rare Mars Komagatake, Akkeshi, Nikka Taketsuru มี cigar หรูหรา',mbti:["INTJ", "ISTJ", "ISTP"],hd:["Projector", "Manifestor"],price:'💰💰💰',priceLevel:3},
+    {name:'Higashiyama Bar',type:'Bar',cityKey:'osaka',cityName:'โอซาก้า',location:'Higashiyama, Kyoto',desc:'9 ที่นั่ง เปิด 2024 cocktail สร้างสรรค์มาก เช่น I Feel Good slushie Tanqueray+raspberry+wasabi Obento Sazerac',mbti:["INFP", "ENFP", "INTP"],hd:["Generator", "Reflector"],price:'💰💰💰',priceLevel:3},
+    {name:'Craft Room',type:'Bar',cityKey:'osaka',cityName:'โอซาก้า',location:'Osaka',desc:'Asia\'s 50 Best Bars debut #28 Osaka\'s proudest cocktail bar energetic บรรยากาศ lively',mbti:["ESFP", "ESTP", "ENFP"],hd:["Manifesting Generator", "Generator"],price:'💰💰💰',priceLevel:3},
+    {name:'Yakoboku',type:'Bar',cityKey:'kyushu',cityName:'คิวชู',location:'Kumamoto, Kyushu',desc:'Asia\'s 50 Best #25 Kumamoto เมืองรองที่ไม่ใช่ cocktail destination แต่บาร์นี้เปลี่ยนทุกอย่าง ค็อกเทล local ingredients',mbti:["INTJ", "INFJ", "INFP"],hd:["Projector", "Reflector"],price:'💰💰💰',priceLevel:3},
+    {name:'Dry Wave Cocktail Studio',type:'Bar',cityKey:'bangkok',cityName:'กรุงเทพ',location:'Thonglor, Bangkok',desc:'Best Bar Thailand 2025 ค็อกเทลได้แรงบันดาลจากธรรมชาติ คลื่นพลังงาน marble bar',mbti:["INFP", "ISFP", "ENFP"],hd:["Reflector", "Generator"],price:'💰💰💰',priceLevel:3},
+    {name:'Bar Us',type:'Bar',cityKey:'bangkok',cityName:'กรุงเทพ',location:'Bangkok',desc:'World\'s 50 Best #15 intimate craft cocktail เข้มข้น ค็อกเทลไทย-inspired',mbti:["INTJ", "INFJ", "ISTP"],hd:["Projector", "Reflector"],price:'💰💰💰',priceLevel:3},
+    {name:'Opium Bar',type:'Bar',cityKey:'bangkok',cityName:'กรุงเทพ',location:'Chinatown, Bangkok',desc:'World\'s 50 Best #92 ชั้น 4-5 ตึก Yaowarat เก่า 120 ปี projections บนผนัง playful theatre',mbti:["INTJ", "INFJ", "ENFJ"],hd:["Projector", "Manifestor"],price:'💰💰💰',priceLevel:3},
+    {name:'G.O.D',type:'Bar',cityKey:'bangkok',cityName:'กรุงเทพ',location:'Bangkok',desc:'Asia\'s 50 Best #26 ค็อกเทล minced meat vodka, banana vinegar, oyster juice Palad Khik ต้อนรับ',mbti:["ENTP", "ENFP", "ESTP"],hd:["Manifesting Generator", "Generator"],price:'💰💰💰',priceLevel:3},
+    {name:'Vesper',type:'Bar',cityKey:'bangkok',cityName:'กรุงเทพ',location:'Silom, Bangkok',desc:'Asia\'s 50 Best คลาสสิกและ creative บรรยากาศหรูแต่ไม่ uptight',mbti:["ENTJ", "ESTJ", "ENFJ"],hd:["Manifestor", "Generator"],price:'💰💰💰',priceLevel:3},
+    {name:'Tropic City',type:'Bar',cityKey:'bangkok',cityName:'กรุงเทพ',location:'Charoen Krung, Bangkok',desc:'Asia\'s 50 Best Tiki cocktail DJ เปิดดึก neighbourhood vibe craft สูง',mbti:["ESFP", "ENFP", "ESTP"],hd:["Manifesting Generator", "Generator"],price:'💰💰',priceLevel:2},
+    {name:'Bar Not Found',type:'Bar',cityKey:'bangkok',cityName:'กรุงเทพ',location:'Bangkok',desc:'ต้องตามหาประตูที่ถูกก่อนเข้า speakeasy ซ่อนใน building เก่า',mbti:["INTJ", "INFJ", "INTP"],hd:["Projector", "Reflector"],price:'💰💰💰',priceLevel:3},
+    {name:'TEP BAR',type:'Bar',cityKey:'bangkok',cityName:'กรุงเทพ',location:'Rattanakosin, Bangkok',desc:'Cultural Bar of Thailand ค็อกเทลไทย ดนตรีไทย อาร์ทไทย authentic',mbti:["ISFJ", "ESFJ", "ENFJ"],hd:["Generator", "Manifesting Generator"],price:'💰💰',priceLevel:2},
+    {name:'The Bamboo Bar',type:'Bar',cityKey:'bangkok',cityName:'กรุงเทพ',location:'Riverside, Bangkok',desc:'Jazz bar ตั้งแต่ปี 1953 บรรยากาศ 1950s ริมน้ำ sultry elegant',mbti:["INFP", "ISFP", "ENFJ"],hd:["Projector", "Reflector"],price:'💰💰💰💰',priceLevel:4},
+    {name:'Muan',type:'Bar',cityKey:'bangkok',cityName:'กรุงเทพ',location:'Phahonyothin, Bangkok',desc:'บาร์ Isan vibe ตลาดอีสานในกรุงเทพ ค็อกเทล bak sida, jam ba เพลง luk thung / mor lam ผสม Thai pop',mbti:["ESFP", "ENFP", "ESTP"],hd:["Manifesting Generator", "Generator"],price:'💰💰',priceLevel:2},
+    {name:'Nusara',type:'Restaurant',cityKey:'bangkok',cityName:'กรุงเทพ',location:'Tha Tien, Bangkok',desc:'Fine dining ไทย มอง Wat Pho 12-course tasting menu โดย Chef Ton intimate',mbti:["INFJ", "ENFJ", "ISFJ"],hd:["Projector", "Reflector"],price:'💰💰💰💰',priceLevel:4},
+    {name:'Bar.San',type:'Bar',cityKey:'chiangmai',cityName:'เชียงใหม่',location:'Near Nawarat Bridge, Chiang Mai',desc:'Best Bar Chiang Mai 2025 Japanese-Nordic design intimate ค็อกเทล Japanese เช่น Sakura Manhattan',mbti:["INTJ", "INFJ", "ISTJ"],hd:["Projector", "Reflector"],price:'💰💰💰',priceLevel:3},
+    {name:'Thuub',type:'Bar',cityKey:'chiangmai',cityName:'เชียงใหม่',location:'Chiang Mai',desc:'กระท่อมป่าเหนือจำลอง ผนังไม้ไผ่ ค็อกเทลจากข้าว 3 ชนิด แจ็กฟรุต วัตถุดิบท้องถิ่น',mbti:["ISFP", "INFP", "ENFP"],hd:["Generator", "Reflector"],price:'💰💰',priceLevel:2},
+    {name:'North Gate Jazz Co-Op',type:'Bar',cityKey:'chiangmai',cityName:'เชียงใหม่',location:'Chang Phuak Gate, Chiang Mai',desc:'Jazz bar จิ๋วริมประตูเมือง Jam session ทุกคืน คนล้นออกมานั่งที่ถนน soulful',mbti:["INFP", "ENFP", "ISFP"],hd:["Generator", "Manifesting Generator"],price:'💰',priceLevel:1},
+    {name:'The Continental',type:'Bar',cityKey:'chiangmai',cityName:'เชียงใหม่',location:'Chiang Mai',desc:'ซ่อนหลัง bookshelf ขึ้นบันได inspired by John Wick บรรยากาศ assassin-chic',mbti:["INTJ", "ISTP", "INFJ"],hd:["Projector", "Reflector"],price:'💰💰💰',priceLevel:3},
+    {name:'Baba Nest',type:'Bar',cityKey:'kohthailand',cityName:'เกาะ/ใต้ไทย',location:'Sri Panwa, Phuket',desc:'Rooftop 360° บนเนินสูงสุด Phuket ช่วง sunset เป็น exclusive ที่สุดในเกาะ ต้อง reserve',mbti:["ENTJ", "ENFJ", "ESTJ"],hd:["Manifestor", "Generator"],price:'💰💰💰💰',priceLevel:4},
+    {name:'Coco Tam\'s',type:'Bar',cityKey:'kohthailand',cityName:'เกาะ/ใต้ไทย',location:'Bophut Beach, Koh Samui',desc:'Beach bar beanbag บนทราย swing seat ที่บาร์ เพลง chilled out sunset view fire show ทุกคืน',mbti:["ESFP", "ISFP", "ENFP"],hd:["Generator", "Reflector"],price:'💰💰',priceLevel:2},
+    {name:'Woobar',type:'Bar',cityKey:'kohthailand',cityName:'เกาะ/ใต้ไทย',location:'W Retreat, Koh Samui',desc:'Luxury pool deck บนแหลม panoramic view ทะเลและ Koh Phangan contemporary theme',mbti:["ENFJ", "ENTJ", "ESFJ"],hd:["Manifestor", "Generator"],price:'💰💰💰💰',priceLevel:4},
+    {name:'OXA Jungle Party',type:'Bar',cityKey:'kohthailand',cityName:'เกาะ/ใต้ไทย',location:'Koh Phangan',desc:'3 stage กลางป่า jungle setting แต่ละ stage ดนตรีต่างกัน backpacker+traveller vibe ไม่ mainstream',mbti:["ENFP", "ESFP", "ESTP"],hd:["Manifesting Generator", "Generator"],price:'💰',priceLevel:1},
+    {name:'Hyde Bar',type:'Bar',cityKey:'isaan',cityName:'อีสาน',location:'Ubon Ratchathani',desc:'Hidden bar บรรยากาศ intimate ค็อกเทล local ingredients + international styles เพลง soothing',mbti:["INFJ", "INFP", "ISFP"],hd:["Projector", "Reflector"],price:'💰💰',priceLevel:2},
+    {name:'Clock Tales',type:'Bar',cityKey:'isaan',cityName:'อีสาน',location:'Khon Kaen',desc:'Bar concept cocktail สร้างสรรค์ใจกลางขอนแก่น community-driven บรรยากาศ indie',mbti:["INTP", "INFP", "ENFP"],hd:["Generator", "Projector"],price:'💰💰',priceLevel:2},
+    {name:'Bar Nouveau',type:'Bar',cityKey:'paris',cityName:'ปารีส',location:'Marais, Paris',desc:'World\'s 50 Best #17 2 ชั้น: ชั้นบน Art Nouveau pre-industrial ชั้นล่าง futuristic dark เมนูเพียง 6 แก้ว',mbti:["INFJ", "INTJ", "INTP"],hd:["Reflector", "Projector"],price:'💰💰💰',priceLevel:3},
+    {name:'Danico',type:'Bar',cityKey:'paris',cityName:'ปารีส',location:'Galerie Vivienne, Paris',desc:'Speakeasy ซ่อนใน gallery สไตล์ Jean Paul Gaultier เมนูเปลี่ยนตาม country theme',mbti:["ENFP", "ENTP", "INFP"],hd:["Generator", "Manifesting Generator"],price:'💰💰💰',priceLevel:3},
+    {name:'The Cambridge Public House',type:'Bar',cityKey:'paris',cityName:'ปารีส',location:'Paris',desc:'World\'s 50 Best #20 NY-style bar in Paris open welcoming staff ค็อกเทล classic-creative',mbti:["ENFP", "ENTP", "ESFP"],hd:["Generator", "Manifesting Generator"],price:'💰💰',priceLevel:2},
+    {name:'Sips',type:'Bar',cityKey:'barcelona',cityName:'บาร์เซโลนา',location:'Barcelona',desc:'World\'s 50 Best #3 Best Bar in Europe 3 ปีซ้อน avant-garde cocktail culture Barcelona',mbti:["ENTJ", "INTJ", "ENFJ"],hd:["Manifestor", "Projector"],price:'💰💰💰💰',priceLevel:4},
+    {name:'Paradiso',type:'Bar',cityKey:'barcelona',cityName:'บาร์เซโลนา',location:'Barcelona',desc:'World\'s 50 Best #4 ซ่อนหลัง fridge door ในร้าน pastrami cocktail ผสม science + art theatrical',mbti:["ENFP", "ENTP", "INFJ"],hd:["Generator", "Manifesting Generator"],price:'💰💰💰',priceLevel:3},
+    {name:'Salmon Guru',type:'Bar',cityKey:'barcelona',cityName:'บาร์เซโลนา',location:'Madrid',desc:'World\'s 50 Best #37 ค็อกเทลสีสันสดใส creative แบบ Madrid lively crowd',mbti:["ESFP", "ESTP", "ENFP"],hd:["Manifesting Generator", "Generator"],price:'💰💰💰',priceLevel:3},
+    {name:'Angelita Madrid',type:'Bar',cityKey:'barcelona',cityName:'บาร์เซโลนา',location:'Madrid',desc:'World\'s 50 Best 51-100 Wine bar ด้านบน 500+ labels farm-to-glass cocktail ด้านล่าง',mbti:["ISTP", "INTP", "INTJ"],hd:["Projector", "Reflector"],price:'💰💰💰',priceLevel:3},
+    {name:'Connaught Bar',type:'Bar',cityKey:'london',cityName:'ลอนดอน',location:'Mayfair, London',desc:'World\'s 50 Best #6 iconic Martini Trolley ทำต่อหน้า บรรยากาศหรูระดับ legend',mbti:["ESTJ", "ENTJ", "ENFJ"],hd:["Manifestor", "Generator"],price:'💰💰💰💰',priceLevel:4},
+    {name:'Satan\'s Whiskers',type:'Bar',cityKey:'london',cityName:'ลอนดอน',location:'Bethnal Green, London',desc:'World\'s 50 Best #21 neighbourhood cocktail bar ไม่ pretentious craft drinks ระดับโลก',mbti:["ISTP", "INTP", "INFP"],hd:["Projector", "Generator"],price:'💰💰',priceLevel:2},
+    {name:'Jerry Thomas Speakeasy',type:'Bar',cityKey:'rome',cityName:'โรม',location:'Rome',desc:'ต้อง knock รหัสถึงเข้า บรรยากาศ 1920s อิตาลี World\'s 50 Best',mbti:["INTJ", "INFJ", "ISTJ"],hd:["Projector", "Manifestor"],price:'💰💰💰',priceLevel:3},
+    {name:'Freni e Frizioni',type:'Bar',cityKey:'rome',cityName:'โรม',location:'Trastevere, Rome',desc:'อดีตโรงซ่อมรถ aperitivo hour สุดยอด bohemian คนทุก type World\'s 50 Best #58',mbti:["ENFP", "ESFP", "ESTP"],hd:["Manifesting Generator", "Generator"],price:'💰💰',priceLevel:2},
+    {name:'Trèsind Studio',type:'Restaurant',cityKey:'dubai',cityName:'ดูไบ',location:'Palm Jumeirah, Dubai',desc:'World\'s 50 Best #27 แค่ 20 ที่นั่ง เคลื่อนที่ไปแต่ละ zone Indian haute cuisine',mbti:["ENTJ", "ENFJ", "INTJ"],hd:["Manifestor", "Projector"],price:'💰💰💰💰',priceLevel:4},
+    {name:'Orfali Bros Bistro',type:'Restaurant',cityKey:'dubai',cityName:'ดูไบ',location:'Dubai',desc:'Syrian + Pan-Asian + European ผสมกัน World\'s 50 Best #37',mbti:["ENTP", "ENFP", "INFP"],hd:["Generator", "Manifesting Generator"],price:'💰💰💰',priceLevel:3},
+    {name:'Mimi Kakushi',type:'Bar',cityKey:'dubai',cityName:'ดูไบ',location:'Four Seasons, Dubai',desc:'Osaka 1920s art deco jazz ค็อกเทล Japanese-inspired World\'s 50 Best #36',mbti:["ISFP", "INFP", "ENFJ"],hd:["Projector", "Reflector"],price:'💰💰💰💰',priceLevel:4},
+    {name:'Superbueno',type:'Bar',cityKey:'nyc',cityName:'นิวยอร์ก',location:'East Village, NYC',desc:'World\'s 50 Best #12 Mexican-American party bar นีออน swinging globe lights festive',mbti:["ESFP", "ESTP", "ENFP"],hd:["Manifesting Generator", "Generator"],price:'💰💰',priceLevel:2},
+    {name:'Attaboy',type:'Bar',cityKey:'nyc',cityName:'นิวยอร์ก',location:'Lower East Side, NYC',desc:'No menu bar bespoke บรรยากาศ dim intimate World\'s 50 Best',mbti:["INFJ", "INFP", "ISFP"],hd:["Projector", "Reflector"],price:'💰💰💰',priceLevel:3},
+    {name:'Schmuck',type:'Bar',cityKey:'nyc',cityName:'นิวยอร์ก',location:'East Village, NYC',desc:'World\'s 50 Best #59 new 2025 พลังงานสูง funky ฮิตสุดใน NYC',mbti:["ENTP", "ESFP", "ESTP"],hd:["Manifesting Generator", "Generator"],price:'💰💰',priceLevel:2},
+    {name:'Zest Seoul',type:'Bar',cityKey:'seoul',cityName:'โซล',location:'Seoul',desc:'World\'s 50 Best #16 local producers ชาวนา city honey จากผึ้งบนดาดฟ้าบาร์เอง',mbti:["INFJ", "ISFJ", "ENFJ"],hd:["Projector", "Generator"],price:'💰💰💰',priceLevel:3},
+    {name:'Bar Cham',type:'Bar',cityKey:'seoul',cityName:'โซล',location:'Seoul',desc:'World\'s 50 Best อยู่ใน Hanok เก่า เลื่อนประตูไม้ lounge แสงนุ่มๆ เกาหลีแท้',mbti:["INFJ", "INTJ", "ISFP"],hd:["Projector", "Reflector"],price:'💰💰💰',priceLevel:3},
+    {name:'To Infinity & Beyond',type:'Bar',cityKey:'taipei',cityName:'ไทเป',location:'Taipei',desc:'Asia\'s 50 Best #41 cosmic expedition ผ่านจักรวาลของรสชาติ textures innovative mixology',mbti:["INFP", "ENFP", "INTP"],hd:["Generator", "Reflector"],price:'💰💰💰',priceLevel:3},
+    {name:'Wu (Nothingness)',type:'Bar',cityKey:'taipei',cityName:'ไทเป',location:'Taipei',desc:'Asia\'s 50 Best #66 classic cocktails reinterpreted ด้วย Taiwanese ingredients&spirits',mbti:["INTJ", "INFJ", "ISTP"],hd:["Projector", "Reflector"],price:'💰💰💰',priceLevel:3},
+    {name:'Moonrock',type:'Bar',cityKey:'taipei',cityName:'ไทเป',location:'Tainan',desc:'Asia\'s 50 Best #42 lunar aesthetic สุดๆ local Taiwanese flavours lighting design เป็นศิลปะ',mbti:["ISFP", "INFP", "INTJ"],hd:["Reflector", "Projector"],price:'💰💰💰',priceLevel:3},
+    {name:'Bar Leone',type:'Bar',cityKey:'hongkong',cityName:'ฮ่องกง',location:'Central, Hong Kong',desc:'World\'s #1 Bar 2025 Italian-inspired cocktails for the people ไม่ pretentious warm festive',mbti:["ESFP", "ENFP", "ESTP"],hd:["Generator", "Manifesting Generator"],price:'💰💰💰',priceLevel:3},
+    {name:'Penicillin',type:'Bar',cityKey:'hongkong',cityName:'ฮ่องกง',location:'Hollywood Road, Hong Kong',desc:'Farm-to-table cocktail bar closed-loop upcycled ingredients ท้องถิ่น medicinal healing vibes',mbti:["INFJ", "ENFJ", "ISFP"],hd:["Projector", "Generator"],price:'💰💰💰',priceLevel:3},
+    {name:'The Savory Project',type:'Bar',cityKey:'hongkong',cityName:'ฮ่องกง',location:'Soho, Hong Kong',desc:'Asia\'s 50 Best #32 cocktail umami-forward beef salad, biriyani ใส่เครื่องดื่ม anti-sweet',mbti:["INTP", "INTJ", "ISTP"],hd:["Projector", "Reflector"],price:'💰💰💰',priceLevel:3},
+    {name:'Coa',type:'Bar',cityKey:'hongkong',cityName:'ฮ่องกง',location:'Shin Hing St, Hong Kong',desc:'Agave-focused bar เปลี่ยนภาพ tequila ในฮ่องกง เมนู accessible แต่ deep',mbti:["ISTP", "INTP", "ENFP"],hd:["Projector", "Generator"],price:'💰💰💰',priceLevel:3},
+    {name:'Sober Company',type:'Bar',cityKey:'shanghai',cityName:'เซี่ยงไฮ้',location:'Shanghai',desc:'Asia\'s 50 Best #81 izakaya-style bar vibes สูง เหมือนนั่งดื่มกับเพื่อนในบ้าน',mbti:["ESFP", "ENFP", "ESFJ"],hd:["Generator", "Manifesting Generator"],price:'💰💰💰',priceLevel:3},
+    {name:'Epic',type:'Bar',cityKey:'shanghai',cityName:'เซี่ยงไฮ้',location:'Shanghai',desc:'Asia\'s 50 Best #74 cocktail ผสม culinary techniques gastronomy meets mixology',mbti:["ENTJ", "INTJ", "ENFJ"],hd:["Manifestor", "Projector"],price:'💰💰💰',priceLevel:3},
+    {name:'Icon Klub',type:'Bar',cityKey:'luangprabang',cityName:'หลวงพระบาง',location:'Luang Prabang',desc:'Best bar ใน LP ตามคะแนน local boudoir-style cocktail ดีมาก Bloody Mary & Absinthe Martini โดดเด่น',mbti:["INFP", "ISFP", "ENFP"],hd:["Reflector", "Generator"],price:'💰💰',priceLevel:2},
+    {name:'Nagini by 3 Nagas',type:'Bar',cityKey:'luangprabang',cityName:'หลวงพระบาง',location:'Luang Prabang',desc:'บรรยากาศสวย ค็อกเทล local ingredients ทำได้ประณีต staff ล้วนเป็นผู้หญิง หน้า Wat 3 Nagas',mbti:["INFJ", "ISFJ", "ENFJ"],hd:["Projector", "Generator"],price:'💰💰',priceLevel:2},
+    {name:'525 Cocktails & Tapas',type:'Bar',cityKey:'luangprabang',cityName:'หลวงพระบาง',location:'Luang Prabang',desc:'Colonial villa บรรยากาศ charm cocktail Sabaidee Laos (kaffir lime gin+lemongrass) Lao+Western food',mbti:["ENFP", "ESFP", "ISFP"],hd:["Generator", "Reflector"],price:'💰💰',priceLevel:2},
+    {name:'Bor Pen Nyang',type:'Bar',cityKey:'luangprabang',cityName:'หลวงพระบาง',location:'Vientiane',desc:'Multi-level บนริม Mekong วิว Thailand อีกฝั่ง casual vibe DJ sets occasional ราคาถูก authentic local',mbti:["ESFP", "ENFP", "ESTP"],hd:["Generator", "Manifesting Generator"],price:'💰',priceLevel:1},
+    {name:'Caretaker\'s Cottage',type:'Bar',cityKey:'melbourne',cityName:'เมลเบิร์น',location:'Melbourne CBD',desc:'World\'s 50 Best #19 อดีต custodian ของโบสถ์ข้างๆ neighbourhood bar ไม่ pretentious',mbti:["ISFP", "INFP", "ESFP"],hd:["Generator", "Reflector"],price:'💰💰',priceLevel:2},
   ];
 
   function getVenueRecommendations(topCities, mbti, hdType, scope) {
     const mbtiList = mbti && mbti !== 'unknown' ? [mbti] : [];
     const hdList = hdType ? [hdType] : [];
+    const cityKeyMap = {
+      'โตเกียว':'tokyo','tokyo':'tokyo',
+      'โอซาก้า':'osaka','osaka':'osaka',
+      'เกียวโต':'kyoto','kyoto':'kyoto',
+      'คานาซาวะ':'kanazawa','kanazawa':'kanazawa',
+      'ซัปโปโร':'sapporo','sapporo':'sapporo',
+      'ฮอกไกโด':'sapporo',
+      'ฮิโรชิมา':'kyoto',
+      'กรุงเทพ':'bangkok','bangkok':'bangkok',
+      'เชียงใหม่':'chiangmai','chiang mai':'chiangmai',
+      'กระบี่':'kohthailand','เกาะสมุย':'kohthailand','เกาะพะงัน':'kohthailand','ภูเก็ต':'kohthailand',
+      'ขอนแก่น':'isaan','อุบลราชธานี':'isaan',
+      'ปารีส':'paris','paris':'paris',
+      'บาร์เซโลนา':'barcelona','barcelona':'barcelona',
+      'มาดริด':'madrid','madrid':'madrid',
+      'ลอนดอน':'london','london':'london',
+      'โรม':'rome','rome':'rome',
+      'ดูไบ':'dubai','dubai':'dubai',
+      'นิวยอร์ก':'nyc','nyc':'nyc',
+      'โซล':'seoul','seoul':'seoul',
+      'ไทเป':'taipei','taipei':'taipei',
+      'ฮ่องกง':'hongkong','hong kong':'hongkong',
+      'เซี่ยงไฮ้':'shanghai','shanghai':'shanghai',
+      'หลวงพระบาง':'luangprabang',
+      'เมลเบิร์น':'melbourne',
+    };
     const cityKeys = topCities.map(c => {
       const n = c.toLowerCase();
-      if (n.includes('โตเกียว') || n.includes('tokyo') || n.includes('osaka') || n.includes('โอซาก้า') || n.includes('kyoto') || n.includes('เกียวโต') || n.includes('hokkaido') || n.includes('ฮอกไกโด') || n.includes('okinawa') || n.includes('โอกินาว่า') || n.includes('hiroshima') || n.includes('ฮิโรชิมา') || n.includes('kanazawa') || n.includes('คานาซาวะ')) return 'tokyo';
-      if (n.includes('กรุงเทพ') || n.includes('bangkok')) return 'bangkok';
-      if (n.includes('ปารีส') || n.includes('paris')) return 'paris';
-      if (n.includes('มาดริด') || n.includes('madrid')) return 'madrid';
-      if (n.includes('โรม') || n.includes('rome')) return 'rome';
-      if (n.includes('ดูไบ') || n.includes('dubai')) return 'dubai';
-      if (n.includes('นิวยอร์ก') || n.includes('nyc')) return 'nyc';
+      for (const [k,v] of Object.entries(cityKeyMap)) {
+        if (n.includes(k.toLowerCase())) return v;
+      }
       return null;
     }).filter(Boolean);
 
-    // ถ้าเลือก domestic แต่ไม่มีกรุงเทพใน top cities → เพิ่ม bangkok เสมอ
     if ((scope === 'domestic' || scope === 'anywhere') && !cityKeys.includes('bangkok')) {
       cityKeys.push('bangkok');
+    }
+    if (scope === 'domestic' && topCities.some(c => c.includes('เชียงใหม่'))) {
+      if (!cityKeys.includes('chiangmai')) cityKeys.push('chiangmai');
     }
 
     let results = venueDatabase.filter(v => {
@@ -1989,7 +2156,6 @@
       return cityMatch && (mbtiMatch || hdMatch);
     });
 
-    // ถ้ายังไม่มี match เลย → แสดงตาม MBTI อย่างเดียว ไม่จำกัดเมือง
     if (results.length === 0 && mbtiList.length > 0) {
       results = venueDatabase.filter(v => v.mbti.some(m => mbtiList.includes(m)));
     }
@@ -2088,6 +2254,22 @@
     return w[profileKey] || w['explore'];
   }
 
+  function resetToWarmup() {
+    // Reset all
+    Object.keys(answers).forEach(k=>delete answers[k]);
+    selectedMBTI=''; warmupLife='';
+    for(let i=0;i<=TOTAL_STEPS;i++){const d=document.getElementById('dot-'+i);if(d){d.classList.remove('active','done');if(i===0)d.classList.add('active');}}
+    document.querySelectorAll('.quiz-opt').forEach(o=>o.classList.remove('selected'));
+    document.querySelectorAll('.mbti-btn').forEach(b=>b.classList.remove('selected'));
+    // Hide quiz, show warmup
+    document.getElementById('quiz-main').style.display='none';
+    document.getElementById('warmup-screen').style.display='block';
+    document.getElementById('result-locked').style.display='block';
+    document.getElementById('result-full').style.display='none';
+    currentStep=0;
+    const s=document.getElementById('step-0');if(s){document.querySelectorAll('.quiz-step').forEach(x=>x.classList.remove('active'));s.classList.add('active');}
+  }
+
   function unlockResult() {
     document.getElementById('result-locked').style.display='none';
     document.getElementById('result-full').style.display='block';
@@ -2136,6 +2318,7 @@
     const dayCount=answers[8]==='day'?1:answers[8]==='weekend'?2:3;
     const musicType2 = answers[13];
     const mv2 = musicType2 && musicType2!=='unknown' ? musicVenues[musicType2] : null;
+    const customBudget = answers['budgetCustom'];
     tops.forEach((d,i)=>{
       const card=document.createElement('div');
       card.style.cssText='background:var(--white);border:1px solid rgba(212,197,169,0.5);border-radius:16px;padding:18px;transition:all 0.2s;';
@@ -2150,7 +2333,13 @@
         });
       }
       const musicHtml = musicTip ? '<div style="margin-top:10px;background:rgba(155,139,180,0.07);border-radius:10px;padding:8px 12px;font-size:12px;color:var(--charcoal-soft);line-height:1.6;border-left:2px solid var(--purple-soft);">' + mv2.icon + ' <b style="color:var(--charcoal);font-weight:500;">'+mv2.label+'</b> — ' + musicTip + '</div>' : '';
-      card.innerHTML='<div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:10px;"><div style="display:flex;align-items:center;gap:10px;"><span style="font-size:22px;">'+d.flag+'</span><div><div style="font-family:\'Playfair Display\',serif;font-size:18px;font-weight:400;color:var(--charcoal);">'+d.city+'</div><div style="font-size:12px;color:var(--charcoal-soft);opacity:0.6;">'+d.country+'</div></div></div>'+(i===0?'<span style="font-size:11px;background:rgba(107,124,92,0.12);color:var(--moss-dark);padding:3px 12px;border-radius:99px;font-weight:500;white-space:nowrap;">เหมาะที่สุด ✦</span>':'')+'</div><p style="font-size:13px;font-weight:300;color:var(--charcoal-soft);line-height:1.65;margin-bottom:'+(itinHtml||musicHtml?'12px':'0')+';">'+d.desc+'</p>'+(itinHtml?'<div style="margin-top:4px;"><div style="font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--moss);margin-bottom:6px;font-weight:500;">Itinerary ง่ายๆ</div><ul style="margin:0;padding:0;">'+itinHtml+'</ul></div>':'')+musicHtml;
+      // Season + budget row
+      const seasonHtml = (d.season||d.budgetEst) ? '<div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px;">'
+        + (d.season?'<span style="font-size:11px;background:rgba(107,124,92,0.1);color:var(--moss-dark);padding:3px 10px;border-radius:99px;">📅 '+d.season+'</span>':'')
+        + (d.budgetEst?'<span style="font-size:11px;background:rgba(196,149,106,0.1);color:#7A5030;padding:3px 10px;border-radius:99px;">💰 '+d.budgetEst+'/คน</span>':'')
+        + (customBudget?'<span style="font-size:11px;background:rgba(155,139,180,0.1);color:var(--purple-dark);padding:3px 10px;border-radius:99px;">งบคุณ ฿'+customBudget.toLocaleString()+'</span>':'')
+        + '</div>' : '';
+      card.innerHTML='<div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:10px;"><div style="display:flex;align-items:center;gap:10px;"><span style="font-size:22px;">'+d.flag+'</span><div><div style="font-family:\'Playfair Display\',serif;font-size:18px;font-weight:400;color:var(--charcoal);">'+d.city+'</div><div style="font-size:12px;color:var(--charcoal-soft);opacity:0.6;">'+d.country+'</div></div></div>'+(i===0?'<span style="font-size:11px;background:rgba(107,124,92,0.12);color:var(--moss-dark);padding:3px 12px;border-radius:99px;font-weight:500;white-space:nowrap;">เหมาะที่สุด ✦</span>':'')+'</div>'+seasonHtml+'<p style="font-size:13px;font-weight:300;color:var(--charcoal-soft);line-height:1.65;margin-bottom:'+(itinHtml||musicHtml?'12px':'0')+';">'+d.desc+'</p>'+(itinHtml?'<div style="margin-top:4px;"><div style="font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--moss);margin-bottom:6px;font-weight:500;">Itinerary ง่ายๆ</div><ul style="margin:0;padding:0;">'+itinHtml+'</ul></div>':'')+musicHtml;
       destCards.appendChild(card);
     });
 
@@ -2283,6 +2472,24 @@
   }
 
   function logoutUser(){localStorage.removeItem('craftaway_user');renderUserBar();}
+
+  function joinWaitlist(tier, nameId, contactId) {
+    const name = document.getElementById(nameId).value.trim();
+    const contact = document.getElementById(contactId).value.trim();
+    if (!name || !contact) { alert('กรุณากรอกชื่อและช่องทางติดต่อก่อนนะ'); return; }
+    sbPost('orders', {
+      user_name: name, ig_or_line: contact, tier: tier,
+      tier_price: tier==='signature'?5999:9999,
+      total_price: tier==='signature'?5999:9999,
+      status: 'waitlist'
+    });
+    const btn = event.target;
+    btn.textContent = '✓ บันทึกแล้ว — monemoll_ จะติดต่อกลับเร็วๆ นี้';
+    btn.style.cssText += ';background:var(--moss);color:var(--white);border-color:var(--moss);';
+    btn.disabled = true;
+    document.getElementById(nameId).disabled = true;
+    document.getElementById(contactId).disabled = true;
+  }
 
   function renderUserBar(){
     const user=getUser();
