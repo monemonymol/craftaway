@@ -1004,7 +1004,7 @@
 
 <!-- NAV -->
 <nav style="background:rgba(245,240,232,.94);backdrop-filter:blur(12px);border-bottom:.5px solid var(--cream-dark);height:56px;display:flex;align-items:center;justify-content:space-between;padding:0 24px;position:sticky;top:0;z-index:100;">
-  <a style="font-family:'Playfair Display',serif;font-size:18px;font-style:italic;color:var(--charcoal);text-decoration:none;" href="#">Craftaway</a>
+  <a style="font-family:\'Playfair Display\',serif;font-size:18px;font-style:italic;color:var(--charcoal);text-decoration:none;" href="#">Craftaway</a>
   <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
     <a style="font-size:13px;color:var(--charcoal-soft);text-decoration:none;padding:6px 14px;border-radius:99px;border:1px solid var(--cream-dark);white-space:nowrap;" href="craftaway-demo.html">💬 คุยกับ Craftaway</a>
     <a style="font-size:13px;color:var(--charcoal-soft);text-decoration:none;padding:6px 14px;border-radius:99px;border:1px solid var(--cream-dark);white-space:nowrap;" href="craftaway-mbti.html">🧠 MBTI Test</a>
@@ -1020,7 +1020,7 @@
 
   <span class="hero-tag">Craftaway — by monemoll_</span>
   <h1 class="hero-title"><em>Craftaway</em></h1>
-  <p class="hero-sub" style="font-style:italic; font-family:'Playfair Display',serif; font-size:clamp(16px,2.2vw,20px); margin-bottom:16px; color:var(--moss);">Design your journey, discover yourself</p>
+  <p class="hero-sub" style="font-style:italic; font-family:\'Playfair Display\',serif; font-size:clamp(16px,2.2vw,20px); margin-bottom:16px; color:var(--moss);">Design your journey, discover yourself</p>
   <p class="hero-sub" style="margin-bottom:48px;">ทริปที่ดีที่สุดไม่ได้เริ่มจากการจอง แต่เริ่มจากการรู้จักตัวเองก่อน Craftaway คือพื้นที่ช่วยให้คุณออกแบบการเดินทางจากข้างใน</p>
   <div class="hero-cta">
     <button class="btn-primary" onclick="document.getElementById('discover').scrollIntoView({behavior:'smooth'})">ค้นหาแบบของคุณ</button>
@@ -1243,8 +1243,40 @@
         </div>
       </div>
 
-      <!-- Result (step 11) -->
+      <!-- 11: Human Design -->
       <div class="quiz-step" id="step-11">
+        <h3 class="quiz-q">รู้ Human Design Type ของตัวเองไหม?</h3>
+        <p class="quiz-sub">HD บอกว่าคุณมีพลังงานแบบไหน — ถ้าไม่รู้ กด "ยังไม่รู้" ได้เลย</p>
+        <div class="quiz-options">
+          <div class="quiz-opt" onclick="selectOpt(this,11,'manifestor')"><div class="quiz-opt-icon">⚡</div><div class="quiz-opt-label">Manifestor</div><div class="quiz-opt-desc">ริเริ่ม เปิดทาง ชอบทำตามใจตัวเอง</div></div>
+          <div class="quiz-opt" onclick="selectOpt(this,11,'generator')"><div class="quiz-opt-icon">🔥</div><div class="quiz-opt-label">Generator / MG</div><div class="quiz-opt-desc">พลังงานสูง ทำได้นานถ้าใจรัก</div></div>
+          <div class="quiz-opt" onclick="selectOpt(this,11,'projector')"><div class="quiz-opt-icon">🔭</div><div class="quiz-opt-label">Projector</div><div class="quiz-opt-desc">มองเห็นลึก ต้องการพักฟื้น</div></div>
+          <div class="quiz-opt" onclick="selectOpt(this,11,'reflector')"><div class="quiz-opt-icon">🌕</div><div class="quiz-opt-label">Reflector</div><div class="quiz-opt-desc">รับพลังงานรอบข้าง หายากมาก</div></div>
+        </div>
+        <p style="font-size:12px;color:var(--charcoal-soft);opacity:0.6;margin-bottom:10px;">ยังไม่รู้ HD type? <a href="https://staraligns.com/my-chart" target="_blank" style="color:var(--purple-soft);">ดูได้ที่นี่ฟรี ✦</a></p>
+        <div class="quiz-nav" style="justify-content:space-between;">
+          <button class="quiz-back" onclick="goStep(10)">← ย้อนกลับ</button>
+          <button class="btn-ghost" style="font-size:13px;padding:8px 20px;" onclick="answers[11]='unknown';goStep(12)">ยังไม่รู้ →</button>
+        </div>
+      </div>
+
+      <!-- 12: ทริปในอุดมคติ -->
+      <div class="quiz-step" id="step-12">
+        <h3 class="quiz-q">ถ้าทริปนี้จะเปลี่ยนอะไรบางอย่างในชีวิตคุณ อยากให้มันเปลี่ยนอะไร?</h3>
+        <p class="quiz-sub">คำถามสุดท้าย — ตอบตามที่รู้สึกจริงๆ</p>
+        <div class="quiz-options">
+          <div class="quiz-opt" onclick="selectOpt(this,12,'clarity')"><div class="quiz-opt-icon">🔮</div><div class="quiz-opt-label">อยากได้ความชัดเจน</div><div class="quiz-opt-desc">ตัดสินใจบางอย่างที่ค้างอยู่</div></div>
+          <div class="quiz-opt" onclick="selectOpt(this,12,'recharge')"><div class="quiz-opt-icon">🔋</div><div class="quiz-opt-label">อยากกลับมามีพลัง</div><div class="quiz-opt-desc">ชาร์จใหม่ทั้งกายและใจ</div></div>
+          <div class="quiz-opt" onclick="selectOpt(this,12,'perspective')"><div class="quiz-opt-icon">🌅</div><div class="quiz-opt-label">อยากมองโลกต่างออกไป</div><div class="quiz-opt-desc">เปิดมุมมองใหม่ให้ชีวิต</div></div>
+          <div class="quiz-opt" onclick="selectOpt(this,12,'connection')"><div class="quiz-opt-icon">🤝</div><div class="quiz-opt-label">อยากเชื่อมต่อกับตัวเองอีกครั้ง</div><div class="quiz-opt-desc">กลับมาเป็นตัวเองที่แท้จริง</div></div>
+        </div>
+        <div class="quiz-nav" style="justify-content:space-between;">
+          <button class="quiz-back" onclick="goStep(11)">← ย้อนกลับ</button>
+        </div>
+      </div>
+
+      <!-- Result (step 13) -->
+      <div class="quiz-step" id="step-13">
         <h3 class="quiz-q" style="margin-bottom:6px;">นี่คือ travel profile ของคุณ ✦</h3>
         <p style="font-size:13px;color:var(--charcoal-soft);font-weight:300;margin-bottom:24px;">จาก 11 คำตอบของคุณ</p>
 
@@ -1274,7 +1306,7 @@
           <!-- unlock overlay -->
           <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:rgba(245,240,232,0.7);backdrop-filter:blur(2px);border-radius:16px;padding:28px 24px;text-align:center;">
             <div style="font-size:24px;margin-bottom:10px;">🔒</div>
-            <div style="font-family:'Playfair Display',serif;font-size:18px;font-weight:400;color:var(--charcoal);margin-bottom:8px;">บันทึก profile เพื่ออ่านผลเต็มๆ</div>
+            <div style="font-family:\'Playfair Display\',serif;font-size:18px;font-weight:400;color:var(--charcoal);margin-bottom:8px;">บันทึก profile เพื่ออ่านผลเต็มๆ</div>
             <p style="font-size:13px;font-weight:300;color:var(--charcoal-soft);line-height:1.6;margin-bottom:20px;max-width:300px;">destination ที่เหมาะกับพลังงานคุณ, itinerary ง่ายๆ และ MBTI insight รอคุณอยู่ข้างใน</p>
             <button class="btn-primary" onclick="openLoginModal()" style="margin-bottom:10px;width:100%;max-width:280px;">สร้าง profile ฟรี — ดูผลเต็มๆ</button>
             <button style="background:none;border:none;font-size:12px;color:var(--charcoal-soft);opacity:0.5;cursor:pointer;font-family:'Sarabun',sans-serif;" onclick="unlockResult()">ข้ามไปก่อน →</button>
@@ -1298,7 +1330,7 @@
           <a class="btn-ghost" href="craftaway-demo.html" style="text-decoration:none;display:inline-flex;align-items:center;gap:6px;">💬 คุยกับ Craftaway</a>
         </div>
         <div class="quiz-nav" style="margin-top:20px;">
-          <button class="quiz-back" onclick="goStep(10)">← ย้อนกลับ</button>
+          <button class="quiz-back" onclick="goStep(12)">← ย้อนกลับ</button>
           <button class="quiz-back" onclick="resetQuiz()" style="opacity:0.5;">เริ่มใหม่</button>
         </div>
       </div>
@@ -1331,56 +1363,44 @@
         <button class="price-btn" onclick="event.stopPropagation(); document.getElementById('discover').scrollIntoView({behavior:'smooth'})">ทำ quiz เลย</button>
       </div>
 
-      <!-- 888 -->
-      <div class="price-card" onclick="openModal('essential')">
-        <div class="price-tier">Essential</div>
-        <div class="price-name">Craft Your Trip</div>
-        <div class="price-amount"><span>฿</span>888</div>
-        <div class="price-note">ส่งผลภายใน 3–5 วัน</div>
-        <div class="price-divider"></div>
-        <ul class="price-features">
-          <li>อ่าน MBTI แล้วออกแบบทริปเฉพาะคุณ</li>
-          <li>แนะนำ destination ที่ตรงกับพลังงาน</li>
-          <li>วิธีเที่ยวให้ชาร์จพลังได้จริง</li>
-          <li>ส่งเป็น PDF เขียนขึ้นมาเพื่อคุณ</li>
-        </ul>
-        <button class="price-btn">เลือก</button>
-      </div>
-
-      <!-- 1555 -->
+      <!-- 5999 -->
       <div class="price-card featured" onclick="openModal('signature')">
         <div class="price-tier">Signature</div>
         <div class="price-name">Design Your Journey</div>
-        <div class="price-amount"><span>฿</span>1,555</div>
-        <div class="price-note">monemoll_ ทำให้ ส่งใน 3–5 วัน</div>
+        <div class="price-amount"><span>฿</span>5,999</div>
+        <div class="price-note">คุย 30 นาที · ส่งผลใน 5–7 วัน</div>
         <div class="price-divider"></div>
         <ul class="price-features">
-          <li>วิเคราะห์ MBTI + Human Design chart</li>
-          <li>อ่านแผนที่พลังงานของคุณ</li>
-          <li>ออกแบบทริปที่ชาร์จพลังงานได้จริง</li>
-          <li>destination ที่เหมาะกับ energy type</li>
-          <li>ส่งเป็น PDF ละเอียด + ถามเพิ่มได้ 2 ข้อ</li>
+          <li>เริ่มด้วยการคุย 30 นาที เพื่อเข้าใจตัวตนและสิ่งที่ต้องการจริงๆ</li>
+          <li>วิเคราะห์ MBTI + Human Design chart ลึกเฉพาะคุณ</li>
+          <li>ออกแบบทริปตามพลังงานที่แท้จริง ไม่ใช่แค่ preference</li>
+          <li>destination ที่เหมาะกับ energy type และจังหวะชีวิตตอนนี้</li>
+          <li>PDF เขียนขึ้นเพื่อคุณคนเดียว ไม่ใช่ template</li>
         </ul>
+        <div style="margin-top:12px;background:rgba(107,124,92,0.07);border-radius:10px;padding:10px 12px;border-left:3px solid var(--moss);">
+          <div style="font-size:12px;font-weight:300;color:var(--charcoal-soft);line-height:1.7;font-style:italic;">"ไม่ใช่แค่บอกว่าควรไปที่ไหน แต่อธิบายว่าทำไมที่นั้นถึงใช่สำหรับพลังงานของคุณ"</div>
+        </div>
         <button class="price-btn">เลือก</button>
       </div>
 
-      <!-- 2999 -->
+      <!-- 9999 -->
       <div class="price-card" onclick="openModal('premium')">
         <div class="price-tier">Full Reading</div>
         <div class="price-name">Discover Yourself</div>
-        <div class="price-amount"><span>฿</span>2,999</div>
-        <div class="price-note">ส่งผลภายใน 5–7 วัน</div>
+        <div class="price-amount"><span>฿</span>9,999</div>
+        <div class="price-note">คุย 30 นาที · ส่งผลใน 7–10 วัน</div>
         <div class="price-divider"></div>
         <ul class="price-features">
-          <li>MBTI + Human Design + โหราศาสตร์ตะวันตก</li>
-          <li>อ่านแผนที่พลังงานและดวงชะตาลึกๆ</li>
-          <li>ออกแบบทริปที่ชาร์จได้จริงตามธรรมชาติของคุณ</li>
-          <li>itinerary จริงทั้งทริป</li>
-          <li>คุยกัน 30 นาที หลังรับไฟล์</li>
+          <li>เริ่มด้วยการคุย 30 นาที เพื่อเข้าใจตัวตนและสิ่งที่ต้องการจริงๆ</li>
+          <li>MBTI + Human Design + โหราศาสตร์ตะวันตก + Astrocartography</li>
+          <li>อ่านลึกถึงแผนที่พลังงาน ดวงชะตา และพื้นที่บนโลกที่เหมาะกับคุณ</li>
+          <li>ออกแบบทริปที่สอดคล้องกับธรรมชาติ ตัวตน และพลังงานที่แท้จริง</li>
+          <li>itinerary จริงทั้งทริป พร้อมเหตุผลว่าทำไมแต่ละที่ถึงใช่</li>
+          <li>PDF ที่เขียนเพื่อคุณคนเดียว ไม่มีคนอื่นได้แบบเดียวกัน</li>
         </ul>
         <div style="margin-top:12px;background:rgba(196,149,106,0.1);border-radius:10px;padding:10px 12px;border-left:3px solid var(--accent);">
-          <div style="font-size:11px;font-weight:500;color:var(--accent);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:4px;">✦ Add-on พิเศษ</div>
-          <div style="font-size:12px;font-weight:300;color:var(--charcoal-soft);line-height:1.6;">โหราศาสตร์แผนที่ (Astrocartography) — ดูว่าพลังงานของคุณไปได้ดีกับประเทศและเมืองไหนในโลกจริงๆ</div>
+          <div style="font-size:11px;font-weight:500;color:var(--accent);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:4px;">✦ รวม Astrocartography</div>
+          <div style="font-size:12px;font-weight:300;color:var(--charcoal-soft);line-height:1.6;">ดูว่าพลังงานของคุณไปได้ดีกับประเทศและเมืองไหนในโลกจริงๆ</div>
         </div>
         <button class="price-btn">เลือก</button>
       </div>
@@ -1393,7 +1413,7 @@
 <!-- ─── FOOTER ─── -->
 <footer class="footer">
   <div class="footer-logo">Craftaway</div>
-  <div class="footer-sub" style="font-style:italic; font-family:'Playfair Display',serif; margin-bottom:6px; color:rgba(254,252,248,0.5);">Design your journey, discover yourself</div>
+  <div class="footer-sub" style="font-style:italic; font-family:\'Playfair Display\',serif; margin-bottom:6px; color:rgba(254,252,248,0.5);">Design your journey, discover yourself</div>
   <div class="footer-sub">by monemoll_</div>
   <a href="https://instagram.com/monemoll_" class="footer-ig" target="_blank">
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
@@ -1475,22 +1495,22 @@
 
     <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:24px;">
       <div style="background:var(--cream);border-radius:var(--border-radius-md);padding:14px 12px;text-align:center;">
-        <div style="font-family:'Playfair Display',serif;font-size:22px;color:var(--moss);margin-bottom:4px;" id="dash-age">—</div>
+        <div style="font-family:\'Playfair Display\',serif;font-size:22px;color:var(--moss);margin-bottom:4px;" id="dash-age">—</div>
         <div style="font-size:11px;color:var(--charcoal-soft);letter-spacing:0.05em;">อายุ</div>
       </div>
       <div style="background:var(--cream);border-radius:var(--border-radius-md);padding:14px 12px;text-align:center;">
-        <div style="font-family:'Playfair Display',serif;font-size:22px;color:var(--moss);margin-bottom:4px;" id="dash-quiz-count">0</div>
+        <div style="font-family:\'Playfair Display\',serif;font-size:22px;color:var(--moss);margin-bottom:4px;" id="dash-quiz-count">0</div>
         <div style="font-size:11px;color:var(--charcoal-soft);letter-spacing:0.05em;">quiz ที่ทำแล้ว</div>
       </div>
       <div style="background:var(--cream);border-radius:var(--border-radius-md);padding:14px 12px;text-align:center;">
-        <div style="font-family:'Playfair Display',serif;font-size:15px;color:var(--moss);margin-bottom:4px;" id="dash-plan">—</div>
+        <div style="font-family:\'Playfair Display\',serif;font-size:15px;color:var(--moss);margin-bottom:4px;" id="dash-plan">—</div>
         <div style="font-size:11px;color:var(--charcoal-soft);letter-spacing:0.05em;">แผนเดินทาง</div>
       </div>
     </div>
 
     <div id="dash-profile-section" style="display:none;background:rgba(107,124,92,0.06);border-radius:16px;padding:20px;margin-bottom:20px;">
       <div style="font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:var(--moss);margin-bottom:8px;">Travel Profile ล่าสุด</div>
-      <div style="font-family:'Playfair Display',serif;font-size:18px;color:var(--charcoal);margin-bottom:6px;" id="dash-profile-name"></div>
+      <div style="font-family:\'Playfair Display\',serif;font-size:18px;color:var(--charcoal);margin-bottom:6px;" id="dash-profile-name"></div>
       <p style="font-size:13px;font-weight:300;color:var(--charcoal-soft);line-height:1.7;margin-bottom:12px;" id="dash-profile-desc"></p>
       <div id="dash-profile-tags" style="display:flex;flex-wrap:wrap;gap:6px;"></div>
     </div>
@@ -1615,7 +1635,7 @@
       <div style="background:var(--cream);border-radius:20px;padding:24px 20px;margin-bottom:20px;border:1px solid var(--cream-dark);">
         <div style="font-size:13px;font-weight:300;color:var(--charcoal-soft);margin-bottom:14px;">สแกน QR หรือโอนเข้าเบอร์ PromptPay</div>
         <img id="qr-img" src="" alt="PromptPay QR" style="width:180px;height:180px;border-radius:12px;display:block;margin:0 auto 14px;">
-        <div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:400;color:var(--charcoal);margin-bottom:4px;" id="qr-amount"></div>
+        <div style="font-family:\'Playfair Display\',serif;font-size:22px;font-weight:400;color:var(--charcoal);margin-bottom:4px;" id="qr-amount"></div>
         <div style="font-size:13px;color:var(--charcoal-soft);">เบอร์ PromptPay: <b style="color:var(--charcoal);">097-280-9498</b></div>
         <div style="font-size:12px;color:var(--charcoal-soft);margin-top:4px;opacity:0.7;">ชื่อบัญชี: monemoll_</div>
       </div>
@@ -1666,7 +1686,7 @@
     }catch(e){return [];}
   }
 
-  const TOTAL_STEPS = 11;
+  const TOTAL_STEPS = 13;
   const dotsEl = document.getElementById('quiz-progress-dots');
   for (let i = 0; i <= TOTAL_STEPS; i++) {
     const d = document.createElement('div');
@@ -1705,42 +1725,84 @@
   }
 
   const destinations = {
-    nan:{country:'ไทย',city:'น่าน',flag:'🇹🇭',desc:'เมืองเก่าที่เดินช้าๆ ได้ทุกวัน วัดภูมินมีจิตรกรรมฝาผนังที่หาที่ไหนไม่ได้',nature:['mountain','forest'],art:['heritage','craft'],vibe:['slow','cozy'],scope:['domestic'],budget:['low','mid'],itinerary:['วันที่ 1 — เดินเมืองเก่า กาแฟริมน้ำน่าน','วันที่ 2 — วัดภูมิน · ดอยภูคา','วันที่ 3 — ตลาดเช้าบ้านผาถ่าน']},
+    // ─── ไทย เหนือ ───
+    nan:{country:'ไทย',city:'น่าน',flag:'🇹🇭',desc:'เมืองเก่าที่เดินช้าๆ ได้ทุกวัน วัดภูมินมีจิตรกรรมฝาผนังที่หาที่ไหนไม่ได้',nature:['mountain','forest'],art:['heritage','craft'],vibe:['slow','cozy'],scope:['domestic'],budget:['low','mid'],itinerary:['วันที่ 1 — เดินเมืองเก่า · กาแฟริมน้ำน่าน','วันที่ 2 — วัดภูมิน · ดอยภูคา','วันที่ 3 — ตลาดเช้าบ้านผาถ่าน']},
     chiangmai:{country:'ไทย',city:'เชียงใหม่',flag:'🇹🇭',desc:'เมืองที่มีคาเฟ่ทุกมุม นิมมาน วัดเก่า และตลาดกลางคืนที่ทำให้เดินได้ทั้งคืน',nature:['mountain','forest'],art:['heritage','contemporary','food'],vibe:['cozy','slow'],scope:['domestic'],budget:['low','mid'],itinerary:['วันที่ 1 — นิมมานเหมินท์ · ดอยสุเทพ','วันที่ 2 — วัดเจดีย์หลวง · ตลาดวโรรส','วันที่ 3 — ดอยอินทนนท์']},
     chiangrai:{country:'ไทย',city:'เชียงราย',flag:'🇹🇭',desc:'มากกว่าวัดขาว — ชุมชนชาติพันธุ์ ไร่ชา และหมอกยามเช้าที่ทำให้ลืมปฏิทิน',nature:['mountain','forest'],art:['heritage','contemporary','craft'],vibe:['offbeat','slow'],scope:['domestic'],budget:['low','mid'],itinerary:['วันที่ 1 — ดอยตุง · สวนแม่ฟ้าหลวง','วันที่ 2 — วัดร่องขุ่น · ไนท์บาซาร์','วันที่ 3 — บ้านดำ · แม่สาย']},
-    lampang:{country:'ไทย',city:'ลำปาง',flag:'🇹🇭',desc:'เมืองรถม้าที่ยังมีชีวิต สถาปัตยกรรมล้านนาที่ไม่ถูก overtourism',nature:['city','forest'],art:['heritage','craft'],vibe:['slow','cozy'],scope:['domestic'],budget:['low','mid'],itinerary:['วันที่ 1 — วัดพระธาตุลำปางหลวง · ขี่รถม้า','วันที่ 2 — ย่านกาดกองต้า · คาเฟ่ริมน้ำวัง']},
-    phrae:{country:'ไทย',city:'แพร่',flag:'🇹🇭',desc:'เมืองเก่าที่ยังไม่ถูกค้นพบ บ้านวงศ์บุรี และบรรยากาศที่เหมือนหยุดเวลาไว้',nature:['city','forest'],art:['heritage','craft'],vibe:['slow','offbeat'],scope:['domestic'],budget:['low'],itinerary:['วันที่ 1 — บ้านวงศ์บุรี · วัดหลวง · เดินเมืองเก่า','วันที่ 2 — วัดพระธาตุช่อแฮ']},
     maehongson:{country:'ไทย',city:'แม่ฮ่องสอน',flag:'🇹🇭',desc:'เมืองที่ห่างไกลที่สุดของไทย — หมอก ชาวเขา และชีวิตที่เดินช้ากว่าที่อื่น',nature:['mountain','forest'],art:['heritage','craft'],vibe:['offbeat','slow'],scope:['domestic'],budget:['low','mid'],itinerary:['วันที่ 1 — วัดจองคำ · ทะเลสาบจองกลาง','วันที่ 2 — บ้านรักไทย · ปายรอบเช้า','วันที่ 3 — ปาย · คาเฟ่ริมน้ำ']},
-    loei:{country:'ไทย',city:'เลย',flag:'🇹🇭',desc:'ภูกระดึง ภูหินร่องกล้า และอากาศหนาวที่สุดในไทย สำหรับคนอยากรู้สึกว่าไม่ได้อยู่ในไทย',nature:['mountain','forest'],art:['heritage'],vibe:['offbeat','slow'],scope:['domestic'],budget:['low','mid'],itinerary:['วันที่ 1 — ภูกระดึง เดินทางขึ้น · ตั้งแคมป์','วันที่ 2 — เดินชมธรรมชาติบนภู','วันที่ 3 — เดินลงและเดินทางกลับ']},
-    khonkaen:{country:'ไทย',city:'ขอนแก่น',flag:'🇹🇭',desc:'เมืองมหาวิทยาลัยที่มีพลังงานดี อาหารอีสานจริงๆ และทะเลสาบที่นั่งเล่นได้ทั้งวัน',nature:['city'],art:['food','contemporary'],vibe:['cozy','slow'],scope:['domestic'],budget:['low','mid'],itinerary:['วันที่ 1 — บึงแก่นนคร · ตลาดกลางคืน','วันที่ 2 — พิพิธภัณฑ์ไดโนเสาร์ · วัดหนองแวง']},
-    ubonratchathani:{country:'ไทย',city:'อุบลราชธานี',flag:'🇹🇭',desc:'ปลายทางของแม่น้ำโขง แกรนด์แคนยอนไทย และวัฒนธรรมอีสานที่ยังดิบอยู่',nature:['forest','mountain'],art:['heritage','craft','food'],vibe:['offbeat','slow'],scope:['domestic'],budget:['low','mid'],itinerary:['วันที่ 1 — ผาแต้ม · พระอาทิตย์ขึ้นเหนือโขง','วันที่ 2 — สามพันโบก · แกรนด์แคนยอนไทย']},
-    nakhonratchasima:{country:'ไทย',city:'นครราชสีมา',flag:'🇹🇭',desc:'ประตูสู่อีสาน อุทยานเขาใหญ่ และย่านเก่าที่มีเรื่องราวของย่าโม',nature:['forest','mountain'],art:['heritage','food'],vibe:['slow','cozy'],scope:['domestic'],budget:['low','mid'],itinerary:['วันที่ 1 — เขาใหญ่ · ดูช้างและสัตว์ป่า','วันที่ 2 — อนุสาวรีย์ย่าโม · เมืองเก่า']},
-    kanchanaburi:{country:'ไทย',city:'กาญจนบุรี',flag:'🇹🇭',desc:'ใกล้กรุงเทพแต่ vibe ต่างกันสิ้น แม่น้ำแควที่เงียบและประวัติศาสตร์ที่ยังมีลมหายใจ',nature:['forest'],art:['heritage','food'],vibe:['slow','cozy'],scope:['domestic'],budget:['low','mid'],itinerary:['วันที่ 1 — สะพานข้ามแม่น้ำแคว · นอนบนแพ','วันที่ 2 — น้ำตกเอราวัณ · ถ้ำ']},
+    lampang:{country:'ไทย',city:'ลำปาง',flag:'🇹🇭',desc:'เมืองรถม้าที่ยังมีชีวิต สถาปัตยกรรมล้านนาที่ไม่ถูก overtourism',nature:['city','forest'],art:['heritage','craft'],vibe:['slow','cozy'],scope:['domestic'],budget:['low','mid'],itinerary:['วันที่ 1 — วัดพระธาตุลำปางหลวง · ขี่รถม้า','วันที่ 2 — ย่านกาดกองต้า · คาเฟ่ริมน้ำวัง']},
+    lamphun:{country:'ไทย',city:'ลำพูน',flag:'🇹🇭',desc:'เมืองเล็กที่งามเงียบ วัดพระธาตุหริภุญชัย และลำไยหวานที่ดีที่สุดในไทย',nature:['city','forest'],art:['heritage'],vibe:['slow','cozy'],scope:['domestic'],budget:['low'],itinerary:['วันที่ 1 — วัดพระธาตุหริภุญชัย · พิพิธภัณฑสถาน','วันที่ 2 — ตลาดเช้า · ไร่ลำไย']},
+    phrae:{country:'ไทย',city:'แพร่',flag:'🇹🇭',desc:'เมืองเก่าที่ยังไม่ถูกค้นพบ บ้านวงศ์บุรี และบรรยากาศที่เหมือนหยุดเวลาไว้',nature:['city','forest'],art:['heritage','craft'],vibe:['slow','offbeat'],scope:['domestic'],budget:['low'],itinerary:['วันที่ 1 — บ้านวงศ์บุรี · วัดหลวง · เดินเมืองเก่า','วันที่ 2 — วัดพระธาตุช่อแฮ']},
+    nan2:{country:'ไทย',city:'พะเยา',flag:'🇹🇭',desc:'กว๊านพะเยา ทะเลสาบน้ำจืดที่ใหญ่ที่สุดในไทยภาคเหนือ และวัดติลอกอาราม กลางน้ำ',nature:['mountain','forest'],art:['heritage'],vibe:['slow','cozy'],scope:['domestic'],budget:['low'],itinerary:['วันที่ 1 — กว๊านพะเยา · วัดติลอกอาราม','วันที่ 2 — ดอยหลวง · คาเฟ่ริมกว๊าน']},
+    uttaradit:{country:'ไทย',city:'อุตรดิตถ์',flag:'🇹🇭',desc:'ลางสาด ทุเรียน และเขื่อนสิริกิติ์ที่สวยงาม เมืองเงียบที่หลายคนยังไม่รู้จัก',nature:['mountain','forest'],art:['food','heritage'],vibe:['slow','offbeat'],scope:['domestic'],budget:['low'],itinerary:['วันที่ 1 — เขื่อนสิริกิติ์ · น้ำตกแม่พูล','วันที่ 2 — ตลาดเช้า · ลางสาดสวนท้องถิ่น']},
+    // ─── ไทย กลาง ───
     ayutthaya:{country:'ไทย',city:'พระนครศรีอยุธยา',flag:'🇹🇭',desc:'อดีตราชธานีที่ยังหายใจอยู่ ขี่จักรยานผ่านวัดพังๆ และรู้สึกถึงความยิ่งใหญ่',nature:['city'],art:['heritage'],vibe:['slow','cozy'],scope:['domestic'],budget:['low','mid'],itinerary:['วันที่ 1 — วัดมหาธาตุ · วัดพระศรีสรรเพชญ์ · ขี่จักรยาน','วันที่ 2 — วัดใหญ่ชัยมงคล · ตลาดน้ำ']},
+    kanchanaburi:{country:'ไทย',city:'กาญจนบุรี',flag:'🇹🇭',desc:'ใกล้กรุงเทพแต่ vibe ต่างกันสิ้น แม่น้ำแควที่เงียบและประวัติศาสตร์ที่ยังมีลมหายใจ',nature:['forest'],art:['heritage','food'],vibe:['slow','cozy'],scope:['domestic'],budget:['low','mid'],itinerary:['วันที่ 1 — สะพานข้ามแม่น้ำแคว · นอนบนแพ','วันที่ 2 — น้ำตกเอราวัณ · ถ้ำ']},
     khaoyai:{country:'ไทย',city:'เขาใหญ่',flag:'🇹🇭',desc:'ป่ามรดกโลกใกล้กรุงเทพ น้ำตก ช้างป่า คาเฟ่สไตล์ยุโรปและอากาศดีตลอดปี',nature:['forest','mountain'],art:['food','contemporary'],vibe:['slow','cozy'],scope:['domestic'],budget:['mid','high'],itinerary:['วันที่ 1 — อุทยานเขาใหญ่ · ดูสัตว์ป่า','วันที่ 2 — น้ำตกเหวนรก · คาเฟ่ริมป่า']},
     phetchaburi:{country:'ไทย',city:'เพชรบุรี',flag:'🇹🇭',desc:'เมืองขนมหวานที่มีประวัติศาสตร์ยาวนาน พระนครคีรี และชายหาดชะอำใกล้ๆ',nature:['sea','mountain'],art:['heritage','food'],vibe:['slow','cozy'],scope:['domestic'],budget:['low','mid'],itinerary:['วันที่ 1 — พระนครคีรี · เดินย่านเมืองเก่า','วันที่ 2 — ถ้ำเขาหลวง · ชายหาดชะอำ']},
+    samutsongkhram:{country:'ไทย',city:'สมุทรสงคราม',flag:'🇹🇭',desc:'แม่กลอง ตลาดร่มหุบ ดอกกุหลาบ และชีวิตริมน้ำที่เงียบสงบใกล้กรุงเทพ',nature:['city'],art:['food','heritage'],vibe:['slow','cozy'],scope:['domestic'],budget:['low'],itinerary:['วันที่ 1 — ตลาดร่มหุบ · ตลาดน้ำอัมพวา','วันที่ 2 — ดูหิ่งห้อยยามเย็น · วัดอัมพวาเจติยาราม']},
+    suphan:{country:'ไทย',city:'สุพรรณบุรี',flag:'🇹🇭',desc:'เมืองประวัติศาสตร์คู่บ้านคู่เมือง อนุสาวรีย์ดอนเจดีย์ และพิพิธภัณฑ์ไม้มงคล',nature:['city'],art:['heritage'],vibe:['slow','cozy'],scope:['domestic'],budget:['low'],itinerary:['วันที่ 1 — อนุสาวรีย์ดอนเจดีย์ · วัดป่าเลไลยก์','วันที่ 2 — ล่องเรือแม่น้ำสุพรรณ']},
+    // ─── ไทย ตะวันออก ───
+    chonburi:{country:'ไทย',city:'ชลบุรี (พัทยา)',flag:'🇹🇭',desc:'ทะเลตะวันออก สวนสัตว์เปิดเขาเขียว และชีวิต expat ที่มีพลังงานสูง',nature:['sea'],art:['food','contemporary'],vibe:['wild'],scope:['domestic'],budget:['mid','high'],itinerary:['วันที่ 1 — เกาะล้าน · ดำน้ำ','วันที่ 2 — สวนสัตว์เปิดเขาเขียว · ตลาดกลางคืน']},
+    rayong:{country:'ไทย',city:'ระยอง',flag:'🇹🇭',desc:'เกาะเสม็ด ผลไม้สดและของทะเลที่ถูกและสด เมืองพักผ่อนสบายๆ ฝั่งอ่าวไทย',nature:['sea'],art:['food'],vibe:['slow','wild'],scope:['domestic'],budget:['low','mid'],itinerary:['วันที่ 1 — เกาะเสม็ด · หาดทราย','วันที่ 2 — ตลาดผลไม้ · อาหารทะเลสด']},
+    chanthaburi:{country:'ไทย',city:'จันทบุรี',flag:'🇹🇭',desc:'เมืองอัญมณีที่มีย่านเก่าริมน้ำสวยงาม โบสถ์ฝรั่งเศส และผลไม้ดีที่สุดของไทย',nature:['forest','mountain'],art:['heritage','food'],vibe:['slow','offbeat'],scope:['domestic'],budget:['low','mid'],itinerary:['วันที่ 1 — ย่านเมืองเก่า · โบสถ์คาทอลิก · ตลาดอัญมณี','วันที่ 2 — น้ำตกพลิ้ว · สวนผลไม้']},
+    trat:{country:'ไทย',city:'ตราด',flag:'🇹🇭',desc:'เกาะช้าง เกาะกูด ทะเลอ่าวไทยที่ยังสวยงามและไม่แออัดเกินไป',nature:['sea','forest'],art:['food'],vibe:['slow','wild'],scope:['domestic'],budget:['mid'],itinerary:['วันที่ 1 — เกาะช้าง · หาดไก่แบ้','วันที่ 2 — ดำน้ำ · ป่าชายเลน']},
+    // ─── ไทย อีสาน ───
+    loei:{country:'ไทย',city:'เลย',flag:'🇹🇭',desc:'ภูกระดึง ภูหินร่องกล้า และอากาศหนาวที่สุดในไทย สำหรับคนอยากรู้สึกว่าไม่ได้อยู่ในไทย',nature:['mountain','forest'],art:['heritage'],vibe:['offbeat','slow'],scope:['domestic'],budget:['low','mid'],itinerary:['วันที่ 1 — ภูกระดึง เดินทางขึ้น','วันที่ 2 — เดินชมธรรมชาติบนภู','วันที่ 3 — เดินลง']},
+    khonkaen:{country:'ไทย',city:'ขอนแก่น',flag:'🇹🇭',desc:'เมืองมหาวิทยาลัยที่มีพลังงานดี อาหารอีสานจริงๆ และทะเลสาบที่นั่งเล่นได้ทั้งวัน',nature:['city'],art:['food','contemporary'],vibe:['cozy','slow'],scope:['domestic'],budget:['low','mid'],itinerary:['วันที่ 1 — บึงแก่นนคร · ตลาดกลางคืน','วันที่ 2 — พิพิธภัณฑ์ไดโนเสาร์ · วัดหนองแวง']},
+    ubonratchathani:{country:'ไทย',city:'อุบลราชธานี',flag:'🇹🇭',desc:'ปลายทางของแม่น้ำโขง แกรนด์แคนยอนไทย และวัฒนธรรมอีสานที่ยังดิบอยู่',nature:['forest','mountain'],art:['heritage','craft','food'],vibe:['offbeat','slow'],scope:['domestic'],budget:['low','mid'],itinerary:['วันที่ 1 — ผาแต้ม · พระอาทิตย์ขึ้นเหนือโขง','วันที่ 2 — สามพันโบก · แกรนด์แคนยอนไทย']},
+    nakhonratchasima:{country:'ไทย',city:'นครราชสีมา',flag:'🇹🇭',desc:'ประตูสู่อีสาน อุทยานเขาใหญ่ และย่านเก่าที่มีเรื่องราวของย่าโม',nature:['forest','mountain'],art:['heritage','food'],vibe:['slow','cozy'],scope:['domestic'],budget:['low','mid'],itinerary:['วันที่ 1 — เขาใหญ่ · ดูสัตว์ป่า','วันที่ 2 — อนุสาวรีย์ย่าโม · เมืองเก่า']},
+    nongkhai:{country:'ไทย',city:'หนองคาย',flag:'🇹🇭',desc:'ริมโขงที่ quiet ที่สุด วัดอาฮงศิลาวาส บั้งไฟพญานาค และข้ามไปเวียงจันทน์ได้ง่าย',nature:['city'],art:['heritage','food'],vibe:['slow','cozy'],scope:['domestic'],budget:['low'],itinerary:['วันที่ 1 — ริมโขง · วัดอาฮงศิลาวาส · ตลาดท่าเสด็จ','วันที่ 2 — ข้ามไปเวียงจันทน์ ลาว']},
+    sakonnakon:{country:'ไทย',city:'สกลนคร',flag:'🇹🇭',desc:'หนองหาร วัดพระธาตุเชิงชุม และเส้นทางธรรมชาติที่ยังไม่มีนักท่องเที่ยว',nature:['city','forest'],art:['heritage'],vibe:['slow','offbeat'],scope:['domestic'],budget:['low'],itinerary:['วันที่ 1 — วัดพระธาตุเชิงชุม · หนองหาร','วันที่ 2 — วัดป่า · ธรรมชาติโดยรอบ']},
+    surin:{country:'ไทย',city:'สุรินทร์',flag:'🇹🇭',desc:'เมืองช้าง ปราสาทขอมที่สวยงาม และผ้าไหมที่ดีที่สุดของอีสาน',nature:['city'],art:['heritage','craft'],vibe:['slow','offbeat'],scope:['domestic'],budget:['low'],itinerary:['วันที่ 1 — ปราสาทศีขรภูมิ · หมู่บ้านช้าง','วันที่ 2 — ตลาดผ้าไหม · ปราสาทบ้านพลวง']},
+    roi_et:{country:'ไทย',city:'ร้อยเอ็ด',flag:'🇹🇭',desc:'เมืองร้อยเอ็ดประตู บึงพลาญชัย และดอกบัวสาย ธรรมชาติอีสานที่เงียบงาม',nature:['city'],art:['heritage','food'],vibe:['slow','cozy'],scope:['domestic'],budget:['low'],itinerary:['วันที่ 1 — บึงพลาญชัย · ดอกบัวสาย','วันที่ 2 — วัดบูรพาภิราม · ตลาดเช้า']},
+    // ─── ไทย ใต้ ───
     kohsamui:{country:'ไทย',city:'เกาะสมุย',flag:'🇹🇭',desc:'ทะเลใต้ที่ยังมีมุมเงียบ ถ้าหลีกเลี่ยงช่วง peak ได้จะเจอเกาะที่รู้สึกว่ามีไว้สำหรับคุณ',nature:['sea'],art:['food'],vibe:['slow','wild'],scope:['domestic'],budget:['mid','high'],itinerary:['วันที่ 1 — หาดเฉวงตอนเช้า · ตลาดฟิชเชอร์แมน','วันที่ 2 — หาดบ่อผุด · น้ำตกนาเมือง','วันที่ 3 — Ang Thong Marine Park']},
     krabi:{country:'ไทย',city:'กระบี่',flag:'🇹🇭',desc:'หน้าผาหินปูนที่สวยที่สุดในโลก เกาะพีพี และหาดไร่เลย์ที่ไปได้แค่ทางเรือ',nature:['sea','mountain'],art:['food'],vibe:['wild','slow'],scope:['domestic'],budget:['mid','high'],itinerary:['วันที่ 1 — อ่าวนาง · ล่องเรือเที่ยวเกาะ','วันที่ 2 — ไร่เลย์ · ถ้ำพระนาง','วันที่ 3 — เกาะพีพี']},
     kohphangan:{country:'ไทย',city:'เกาะพะงัน',flag:'🇹🇭',desc:'มากกว่า Full Moon Party — หาดเงียบๆ น้ำตกในป่า และ vibe ที่สบายกว่าที่คิด',nature:['sea','forest'],art:['food'],vibe:['wild','offbeat'],scope:['domestic'],budget:['low','mid'],itinerary:['วันที่ 1 — หาดทองนาย · ธรรมชาติบนเกาะ','วันที่ 2 — น้ำตกธารปาหลัน · สนอร์เกิ้ล']},
     trang:{country:'ไทย',city:'ตรัง',flag:'🇹🇭',desc:'ทะเลอันดามันที่ยังไม่ถูกรุกราน หาดสวย ถ้ำทะเล และอาหารใต้ที่ดีที่สุด',nature:['sea','forest'],art:['food','heritage'],vibe:['offbeat','slow'],scope:['domestic'],budget:['low','mid'],itinerary:['วันที่ 1 — เกาะเชือก · ถ้ำมรกต','วันที่ 2 — หาดปากเมง · อาหารเช้าสไตล์ตรัง']},
     songkhla:{country:'ไทย',city:'สงขลา',flag:'🇹🇭',desc:'เมืองเก่าที่ไม่ค่อยมีคนรู้จัก street art มีชีวิต ทะเลสาบสงขลา และอาหารต่างจากที่อื่น',nature:['sea','city'],art:['contemporary','heritage','food'],vibe:['offbeat','cozy'],scope:['domestic'],budget:['low','mid'],itinerary:['วันที่ 1 — เมืองเก่าสงขลา · street art','วันที่ 2 — หาดสมิหลา · ทะเลสาบสงขลา']},
+    satun:{country:'ไทย',city:'สตูล',flag:'🇹🇭',desc:'เกาะตะรุเตา อุทยานแห่งชาติทางทะเลที่ไม่มีไฟฟ้า และความป่าที่หาไม่ได้อีกแล้ว',nature:['sea','forest'],art:['food'],vibe:['offbeat','wild'],scope:['domestic'],budget:['low','mid'],itinerary:['วันที่ 1 — เกาะตะรุเตา · ชายหาดดิบ','วันที่ 2 — เกาะอาดัง · ดำน้ำ']},
+    phattalung:{country:'ไทย',city:'พัทลุง',flag:'🇹🇭',desc:'ทะเลน้อย นกน้ำ และบรรยากาศอีสานใต้ที่คนไม่ค่อยรู้จัก เงียบสงบจริงๆ',nature:['city','forest'],art:['food','heritage'],vibe:['slow','cozy'],scope:['domestic'],budget:['low'],itinerary:['วันที่ 1 — ทะเลน้อย · ดูนกยามเช้า','วันที่ 2 — เขาอกทะลุ · ตลาดชุมชน']},
+    nakhonsithammarat:{country:'ไทย',city:'นครศรีธรรมราช',flag:'🇹🇭',desc:'วัดพระมหาธาตุ หนังตะลุง และอาหารใต้รสแท้ที่หาไม่ได้ที่ไหน',nature:['mountain','forest'],art:['heritage','craft','food'],vibe:['slow','cozy'],scope:['domestic'],budget:['low','mid'],itinerary:['วันที่ 1 — วัดพระมหาธาตุ · ย่านเมืองเก่า','วันที่ 2 — เขาหลวง · ผักเหนาะ']},
+    chumphon:{country:'ไทย',city:'ชุมพร',flag:'🇹🇭',desc:'ประตูสู่เกาะเต่า เกาะทะลุ และอาหารทะเลสดๆ ก่อนจะข้ามไปฝั่งอ่าวหรืออันดามัน',nature:['sea'],art:['food'],vibe:['slow','wild'],scope:['domestic'],budget:['low','mid'],itinerary:['วันที่ 1 — หาดทุ่งวัวแล่น · อาหารทะเลตลาดเช้า','วันที่ 2 — เกาะทะลุ · ดำน้ำ']},
+    ranong:{country:'ไทย',city:'ระนอง',flag:'🇹🇭',desc:'บ่อน้ำร้อนธรรมชาติ ป่าชายเลนที่ใหญ่ที่สุดในไทย และเกาะที่ยังไม่มีใครไป',nature:['forest','sea'],art:['food'],vibe:['offbeat','slow'],scope:['domestic'],budget:['low'],itinerary:['วันที่ 1 — บ่อน้ำร้อน · ป่าชายเลน','วันที่ 2 — เกาะพยาม · หาดเงียบ']},
+    phangnga:{country:'ไทย',city:'พังงา',flag:'🇹🇭',desc:'เขาตาปู (James Bond Island) อ่าวพังงา และถ้ำลอดที่สวยที่สุดในไทย',nature:['sea','mountain'],art:['heritage','food'],vibe:['slow','wild'],scope:['domestic'],budget:['mid'],itinerary:['วันที่ 1 — อ่าวพังงา · เขาตาปู · ถ้ำลอด','วันที่ 2 — เกาะยาว · ชุมชนประมง']},
+    phuket:{country:'ไทย',city:'ภูเก็ต',flag:'🇹🇭',desc:'ชายหาดสวย ย่านเมืองเก่า Sino-Portuguese และ sunset ที่ดีที่สุดในไทย',nature:['sea','city'],art:['heritage','food','contemporary'],vibe:['wild','slow'],scope:['domestic'],budget:['mid','high'],itinerary:['วันที่ 1 — ย่านเก่าภูเก็ต · วัดฉลอง','วันที่ 2 — หาดกะรน · sunset แหลมพรหมเทพ','วันที่ 3 — เกาะเฮ · ดำน้ำ']},
+    // ─── ญี่ปุ่น ───
+    kyoto:{country:'ญี่ปุ่น',city:'เกียวโต',flag:'🇯🇵',desc:'เมืองที่สอนให้เดินช้า มองตรงหน้า ไม่รีบ มีวัด ป่าไผ่ และร้านชาที่อยากกลับมาอีก',nature:['forest','mountain'],art:['heritage','craft','contemporary'],vibe:['slow','cozy'],scope:['asia'],budget:['mid','high'],itinerary:['วันที่ 1 — Arashiyama bamboo grove · วัด Tenryu-ji','วันที่ 2 — Fushimi Inari · Gion · Nishiki Market','วันที่ 3 — Philosopher Path · Nanzen-ji']},
+    tokyo:{country:'ญี่ปุ่น',city:'โตเกียว',flag:'🇯🇵',desc:'เมืองที่มีทุกอย่างอยู่ในที่เดียว — ยิ่งหลงยิ่งเจอของดี',nature:['city'],art:['contemporary','food','craft'],vibe:['wild','offbeat'],scope:['asia'],budget:['mid','high'],itinerary:['วันที่ 1 — Shimokitazawa · ร้านมือสอง','วันที่ 2 — Yanaka ย่านเก่า · Ueno Museum','วันที่ 3 — Harajuku · Meiji Shrine']},
+    osaka:{country:'ญี่ปุ่น',city:'โอซาก้า',flag:'🇯🇵',desc:'เมืองที่คนกินเก่งที่สุดในญี่ปุ่น Dotonbori ไฟสว่างตลอดคืน และ takoyaki ทุกมุม',nature:['city'],art:['food','contemporary'],vibe:['wild','cozy'],scope:['asia'],budget:['mid','high'],itinerary:['วันที่ 1 — Dotonbori · Shinsaibashi','วันที่ 2 — Osaka Castle · Kuromon Market','วันที่ 3 — Nara day trip']},
+    okinawa:{country:'ญี่ปุ่น',city:'โอกินาว่า',flag:'🇯🇵',desc:'ญี่ปุ่นที่ไม่เหมือนญี่ปุ่น ทะเลใสเขียว วัฒนธรรม Ryukyu และอาหารที่ต่างจากแผ่นดินใหญ่',nature:['sea'],art:['heritage','food','craft'],vibe:['slow','wild'],scope:['asia'],budget:['mid','high'],itinerary:['วันที่ 1 — Shurijo Castle · Kokusai Street','วันที่ 2 — Churaumi Aquarium · หาดมันซา','วันที่ 3 — เกาะมิยาโกะ · ทะเลใส']},
+    hokkaido:{country:'ญี่ปุ่น',city:'ฮอกไกโด (ซัปโปโร)',flag:'🇯🇵',desc:'ญี่ปุ่นฝั่งเหนือ หิมะลึก สกี Niseko ปูยักษ์ และดอกลาเวนเดอร์ที่ Furano',nature:['mountain','forest'],art:['food','craft'],vibe:['slow','wild'],scope:['asia'],budget:['mid','high'],itinerary:['วันที่ 1 — Odori Park · Sapporo Beer Museum','วันที่ 2 — Furano ทุ่งลาเวนเดอร์ · Biei','วันที่ 3 — Niseko หรือ Otaru คลอง']},
+    hiroshima:{country:'ญี่ปุ่น',city:'ฮิโรชิมา',flag:'🇯🇵',desc:'เมืองที่ฟื้นจากความเจ็บปวดได้อย่างงดงาม สวนสันติภาพ และเกาะ Miyajima ที่ torii ลอยน้ำ',nature:['sea','city'],art:['heritage','food'],vibe:['slow','cozy'],scope:['asia'],budget:['mid','high'],itinerary:['วันที่ 1 — Peace Memorial Park · Atomic Bomb Dome','วันที่ 2 — เกาะ Miyajima · Itsukushima Shrine','วันที่ 3 — Okonomiyaki ท้องถิ่น']},
+    kanazawa:{country:'ญี่ปุ่น',city:'คานาซาวะ',flag:'🇯🇵',desc:'เกียวโตน้อยที่ไม่มีใครแออัด ย่าน geisha ที่ยังมีชีวิต และ Kenroku-en สวนที่สวยที่สุดในญี่ปุ่น',nature:['city','forest'],art:['heritage','craft','food'],vibe:['slow','cozy'],scope:['asia'],budget:['mid','high'],itinerary:['วันที่ 1 — Kenroku-en Garden · Kanazawa Castle','วันที่ 2 — Higashi Chaya ย่าน geisha · ตลาด Omicho','วันที่ 3 — Nishi Chaya · พิพิธภัณฑ์ศิลปะ']},
+    nikko:{country:'ญี่ปุ่น',city:'นิกโก้',flag:'🇯🇵',desc:'วัดทองสีสดใส Toshogu ภูเขาหิมะ และน้ำตก Kegon ที่สูงที่สุดในญี่ปุ่น',nature:['mountain','forest'],art:['heritage'],vibe:['slow','cozy'],scope:['asia'],budget:['mid'],itinerary:['วันที่ 1 — Toshogu Shrine · วัดและเจดีย์','วันที่ 2 — Kegon Waterfall · ทะเลสาบ Chuzenji']},
+    // ─── เอเชีย งบน้อย ───
     hanoi:{country:'เวียดนาม',city:'ฮานอย',flag:'🇻🇳',desc:'เมืองหลวงที่ยังมีวิญญาณ เดินในย่านเก่า กิน Pho ตั้งแต่เช้า ดูชีวิตจริงของผู้คน',nature:['city'],art:['heritage','food'],vibe:['offbeat','cozy'],scope:['asia'],budget:['low','mid'],itinerary:['วันที่ 1 — Old Quarter · Hoan Kiem · Train Street','วันที่ 2 — Temple of Literature · Beer corner','วันที่ 3 — Ha Long Bay day trip']},
     hoi_an:{country:'เวียดนาม',city:'ฮอยอัน',flag:'🇻🇳',desc:'เมืองเก่าที่เดินได้ทั้งวัน โคมไฟส่องแม่น้ำยามค่ำ และร้านตัดผ้าที่ทำให้อยากซื้อใหม่',nature:['sea','city'],art:['heritage','craft','food'],vibe:['slow','cozy'],scope:['asia'],budget:['low','mid'],itinerary:['วันที่ 1 — Ancient Town · Japanese Bridge · ล่องเรือ','วันที่ 2 — Cooking class · ชายหาด An Bang','วันที่ 3 — My Son Sanctuary']},
     bali:{country:'อินโดนีเซีย',city:'บาหลี (Ubud)',flag:'🇮🇩',desc:'Ubud ยังมีนาขั้นบันได วัด และชุมชนศิลปะที่ทำให้อยากอยู่ต่อ',nature:['forest','mountain','sea'],art:['craft','heritage','contemporary'],vibe:['slow','cozy'],scope:['asia'],budget:['low','mid'],itinerary:['วันที่ 1 — Tegalalang Rice Terrace · Ubud Market','วันที่ 2 — Tirta Empul · Campuhan Ridge Walk','วันที่ 3 — Seminyak · sunset Tanah Lot']},
-    luangprabang:{country:'ลาว',city:'หลวงพระบาง',flag:'🇱🇦',desc:'เมืองมรดกโลกที่เวลาเดินช้ากว่าที่อื่น ตักบาตรยามเช้า น้ำตกกวางสี และแม่น้ำโขง',nature:['forest','mountain'],art:['heritage','craft','food'],vibe:['slow','cozy'],scope:['asia'],budget:['low','mid'],itinerary:['วันที่ 1 — ตักบาตรยามเช้า · วัดเชียงทอง · ตลาดกลางคืน','วันที่ 2 — น้ำตกกวางสี · ล่องเรือโขง','วันที่ 3 — ถ้ำปากอู']},
+    luangprabang:{country:'ลาว',city:'หลวงพระบาง',flag:'🇱🇦',desc:'เมืองมรดกโลกที่เวลาเดินช้ากว่าที่อื่น ตักบาตรยามเช้า น้ำตกกวางสี และแม่น้ำโขง',nature:['forest','mountain'],art:['heritage','craft','food'],vibe:['slow','cozy'],scope:['asia'],budget:['low','mid'],itinerary:['วันที่ 1 — ตักบาตรยามเช้า · วัดเชียงทอง','วันที่ 2 — น้ำตกกวางสี · ล่องเรือโขง','วันที่ 3 — ถ้ำปากอู']},
     yangon:{country:'พม่า',city:'ย่างกุ้ง',flag:'🇲🇲',desc:'เมืองที่ยังมีชั้นประวัติศาสตร์อยู่ครบ เจดีย์ชเวดากอง และย่านเก่าที่รอคนมาสำรวจ',nature:['city'],art:['heritage','food'],vibe:['offbeat','slow'],scope:['asia'],budget:['low','mid'],itinerary:['วันที่ 1 — เจดีย์ชเวดากอง · ย่านเมืองเก่า','วันที่ 2 — Circular Train · ตลาด Bogyoke']},
-    tbilisi:{country:'จอร์เจีย',city:'ทบิลิซี',flag:'🇬🇪',desc:'เมืองที่ overtourism ยังไปไม่ถึง — สถาปัตยกรรมเก่า ไวน์ local และคนที่ warm มาก',nature:['mountain','city'],art:['heritage','craft','food'],vibe:['offbeat','cozy'],scope:['far'],budget:['low','mid'],itinerary:['วันที่ 1 — Old Town · Narikala · อาบน้ำกำมะถัน','วันที่ 2 — Wine tasting · Fabrika market','วันที่ 3 — Kazbegi day trip']},
-    kyoto:{country:'ญี่ปุ่น',city:'เกียวโต',flag:'🇯🇵',desc:'เมืองที่สอนให้เดินช้า มองตรงหน้า ไม่รีบ มีวัด ป่าไผ่ และร้านชาที่อยากกลับมาอีก',nature:['forest','mountain'],art:['heritage','craft','contemporary'],vibe:['slow','cozy'],scope:['asia'],budget:['mid','high'],itinerary:['วันที่ 1 — Arashiyama bamboo grove · วัด Tenryu-ji','วันที่ 2 — Fushimi Inari · Gion · Nishiki Market','วันที่ 3 — Philosopher Path · Nanzen-ji']},
-    tokyo:{country:'ญี่ปุ่น',city:'โตเกียว',flag:'🇯🇵',desc:'เมืองที่มีทุกอย่างอยู่ในที่เดียว — ยิ่งหลงยิ่งเจอของดี',nature:['city'],art:['contemporary','food','craft'],vibe:['wild','offbeat'],scope:['asia'],budget:['mid','high'],itinerary:['วันที่ 1 — Shimokitazawa · ร้านมือสอง','วันที่ 2 — Yanaka ย่านเก่า · Ueno Museum','วันที่ 3 — Harajuku · Meiji Shrine']},
-    osaka:{country:'ญี่ปุ่น',city:'โอซาก้า',flag:'🇯🇵',desc:'เมืองที่คนกินเก่งที่สุดในญี่ปุ่น Dotonbori ไฟสว่างตลอดคืน และ takoyaki ทุกมุม',nature:['city'],art:['food','contemporary'],vibe:['wild','cozy'],scope:['asia'],budget:['mid','high'],itinerary:['วันที่ 1 — Dotonbori · Shinsaibashi · street food','วันที่ 2 — Osaka Castle · Kuromon Market','วันที่ 3 — Nara day trip · กวางอิสระ']},
+    danang:{country:'เวียดนาม',city:'ดานัง',flag:'🇻🇳',desc:'เมืองใหม่ที่ผสม resort กับ local ได้ดี หาดมีลาน Ba Na Hills และสะพาน Golden Hand',nature:['sea','mountain'],art:['contemporary','food'],vibe:['wild','slow'],scope:['asia'],budget:['low','mid'],itinerary:['วันที่ 1 — หาดมีลาน · Marble Mountains','วันที่ 2 — Ba Na Hills · Golden Bridge','วันที่ 3 — ล่องเรือแม่น้ำ Han']},
+    kathmandu:{country:'เนปาล',city:'กาฐมาณฑุ',flag:'🇳🇵',desc:'เมืองที่ทุกหัวมุมมีวัด กลิ่นไม้หอม และพลังงานที่ไม่มีที่ไหนเหมือน ก่อนขึ้น Himalayas',nature:['mountain'],art:['heritage','craft','food'],vibe:['offbeat','slow'],scope:['asia'],budget:['low','mid'],itinerary:['วันที่ 1 — Pashupatinath · Boudhanath Stupa','วันที่ 2 — Durbar Square · ย่าน Thamel','วันที่ 3 — Nagarkot ชมเทือกเขาหิมาลัย']},
+    // ─── เอเชีย งบกลาง ───
     seoul:{country:'เกาหลี',city:'โซล',flag:'🇰🇷',desc:'โซลไม่ได้มีแค่ Myeongdong — Bukchon และ Hongdae มีชีวิตอีกแบบที่น่าค้นพบ',nature:['city','mountain'],art:['contemporary','food','craft'],vibe:['wild','cozy'],scope:['asia'],budget:['mid','high'],itinerary:['วันที่ 1 — Bukchon Hanok · Gyeongbokgung','วันที่ 2 — Hongdae · street food tour','วันที่ 3 — Namsan Tower · Han River']},
     taipei:{country:'ไต้หวัน',city:'ไทเป',flag:'🇹🇼',desc:'เมืองที่กิน street food ได้ทุก 10 เมตร คนดีมาก ระบบขนส่งดีที่สุดในเอเชีย',nature:['city','mountain'],art:['contemporary','food','heritage'],vibe:['cozy','offbeat'],scope:['asia'],budget:['mid','high'],itinerary:['วันที่ 1 — Jiufen · ทะเลสาบ Ruifang','วันที่ 2 — Shilin Night Market · Taipei 101','วันที่ 3 — Elephant Mountain · Da an Park']},
     singapore:{country:'สิงคโปร์',city:'สิงคโปร์',flag:'🇸🇬',desc:'เมืองที่สะอาดที่สุด อาหารดีที่สุด และ hawker center ที่ทำให้ไม่อยากกลับบ้าน',nature:['city'],art:['contemporary','food','heritage'],vibe:['cozy','wild'],scope:['asia'],budget:['mid','high'],itinerary:['วันที่ 1 — Gardens by the Bay · Marina Bay','วันที่ 2 — Chinatown · Maxwell Hawker','วันที่ 3 — Sentosa · Haji Lane']},
-    lisbon:{country:'โปรตุเกส',city:'ลิสบอน',flag:'🇵🇹',desc:'เมืองที่รู้สึกเหมือน "ค้นพบ" ได้ทุกวัน เนินเขา ราง tram เก่า Fado และอาหารทะเล',nature:['city','sea'],art:['heritage','contemporary','food'],vibe:['slow','offbeat'],scope:['far'],budget:['mid','high','flex'],itinerary:['วันที่ 1 — Alfama · Castelo · Fado bar','วันที่ 2 — Belém · LX Factory','วันที่ 3 — Sintra day trip']},
+    kualalumpur:{country:'มาเลเซีย',city:'กัวลาลัมเปอร์',flag:'🇲🇾',desc:'Petronas Towers ย่าน Bukit Bintang และอาหาร Mamak ที่ดีที่สุดในโลก',nature:['city'],art:['contemporary','food','heritage'],vibe:['wild','cozy'],scope:['asia'],budget:['low','mid'],itinerary:['วันที่ 1 — Petronas Towers · KLCC Park','วันที่ 2 — Bukit Bintang · Petaling Street · Mamak','วันที่ 3 — Batu Caves · Forest Research Institute']},
+    penang:{country:'มาเลเซีย',city:'ปีนัง',flag:'🇲🇾',desc:'George Town มรดกโลก street art ชื่อดัง และอาหาร Nyonya ที่ดีที่สุดในเอเชียตะวันออกเฉียงใต้',nature:['sea','city'],art:['contemporary','heritage','food'],vibe:['offbeat','cozy'],scope:['asia'],budget:['low','mid'],itinerary:['วันที่ 1 — George Town · street art · Little India','วันที่ 2 — Penang Hill · Kek Lok Si Temple','วันที่ 3 — ชายหาด Batu Ferringhi']},
+    // ─── ยุโรป / ไกล ───
+    lisbon:{country:'โปรตุเกส',city:'ลิสบอน',flag:'🇵🇹',desc:'เมืองที่รู้สึกเหมือน "ค้นพบ" ได้ทุกวัน เนินเขา ราง tram เก่า Fado และอาหารทะเล',nature:['city','sea'],art:['heritage','contemporary','food'],vibe:['slow','offbeat'],scope:['far'],budget:['mid','high','flex'],itinerary:['วันที่ 1 — Alfama · Castelo · Fado bar','วันที่ 2 — Belem · LX Factory','วันที่ 3 — Sintra day trip']},
     amsterdam:{country:'เนเธอร์แลนด์',city:'อัมสเตอร์ดัม',flag:'🇳🇱',desc:'เมืองจักรยานและคลอง ที่ทุกย่านมีบุคลิกเป็นของตัวเอง — museum ที่ไม่น่าเบื่อเลย',nature:['city'],art:['contemporary','heritage'],vibe:['cozy','offbeat'],scope:['far'],budget:['high','flex'],itinerary:['วันที่ 1 — Rijksmuseum · Vondelpark · Jordaan','วันที่ 2 — Van Gogh Museum · canal cruise','วันที่ 3 — NDSM Wharf · Haarlem']},
     prague:{country:'เช็กเกีย',city:'ปราก',flag:'🇨🇿',desc:'เมืองเทพนิยายที่สะพานชาร์ลส์และปราสาทโกธิคยังงดงามทุกเช้า งบไม่แพงเมื่อเทียบกับยุโรปตะวันตก',nature:['city'],art:['heritage','contemporary','food'],vibe:['slow','cozy'],scope:['far'],budget:['mid','high'],itinerary:['วันที่ 1 — Old Town Square · Charles Bridge','วันที่ 2 — Prague Castle · Lesser Town','วันที่ 3 — Vinohrady ย่าน local']},
     barcelona:{country:'สเปน',city:'บาร์เซโลนา',flag:'🇪🇸',desc:'Gaudi ทำให้เมืองนี้ดูเหมือนหลุดออกจากจินตนาการ และ La Boqueria ทำให้กลับมาอีก',nature:['sea','city'],art:['contemporary','heritage','food'],vibe:['wild','slow'],scope:['far'],budget:['high','flex'],itinerary:['วันที่ 1 — Sagrada Familia · Park Guell','วันที่ 2 — La Boqueria · Barceloneta beach','วันที่ 3 — Montjuic · tapas tour']},
-  };;
+    tbilisi:{country:'จอร์เจีย',city:'ทบิลิซี',flag:'🇬🇪',desc:'เมืองที่ overtourism ยังไปไม่ถึง — สถาปัตยกรรมเก่า ไวน์ local และคนที่ warm มาก',nature:['mountain','city'],art:['heritage','craft','food'],vibe:['offbeat','cozy'],scope:['far'],budget:['low','mid'],itinerary:['วันที่ 1 — Old Town · Narikala · อาบน้ำกำมะถัน','วันที่ 2 — Wine tasting · Fabrika market','วันที่ 3 — Kazbegi day trip']},
+    baku:{country:'อาเซอร์ไบจาน',city:'บากู',flag:'🇦🇿',desc:'เมืองที่ผสมสถาปัตยกรรม medieval กับ ultra-modern ได้อย่างน่าตะลึง และสนามกีฬา F1',nature:['city','sea'],art:['heritage','contemporary'],vibe:['offbeat','wild'],scope:['far'],budget:['mid','high'],itinerary:['วันที่ 1 — Icheri Sheher (Old City) · Maiden Tower','วันที่ 2 — Flame Towers · Baku Boulevard','วันที่ 3 — Gobustan National Park']},
+    reykjavik:{country:'ไอซ์แลนด์',city:'เรคยาวิก',flag:'🇮🇸',desc:'แสงเหนือ น้ำพุร้อน ฟยอร์ด และธรรมชาติที่ดูเหมือนมาจากดาวอื่น',nature:['mountain','sea'],art:['contemporary','food'],vibe:['wild','slow'],scope:['far'],budget:['flex'],itinerary:['วันที่ 1 — Blue Lagoon · เมือง Reykjavik','วันที่ 2 — Golden Circle: Geysir · Gullfoss','วันที่ 3 — Northern Lights tour']},
+    marrakech:{country:'โมร็อกโก',city:'มาร์ราเกช',flag:'🇲🇦',desc:'เมืองสีชมพูที่ Medina เก่า souk ที่ขายทุกอย่าง และพระอาทิตย์ตกในทะเลทราย',nature:['mountain','city'],art:['heritage','craft','food'],vibe:['offbeat','wild'],scope:['far'],budget:['mid','high'],itinerary:['วันที่ 1 — Djemaa el-Fna · Souk · Bahia Palace','วันที่ 2 — Majorelle Garden · Medina เดินเท้า','วันที่ 3 — Sahara Desert day trip']},
+  };
+
 
   const mbtiInsights = {
     INTJ:'INTJ ชาร์จพลังในที่เงียบและมีความหมาย ทริปที่ดีสำหรับคุณคือมีเวลาคิดคนเดียว ที่พักที่ดี และ itinerary ที่ไม่แน่นจนเกินไป',
@@ -1795,86 +1857,17 @@
   const scopeLabels={domestic:'ในประเทศ',asia:'เอเชีย',far:'ยุโรป/ไกลๆ',anywhere:'ทุกที่'};
   const natureLabels={mountain:'ภูเขา & หมอก',sea:'ทะเล & ชายหาด',forest:'ป่า & ธรรมชาติ',city:'เมืองที่มีชีวิต'};
   const artLabels={heritage:'ประวัติศาสตร์ & วัด',contemporary:'ศิลปะร่วมสมัย',food:'อาหาร & ตลาด',craft:'งานฝีมือ & ชุมชน'};
+  const hdLabels={manifestor:'Manifestor',generator:'Generator/MG',projector:'Projector',reflector:'Reflector',unknown:''};
 
   function getWatercolor(profileKey) {
     const w = {
-      recharge: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 120" preserveAspectRatio="xMidYMid slice">
-        <defs>
-          <filter id="wc1"><feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="4" result="noise"/><feDisplacementMap in="SourceGraphic" in2="noise" scale="12" xChannelSelector="R" yChannelSelector="G"/></filter>
-          <filter id="blur1"><feGaussianBlur stdDeviation="8"/></filter>
-        </defs>
-        <rect width="600" height="120" fill="#E8EFF5"/>
-        <ellipse cx="120" cy="80" rx="160" ry="90" fill="#B8D4E8" opacity="0.5" filter="url(#blur1)"/>
-        <ellipse cx="350" cy="40" rx="200" ry="70" fill="#9BB8CC" opacity="0.4" filter="url(#blur1)"/>
-        <ellipse cx="500" cy="90" rx="120" ry="60" fill="#7BA8C4" opacity="0.35" filter="url(#blur1)"/>
-        <ellipse cx="240" cy="60" rx="140" ry="50" fill="#C8DDE8" opacity="0.3" filter="url(#blur1)"/>
-        <ellipse cx="80" cy="30" rx="80" ry="40" fill="#D4E8F0" opacity="0.4" filter="url(#blur1)"/>
-        <text x="50%" y="58%" text-anchor="middle" font-family="Georgia,serif" font-size="11" fill="#4A7A94" opacity="0.5" letter-spacing="4">THE QUIET WANDERER</text>
-      </svg>`,
-      reset: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 120" preserveAspectRatio="xMidYMid slice">
-        <defs><filter id="blur2"><feGaussianBlur stdDeviation="9"/></filter></defs>
-        <rect width="600" height="120" fill="#F0EDE8"/>
-        <ellipse cx="100" cy="90" rx="180" ry="80" fill="#D4C4A8" opacity="0.45" filter="url(#blur2)"/>
-        <ellipse cx="320" cy="50" rx="220" ry="65" fill="#C8B090" opacity="0.35" filter="url(#blur2)"/>
-        <ellipse cx="520" cy="80" rx="140" ry="55" fill="#B89870" opacity="0.3" filter="url(#blur2)"/>
-        <ellipse cx="200" cy="30" rx="100" ry="45" fill="#E0D4BC" opacity="0.4" filter="url(#blur2)"/>
-        <ellipse cx="450" cy="20" rx="90" ry="35" fill="#D8C8A8" opacity="0.35" filter="url(#blur2)"/>
-        <text x="50%" y="58%" text-anchor="middle" font-family="Georgia,serif" font-size="11" fill="#8B7355" opacity="0.5" letter-spacing="4">THE GENTLE RESET</text>
-      </svg>`,
-      explore: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 120" preserveAspectRatio="xMidYMid slice">
-        <defs><filter id="blur3"><feGaussianBlur stdDeviation="8"/></filter></defs>
-        <rect width="600" height="120" fill="#EAF0E8"/>
-        <ellipse cx="150" cy="70" rx="190" ry="85" fill="#A8C8A0" opacity="0.4" filter="url(#blur3)"/>
-        <ellipse cx="380" cy="40" rx="200" ry="60" fill="#88B080" opacity="0.35" filter="url(#blur3)"/>
-        <ellipse cx="530" cy="85" rx="130" ry="55" fill="#6B9E68" opacity="0.3" filter="url(#blur3)"/>
-        <ellipse cx="60" cy="35" rx="90" ry="50" fill="#C0D8B8" opacity="0.4" filter="url(#blur3)"/>
-        <ellipse cx="280" cy="95" rx="150" ry="40" fill="#B0CCA8" opacity="0.3" filter="url(#blur3)"/>
-        <text x="50%" y="58%" text-anchor="middle" font-family="Georgia,serif" font-size="11" fill="#4A7A45" opacity="0.5" letter-spacing="4">THE CURIOUS SOUL</text>
-      </svg>`,
-      connect: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 120" preserveAspectRatio="xMidYMid slice">
-        <defs><filter id="blur4"><feGaussianBlur stdDeviation="9"/></filter></defs>
-        <rect width="600" height="120" fill="#F0E8EC"/>
-        <ellipse cx="130" cy="75" rx="170" ry="80" fill="#D4A8B8" opacity="0.4" filter="url(#blur4)"/>
-        <ellipse cx="360" cy="45" rx="210" ry="65" fill="#C08898" opacity="0.35" filter="url(#blur4)"/>
-        <ellipse cx="510" cy="85" rx="130" ry="50" fill="#A87888" opacity="0.3" filter="url(#blur4)"/>
-        <ellipse cx="70" cy="30" rx="85" ry="45" fill="#E0C0CC" opacity="0.4" filter="url(#blur4)"/>
-        <ellipse cx="430" cy="15" rx="100" ry="38" fill="#D8B0BC" opacity="0.35" filter="url(#blur4)"/>
-        <text x="50%" y="58%" text-anchor="middle" font-family="Georgia,serif" font-size="11" fill="#8B4A5A" opacity="0.5" letter-spacing="3">THE HEARTFUL TRAVELER</text>
-      </svg>`,
-      still: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 120" preserveAspectRatio="xMidYMid slice">
-        <defs><filter id="blur5"><feGaussianBlur stdDeviation="10"/></filter></defs>
-        <rect width="600" height="120" fill="#1A1A2E"/>
-        <ellipse cx="100" cy="100" rx="200" ry="90" fill="#2A2A4A" opacity="0.8" filter="url(#blur5)"/>
-        <ellipse cx="400" cy="30" rx="180" ry="60" fill="#3A3A5C" opacity="0.6" filter="url(#blur5)"/>
-        <ellipse cx="520" cy="80" rx="120" ry="50" fill="#4A4A6C" opacity="0.5" filter="url(#blur5)"/>
-        <ellipse cx="280" cy="60" rx="100" ry="40" fill="#5A5A8A" opacity="0.3" filter="url(#blur5)"/>
-        <circle cx="480" cy="25" r="3" fill="#E8E0F0" opacity="0.6"/>
-        <circle cx="320" cy="15" r="2" fill="#E8E0F0" opacity="0.5"/>
-        <circle cx="150" cy="35" r="2.5" fill="#E8E0F0" opacity="0.4"/>
-        <circle cx="560" cy="50" r="2" fill="#E8E0F0" opacity="0.5"/>
-        <circle cx="80" cy="20" r="1.5" fill="#E8E0F0" opacity="0.4"/>
-        <text x="50%" y="60%" text-anchor="middle" font-family="Georgia,serif" font-size="11" fill="#C8C0E0" opacity="0.5" letter-spacing="3">THE STILL SEEKER</text>
-      </svg>`,
-      transform: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 120" preserveAspectRatio="xMidYMid slice">
-        <defs><filter id="blur6"><feGaussianBlur stdDeviation="8"/></filter></defs>
-        <rect width="600" height="120" fill="#F0EBF5"/>
-        <ellipse cx="80" cy="90" rx="160" ry="80" fill="#C8A8D8" opacity="0.4" filter="url(#blur6)"/>
-        <ellipse cx="300" cy="40" rx="220" ry="65" fill="#B890C8" opacity="0.35" filter="url(#blur6)"/>
-        <ellipse cx="520" cy="75" rx="140" ry="55" fill="#D4B8E0" opacity="0.3" filter="url(#blur6)"/>
-        <ellipse cx="180" cy="20" rx="100" ry="40" fill="#E8D4F0" opacity="0.4" filter="url(#blur6)"/>
-        <ellipse cx="450" cy="100" rx="90" ry="35" fill="#C0A0D0" opacity="0.35" filter="url(#blur6)"/>
-        <text x="50%" y="58%" text-anchor="middle" font-family="Georgia,serif" font-size="11" fill="#7A5090" opacity="0.5" letter-spacing="3">THE TRANSFORMER</text>
-      </svg>`,
-      drift: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 120" preserveAspectRatio="xMidYMid slice">
-        <defs><filter id="blur7"><feGaussianBlur stdDeviation="9"/></filter></defs>
-        <rect width="600" height="120" fill="#E8F4F8"/>
-        <ellipse cx="60" cy="70" rx="150" ry="75" fill="#88C4D8" opacity="0.4" filter="url(#blur7)"/>
-        <ellipse cx="280" cy="40" rx="210" ry="60" fill="#70B0C8" opacity="0.35" filter="url(#blur7)"/>
-        <ellipse cx="500" cy="80" rx="150" ry="55" fill="#58A0B8" opacity="0.3" filter="url(#blur7)"/>
-        <ellipse cx="160" cy="95" rx="120" ry="40" fill="#A8D4E4" opacity="0.35" filter="url(#blur7)"/>
-        <ellipse cx="420" cy="15" rx="100" ry="35" fill="#C0E4F0" opacity="0.4" filter="url(#blur7)"/>
-        <text x="50%" y="58%" text-anchor="middle" font-family="Georgia,serif" font-size="11" fill="#3A7A94" opacity="0.5" letter-spacing="3">THE FREE DRIFTER</text>
-      </svg>`,
+      recharge: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 120" preserveAspectRatio="xMidYMid slice"><defs><filter id="blur1"><feGaussianBlur stdDeviation="8"/></filter></defs><rect width="600" height="120" fill="#E8EFF5"/><ellipse cx="120" cy="80" rx="160" ry="90" fill="#B8D4E8" opacity="0.5" filter="url(#blur1)"/><ellipse cx="350" cy="40" rx="200" ry="70" fill="#9BB8CC" opacity="0.4" filter="url(#blur1)"/><ellipse cx="500" cy="90" rx="120" ry="60" fill="#7BA8C4" opacity="0.35" filter="url(#blur1)"/><text x="50%" y="58%" text-anchor="middle" font-family="Georgia,serif" font-size="11" fill="#4A7A94" opacity="0.5" letter-spacing="4">THE QUIET WANDERER</text></svg>',
+      reset:    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 120" preserveAspectRatio="xMidYMid slice"><defs><filter id="blur2"><feGaussianBlur stdDeviation="9"/></filter></defs><rect width="600" height="120" fill="#F0EDE8"/><ellipse cx="100" cy="90" rx="180" ry="80" fill="#D4C4A8" opacity="0.45" filter="url(#blur2)"/><ellipse cx="320" cy="50" rx="220" ry="65" fill="#C8B090" opacity="0.35" filter="url(#blur2)"/><ellipse cx="520" cy="80" rx="140" ry="55" fill="#B89870" opacity="0.3" filter="url(#blur2)"/><text x="50%" y="58%" text-anchor="middle" font-family="Georgia,serif" font-size="11" fill="#8B7355" opacity="0.5" letter-spacing="4">THE GENTLE RESET</text></svg>',
+      explore:  '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 120" preserveAspectRatio="xMidYMid slice"><defs><filter id="blur3"><feGaussianBlur stdDeviation="8"/></filter></defs><rect width="600" height="120" fill="#EAF0E8"/><ellipse cx="150" cy="70" rx="190" ry="85" fill="#A8C8A0" opacity="0.4" filter="url(#blur3)"/><ellipse cx="380" cy="40" rx="200" ry="60" fill="#88B080" opacity="0.35" filter="url(#blur3)"/><ellipse cx="530" cy="85" rx="130" ry="55" fill="#6B9E68" opacity="0.3" filter="url(#blur3)"/><text x="50%" y="58%" text-anchor="middle" font-family="Georgia,serif" font-size="11" fill="#4A7A45" opacity="0.5" letter-spacing="4">THE CURIOUS SOUL</text></svg>',
+      connect:  '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 120" preserveAspectRatio="xMidYMid slice"><defs><filter id="blur4"><feGaussianBlur stdDeviation="9"/></filter></defs><rect width="600" height="120" fill="#F0E8EC"/><ellipse cx="130" cy="75" rx="170" ry="80" fill="#D4A8B8" opacity="0.4" filter="url(#blur4)"/><ellipse cx="360" cy="45" rx="210" ry="65" fill="#C08898" opacity="0.35" filter="url(#blur4)"/><ellipse cx="510" cy="85" rx="130" ry="50" fill="#A87888" opacity="0.3" filter="url(#blur4)"/><text x="50%" y="58%" text-anchor="middle" font-family="Georgia,serif" font-size="11" fill="#8B4A5A" opacity="0.5" letter-spacing="3">THE HEARTFUL TRAVELER</text></svg>',
+      still:    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 120" preserveAspectRatio="xMidYMid slice"><defs><filter id="blur5"><feGaussianBlur stdDeviation="10"/></filter></defs><rect width="600" height="120" fill="#1A1A2E"/><ellipse cx="100" cy="100" rx="200" ry="90" fill="#2A2A4A" opacity="0.8" filter="url(#blur5)"/><ellipse cx="400" cy="30" rx="180" ry="60" fill="#3A3A5C" opacity="0.6" filter="url(#blur5)"/><circle cx="480" cy="25" r="3" fill="#E8E0F0" opacity="0.6"/><circle cx="320" cy="15" r="2" fill="#E8E0F0" opacity="0.5"/><text x="50%" y="60%" text-anchor="middle" font-family="Georgia,serif" font-size="11" fill="#C8C0E0" opacity="0.5" letter-spacing="3">THE STILL SEEKER</text></svg>',
+      transform:'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 120" preserveAspectRatio="xMidYMid slice"><defs><filter id="blur6"><feGaussianBlur stdDeviation="8"/></filter></defs><rect width="600" height="120" fill="#F0EBF5"/><ellipse cx="80" cy="90" rx="160" ry="80" fill="#C8A8D8" opacity="0.4" filter="url(#blur6)"/><ellipse cx="300" cy="40" rx="220" ry="65" fill="#B890C8" opacity="0.35" filter="url(#blur6)"/><ellipse cx="520" cy="75" rx="140" ry="55" fill="#D4B8E0" opacity="0.3" filter="url(#blur6)"/><text x="50%" y="58%" text-anchor="middle" font-family="Georgia,serif" font-size="11" fill="#7A5090" opacity="0.5" letter-spacing="3">THE TRANSFORMER</text></svg>',
+      drift:    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 120" preserveAspectRatio="xMidYMid slice"><defs><filter id="blur7"><feGaussianBlur stdDeviation="9"/></filter></defs><rect width="600" height="120" fill="#E8F4F8"/><ellipse cx="60" cy="70" rx="150" ry="75" fill="#88C4D8" opacity="0.4" filter="url(#blur7)"/><ellipse cx="280" cy="40" rx="210" ry="60" fill="#70B0C8" opacity="0.35" filter="url(#blur7)"/><ellipse cx="500" cy="80" rx="150" ry="55" fill="#58A0B8" opacity="0.3" filter="url(#blur7)"/><text x="50%" y="58%" text-anchor="middle" font-family="Georgia,serif" font-size="11" fill="#3A7A94" opacity="0.5" letter-spacing="3">THE FREE DRIFTER</text></svg>',
     };
     return w[profileKey] || w['explore'];
   }
@@ -1905,7 +1898,7 @@
     const mbtiEl=document.getElementById('mbti-insight');
     if (mbti&&mbti!=='unknown'&&mbtiInsights[mbti]) {
       mbtiEl.style.display='block';
-      mbtiEl.innerHTML=`<b style="color:var(--purple-soft);font-weight:500;">${mbti}</b> — ${mbtiInsights[mbti]}`;
+      mbtiEl.innerHTML='<b style="color:var(--purple-soft);font-weight:500;">'+mbti+'</b> — '+mbtiInsights[mbti];
     } else { mbtiEl.style.display='none'; }
 
     const tops=getTopDestinations(3);
@@ -1915,42 +1908,31 @@
     tops.forEach((d,i)=>{
       const card=document.createElement('div');
       card.style.cssText='background:var(--white);border:1px solid rgba(212,197,169,0.5);border-radius:16px;padding:18px;transition:all 0.2s;';
-      const itinHtml=d.itinerary?d.itinerary.slice(0,dayCount).map(s=>`<li style="padding:4px 0;border-bottom:1px solid rgba(212,197,169,0.2);font-size:12px;font-weight:300;list-style:none;color:var(--charcoal-soft);">${s}</li>`).join(''):'';
-      card.innerHTML=`
-        <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:10px;">
-          <div style="display:flex;align-items:center;gap:10px;">
-            <span style="font-size:22px;">${d.flag}</span>
-            <div>
-              <div style="font-family:'Playfair Display',serif;font-size:18px;font-weight:400;color:var(--charcoal);">${d.city}</div>
-              <div style="font-size:12px;color:var(--charcoal-soft);opacity:0.6;">${d.country}</div>
-            </div>
-          </div>
-          ${i===0?'<span style="font-size:11px;background:rgba(107,124,92,0.12);color:var(--moss-dark);padding:3px 12px;border-radius:99px;font-weight:500;white-space:nowrap;">เหมาะที่สุด ✦</span>':''}
-        </div>
-        <p style="font-size:13px;font-weight:300;color:var(--charcoal-soft);line-height:1.65;margin-bottom:${itinHtml?'12px':'0'};">${d.desc}</p>
-        ${itinHtml?`<div style="margin-top:4px;"><div style="font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--moss);margin-bottom:6px;font-weight:500;">Itinerary ง่ายๆ</div><ul style="margin:0;padding:0;">${itinHtml}</ul></div>`:''}
-      `;
+      const itinHtml=d.itinerary?d.itinerary.slice(0,dayCount).map(s=>'<li style="padding:4px 0;border-bottom:1px solid rgba(212,197,169,0.2);font-size:12px;font-weight:300;list-style:none;color:var(--charcoal-soft);">'+s+'</li>').join(''):'';
+      card.innerHTML='<div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:10px;"><div style="display:flex;align-items:center;gap:10px;"><span style="font-size:22px;">'+d.flag+'</span><div><div style="font-family:\'Playfair Display\',serif;font-size:18px;font-weight:400;color:var(--charcoal);">'+d.city+'</div><div style="font-size:12px;color:var(--charcoal-soft);opacity:0.6;">'+d.country+'</div></div></div>'+(i===0?'<span style="font-size:11px;background:rgba(107,124,92,0.12);color:var(--moss-dark);padding:3px 12px;border-radius:99px;font-weight:500;white-space:nowrap;">เหมาะที่สุด ✦</span>':'')+'</div><p style="font-size:13px;font-weight:300;color:var(--charcoal-soft);line-height:1.65;margin-bottom:'+(itinHtml?'12px':'0')+';">'+d.desc+'</p>'+(itinHtml?'<div style="margin-top:4px;"><div style="font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--moss);margin-bottom:6px;font-weight:500;">Itinerary ง่ายๆ</div><ul style="margin:0;padding:0;">'+itinHtml+'</ul></div>':'');
       destCards.appendChild(card);
     });
 
+    const hdType = answers[11] && answers[11]!=='unknown' ? hdLabels[answers[11]]||answers[11] : '';
     const summaryParts=[
-      answers[4]?`<span style="color:var(--moss-dark);">${scopeLabels[answers[4]]}</span>`:'',
-      answers[2]?`ธรรมชาติ: <span style="color:var(--moss-dark);">${natureLabels[answers[2]]}</span>`:'',
-      answers[3]?`ชอบ: <span style="color:var(--moss-dark);">${artLabels[answers[3]]}</span>`:'',
-      answers[6]?`งบ: <span style="color:var(--moss-dark);">${budgetLabels[answers[6]]}</span>`:'',
-      answers[7]?`ไป<span style="color:var(--moss-dark);">${styleLabels[answers[7]]}</span>`:'',
-      answers[8]?`<span style="color:var(--moss-dark);">${durationLabels[answers[8]]}</span>`:'',
-      mbti&&mbti!=='unknown'?`MBTI: <span style="color:var(--purple-soft);">${mbti}</span>`:'',
+      answers[4]?'<span style="color:var(--moss-dark);">'+scopeLabels[answers[4]]+'</span>':'',
+      answers[2]?'ธรรมชาติ: <span style="color:var(--moss-dark);">'+natureLabels[answers[2]]+'</span>':'',
+      answers[3]?'ชอบ: <span style="color:var(--moss-dark);">'+artLabels[answers[3]]+'</span>':'',
+      answers[6]?'งบ: <span style="color:var(--moss-dark);">'+budgetLabels[answers[6]]+'</span>':'',
+      answers[7]?'ไป<span style="color:var(--moss-dark);">'+styleLabels[answers[7]]+'</span>':'',
+      answers[8]?'<span style="color:var(--moss-dark);">'+durationLabels[answers[8]]+'</span>':'',
+      mbti&&mbti!=='unknown'?'MBTI: <span style="color:var(--purple-soft);">'+mbti+'</span>':'',
+      hdType?'HD: <span style="color:var(--accent);">'+hdType+'</span>':'',
     ].filter(Boolean);
     document.getElementById('result-summary').innerHTML='<b style="font-weight:500;color:var(--charcoal);">สรุปแบบของคุณ</b> · '+summaryParts.join(' · ');
 
     const tags=[tops[0]?.city,tops[1]?.city,p.type,styleLabels[answers[7]]||''].filter(Boolean);
-    document.getElementById('result-tags').innerHTML=tags.map(t=>`<span class="result-tag">${t}</span>`).join('');
+    document.getElementById('result-tags').innerHTML=tags.map(t=>'<span class="result-tag">'+t+'</span>').join('');
 
     const user=getUser();
     if (user) {
       user.quizCount=(user.quizCount||0)+1;
-      user.lastProfile={...p,dest:scopeLabels[answers[4]]||'—',budget:budgetLabels[answers[6]]||'—',style:styleLabels[answers[7]]||'—',duration:durationLabels[answers[8]]||'—',mbti:mbti||'—',topCity:tops[0]?.city||'—',date:new Date().toLocaleDateString('th-TH')};
+      user.lastProfile={...p,dest:scopeLabels[answers[4]]||'—',budget:budgetLabels[answers[6]]||'—',style:styleLabels[answers[7]]||'—',duration:durationLabels[answers[8]]||'—',mbti:mbti||'—',hdType:hdType||'—',topCity:tops[0]?.city||'—',date:new Date().toLocaleDateString('th-TH')};
       saveUser(user);
       sbPost('quiz_results',{user_email:user.email,user_name:user.name,profile_type:p.type,profile_title:p.title,mbti:mbti||null,top_city:tops[0]?.city||null,destination_scope:scopeLabels[answers[4]]||null,budget:budgetLabels[answers[6]]||null,travel_style:styleLabels[answers[7]]||null,duration:durationLabels[answers[8]]||null,nature_type:answers[2]||null,art_type:answers[3]||null,accommodation:answers[9]||null});
       unlockResult();
@@ -1971,6 +1953,8 @@
     document.getElementById('step-'+currentStep).classList.remove('active');
     currentStep=0;
     document.getElementById('step-0').classList.add('active');
+    document.getElementById('result-locked').style.display='block';
+    document.getElementById('result-full').style.display='none';
   }
 
   function getUser(){try{return JSON.parse(localStorage.getItem('craftaway_user'));}catch{return null;}}
@@ -1982,7 +1966,6 @@
 
   let selectedPlan='';
   function selectPlan(plan){selectedPlan=plan;['domestic','international','both','undecided'].forEach(p=>{document.getElementById('plan-'+p).classList.toggle('selected',p===plan);});}
-
   function openLoginModal(){document.getElementById('login-form-state').style.display='block';document.getElementById('login-success-state').style.display='none';document.getElementById('login-modal').classList.add('open');document.body.style.overflow='hidden';}
   function closeLoginModal(){document.getElementById('login-modal').classList.remove('open');document.body.style.overflow='';}
   function closeLoginOutside(e){if(e.target===document.getElementById('login-modal'))closeLoginModal();}
@@ -2025,7 +2008,7 @@
       document.getElementById('dash-profile-section').style.display='block';
       document.getElementById('dash-profile-name').textContent=user.lastProfile.title;
       document.getElementById('dash-profile-desc').textContent=[user.lastProfile.topCity,user.lastProfile.dest,'งบ '+user.lastProfile.budget,user.lastProfile.style,user.lastProfile.duration,user.lastProfile.mbti&&user.lastProfile.mbti!=='—'?'MBTI: '+user.lastProfile.mbti:''].filter(Boolean).join(' · ');
-      document.getElementById('dash-profile-tags').innerHTML=[user.lastProfile.topCity,user.lastProfile.type].filter(Boolean).map(t=>`<span class="result-tag">${t}</span>`).join('');
+      document.getElementById('dash-profile-tags').innerHTML=[user.lastProfile.topCity,user.lastProfile.type].filter(Boolean).map(t=>'<span class="result-tag">'+t+'</span>').join('');
     }
     if(user.dream){document.getElementById('dash-dream-section').style.display='block';document.getElementById('dash-dream').textContent=user.dream;}
     document.getElementById('dashboard-modal').classList.add('open');
@@ -2036,15 +2019,15 @@
 
   const tiers={
     free:      {title:'Travel Profile',sub:'ผลจาก quiz ของคุณ — ฟรี ไม่มีค่าใช้จ่าย',price:0,showMBTI:false,showHD:false,free:true},
-    essential: {title:'Craft Your Trip',sub:'monemoll_ อ่าน MBTI แล้วออกแบบทริปเฉพาะคุณ',price:888,showMBTI:true,showHD:false},
-    signature: {title:'Design Your Journey',sub:'MBTI + Human Design — ออกแบบทริปที่ชาร์จพลังงานได้จริง',price:1555,showMBTI:true,showHD:false},
-    premium:   {title:'Discover Yourself',sub:'MBTI + HD + โหราศาสตร์ — อ่านแผนที่พลังงานลึกที่สุด + itinerary จริง',price:2999,showMBTI:true,showHD:false},
+    signature: {title:'Design Your Journey',sub:'MBTI + Human Design — ออกแบบทริปที่ชาร์จพลังงานได้จริง',price:5999,showMBTI:true,showHD:false},
+    premium:   {title:'Discover Yourself',sub:'MBTI + HD + โหราศาสตร์ + Astrocartography — อ่านแผนที่พลังงานลึกที่สุด',price:9999,showMBTI:true,showHD:false},
   };
   let currentTier='signature',hdAdded=false;
 
   function openModal(tier,withHD=false){
     currentTier=tier;hdAdded=false;
     const t=tiers[tier];
+    if(!t)return;
     document.getElementById('modal-title').textContent=t.title;
     document.getElementById('modal-sub').textContent=t.sub;
     document.getElementById('order-product-name').textContent=t.title;
@@ -2055,18 +2038,18 @@
     if(t.free){payBtn.textContent='รับผล Travel Profile';}
     else{payBtn.innerHTML='ชำระเงิน <span id="pay-btn-price">'+pl+'</span>';}
     document.getElementById('order-summary').style.display=t.free?'none':'block';
-    document.getElementById('hd-toggle-row').style.display=t.showHD?'flex':'none';
+    document.getElementById('hd-toggle-row').style.display='none';
     document.getElementById('mbti-section').style.display=t.showMBTI?'block':'none';
     document.getElementById('hd-order-row').style.display='none';
     document.getElementById('hd-input-section').style.display='none';
     document.getElementById('hd-switch').classList.remove('on');
-    document.getElementById('hd-toggle-row').classList.remove('checked');
     document.getElementById('modal-form').style.display='block';
     document.getElementById('modal-success').style.display='none';
-    if(withHD&&t.showHD)setTimeout(toggleHD,300);
+    document.getElementById('modal-qr').style.display='none';
     document.getElementById('modal').classList.add('open');
     document.body.style.overflow='hidden';
   }
+
   function closeModal(){
     document.getElementById('modal').classList.remove('open');
     document.body.style.overflow='';
@@ -2074,18 +2057,15 @@
     document.getElementById('modal-success').style.display='none';
   }
   function closeModalOutside(e){if(e.target===document.getElementById('modal'))closeModal();}
-
   function toggleHD(){
     hdAdded=!hdAdded;
     document.getElementById('hd-switch').classList.toggle('on',hdAdded);
-    document.getElementById('hd-toggle-row').classList.toggle('checked',hdAdded);
     document.getElementById('hd-input-section').style.display=hdAdded?'block':'none';
     document.getElementById('hd-order-row').style.display=hdAdded?'flex':'none';
     const total=hdAdded?tiers[currentTier].price+500:tiers[currentTier].price;
     document.getElementById('order-total').textContent='฿'+total.toLocaleString();
     const pp=document.getElementById('pay-btn-price');if(pp)pp.textContent='฿'+total.toLocaleString();
   }
-
   function selectMBTI(btn){btn.closest('.mbti-select').querySelectorAll('.mbti-btn').forEach(b=>b.classList.remove('selected'));btn.classList.add('selected');}
 
   function handlePay(){
@@ -2097,7 +2077,6 @@
     const mbtiSelected=document.querySelector('#mbti-section .mbti-btn.selected');
     const hdTypeEl=document.querySelector('#hd-input-section select');
     const total=hdAdded?t.price+500:t.price;
-
     if(t.free){
       document.getElementById('modal-form').style.display='none';
       document.getElementById('modal-success').style.display='block';
@@ -2105,23 +2084,9 @@
       document.getElementById('success-desc').textContent='ลองเลื่อนขึ้นไปดู travel profile ของคุณได้เลย';
       return;
     }
-
-    sbPost('orders',{
-      user_name:nameEl?.value||null,
-      user_email:emailEl?.value||null,
-      ig_or_line:igEl?.value||null,
-      tier:currentTier,
-      tier_price:t.price,
-      hd_addon:hdAdded,
-      total_price:total,
-      mbti_type:mbtiSelected?.textContent||null,
-      hd_type:hdTypeEl?.value||null,
-      trip_note:noteEl?.value||null,
-      status:'pending'
-    });
-
+    sbPost('orders',{user_name:nameEl?.value||null,user_email:emailEl?.value||null,ig_or_line:igEl?.value||null,tier:currentTier,tier_price:t.price,hd_addon:hdAdded,total_price:total,mbti_type:mbtiSelected?.textContent||null,hd_type:hdTypeEl?.value||null,trip_note:noteEl?.value||null,status:'pending'});
     const phone='0972809498';
-    const qrUrl=`https://promptpay.io/${phone}/${total}.png`;
+    const qrUrl='https://promptpay.io/'+phone+'/'+total+'.png';
     document.getElementById('qr-img').src=qrUrl;
     document.getElementById('qr-amount').textContent='฿'+total.toLocaleString();
     document.getElementById('modal-form').style.display='none';
@@ -2129,6 +2094,7 @@
   }
 
   renderUserBar();
+
 </script>
 
 </body>
