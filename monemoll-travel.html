@@ -1415,6 +1415,38 @@
           <div id="venue-section" style="display:none;margin-bottom:20px;"></div>
           <div id="result-summary" style="background:rgba(107,124,92,0.06);border-radius:12px;padding:14px 16px;margin-bottom:20px;font-size:13px;line-height:1.9;color:var(--charcoal-soft);"></div>
           <div class="result-tags" id="result-tags" style="margin-bottom:24px;"></div>
+
+          <!-- Story Card for sharing -->
+          <div id="story-share-section" style="margin-bottom:28px;">
+            <div style="font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--moss);margin-bottom:12px;font-weight:500;">📲 แชร์ผลลัพธ์ของคุณ</div>
+            <div style="position:relative;">
+              <!-- Story Card -->
+              <div id="share-card" style="width:100%;max-width:320px;margin:0 auto;aspect-ratio:9/16;border-radius:20px;overflow:hidden;position:relative;cursor:pointer;" onclick="downloadStoryCard()">
+                <div id="share-card-bg" style="position:absolute;inset:0;"></div>
+                <div style="position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;padding:24px 20px;">
+                  <span id="sc-brand" style="font-size:10px;letter-spacing:0.22em;text-transform:uppercase;"></span>
+                  <div style="flex:1;display:flex;flex-direction:column;justify-content:center;padding:8px 0;">
+                    <div id="sc-wc" style="width:100%;height:110px;border-radius:12px;overflow:hidden;position:relative;margin-bottom:16px;"></div>
+                    <div id="sc-typelabel" style="font-size:9px;letter-spacing:0.18em;text-transform:uppercase;margin-bottom:6px;"></div>
+                    <div id="sc-name" style="font-family:'Playfair Display',serif;font-size:22px;font-weight:400;line-height:1.25;margin-bottom:10px;"></div>
+                    <div id="sc-divider" style="height:0.5px;margin:4px 0 12px;opacity:0.2;"></div>
+                    <div id="sc-tags" style="display:flex;flex-wrap:wrap;gap:5px;margin-bottom:10px;"></div>
+                    <div id="sc-desc" style="font-size:11px;font-weight:300;line-height:1.65;opacity:0.72;"></div>
+                  </div>
+                  <div style="display:flex;justify-content:space-between;align-items:flex-end;">
+                    <span id="sc-cta" style="font-size:10px;opacity:0.4;"></span>
+                    <span id="sc-pill" style="font-size:9px;padding:4px 11px;border-radius:99px;">@monemoll_</span>
+                  </div>
+                </div>
+              </div>
+              <div style="text-align:center;margin-top:12px;">
+                <button onclick="downloadStoryCard()" style="background:var(--moss);color:var(--white);border:none;padding:10px 24px;border-radius:12px;font-family:'Sarabun',sans-serif;font-size:13px;font-weight:500;cursor:pointer;display:inline-flex;align-items:center;gap:8px;">
+                  📥 บันทึก Story Card
+                </button>
+                <p style="font-size:11px;color:var(--charcoal-soft);opacity:0.5;margin-top:8px;">กดบันทึกแล้วแชร์ลง IG Stories ได้เลย</p>
+              </div>
+            </div>
+          </div>
         </div>
 
         <p style="font-size:14px;font-weight:300;color:var(--charcoal-soft);line-height:1.7;margin-bottom:20px;">ถ้าอยากให้ monemoll_ วิเคราะห์และออกแบบทริปให้ลึกกว่านี้ — เลือก service ด้านล่างได้เลย</p>
@@ -2291,6 +2323,7 @@
     document.getElementById('result-title').textContent=p.title;
     document.getElementById('result-desc').textContent=p.desc;
     document.getElementById('result-watercolor').innerHTML=getWatercolor(key);
+    renderStoryCard(key, p);
 
     // Takeaway + Warning
     const extraEl = document.getElementById('result-extra');
@@ -2472,6 +2505,174 @@
   }
 
   function logoutUser(){localStorage.removeItem('craftaway_user');renderUserBar();}
+
+  const storyThemes = {
+    recharge: {
+      bg:'linear-gradient(150deg,#141C24 0%,#1C2830 60%,#121C22 100%)',
+      glow:'radial-gradient(ellipse at 25% 25%,rgba(88,130,168,0.22) 0%,transparent 55%)',
+      wc:'linear-gradient(130deg,#1A2E40 0%,#243848 50%,#182838 100%)',
+      e1:'#2E5878',e2:'#3A6888',e3:'#1E4060',
+      typeColor:'#88BADA', textMode:'light',
+      wcLabel:'THE QUIET WANDERER',
+      tags:[{t:'slow travel',c:'rgba(88,130,168,0.2)',tc:'#88BADA',b:'rgba(88,130,168,0.3)'},
+            {t:'restore',c:'rgba(196,149,106,0.18)',tc:'#C4956A',b:'rgba(196,149,106,0.25)'},
+            {t:'คนเดียว',c:'rgba(88,130,168,0.2)',tc:'#88BADA',b:'rgba(88,130,168,0.3)'}],
+      pillBg:'rgba(245,240,232,0.15)',pillC:'#F5F0E8',pillBd:'rgba(245,240,232,0.2)',
+    },
+    reset: {
+      bg:'linear-gradient(145deg,#F2EAD8 0%,#EAE0C8 55%,#E0D4B8 100%)',
+      glow:'', wc:'linear-gradient(130deg,#D8C4A0 0%,#CCBA90 50%,#D4C0A0 100%)',
+      e1:'#C8A870',e2:'#B89858',e3:'#D4B880',
+      typeColor:'#8A6A40', textMode:'dark',
+      wcLabel:'THE GENTLE RESET',
+      tags:[{t:'2–3 วัน',c:'rgba(107,124,92,0.15)',tc:'#5A7A4A',b:'rgba(107,124,92,0.22)'},
+            {t:'vibe ดี',c:'rgba(196,149,106,0.18)',tc:'#C4956A',b:'rgba(196,149,106,0.25)'},
+            {t:'กินอาหารอร่อย',c:'rgba(107,124,92,0.15)',tc:'#5A7A4A',b:'rgba(107,124,92,0.22)'}],
+      pillBg:'#3A3A2E',pillC:'#FEFCF8',pillBd:'transparent',
+    },
+    explore: {
+      bg:'linear-gradient(150deg,#121A12 0%,#182018 55%,#101810 100%)',
+      glow:'radial-gradient(ellipse at 30% 30%,rgba(80,130,80,0.2) 0%,transparent 55%)',
+      wc:'linear-gradient(130deg,#1A2E1A 0%,#203820 50%,#182818 100%)',
+      e1:'#2E5828',e2:'#3A7030',e3:'#224820',
+      typeColor:'#8AAE78', textMode:'light',
+      wcLabel:'THE CURIOUS SOUL',
+      tags:[{t:'offbeat',c:'rgba(107,124,92,0.18)',tc:'#8AAE78',b:'rgba(107,124,92,0.25)'},
+            {t:'ของใหม่',c:'rgba(196,149,106,0.18)',tc:'#C4956A',b:'rgba(196,149,106,0.25)'},
+            {t:'explore',c:'rgba(107,124,92,0.18)',tc:'#8AAE78',b:'rgba(107,124,92,0.25)'}],
+      pillBg:'#6B7C5C',pillC:'#FEFCF8',pillBd:'transparent',
+    },
+    connect: {
+      bg:'linear-gradient(145deg,#F0E8EC 0%,#E8DDE4 55%,#DDD0D8 100%)',
+      glow:'', wc:'linear-gradient(130deg,#D8B0C0 0%,#CCA0B0 50%,#D4A8BC 100%)',
+      e1:'#C48898',e2:'#B87888',e3:'#CA9098',
+      typeColor:'#904858', textMode:'dark',
+      wcLabel:'THE HEARTFUL TRAVELER',
+      tags:[{t:'ผู้คน',c:'rgba(180,100,120,0.12)',tc:'#904858',b:'rgba(180,100,120,0.2)'},
+            {t:'วัฒนธรรม',c:'rgba(180,100,120,0.12)',tc:'#904858',b:'rgba(180,100,120,0.2)'},
+            {t:'local life',c:'rgba(107,124,92,0.15)',tc:'#5A7A4A',b:'rgba(107,124,92,0.22)'}],
+      pillBg:'#C4889A',pillC:'#FEFCF8',pillBd:'transparent',
+    },
+    still: {
+      bg:'linear-gradient(150deg,#0C0C14 0%,#121220 55%,#0A0A12 100%)',
+      glow:'radial-gradient(ellipse at 40% 35%,rgba(80,70,120,0.25) 0%,transparent 55%)',
+      wc:'linear-gradient(130deg,#14102A 0%,#1C1838 50%,#12102A 100%)',
+      e1:'#2A2848',e2:'#383560',e3:'#222040',
+      typeColor:'#B0A0D0', textMode:'light',
+      wcLabel:'THE STILL SEEKER',
+      tags:[{t:'ไม่มีแผน',c:'rgba(60,70,130,0.2)',tc:'#6878B8',b:'rgba(60,70,130,0.3)'},
+            {t:'ความเงียบ',c:'rgba(155,139,180,0.2)',tc:'#C8B8E0',b:'rgba(155,139,180,0.3)'},
+            {t:'คนเดียว',c:'rgba(60,70,130,0.2)',tc:'#6878B8',b:'rgba(60,70,130,0.3)'}],
+      pillBg:'rgba(155,139,180,0.3)',pillC:'#D0C0E8',pillBd:'rgba(155,139,180,0.4)',
+    },
+    transform: {
+      bg:'linear-gradient(150deg,#F0EBF8 0%,#E8E0F0 55%,#DDD5E8 100%)',
+      glow:'', wc:'linear-gradient(130deg,#C8B0D8 0%,#BCA0CC 50%,#C4A8D4 100%)',
+      e1:'#A888C8',e2:'#9878B8',e3:'#B090CA',
+      typeColor:'#8060A8', textMode:'dark',
+      wcLabel:'THE TRANSFORMER',
+      tags:[{t:'ช่วงเปลี่ยน',c:'rgba(130,100,170,0.15)',tc:'#8060A8',b:'rgba(130,100,170,0.22)'},
+            {t:'clarity',c:'rgba(130,100,170,0.15)',tc:'#8060A8',b:'rgba(130,100,170,0.22)'},
+            {t:'ก้าวต่อไป',c:'rgba(107,124,92,0.15)',tc:'#5A7A4A',b:'rgba(107,124,92,0.22)'}],
+      pillBg:'rgba(130,100,170,0.2)',pillC:'#8060A8',pillBd:'rgba(130,100,170,0.3)',
+    },
+    drift: {
+      bg:'linear-gradient(150deg,#0E1A1C 0%,#142228 55%,#0C1820 100%)',
+      glow:'radial-gradient(ellipse at 35% 30%,rgba(60,140,150,0.2) 0%,transparent 55%)',
+      wc:'linear-gradient(130deg,#162830 0%,#1E3840 50%,#142430 100%)',
+      e1:'#2A6878',e2:'#387888',e3:'#205868',
+      typeColor:'#70C0C8', textMode:'light',
+      wcLabel:'THE FREE DRIFTER',
+      tags:[{t:'spontaneous',c:'rgba(60,140,150,0.2)',tc:'#70C0C8',b:'rgba(60,140,150,0.3)'},
+            {t:'ไม่มีแผน',c:'rgba(196,149,106,0.18)',tc:'#C4956A',b:'rgba(196,149,106,0.25)'},
+            {t:'wild & free',c:'rgba(60,140,150,0.2)',tc:'#70C0C8',b:'rgba(60,140,150,0.3)'}],
+      pillBg:'rgba(60,140,150,0.3)',pillC:'#90D4D8',pillBd:'rgba(60,140,150,0.4)',
+    },
+  };
+
+  function renderStoryCard(profileKey, profileData) {
+    const th = storyThemes[profileKey] || storyThemes['explore'];
+    const isDark = th.textMode === 'light';
+    const textMain = isDark ? '#F5F0E8' : '#3A3A2E';
+    const textSub = isDark ? 'rgba(245,240,232,0.55)' : 'rgba(58,58,46,0.5)';
+    const divColor = isDark ? '#F5F0E8' : '#3A3A2E';
+
+    // BG
+    const bg = document.getElementById('share-card-bg');
+    bg.style.cssText = `background:${th.bg};`;
+    if (th.glow) bg.style.background = th.bg;
+
+    // glow overlay
+    let glowEl = document.getElementById('sc-glow');
+    if (!glowEl) { glowEl = document.createElement('div'); glowEl.id='sc-glow'; glowEl.style.cssText='position:absolute;inset:0;'; bg.parentNode.insertBefore(glowEl, bg.nextSibling); }
+    glowEl.style.background = th.glow || '';
+
+    // brand
+    const brandEl = document.getElementById('sc-brand');
+    brandEl.textContent = 'CRAFTAWAY ✦';
+    brandEl.style.color = textSub;
+
+    // watercolor
+    const wcEl = document.getElementById('sc-wc');
+    wcEl.style.background = th.wc;
+    wcEl.innerHTML = `
+      <svg width="100%" height="100%" viewBox="0 0 260 110" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+        <defs><filter id="scf"><feGaussianBlur stdDeviation="14"/></filter></defs>
+        <ellipse cx="60" cy="80" rx="130" ry="72" fill="${th.e1}" opacity="0.7" filter="url(#scf)"/>
+        <ellipse cx="210" cy="35" rx="105" ry="60" fill="${th.e2}" opacity="0.55" filter="url(#scf)"/>
+        <ellipse cx="150" cy="100" rx="80" ry="40" fill="${th.e3}" opacity="0.5" filter="url(#scf)"/>
+      </svg>
+      <span style="position:absolute;bottom:8px;left:50%;transform:translateX(-50%);font-family:'Playfair Display',serif;font-size:8px;letter-spacing:0.25em;text-transform:uppercase;white-space:nowrap;color:${textMain};opacity:0.35;">${th.wcLabel}</span>`;
+
+    // type label
+    const typeEl = document.getElementById('sc-typelabel');
+    typeEl.textContent = '✦  Travel Profile';
+    typeEl.style.color = th.typeColor;
+
+    // name
+    const nameEl = document.getElementById('sc-name');
+    nameEl.textContent = profileData.title;
+    nameEl.style.color = textMain;
+
+    // divider
+    document.getElementById('sc-divider').style.background = divColor;
+
+    // tags
+    const tagsEl = document.getElementById('sc-tags');
+    tagsEl.innerHTML = th.tags.map(t =>
+      `<span style="font-size:9px;padding:2px 8px;border-radius:99px;background:${t.c};color:${t.tc};border:0.5px solid ${t.b};">${t.t}</span>`
+    ).join('');
+
+    // desc (short)
+    const descEl = document.getElementById('sc-desc');
+    const shortDesc = profileData.desc.substring(0, 55) + (profileData.desc.length > 55 ? '...' : '');
+    descEl.textContent = shortDesc;
+    descEl.style.color = textMain;
+
+    // cta + pill
+    document.getElementById('sc-cta').textContent = 'ค้นพบ profile ของคุณ';
+    document.getElementById('sc-cta').style.color = textSub;
+    const pillEl = document.getElementById('sc-pill');
+    pillEl.style.cssText = `font-size:9px;padding:4px 11px;border-radius:99px;background:${th.pillBg};color:${th.pillC};border:0.5px solid ${th.pillBd||'transparent'};`;
+    pillEl.textContent = '@monemoll_';
+  }
+
+  function downloadStoryCard() {
+    import('https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js').then(() => {
+      html2canvas(document.getElementById('share-card'), {
+        scale: 3, useCORS: true, allowTaint: true,
+        backgroundColor: null,
+      }).then(canvas => {
+        const link = document.createElement('a');
+        link.download = 'craftaway-profile.png';
+        link.href = canvas.toDataURL('image/png');
+        link.click();
+      });
+    }).catch(() => {
+      // fallback: open in new tab
+      alert('กด screenshot แล้วบันทึกลงเครื่องได้เลยนะ 📱');
+    });
+  }
 
   function joinWaitlist(tier, nameId, contactId) {
     const name = document.getElementById(nameId).value.trim();
