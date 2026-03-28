@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Craftaway — Design your journey, discover yourself</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Sarabun:wght@300;400;500&family=Noto+Sans+Thai:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Sarabun:wght@300;400;500&family=Noto+Sans+Thai:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -1505,27 +1505,9 @@
           <!-- Story Card for sharing -->
           <div id="story-share-section" style="margin-bottom:28px;">
             <div style="font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--moss);margin-bottom:12px;font-weight:500;">📲 แชร์ผลลัพธ์ของคุณ</div>
-            <div style="position:relative;">
-              <!-- Story Card -->
-              <div id="share-card" style="width:100%;max-width:320px;margin:0 auto;aspect-ratio:9/16;border-radius:20px;overflow:hidden;position:relative;cursor:pointer;" onclick="downloadStoryCard()">
-                <div id="share-card-bg" style="position:absolute;inset:0;"></div>
-                <div style="position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;padding:24px 20px;">
-                  <span id="sc-brand" style="font-size:10px;letter-spacing:0.22em;text-transform:uppercase;"></span>
-                  <div style="flex:1;display:flex;flex-direction:column;justify-content:center;padding:8px 0;">
-                    <div id="sc-wc" style="width:100%;height:110px;border-radius:12px;overflow:hidden;position:relative;margin-bottom:16px;"></div>
-                    <div id="sc-typelabel" style="font-size:9px;letter-spacing:0.18em;text-transform:uppercase;margin-bottom:6px;font-weight:600;"></div>
-                    <div id="sc-name" style="font-family:'Noto Sans Thai',sans-serif;font-size:21px;font-weight:700;line-height:1.3;margin-bottom:10px;word-break:keep-all;"></div>
-                    <div id="sc-divider" style="height:1px;margin:4px 0 12px;opacity:0.35;"></div>
-                    <div id="sc-tags" style="display:flex;flex-wrap:wrap;gap:5px;margin-bottom:10px;"></div>
-                    <div id="sc-desc" style="font-size:12px;font-weight:500;line-height:1.7;word-break:keep-all;"></div>
-                  </div>
-                  <div style="display:flex;justify-content:space-between;align-items:flex-end;">
-                    <span id="sc-cta" style="font-size:10px;opacity:0.65;font-weight:500;"></span>
-                    <span id="sc-pill" style="font-size:9px;padding:4px 11px;border-radius:99px;">@craftaway.th</span>
-                  </div>
-                </div>
-              </div>
-              <div style="text-align:center;margin-top:12px;">
+            <div style="text-align:center;">
+              <canvas id="share-card-canvas" width="540" height="960" style="width:100%;max-width:300px;border-radius:20px;display:block;margin:0 auto;cursor:pointer;" onclick="downloadStoryCard()"></canvas>
+              <div style="margin-top:12px;">
                 <button onclick="downloadStoryCard()" style="background:var(--moss);color:var(--white);border:none;padding:10px 24px;border-radius:12px;font-family:'Sarabun',sans-serif;font-size:13px;font-weight:500;cursor:pointer;display:inline-flex;align-items:center;gap:8px;">
                   📥 บันทึก Story Card
                 </button>
@@ -2601,20 +2583,25 @@
       e1:'#2E5878',e2:'#3A6888',e3:'#1E4060',
       typeColor:'#88BADA', textMode:'light',
       wcLabel:'THE QUIET WANDERER',
-      tags:[{t:'slow travel',c:'rgba(88,130,168,0.2)',tc:'#88BADA',b:'rgba(88,130,168,0.3)'},
-            {t:'restore',c:'rgba(196,149,106,0.18)',tc:'#C4956A',b:'rgba(196,149,106,0.25)'},
-            {t:'คนเดียว',c:'rgba(88,130,168,0.2)',tc:'#88BADA',b:'rgba(88,130,168,0.3)'}],
+      tags:[
+        {t:'slow travel',c:'rgba(88,130,168,0.2)',tc:'#88BADA',b:'rgba(88,130,168,0.3)'},
+        {t:'restore',c:'rgba(196,149,106,0.18)',tc:'#C4956A',b:'rgba(196,149,106,0.25)'},
+        {t:'คนเดียว',c:'rgba(88,130,168,0.2)',tc:'#88BADA',b:'rgba(88,130,168,0.3)'},
+      ],
       pillBg:'rgba(245,240,232,0.15)',pillC:'#F5F0E8',pillBd:'rgba(245,240,232,0.2)',
     },
     reset: {
       bg:'linear-gradient(145deg,#F2EAD8 0%,#EAE0C8 55%,#E0D4B8 100%)',
-      glow:'', wc:'linear-gradient(130deg,#D8C4A0 0%,#CCBA90 50%,#D4C0A0 100%)',
+      glow:'',
+      wc:'linear-gradient(130deg,#D8C4A0 0%,#CCBA90 50%,#D4C0A0 100%)',
       e1:'#C8A870',e2:'#B89858',e3:'#D4B880',
       typeColor:'#8A6A40', textMode:'dark',
       wcLabel:'THE GENTLE RESET',
-      tags:[{t:'2–3 วัน',c:'rgba(107,124,92,0.15)',tc:'#5A7A4A',b:'rgba(107,124,92,0.22)'},
-            {t:'vibe ดี',c:'rgba(196,149,106,0.18)',tc:'#C4956A',b:'rgba(196,149,106,0.25)'},
-            {t:'กินอาหารอร่อย',c:'rgba(107,124,92,0.15)',tc:'#5A7A4A',b:'rgba(107,124,92,0.22)'}],
+      tags:[
+        {t:'2–3 วัน',c:'rgba(107,124,92,0.15)',tc:'#5A7A4A',b:'rgba(107,124,92,0.22)'},
+        {t:'vibe ดี',c:'rgba(196,149,106,0.18)',tc:'#C4956A',b:'rgba(196,149,106,0.25)'},
+        {t:'กินอาหารอร่อย',c:'rgba(107,124,92,0.15)',tc:'#5A7A4A',b:'rgba(107,124,92,0.22)'},
+      ],
       pillBg:'#3A3A2E',pillC:'#FEFCF8',pillBd:'transparent',
     },
     explore: {
@@ -2624,20 +2611,25 @@
       e1:'#2E5828',e2:'#3A7030',e3:'#224820',
       typeColor:'#8AAE78', textMode:'light',
       wcLabel:'THE CURIOUS SOUL',
-      tags:[{t:'offbeat',c:'rgba(107,124,92,0.18)',tc:'#8AAE78',b:'rgba(107,124,92,0.25)'},
-            {t:'ของใหม่',c:'rgba(196,149,106,0.18)',tc:'#C4956A',b:'rgba(196,149,106,0.25)'},
-            {t:'explore',c:'rgba(107,124,92,0.18)',tc:'#8AAE78',b:'rgba(107,124,92,0.25)'}],
+      tags:[
+        {t:'offbeat',c:'rgba(107,124,92,0.18)',tc:'#8AAE78',b:'rgba(107,124,92,0.25)'},
+        {t:'ของใหม่',c:'rgba(196,149,106,0.18)',tc:'#C4956A',b:'rgba(196,149,106,0.25)'},
+        {t:'explore',c:'rgba(107,124,92,0.18)',tc:'#8AAE78',b:'rgba(107,124,92,0.25)'},
+      ],
       pillBg:'#6B7C5C',pillC:'#FEFCF8',pillBd:'transparent',
     },
     connect: {
       bg:'linear-gradient(145deg,#F0E8EC 0%,#E8DDE4 55%,#DDD0D8 100%)',
-      glow:'', wc:'linear-gradient(130deg,#D8B0C0 0%,#CCA0B0 50%,#D4A8BC 100%)',
+      glow:'',
+      wc:'linear-gradient(130deg,#D8B0C0 0%,#CCA0B0 50%,#D4A8BC 100%)',
       e1:'#C48898',e2:'#B87888',e3:'#CA9098',
       typeColor:'#904858', textMode:'dark',
       wcLabel:'THE HEARTFUL TRAVELER',
-      tags:[{t:'ผู้คน',c:'rgba(180,100,120,0.12)',tc:'#904858',b:'rgba(180,100,120,0.2)'},
-            {t:'วัฒนธรรม',c:'rgba(180,100,120,0.12)',tc:'#904858',b:'rgba(180,100,120,0.2)'},
-            {t:'local life',c:'rgba(107,124,92,0.15)',tc:'#5A7A4A',b:'rgba(107,124,92,0.22)'}],
+      tags:[
+        {t:'ผู้คน',c:'rgba(180,100,120,0.12)',tc:'#904858',b:'rgba(180,100,120,0.2)'},
+        {t:'วัฒนธรรม',c:'rgba(180,100,120,0.12)',tc:'#904858',b:'rgba(180,100,120,0.2)'},
+        {t:'local life',c:'rgba(107,124,92,0.15)',tc:'#5A7A4A',b:'rgba(107,124,92,0.22)'},
+      ],
       pillBg:'#C4889A',pillC:'#FEFCF8',pillBd:'transparent',
     },
     still: {
@@ -2647,20 +2639,25 @@
       e1:'#2A2848',e2:'#383560',e3:'#222040',
       typeColor:'#B0A0D0', textMode:'light',
       wcLabel:'THE STILL SEEKER',
-      tags:[{t:'ไม่มีแผน',c:'rgba(60,70,130,0.2)',tc:'#6878B8',b:'rgba(60,70,130,0.3)'},
-            {t:'ความเงียบ',c:'rgba(155,139,180,0.2)',tc:'#C8B8E0',b:'rgba(155,139,180,0.3)'},
-            {t:'คนเดียว',c:'rgba(60,70,130,0.2)',tc:'#6878B8',b:'rgba(60,70,130,0.3)'}],
+      tags:[
+        {t:'ไม่มีแผน',c:'rgba(60,70,130,0.2)',tc:'#6878B8',b:'rgba(60,70,130,0.3)'},
+        {t:'ความเงียบ',c:'rgba(155,139,180,0.2)',tc:'#C8B8E0',b:'rgba(155,139,180,0.3)'},
+        {t:'คนเดียว',c:'rgba(60,70,130,0.2)',tc:'#6878B8',b:'rgba(60,70,130,0.3)'},
+      ],
       pillBg:'rgba(155,139,180,0.3)',pillC:'#D0C0E8',pillBd:'rgba(155,139,180,0.4)',
     },
     transform: {
       bg:'linear-gradient(150deg,#F0EBF8 0%,#E8E0F0 55%,#DDD5E8 100%)',
-      glow:'', wc:'linear-gradient(130deg,#C8B0D8 0%,#BCA0CC 50%,#C4A8D4 100%)',
+      glow:'',
+      wc:'linear-gradient(130deg,#C8B0D8 0%,#BCA0CC 50%,#C4A8D4 100%)',
       e1:'#A888C8',e2:'#9878B8',e3:'#B090CA',
       typeColor:'#8060A8', textMode:'dark',
       wcLabel:'THE TRANSFORMER',
-      tags:[{t:'ช่วงเปลี่ยน',c:'rgba(130,100,170,0.15)',tc:'#8060A8',b:'rgba(130,100,170,0.22)'},
-            {t:'clarity',c:'rgba(130,100,170,0.15)',tc:'#8060A8',b:'rgba(130,100,170,0.22)'},
-            {t:'ก้าวต่อไป',c:'rgba(107,124,92,0.15)',tc:'#5A7A4A',b:'rgba(107,124,92,0.22)'}],
+      tags:[
+        {t:'ช่วงเปลี่ยน',c:'rgba(130,100,170,0.15)',tc:'#8060A8',b:'rgba(130,100,170,0.22)'},
+        {t:'clarity',c:'rgba(130,100,170,0.15)',tc:'#8060A8',b:'rgba(130,100,170,0.22)'},
+        {t:'ก้าวต่อไป',c:'rgba(107,124,92,0.15)',tc:'#5A7A4A',b:'rgba(107,124,92,0.22)'},
+      ],
       pillBg:'rgba(130,100,170,0.2)',pillC:'#8060A8',pillBd:'rgba(130,100,170,0.3)',
     },
     drift: {
@@ -2670,113 +2667,206 @@
       e1:'#2A6878',e2:'#387888',e3:'#205868',
       typeColor:'#70C0C8', textMode:'light',
       wcLabel:'THE FREE DRIFTER',
-      tags:[{t:'spontaneous',c:'rgba(60,140,150,0.2)',tc:'#70C0C8',b:'rgba(60,140,150,0.3)'},
-            {t:'ไม่มีแผน',c:'rgba(196,149,106,0.18)',tc:'#C4956A',b:'rgba(196,149,106,0.25)'},
-            {t:'wild & free',c:'rgba(60,140,150,0.2)',tc:'#70C0C8',b:'rgba(60,140,150,0.3)'}],
+      tags:[
+        {t:'spontaneous',c:'rgba(60,140,150,0.2)',tc:'#70C0C8',b:'rgba(60,140,150,0.3)'},
+        {t:'ไม่มีแผน',c:'rgba(196,149,106,0.18)',tc:'#C4956A',b:'rgba(196,149,106,0.25)'},
+        {t:'wild & free',c:'rgba(60,140,150,0.2)',tc:'#70C0C8',b:'rgba(60,140,150,0.3)'},
+      ],
       pillBg:'rgba(60,140,150,0.3)',pillC:'#90D4D8',pillBd:'rgba(60,140,150,0.4)',
     },
   };
 
+  function drawCard(canvas, th, profileData) {
+    const W = canvas.width, H = canvas.height;
+    const ctx = canvas.getContext('2d');
+    const S = W / 540;
+    const PAD = 44 * S;
+    const FONT = "'Noto Sans Thai', Arial, sans-serif";
+
+    // Background
+    const bgCols = th.bg.match(/#[0-9A-Fa-f]{6}/g) || ['#1a1a2e','#101020'];
+    const bgGrad = ctx.createLinearGradient(0, 0, W*0.7, H);
+    bgGrad.addColorStop(0, bgCols[0]);
+    bgGrad.addColorStop(1, bgCols[bgCols.length-1] || bgCols[0]);
+    ctx.fillStyle = bgGrad;
+    ctx.fillRect(0, 0, W, H);
+
+    // Glow
+    const glowCols = th.glow ? th.glow.match(/#[0-9A-Fa-f]{6}/g) : null;
+    if (glowCols) {
+      const gr = ctx.createRadialGradient(W*0.35, H*0.25, 0, W*0.35, H*0.25, W*0.7);
+      gr.addColorStop(0, glowCols[0]+'66'); gr.addColorStop(1, 'transparent');
+      ctx.fillStyle = gr; ctx.fillRect(0, 0, W, H);
+    }
+
+    ctx.letterSpacing = '0px';
+    // textMode: 'light' = dark bg → white text, 'dark' = light bg → dark text
+    const isDarkBg = th.textMode === 'light';
+    const TEXT_MAIN = isDarkBg ? '#F5F0E8' : '#3A3A2E';
+    const TEXT_SUB  = isDarkBg ? 'rgba(245,240,232,0.65)' : 'rgba(58,58,46,0.6)';
+    let y = PAD * 1.6;
+
+    // ── Brand ──
+    ctx.font = `500 ${12*S}px ${FONT}`;
+    ctx.fillStyle = TEXT_SUB;
+    ctx.letterSpacing = (3*S)+'px';
+    ctx.fillText('CRAFTAWAY  ✦', PAD, y);
+    y += 40 * S;
+    ctx.letterSpacing = '0px';
+
+    // ── Watercolor box ──
+    const WC_H = 160 * S;
+    const wcBg = th.wc.match(/#[0-9A-Fa-f]{6}/g) || ['#223','#334'];
+    const wcG = ctx.createLinearGradient(PAD, y, W-PAD, y+WC_H);
+    wcG.addColorStop(0, wcBg[0]); wcG.addColorStop(1, wcBg[wcBg.length-1]);
+    ctx.save();
+    const rx=14*S, bx=PAD, by=y, bw=W-PAD*2, bh=WC_H;
+    ctx.beginPath();
+    ctx.moveTo(bx+rx,by); ctx.lineTo(bx+bw-rx,by); ctx.quadraticCurveTo(bx+bw,by,bx+bw,by+rx);
+    ctx.lineTo(bx+bw,by+bh-rx); ctx.quadraticCurveTo(bx+bw,by+bh,bx+bw-rx,by+bh);
+    ctx.lineTo(bx+rx,by+bh); ctx.quadraticCurveTo(bx,by+bh,bx,by+bh-rx);
+    ctx.lineTo(bx,by+rx); ctx.quadraticCurveTo(bx,by,bx+rx,by); ctx.closePath(); ctx.clip();
+    ctx.fillStyle = wcG; ctx.fillRect(bx,by,bw,bh);
+    [[bx+bw*0.25, by+bh*0.75, bw*0.5, th.e1||'#334', 0.6],
+     [bx+bw*0.78, by+bh*0.3,  bw*0.42, th.e2||'#445', 0.5],
+     [bx+bw*0.55, by+bh*0.9,  bw*0.35, th.e3||'#223', 0.45]
+    ].forEach(function(p) {
+      const rg = ctx.createRadialGradient(p[0],p[1],0,p[0],p[1],p[2]);
+      rg.addColorStop(0, p[3]+'CC'); rg.addColorStop(1, p[3]+'00');
+      ctx.globalAlpha = p[4]; ctx.fillStyle = rg; ctx.fillRect(bx,by,bw,bh);
+    });
+    ctx.globalAlpha = 1;
+    ctx.font = `400 ${8*S}px ${FONT}`; ctx.letterSpacing = (2.5*S)+'px';
+    ctx.fillStyle = isDarkBg ? 'rgba(245,240,232,0.38)' : 'rgba(58,58,46,0.35)'; ctx.textAlign = 'center';
+    ctx.fillText(th.wcLabel, W/2, by+bh - 10*S);
+    ctx.textAlign = 'left'; ctx.restore();
+    ctx.letterSpacing = '0px';
+    y += WC_H + 24*S;
+
+    // ── Type label ──
+    ctx.letterSpacing = (1.5*S)+'px';
+    ctx.font = `600 ${10*S}px ${FONT}`;
+    ctx.fillStyle = th.typeColor || '#A8D0F0';
+    ctx.fillText('✦  TRAVEL PROFILE', PAD, y);
+    y += 28 * S;
+    ctx.letterSpacing = '0px';
+
+    // ── Profile name — auto-size to fit 2 lines max ──
+    let NAME_SIZE = 32 * S;
+    const NAME_LH = 44 * S;
+    const nameMaxW = W - PAD * 2;
+    // Try font sizes from 32 down until title fits in 2 lines
+    for (let sz = 32; sz >= 18; sz--) {
+      ctx.font = `700 ${sz*S}px ${FONT}`;
+      const chars = Array.from(profileData.title);
+      let ln='', lns=[];
+      chars.forEach(function(c) {
+        if (ctx.measureText(ln+c).width > nameMaxW) { lns.push(ln); ln=c; }
+        else ln+=c;
+      });
+      if(ln) lns.push(ln);
+      if (lns.length <= 2) { NAME_SIZE = sz*S; break; }
+    }
+    ctx.font = `700 ${NAME_SIZE}px ${FONT}`;
+    ctx.fillStyle = TEXT_MAIN;
+    const nameChars = Array.from(profileData.title);
+    let nLine='', nLines=[];
+    nameChars.forEach(function(ch) {
+      if (ctx.measureText(nLine+ch).width > nameMaxW) { nLines.push(nLine); nLine=ch; }
+      else nLine+=ch;
+    });
+    if(nLine) nLines.push(nLine);
+    const actualNLH = NAME_SIZE * 1.45;
+    nLines.forEach(function(l) { ctx.fillText(l, PAD, y); y += actualNLH; });
+    y += 12*S;
+
+    // ── Divider ──
+    ctx.strokeStyle = isDarkBg ? 'rgba(245,240,232,0.2)' : 'rgba(58,58,46,0.2)'; ctx.lineWidth = S;
+    ctx.beginPath(); ctx.moveTo(PAD,y); ctx.lineTo(W-PAD,y); ctx.stroke();
+    y += 22*S;
+
+    // ── Tags ──
+    const TAG_SIZE = 10*S;
+    ctx.font = `500 ${TAG_SIZE}px ${FONT}`;
+    let tagX = PAD;
+    th.tags.forEach(function(tag) {
+      const tw = ctx.measureText(tag.t).width + 18*S;
+      ctx.fillStyle = tag.c||'rgba(255,255,255,0.15)';
+      ctx.beginPath(); ctx.roundRect(tagX, y-13*S, tw, 21*S, 10*S); ctx.fill();
+      ctx.strokeStyle = tag.b||'rgba(255,255,255,0.3)'; ctx.lineWidth = 0.5*S;
+      ctx.beginPath(); ctx.roundRect(tagX, y-13*S, tw, 21*S, 10*S); ctx.stroke();
+      ctx.fillStyle = tag.tc||'#F5F0E8';
+      ctx.fillText(tag.t, tagX+9*S, y+3*S);
+      tagX += tw + 8*S;
+    });
+    y += 36*S;
+
+    // ── Description — word wrap by space + char fallback ──
+    const DESC_SIZE = 13*S;
+    const DESC_LH = 24*S;
+    ctx.font = `400 ${DESC_SIZE}px ${FONT}`;
+    ctx.fillStyle = '#F5F0E8';
+    const maxW = W - PAD*2;
+    const words = profileData.desc.split(' ');
+    let dLine='', dLines=[];
+    // try word-level wrap first
+    words.forEach(function(w) {
+      const test = dLine ? dLine+' '+w : w;
+      if (ctx.measureText(test).width > maxW && dLine) { dLines.push(dLine); dLine=w; }
+      else dLine=test;
+    });
+    if(dLine) dLines.push(dLine);
+    // if any line still overflows, split by char
+    const finalLines = [];
+    dLines.forEach(function(line) {
+      if (ctx.measureText(line).width <= maxW) { finalLines.push(line); return; }
+      let cLine='';
+      Array.from(line).forEach(function(ch) {
+        if (ctx.measureText(cLine+ch).width > maxW) { finalLines.push(cLine); cLine=ch; }
+        else cLine+=ch;
+      });
+      if(cLine) finalLines.push(cLine);
+    });
+    finalLines.slice(0,6).forEach(function(l) { ctx.fillText(l, PAD, y); y += DESC_LH; });
+
+    // ── Footer ──
+    const FY = H - 38*S;
+    ctx.font = `400 ${10*S}px ${FONT}`; ctx.letterSpacing='0px';
+    ctx.fillStyle = TEXT_SUB;
+    ctx.fillText('ค้นพบ profile ของคุณ', PAD, FY);
+    const ptxt = '@craftaway.th';
+    ctx.font = `500 ${10*S}px ${FONT}`;
+    const pw = ctx.measureText(ptxt).width + 22*S;
+    ctx.fillStyle = th.pillBg||'rgba(255,255,255,0.18)';
+    ctx.beginPath(); ctx.roundRect(W-PAD-pw, FY-15*S, pw, 22*S, 11*S); ctx.fill();
+    ctx.fillStyle = th.pillC||TEXT_MAIN;
+    ctx.fillText(ptxt, W-PAD-pw+11*S, FY);
+  }
+
   function renderStoryCard(profileKey, profileData) {
     const th = storyThemes[profileKey] || storyThemes['explore'];
-    const isDark = th.textMode === 'light';
-    const textMain = isDark ? '#F5F0E8' : '#3A3A2E';
-    const textSub = isDark ? 'rgba(245,240,232,0.75)' : 'rgba(58,58,46,0.75)';
-    const divColor = isDark ? '#F5F0E8' : '#3A3A2E';
-
-    // BG
-    const bg = document.getElementById('share-card-bg');
-    bg.style.cssText = `background:${th.bg};`;
-    if (th.glow) bg.style.background = th.bg;
-
-    // glow overlay
-    let glowEl = document.getElementById('sc-glow');
-    if (!glowEl) { glowEl = document.createElement('div'); glowEl.id='sc-glow'; glowEl.style.cssText='position:absolute;inset:0;'; bg.parentNode.insertBefore(glowEl, bg.nextSibling); }
-    glowEl.style.background = th.glow || '';
-
-    // Add contrast layer for light-background cards
-    let contrastEl = document.getElementById('sc-contrast');
-    if (!contrastEl) {
-      contrastEl = document.createElement('div');
-      contrastEl.id = 'sc-contrast';
-      contrastEl.style.cssText = 'position:absolute;inset:0;z-index:1;';
-      bg.parentNode.insertBefore(contrastEl, glowEl.nextSibling);
-    }
-    // Light themes get a subtle darkening overlay to help text readability
-    contrastEl.style.background = isDark ? 'none' : 'rgba(0,0,0,0.08)';
-
-    // brand
-    const brandEl = document.getElementById('sc-brand');
-    brandEl.textContent = 'CRAFTAWAY ✦';
-    brandEl.style.color = textSub;
-    brandEl.style.opacity = '1';
-
-    // watercolor
-    const wcEl = document.getElementById('sc-wc');
-    wcEl.style.background = th.wc;
-    wcEl.innerHTML = `
-      <svg width="100%" height="100%" viewBox="0 0 260 110" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
-        <defs><filter id="scf"><feGaussianBlur stdDeviation="14"/></filter></defs>
-        <ellipse cx="60" cy="80" rx="130" ry="72" fill="${th.e1}" opacity="0.7" filter="url(#scf)"/>
-        <ellipse cx="210" cy="35" rx="105" ry="60" fill="${th.e2}" opacity="0.55" filter="url(#scf)"/>
-        <ellipse cx="150" cy="100" rx="80" ry="40" fill="${th.e3}" opacity="0.5" filter="url(#scf)"/>
-      </svg>
-      <span style="position:absolute;bottom:8px;left:50%;transform:translateX(-50%);font-family:'Playfair Display',serif;font-size:8px;letter-spacing:0.25em;text-transform:uppercase;white-space:nowrap;color:${textMain};opacity:0.35;">${th.wcLabel}</span>`;
-
-    // type label
-    const typeEl = document.getElementById('sc-typelabel');
-    typeEl.textContent = '✦  Travel Profile';
-    typeEl.style.color = th.typeColor;
-
-    // name
-    const nameEl = document.getElementById('sc-name');
-    nameEl.textContent = profileData.title;
-    nameEl.style.color = textMain;
-    nameEl.style.fontFamily = "'Noto Sans Thai', sans-serif";
-    nameEl.style.fontWeight = '700';
-    nameEl.style.wordBreak = 'keep-all';
-    nameEl.style.overflowWrap = 'break-word';
-
-    // divider
-    document.getElementById('sc-divider').style.background = divColor;
-
-    // tags
-    const tagsEl = document.getElementById('sc-tags');
-    tagsEl.innerHTML = th.tags.map(t =>
-      `<span style="font-size:9px;padding:2px 8px;border-radius:99px;background:${t.c};color:${t.tc};border:0.5px solid ${t.b};">${t.t}</span>`
-    ).join('');
-
-    // desc (short)
-    const descEl = document.getElementById('sc-desc');
-    descEl.textContent = profileData.desc;
-    descEl.style.color = textMain;
-    descEl.style.wordBreak = 'keep-all';
-    descEl.style.overflowWrap = 'break-word';
-    descEl.style.opacity = '1';
-
-    // cta + pill
-    document.getElementById('sc-cta').textContent = 'ค้นพบ profile ของคุณ';
-    document.getElementById('sc-cta').style.color = textSub;
-    const pillEl = document.getElementById('sc-pill');
-    pillEl.style.cssText = `font-size:9px;padding:4px 11px;border-radius:99px;background:${th.pillBg};color:${th.pillC};border:0.5px solid ${th.pillBd||'transparent'};`;
-    pillEl.textContent = '@craftaway.th';
+    window.currentProfileKey = profileKey;
+    window.currentProfileData = profileData;
+    const canvas = document.getElementById('share-card-canvas');
+    if (canvas) drawCard(canvas, th, profileData);
   }
 
   function downloadStoryCard() {
-    import('https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js').then(() => {
-      html2canvas(document.getElementById('share-card'), {
-        scale: 3, useCORS: true, allowTaint: true,
-        backgroundColor: null,
-      }).then(canvas => {
-        const link = document.createElement('a');
-        link.download = 'craftaway-profile.png';
-        link.href = canvas.toDataURL('image/png');
-        link.click();
-      });
-    }).catch(() => {
-      // fallback: open in new tab
-      alert('กด screenshot แล้วบันทึกลงเครื่องได้เลยนะ 📱');
-    });
+    const th = storyThemes[window.currentProfileKey] || storyThemes['explore'];
+    const profileData = window.currentProfileData;
+    if (!profileData) { alert('กรุณาทำ quiz ให้เสร็จก่อนนะ'); return; }
+    const btn = document.querySelector('#story-share-section button');
+    if (btn) { btn.textContent = '⏳ กำลังสร้าง...'; btn.disabled = true; }
+    const hc = document.createElement('canvas');
+    hc.width = 1080; hc.height = 1920;
+    drawCard(hc, th, profileData);
+    hc.toBlob(function(blob) {
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url; a.download = 'craftaway-profile.png'; a.click();
+      URL.revokeObjectURL(url);
+      if (btn) { btn.textContent = '📥 บันทึก Story Card'; btn.disabled = false; }
+    }, 'image/png');
   }
 
   function joinWaitlist(tier, nameId, contactId) {
