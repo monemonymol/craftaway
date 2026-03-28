@@ -71,7 +71,7 @@
     position: absolute;
     inset: 0;
     background:
-      radial-gradient(ellipse 80% 60% at 50% 50%, rgba(245,240,232,0.82) 0%, rgba(245,240,232,0.65) 50%, rgba(245,240,232,0.3) 100%);
+      radial-gradient(ellipse 80% 60% at 50% 50%, rgba(245,240,232,0.96) 0%, rgba(245,240,232,0.88) 45%, rgba(245,240,232,0.65) 100%);
     z-index: 1;
   }
 
@@ -1026,6 +1026,108 @@
     /* ── Result share card mobile ── */
     #share-card { max-width: 260px; }
   }
+
+
+  /* ── Story Card ── */
+  * { margin:0; padding:0; box-sizing:border-box; }
+  :root {
+    --cream:#F5F0E8; --charcoal:#3A3A2E; --moss:#6B7C5C; --moss-light:#8A9E78;
+    --sand:#D4C5A9; --accent:#C4956A; --white:#FEFCF8; --purple:#9B8BB4;
+    --pink:#C4889A; --teal:#6B9E9A; --navy:#2A3A5C;
+  }
+  body { background:#141410; font-family:'Sarabun',sans-serif; color:var(--white); padding:40px 20px; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+  h1 { font-family:'Noto Sans Thai',sans-serif; font-size:28px; font-weight:500; color:var(--cream); margin-bottom:6px; }
+  .subtitle { font-size:13px; color:rgba(255,255,255,0.35); margin-bottom:48px; }
+  
+  .write-frame-lt { margin-top:10px; min-height:36px; border-radius:8px; border:0.5px dashed rgba(245,240,232,0.25); padding:6px 10px; font-family:'Sarabun',sans-serif; font-size:10px; font-weight:300; color:rgba(245,240,232,0.5); line-height:1.6; outline:none; cursor:text; }
+  .write-frame-lt:empty::before { content:attr(data-placeholder); opacity:0.4; pointer-events:none; }
+  .write-frame-lt:focus { border-color:rgba(245,240,232,0.45); color:rgba(245,240,232,0.85); }
+  .write-frame-dk { margin-top:10px; min-height:36px; border-radius:8px; border:0.5px dashed rgba(58,58,46,0.3); padding:6px 10px; font-family:'Sarabun',sans-serif; font-size:10px; font-weight:300; color:rgba(58,58,46,0.5); line-height:1.6; outline:none; cursor:text; }
+  .write-frame-dk:empty::before { content:attr(data-placeholder); opacity:0.45; pointer-events:none; }
+  .write-frame-dk:focus { border-color:rgba(58,58,46,0.5); color:rgba(58,58,46,0.8); }
+  
+  .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:32px; max-width:1200px; margin:0 auto; }
+  .story-wrap {}
+  .story-label { font-size:10px; letter-spacing:0.18em; text-transform:uppercase; color:rgba(255,255,255,0.3); margin-bottom:10px; }
+  .story { width:280px; height:497px; border-radius:24px; position:relative; overflow:hidden; }
+  .story-content { position:relative; z-index:2; height:100%; display:flex; flex-direction:column; padding:24px 20px; }
+  .brand { font-size:10px; letter-spacing:0.22em; text-transform:uppercase; margin-bottom:auto; }
+  .mid { flex:1; display:flex; flex-direction:column; justify-content:center; padding:10px 0; }
+  .wc { width:100%; height:110px; border-radius:12px; overflow:hidden; position:relative; margin-bottom:16px; }
+  .type-label { font-size:9px; letter-spacing:0.18em; text-transform:uppercase; margin-bottom:6px; }
+  .type-name { font-family:'Noto Sans Thai',sans-serif; font-size:22px; font-weight:600; line-height:1.3; margin-bottom:8px; word-break:keep-all; overflow-wrap:break-word; }
+  .divider { height:0.5px; margin:10px 0; opacity:0.2; }
+  .tags { display:flex; flex-wrap:wrap; gap:5px; margin-bottom:10px; }
+  .tag { font-size:9px; padding:2px 8px; border-radius:99px; }
+  .desc { font-size:11px; font-weight:300; line-height:1.65; opacity:0.72; word-break:keep-all; overflow-wrap:break-word; }
+  .card-footer { display:flex; justify-content:space-between; align-items:flex-end; margin-top:auto; }
+  .cta { font-size:10px; opacity:0.4; }
+  .pill { font-size:9px; padding:4px 11px; border-radius:99px; }
+  .wc-type-label { position:absolute; bottom:8px; left:50%; transform:translateX(-50%); font-family:'Playfair Display',serif; font-size:8px; letter-spacing:0.25em; text-transform:uppercase; white-space:nowrap; opacity:0.45; }
+  
+  /* ── 1 QUIET WANDERER — Blue mist ── */
+  .s1 { background-color:#141C24; background:linear-gradient(150deg,#141C24 0%,#1C2830 60%,#121C22 100%); }
+  .s1::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse at 25% 25%,rgba(88,130,168,0.22) 0%,transparent 55%), radial-gradient(ellipse at 75% 75%,rgba(60,90,120,0.15) 0%,transparent 50%); }
+  .wc1 { background:linear-gradient(130deg,#1A2E40 0%,#243848 50%,#182838 100%); }
+  .wc1 svg .e1 { fill:#2E5878; } .wc1 svg .e2 { fill:#3A6888; } .wc1 svg .e3 { fill:#1E4060; }
+  
+  /* ── 2 GENTLE RESET — Warm sand ── */
+  .s2 { background-color:#F2EAD8; background:linear-gradient(145deg,#F2EAD8 0%,#EAE0C8 55%,#E0D4B8 100%); }
+  .wc2 { background:linear-gradient(130deg,#D8C4A0 0%,#CCBA90 50%,#D4C0A0 100%); }
+  .wc2 svg .e1 { fill:#C8A870; } .wc2 svg .e2 { fill:#B89858; } .wc2 svg .e3 { fill:#D4B880; }
+  
+  /* ── 3 CURIOUS SOUL — Forest green ── */
+  .s3 { background-color:#121A12; background:linear-gradient(150deg,#121A12 0%,#182018 55%,#101810 100%); }
+  .s3::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse at 30% 30%,rgba(80,130,80,0.2) 0%,transparent 55%); }
+  .wc3 { background:linear-gradient(130deg,#1A2E1A 0%,#203820 50%,#182818 100%); }
+  .wc3 svg .e1 { fill:#2E5828; } .wc3 svg .e2 { fill:#3A7030; } .wc3 svg .e3 { fill:#224820; }
+  
+  /* ── 4 HEARTFUL TRAVELER — Rose blush ── */
+  .s4 { background-color:#F0E8EC; background:linear-gradient(145deg,#F0E8EC 0%,#E8DDE4 55%,#DDD0D8 100%); }
+  .wc4 { background:linear-gradient(130deg,#D8B0C0 0%,#CCA0B0 50%,#D4A8BC 100%); }
+  .wc4 svg .e1 { fill:#C48898; } .wc4 svg .e2 { fill:#B87888; } .wc4 svg .e3 { fill:#CA9098; }
+  
+  /* ── 5 STILL SEEKER — Midnight deep ── */
+  .s5 { background-color:#0C0C14; background:linear-gradient(150deg,#0C0C14 0%,#121220 55%,#0A0A12 100%); }
+  .s5::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse at 40% 35%,rgba(80,70,120,0.25) 0%,transparent 55%); }
+  .wc5 { background:linear-gradient(130deg,#14102A 0%,#1C1838 50%,#12102A 100%); }
+  .wc5 svg .e1 { fill:#2A2848; } .wc5 svg .e2 { fill:#383560; } .wc5 svg .e3 { fill:#222040; }
+  
+  /* ── 6 TRANSFORMER — Violet mist ── */
+  .s6 { background-color:#F0EBF8; background:linear-gradient(150deg,#F0EBF8 0%,#E8E0F0 55%,#DDD5E8 100%); }
+  .wc6 { background:linear-gradient(130deg,#C8B0D8 0%,#BCA0CC 50%,#C4A8D4 100%); }
+  .wc6 svg .e1 { fill:#A888C8; } .wc6 svg .e2 { fill:#9878B8; } .wc6 svg .e3 { fill:#B090CA; }
+  
+  /* ── 7 FREE DRIFTER — Ocean teal ── */
+  .s7 { background-color:#0E1A1C; background:linear-gradient(150deg,#0E1A1C 0%,#142228 55%,#0C1820 100%); }
+  .s7::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse at 35% 30%,rgba(60,140,150,0.2) 0%,transparent 55%); }
+  .wc7 { background:linear-gradient(130deg,#162830 0%,#1E3840 50%,#142430 100%); }
+  .wc7 svg .e1 { fill:#2A6878; } .wc7 svg .e2 { fill:#387888; } .wc7 svg .e3 { fill:#205868; }
+  
+  /* light/dark text */
+  .lt { color:var(--cream); } .dk { color:var(--charcoal); }
+  .lt-s { color:rgba(245,240,232,0.55); } .dk-s { color:rgba(58,58,46,0.5); }
+  .div-lt { background:var(--cream); } .div-dk { background:var(--charcoal); }
+  
+  /* tag colors */
+  .tg-blue  { background:rgba(88,130,168,0.2);  color:#88BADA; border:0.5px solid rgba(88,130,168,0.3); }
+  .tg-sand  { background:rgba(196,149,106,0.18); color:#C4956A; border:0.5px solid rgba(196,149,106,0.25); }
+  .tg-moss  { background:rgba(107,124,92,0.18);  color:#8AAE78; border:0.5px solid rgba(107,124,92,0.25); }
+  .tg-dm    { background:rgba(107,124,92,0.15);  color:#5A7A4A; border:0.5px solid rgba(107,124,92,0.22); }
+  .tg-rose  { background:rgba(196,136,154,0.18); color:#A86878; border:0.5px solid rgba(196,136,154,0.25); }
+  .tg-drose { background:rgba(180,100,120,0.12); color:#904858; border:0.5px solid rgba(180,100,120,0.2); }
+  .tg-navy  { background:rgba(60,70,130,0.2);    color:#6878B8; border:0.5px solid rgba(60,70,130,0.3); }
+  .tg-purp  { background:rgba(155,139,180,0.2);  color:#C8B8E0; border:0.5px solid rgba(155,139,180,0.3); }
+  .tg-dpurp { background:rgba(130,100,170,0.15); color:#8060A8; border:0.5px solid rgba(130,100,170,0.22); }
+  .tg-teal  { background:rgba(60,140,150,0.2);   color:#70C0C8; border:0.5px solid rgba(60,140,150,0.3); }
+  
+  .pill-dk  { background:var(--charcoal); color:var(--white); }
+  .pill-lt  { background:rgba(245,240,232,0.15); color:var(--cream); border:0.5px solid rgba(245,240,232,0.2); }
+  .pill-moss{ background:var(--moss); color:var(--white); }
+  .pill-acc { background:var(--accent); color:var(--white); }
+  .pill-purp{ background:rgba(155,139,180,0.3); color:#D0C0E8; border:0.5px solid rgba(155,139,180,0.4); }
+  .pill-teal{ background:rgba(60,140,150,0.3); color:#90D4D8; border:0.5px solid rgba(60,140,150,0.4); }
+
 </style>
 </head>
 <body>
@@ -1506,7 +1608,8 @@
           <div id="story-share-section" style="margin-bottom:28px;">
             <div style="font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--moss);margin-bottom:12px;font-weight:500;">📲 แชร์ผลลัพธ์ของคุณ</div>
             <div style="text-align:center;">
-              <canvas id="share-card-canvas" width="540" height="960" style="width:100%;max-width:300px;border-radius:20px;display:block;margin:0 auto;cursor:pointer;" onclick="downloadStoryCard()"></canvas>
+              <div id="share-card-html" style="margin:0 auto;display:inline-block;"></div>
+              <canvas id="share-card-canvas" width="540" height="960" style="display:none;"></canvas>
               <div style="margin-top:12px;">
                 <button onclick="downloadStoryCard()" style="background:var(--moss);color:var(--white);border:none;padding:10px 24px;border-radius:12px;font-family:'Sarabun',sans-serif;font-size:13px;font-weight:500;cursor:pointer;display:inline-flex;align-items:center;gap:8px;">
                   📥 บันทึก Story Card
@@ -2078,43 +2181,43 @@
   const profiles = {
     recharge: {
       type:'The Quiet Wanderer', title:'นักเดินทางผู้เงียบงาม',
-      desc:'คุณเดินทางเพื่อ restore ไม่ใช่เพื่อ check-in ทริปที่ใช่คือที่ที่ไม่ต้องรีบ ไม่ต้องอธิบาย แค่ได้เป็นตัวเอง',
+      desc:'คุณเดินทางเพื่อ restore ไม่ใช่เพื่อ check-in ทริปที่ใช่คือที่ที่ไม่ต้องอธิบาย',
       takeaway:'ความสงบที่หายไปนาน กลับมาได้ในทริปเดียว คุณจะกลับบ้านมาพร้อมพลังงานที่ชาร์จจนเต็ม และรู้ว่าตัวเองต้องการอะไรในชีวิตมากขึ้น',
       warning:'ระวังการ over-plan — ถ้า itinerary แน่นเกินไป ทริปนี้จะไม่ต่างจากที่ทำงาน ปล่อยให้มีช่องว่างไว้บ้าง',
     },
     reset: {
       type:'The Gentle Reset', title:'นักหนีชีวิตฉบับ soft',
-      desc:'คุณไม่ได้อยากหนีทุกอย่าง แค่อยากออกไปหายใจ ทริปสั้น 2–3 วันที่ vibe ดี กินอาหารอร่อย เปลี่ยนวิว นั่นพอแล้ว',
+      desc:'ไม่ได้อยากหนีทุกอย่าง แค่อยากออกไปหายใจ นั่นพอแล้ว',
       takeaway:'ความรู้สึกว่า "โอเค ยังไปต่อได้" — ไม่ต้องได้คำตอบใหญ่ แค่ได้หยุดหายใจและรู้สึกดีขึ้นก็เพียงพอแล้วสำหรับทริปนี้',
       warning:'อย่าคาดหวังให้ทริปแก้ทุกอย่าง ถ้าปัญหาที่บ้านใหญ่มาก ทริปช่วยได้แค่พักชั่วคราว ไม่ใช่ทางออกถาวร',
     },
     explore: {
       type:'The Curious Soul', title:'นักสำรวจตัวจริง',
-      desc:'คุณชาร์จพลังด้วยประสบการณ์ใหม่ๆ อยากค้นพบที่ที่ไม่มีใครรู้จัก ลองอาหารที่ไม่มีในเมนู และพูดคุยกับคนแปลกหน้า',
+      desc:'ชาร์จพลังด้วยประสบการณ์ใหม่ๆ ยิ่งหลงยิ่งเจอของดี',
       takeaway:'มุมมองใหม่ที่เปลี่ยนวิธีคิดเรื่องบางอย่างในชีวิต และเรื่องราวที่เล่าได้ตลอดชีวิต',
       warning:'ระวัง FOMO — อยากไปทุกที่จนไม่ได้หยุดพักจริงๆ บางทีการนั่งอยู่ที่เดิมนานๆ คือ experience ที่ลึกที่สุด',
     },
     connect: {
       type:'The Heartful Traveler', title:'นักเดินทางแห่งการเชื่อมต่อ',
-      desc:'คุณเดินทางเพื่อสัมผัสชีวิตจริงของที่นั่น ผู้คน อาหาร เรื่องราว ทริปที่ดีทำให้รู้สึกว่าได้รู้จักอะไรบางอย่างที่แท้จริง',
+      desc:'เดินทางเพื่อสัมผัสชีวิตจริงของที่นั่น ไม่ใช่แค่ถ่ายรูป',
       takeaway:'ความรู้สึกว่าโลกนี้ใหญ่และมีคนดีอยู่ทุกมุม — และบางทีการเชื่อมต่อกับคนแปลกหน้าทำให้เข้าใจตัวเองมากขึ้น',
       warning:'ระวังใส่ใจคนอื่นมากจนลืมว่าตัวเองต้องการอะไร ทริปนี้ควรมีเวลาส่วนตัวบ้างด้วย',
     },
     still: {
       type:'The Still Seeker', title:'นักเดินทางแห่งความเงียบภายใน',
-      desc:'คุณไม่ได้มองหาที่ใหม่ แต่มองหาตัวเองใหม่ในที่เดิม ทริปที่ดีที่สุดของคุณคือที่ที่ไม่มีเสียง ไม่มีแผน แค่นั่งอยู่กับตัวเองได้จริงๆ',
+      desc:'ไม่ได้มองหาที่ใหม่ แต่มองหาตัวเองใหม่ในที่เดิม',
       takeaway:'ความเงียบภายในที่หายาก — คุณจะกลับมาพร้อมกับรู้ว่าเสียงในหัวอันไหนเป็นของจริง อันไหนเป็นแค่ noise',
       warning:'ระวังโดดเดี่ยวตัวเองมากเกินไปจนกลายเป็นการหนีแทนที่จะเป็นการหา บางทีความเงียบที่ดีต้องการคนสักคนข้างๆ ด้วย',
     },
     transform: {
       type:'The Transformer', title:'นักเปลี่ยนผ่านตัวเอง',
-      desc:'คุณรู้ว่าตัวเองกำลังอยู่ในช่วงเปลี่ยน และทริปคือพื้นที่ปลอดภัยสำหรับการเป็นคนใหม่ คุณไม่ได้หนีจากอะไร คุณกำลังเดินเข้าหาอะไรบางอย่าง',
+      desc:'ไม่ได้หนีจากอะไร กำลังเดินเข้าหาอะไรบางอย่าง',
       takeaway:'ความกล้าที่จะเปลี่ยน — ทริปนี้จะช่วยยืนยันว่าสิ่งที่คุณรู้สึกอยู่นั้นจริง และบางอย่างในชีวิตกำลังจะเปลี่ยนไปอย่างถาวร',
       warning:'ระวังคาดหวังให้ทริปเดียวเปลี่ยนทุกอย่าง — transformation เป็น process ไม่ใช่ moment ทริปนี้เป็นแค่จุดเริ่มต้น',
     },
     drift: {
       type:'The Free Drifter', title:'นักปล่อยวางผู้กล้า',
-      desc:'คุณชาร์จพลังด้วยการไม่รู้ว่าวันพรุ่งนี้จะเป็นยังไง ทริปที่ดีที่สุดของคุณคือที่ที่ไม่มีแผน มีแค่ตั๋วและความอยากรู้',
+      desc:'ชาร์จพลังด้วยการไม่รู้ว่าพรุ่งนี้จะเป็นยังไง',
       takeaway:'ความเชื่อมั่นในตัวเองว่าไม่ว่าจะเกิดอะไรก็รับมือได้ — และเรื่องราวที่ไม่มีใครเชื่อว่าเกิดขึ้นจริง',
       warning:'ระวัง spontaneous จนกลายเป็น irresponsible — มีแผน backup สักนิดไม่ใช่การ over-plan แต่เป็นการดูแลตัวเอง',
     },
@@ -2767,7 +2870,7 @@
       if(ln) lns.push(ln);
       if (lns.length <= 2) { NAME_SIZE = sz*S; break; }
     }
-    ctx.font = `700 ${NAME_SIZE}px ${FONT}`;
+    ctx.font = `600 ${NAME_SIZE}px ${FONT}`;
     ctx.fillStyle = TEXT_MAIN;
     const nameChars = Array.from(profileData.title);
     let nLine='', nLines=[];
@@ -2804,8 +2907,9 @@
     // ── Description — word wrap by space + char fallback ──
     const DESC_SIZE = 13*S;
     const DESC_LH = 24*S;
-    ctx.font = `400 ${DESC_SIZE}px ${FONT}`;
-    ctx.fillStyle = '#F5F0E8';
+    ctx.font = `300 ${DESC_SIZE}px ${FONT}`;
+    ctx.globalAlpha = isDarkBg ? 0.82 : 0.75;
+    ctx.fillStyle = TEXT_MAIN;
     const maxW = W - PAD*2;
     const words = profileData.desc.split(' ');
     let dLine='', dLines=[];
@@ -2828,6 +2932,8 @@
       if(cLine) finalLines.push(cLine);
     });
     finalLines.slice(0,6).forEach(function(l) { ctx.fillText(l, PAD, y); y += DESC_LH; });
+    ctx.globalAlpha = 1;
+    ctx.globalAlpha = 1;
 
     // ── Footer ──
     const FY = H - 38*S;
@@ -2843,10 +2949,261 @@
     ctx.fillText(ptxt, W-PAD-pw+11*S, FY);
   }
 
+  const storyCardHTMLs = {
+    recharge: `<div class="story-wrap">
+  <p class="story-label">The Quiet Wanderer</p>
+  <div class="story s1">
+    <div class="story-content">
+      <span class="brand lt-s">CRAFTAWAY ✦</span>
+      <div class="mid">
+        <div class="wc wc1">
+          <svg width="100%" height="100%" viewBox="0 0 260 110" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+            <defs><filter id="f1"><feGaussianBlur stdDeviation="14"/></filter></defs>
+            <ellipse class="e1" cx="60" cy="80" rx="130" ry="75" opacity="0.7" filter="url(#f1)"/>
+            <ellipse class="e2" cx="210" cy="35" rx="100" ry="60" opacity="0.55" filter="url(#f1)"/>
+            <ellipse class="e3" cx="150" cy="100" rx="80" ry="40" opacity="0.5" filter="url(#f1)"/>
+          </svg>
+          <span class="wc-type-label lt">THE QUIET WANDERER</span>
+        </div>
+        <div class="type-label" style="color:#88BADA;">✦ &nbsp;Travel Profile</div>
+        <div class="type-name lt">นักเดินทาง ผู้เงียบงาม</div>
+        <div class="divider div-lt"></div>
+        <div class="tags">
+          <span class="tag tg-blue">slow travel</span>
+          <span class="tag tg-sand">restore</span>
+          <span class="tag tg-blue">คนเดียว</span>
+        </div>
+        <div class="desc lt">คุณเดินทางเพื่อ restore ไม่ใช่เพื่อ check-in ทริปที่ใช่คือที่ที่ไม่ต้องอธิบาย</div>
+        <div class="write-frame-lt" contenteditable="true" data-placeholder="เขียนอะไรก็ได้ที่นี่..."></div>
+      </div>
+      <div class="card-footer">
+        <span class="cta lt">ค้นพบ profile ของคุณ</span>
+        <span class="pill pill-lt">@craftaway.th</span>
+      </div>
+    </div>
+  </div>
+</div>`,
+    reset: `<div class="story-wrap">
+  <p class="story-label">The Gentle Reset</p>
+  <div class="story s2">
+    <div class="story-content">
+      <span class="brand dk-s">CRAFTAWAY ✦</span>
+      <div class="mid">
+        <div class="wc wc2">
+          <svg width="100%" height="100%" viewBox="0 0 260 110" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+            <defs><filter id="f2"><feGaussianBlur stdDeviation="13"/></filter></defs>
+            <ellipse class="e1" cx="70" cy="75" rx="130" ry="70" opacity="0.6" filter="url(#f2)"/>
+            <ellipse class="e2" cx="200" cy="40" rx="100" ry="58" opacity="0.5" filter="url(#f2)"/>
+            <ellipse class="e3" cx="140" cy="100" rx="80" ry="38" opacity="0.45" filter="url(#f2)"/>
+          </svg>
+          <span class="wc-type-label dk">THE GENTLE RESET</span>
+        </div>
+        <div class="type-label" style="color:#8A6A40;">✦ &nbsp;Travel Profile</div>
+        <div class="type-name dk">นักหนีชีวิต ฉบับ soft</div>
+        <div class="divider div-dk"></div>
+        <div class="tags">
+          <span class="tag tg-dm">2–3 วัน</span>
+          <span class="tag tg-sand">vibe ดี</span>
+          <span class="tag tg-dm">กินอาหารอร่อย</span>
+        </div>
+        <div class="desc dk">ไม่ได้อยากหนีทุกอย่าง แค่อยากออกไปหายใจ นั่นพอแล้ว</div>
+        <div class="write-frame-dk" contenteditable="true" data-placeholder="เขียนอะไรก็ได้ที่นี่..."></div>
+      </div>
+      <div class="card-footer">
+        <span class="cta dk">ทำ quiz ฟรี</span>
+        <span class="pill pill-dk">@craftaway.th</span>
+      </div>
+    </div>
+  </div>
+</div>`,
+    explore: `<div class="story-wrap">
+  <p class="story-label">The Curious Soul</p>
+  <div class="story s3">
+    <div class="story-content">
+      <span class="brand lt-s">CRAFTAWAY ✦</span>
+      <div class="mid">
+        <div class="wc wc3">
+          <svg width="100%" height="100%" viewBox="0 0 260 110" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+            <defs><filter id="f3"><feGaussianBlur stdDeviation="13"/></filter></defs>
+            <ellipse class="e1" cx="60" cy="80" rx="130" ry="72" opacity="0.7" filter="url(#f3)"/>
+            <ellipse class="e2" cx="210" cy="35" rx="105" ry="60" opacity="0.55" filter="url(#f3)"/>
+            <ellipse class="e3" cx="145" cy="100" rx="78" ry="38" opacity="0.5" filter="url(#f3)"/>
+          </svg>
+          <span class="wc-type-label lt">THE CURIOUS SOUL</span>
+        </div>
+        <div class="type-label" style="color:#8AAE78;">✦ &nbsp;Travel Profile</div>
+        <div class="type-name lt">นักสำรวจ ตัวจริง</div>
+        <div class="divider div-lt"></div>
+        <div class="tags">
+          <span class="tag tg-moss">offbeat</span>
+          <span class="tag tg-sand">ของใหม่</span>
+          <span class="tag tg-moss">explore</span>
+        </div>
+        <div class="desc lt">ชาร์จพลังด้วยประสบการณ์ใหม่ๆ ยิ่งหลงยิ่งเจอของดี</div>
+        <div class="write-frame-lt" contenteditable="true" data-placeholder="เขียนอะไรก็ได้ที่นี่..."></div>
+      </div>
+      <div class="card-footer">
+        <span class="cta lt">ค้นพบ profile ของคุณ</span>
+        <span class="pill pill-moss">@craftaway.th</span>
+      </div>
+    </div>
+  </div>
+</div>`,
+    connect: `<div class="story-wrap">
+  <p class="story-label">The Heartful Traveler</p>
+  <div class="story s4">
+    <div class="story-content">
+      <span class="brand dk-s">CRAFTAWAY ✦</span>
+      <div class="mid">
+        <div class="wc wc4">
+          <svg width="100%" height="100%" viewBox="0 0 260 110" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+            <defs><filter id="f4"><feGaussianBlur stdDeviation="13"/></filter></defs>
+            <ellipse class="e1" cx="70" cy="75" rx="135" ry="70" opacity="0.6" filter="url(#f4)"/>
+            <ellipse class="e2" cx="205" cy="38" rx="100" ry="58" opacity="0.5" filter="url(#f4)"/>
+            <ellipse class="e3" cx="140" cy="100" rx="80" ry="38" opacity="0.45" filter="url(#f4)"/>
+          </svg>
+          <span class="wc-type-label dk">THE HEARTFUL TRAVELER</span>
+        </div>
+        <div class="type-label" style="color:#904858;">✦ &nbsp;Travel Profile</div>
+        <div class="type-name dk">นักเดินทาง แห่งการเชื่อมต่อ</div>
+        <div class="divider div-dk"></div>
+        <div class="tags">
+          <span class="tag tg-drose">ผู้คน</span>
+          <span class="tag tg-drose">วัฒนธรรม</span>
+          <span class="tag tg-dm">local life</span>
+        </div>
+        <div class="desc dk">เดินทางเพื่อสัมผัสชีวิตจริงของที่นั่น ไม่ใช่แค่ถ่ายรูป</div>
+        <div class="write-frame-dk" contenteditable="true" data-placeholder="เขียนอะไรก็ได้ที่นี่..."></div>
+      </div>
+      <div class="card-footer">
+        <span class="cta dk">ทำ quiz ฟรี</span>
+        <span class="pill" style="background:var(--pink);color:var(--white);">@craftaway.th</span>
+      </div>
+    </div>
+  </div>
+</div>`,
+    still: `<div class="story-wrap">
+  <p class="story-label">The Still Seeker</p>
+  <div class="story s5">
+    <div class="story-content">
+      <span class="brand lt-s">CRAFTAWAY ✦</span>
+      <div class="mid">
+        <div class="wc wc5">
+          <svg width="100%" height="100%" viewBox="0 0 260 110" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+            <defs><filter id="f5"><feGaussianBlur stdDeviation="14"/></filter></defs>
+            <ellipse class="e1" cx="60" cy="85" rx="130" ry="75" opacity="0.8" filter="url(#f5)"/>
+            <ellipse class="e2" cx="210" cy="30" rx="105" ry="60" opacity="0.6" filter="url(#f5)"/>
+            <ellipse class="e3" cx="150" cy="105" rx="80" ry="40" opacity="0.55" filter="url(#f5)"/>
+            <circle cx="230" cy="18" r="2.5" fill="#C8C0E0" opacity="0.5"/>
+            <circle cx="170" cy="10" r="1.8" fill="#C8C0E0" opacity="0.4"/>
+            <circle cx="45" cy="16" r="2" fill="#C8C0E0" opacity="0.35"/>
+            <circle cx="120" cy="8" r="1.5" fill="#C8C0E0" opacity="0.3"/>
+          </svg>
+          <span class="wc-type-label lt">THE STILL SEEKER</span>
+        </div>
+        <div class="type-label" style="color:#B0A0D0;">✦ &nbsp;Travel Profile</div>
+        <div class="type-name lt">นักเดินทาง แห่งความเงียบภายใน</div>
+        <div class="divider div-lt"></div>
+        <div class="tags">
+          <span class="tag tg-navy">ไม่มีแผน</span>
+          <span class="tag tg-purp">ความเงียบ</span>
+          <span class="tag tg-navy">คนเดียว</span>
+        </div>
+        <div class="desc lt">ไม่ได้มองหาที่ใหม่ แต่มองหาตัวเองใหม่ในที่เดิม</div>
+        <div class="write-frame-lt" contenteditable="true" data-placeholder="เขียนอะไรก็ได้ที่นี่..."></div>
+      </div>
+      <div class="card-footer">
+        <span class="cta lt">ค้นพบ profile ของคุณ</span>
+        <span class="pill pill-purp">@craftaway.th</span>
+      </div>
+    </div>
+  </div>
+</div>`,
+    transform: `<div class="story-wrap">
+  <p class="story-label">The Transformer</p>
+  <div class="story s6">
+    <div class="story-content">
+      <span class="brand dk-s">CRAFTAWAY ✦</span>
+      <div class="mid">
+        <div class="wc wc6">
+          <svg width="100%" height="100%" viewBox="0 0 260 110" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+            <defs><filter id="f6"><feGaussianBlur stdDeviation="12"/></filter></defs>
+            <ellipse class="e1" cx="65" cy="78" rx="130" ry="70" opacity="0.6" filter="url(#f6)"/>
+            <ellipse class="e2" cx="208" cy="38" rx="105" ry="58" opacity="0.5" filter="url(#f6)"/>
+            <ellipse class="e3" cx="145" cy="102" rx="78" ry="38" opacity="0.45" filter="url(#f6)"/>
+          </svg>
+          <span class="wc-type-label dk">THE TRANSFORMER</span>
+        </div>
+        <div class="type-label" style="color:#8060A8;">✦ &nbsp;Travel Profile</div>
+        <div class="type-name dk">นักเปลี่ยนผ่าน ตัวเอง</div>
+        <div class="divider div-dk"></div>
+        <div class="tags">
+          <span class="tag tg-dpurp">ช่วงเปลี่ยน</span>
+          <span class="tag tg-dpurp">clarity</span>
+          <span class="tag tg-dm">ก้าวต่อไป</span>
+        </div>
+        <div class="desc dk">ไม่ได้หนีจากอะไร กำลังเดินเข้าหาอะไรบางอย่าง</div>
+        <div class="write-frame-dk" contenteditable="true" data-placeholder="เขียนอะไรก็ได้ที่นี่..."></div>
+      </div>
+      <div class="card-footer">
+        <span class="cta dk">ทำ quiz ฟรี</span>
+        <span class="pill" style="background:rgba(130,100,170,0.2);color:#8060A8;border:0.5px solid rgba(130,100,170,0.3);">@craftaway.th</span>
+      </div>
+    </div>
+  </div>
+</div>`,
+    drift: `<div class="story-wrap">
+  <p class="story-label">The Free Drifter</p>
+  <div class="story s7">
+    <div class="story-content">
+      <span class="brand lt-s">CRAFTAWAY ✦</span>
+      <div class="mid">
+        <div class="wc wc7">
+          <svg width="100%" height="100%" viewBox="0 0 260 110" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+            <defs><filter id="f7"><feGaussianBlur stdDeviation="13"/></filter></defs>
+            <ellipse class="e1" cx="55" cy="80" rx="135" ry="72" opacity="0.7" filter="url(#f7)"/>
+            <ellipse class="e2" cx="215" cy="35" rx="105" ry="62" opacity="0.55" filter="url(#f7)"/>
+            <ellipse class="e3" cx="150" cy="102" rx="82" ry="40" opacity="0.5" filter="url(#f7)"/>
+          </svg>
+          <span class="wc-type-label lt">THE FREE DRIFTER</span>
+        </div>
+        <div class="type-label" style="color:#70C0C8;">✦ &nbsp;Travel Profile</div>
+        <div class="type-name lt">นักปล่อยวาง ผู้กล้า</div>
+        <div class="divider div-lt"></div>
+        <div class="tags">
+          <span class="tag tg-teal">spontaneous</span>
+          <span class="tag tg-sand">ไม่มีแผน</span>
+          <span class="tag tg-teal">wild & free</span>
+        </div>
+        <div class="desc lt">ชาร์จพลังด้วยการไม่รู้ว่าพรุ่งนี้จะเป็นยังไง</div>
+        <div class="write-frame-lt" contenteditable="true" data-placeholder="เขียนอะไรก็ได้ที่นี่..."></div>
+      </div>
+      <div class="card-footer">
+        <span class="cta lt">ค้นพบ profile ของคุณ</span>
+        <span class="pill pill-teal">@craftaway.th</span>
+      </div>
+    </div>
+  </div>
+</div>`
+  };
+
   function renderStoryCard(profileKey, profileData) {
     const th = storyThemes[profileKey] || storyThemes['explore'];
     window.currentProfileKey = profileKey;
     window.currentProfileData = profileData;
+
+    // Inject HTML card
+    const container = document.getElementById('share-card-html');
+    if (container) {
+      const html = storyCardHTMLs[profileKey] || storyCardHTMLs['explore'];
+      container.innerHTML = html;
+      // Make write-frame editable
+      container.querySelectorAll('[contenteditable]').forEach(function(el) {
+        el.setAttribute('contenteditable', 'true');
+      });
+    }
+
+    // Also draw canvas for download
     const canvas = document.getElementById('share-card-canvas');
     if (canvas) drawCard(canvas, th, profileData);
   }
