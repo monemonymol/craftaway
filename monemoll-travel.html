@@ -3202,21 +3202,68 @@
   }
 
   function downloadStoryCard() {
-    const th = storyThemes[window.currentProfileKey] || storyThemes['explore'];
     const profileData = window.currentProfileData;
     if (!profileData) { alert('กรุณาทำ quiz ให้เสร็จก่อนนะ'); return; }
+
     const btn = document.querySelector('#story-share-section button');
+    const card = document.querySelector('#share-card-html .story');
+    if (!card) { alert('ไม่พบ card กรุณาทำ quiz ก่อนนะ'); return; }
+
     if (btn) { btn.textContent = '⏳ กำลังสร้าง...'; btn.disabled = true; }
-    const hc = document.createElement('canvas');
-    hc.width = 1080; hc.height = 1920;
-    drawCard(hc, th, profileData);
-    hc.toBlob(function(blob) {
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url; a.download = 'craftaway-profile.png'; a.click();
-      URL.revokeObjectURL(url);
-      if (btn) { btn.textContent = '📥 บันทึก Story Card'; btn.disabled = false; }
-    }, 'image/png');
+
+    // Load html2canvas then capture the HTML card directly
+    const script = document.createElement('script');
+    script.src = 'https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js';
+    script.onload = function() {
+      html2canvas(card, {
+        scale: 4,
+        useCORS: true,
+        allowTaint: true,
+        backgroundColor: null,
+        logging: false,
+      }).then(function(canvas) {
+        canvas.toBlob(function(blob) {
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = url; a.download = 'craftaway-profile.png'; a.click();
+          URL.revokeObjectURL(url);
+          if (btn) { btn.textContent = '📥 บันทึก Story Card'; btn.disabled = false; }
+        }, 'image/png');
+      }).catch(function() {
+        // fallback to canvas draw
+        const th = storyThemes[window.currentProfileKey] || storyThemes['explore'];
+        const hc = document.createElement('canvas');
+        hc.width = 1080; hc.height = 1920;
+        drawCard(hc, th, profileData);
+        hc.toBlob(function(blob) {
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = url; a.download = 'craftaway-profile.png'; a.click();
+          URL.revokeObjectURL(url);
+          if (btn) { btn.textContent = '📥 บันทึก Story Card'; btn.disabled = false; }
+        }, 'image/png');
+      });
+    };
+    script.onerror = function() {
+      // fallback if CDN fails
+      const th = storyThemes[window.currentProfileKey] || storyThemes['explore'];
+      const hc = document.createElement('canvas');
+      hc.width = 1080; hc.height = 1920;
+      drawCard(hc, th, profileData);
+      hc.toBlob(function(blob) {
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url; a.download = 'craftaway-profile.png'; a.click();
+        URL.revokeObjectURL(url);
+        if (btn) { btn.textContent = '📥 บันทึก Story Card'; btn.disabled = false; }
+      }, 'image/png');
+    };
+    // ถ้า html2canvas โหลดแล้ว ใช้ได้เลย
+    if (window.html2canvas) {
+      script.onload();
+    } else {
+      document.head.appendChild(script);
+    }
   }
 
   function joinWaitlist(tier, nameId, contactId) {
