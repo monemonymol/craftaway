@@ -1121,22 +1121,17 @@
   .pill-purp{ background:rgba(155,139,180,0.3); color:#D0C0E8; border:0.5px solid rgba(155,139,180,0.4); }
   .pill-teal{ background:rgba(60,140,150,0.3); color:#90D4D8; border:0.5px solid rgba(60,140,150,0.4); }
 
-  #share-text-box:empty::before {
-    content: attr(data-placeholder);
-    opacity: 0.4;
-    pointer-events: none;
-  }
 </style>
 </head>
 <body>
 
 <!-- NAV -->
-<nav style="background:rgba(245,240,232,.94);backdrop-filter:blur(12px);border-bottom:.5px solid var(--cream-dark);min-height:56px;display:flex;align-items:center;justify-content:space-between;padding:0 16px;position:sticky;top:0;z-index:100;flex-wrap:nowrap;gap:8px;">
-  <a style="font-family:\'Playfair Display\',serif;font-size:18px;font-style:italic;color:var(--charcoal);text-decoration:none;" href="#">Craftaway</a>
-  <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
-    <a style="font-size:clamp(11px,2vw,13px);color:var(--charcoal-soft);text-decoration:none;padding:5px 10px;border-radius:99px;border:1px solid var(--cream-dark);white-space:nowrap;" href="craftaway-demo.html">💬 คุยกับ Craftaway</a>
-    <a style="font-size:clamp(11px,2vw,13px);color:var(--charcoal-soft);text-decoration:none;padding:5px 10px;border-radius:99px;border:1px solid var(--cream-dark);white-space:nowrap;" href="craftaway-mbti.html">🧠 MBTI Test</a>
-    <a style="font-size:clamp(11px,2vw,13px);color:var(--white);background:var(--purple-soft);text-decoration:none;padding:5px 12px;border-radius:99px;white-space:nowrap;" href="https://staraligns.com/my-chart" target="_blank">✦ Human Design</a>
+<nav style="background:rgba(245,240,232,.94);backdrop-filter:blur(12px);border-bottom:.5px solid var(--cream-dark);height:52px;display:flex;align-items:center;justify-content:space-between;padding:0 16px;position:sticky;top:0;z-index:100;overflow:hidden;">
+  <a style="font-family:\'Playfair Display\',serif;font-size:17px;font-style:italic;color:var(--charcoal);text-decoration:none;flex-shrink:0;" href="#">Craftaway</a>
+  <div style="display:flex;gap:6px;align-items:center;flex-shrink:0;">
+    <a style="font-size:clamp(10px,1.8vw,12px);color:var(--charcoal-soft);text-decoration:none;padding:4px 8px;border-radius:99px;border:1px solid var(--cream-dark);white-space:nowrap;" href="craftaway-demo.html">💬 คุยกับ Craftaway</a>
+    <a style="font-size:clamp(10px,1.8vw,12px);color:var(--charcoal-soft);text-decoration:none;padding:4px 8px;border-radius:99px;border:1px solid var(--cream-dark);white-space:nowrap;" href="craftaway-mbti.html">🧠 MBTI Test</a>
+    <a style="font-size:clamp(10px,1.8vw,12px);color:var(--white);background:var(--purple-soft);text-decoration:none;padding:4px 10px;border-radius:99px;white-space:nowrap;" href="https://staraligns.com/my-chart" target="_blank">✦ Human Design</a>
   </div>
 </nav>
 
@@ -1609,20 +1604,14 @@
               <!-- PNG card wrapper -->
               <div id="share-card-wrap" style="position:relative;width:280px;margin:0 auto;display:inline-block;border-radius:20px;overflow:hidden;">
                 <img id="share-card-img" src="" alt="Travel Profile Card" style="width:100%;display:block;border-radius:20px;">
-                <!-- overlay text input -->
-                <div id="share-card-overlay" style="position:absolute;bottom:72px;left:0;right:0;padding:0 20px;">
-                  <div id="share-text-box"
-                    contenteditable="true"
-                    data-placeholder="เขียนอะไรก็ได้ที่นี่..."
-                    style="min-height:36px;border-radius:10px;border:0.5px dashed rgba(255,255,255,0.4);padding:7px 12px;font-family:'Noto Sans Thai',sans-serif;font-size:12px;font-weight:300;color:rgba(255,255,255,0.85);line-height:1.6;outline:none;cursor:text;background:rgba(0,0,0,0.15);backdrop-filter:blur(4px);text-align:left;word-break:break-word;"></div>
-                </div>
+
               </div>
               <canvas id="share-card-canvas" style="display:none;"></canvas>
               <div style="margin-top:12px;">
                 <button onclick="downloadStoryCard()" style="background:var(--moss);color:var(--white);border:none;padding:10px 24px;border-radius:12px;font-family:'Noto Sans Thai',sans-serif;font-size:13px;font-weight:500;cursor:pointer;display:inline-flex;align-items:center;gap:8px;">
                   📥 บันทึก Story Card
                 </button>
-                <p style="font-size:11px;color:var(--charcoal-soft);opacity:0.5;margin-top:8px;">พิมพ์ข้อความได้เลย แล้วกดบันทึก</p>
+                <p style="font-size:11px;color:var(--charcoal-soft);opacity:0.5;margin-top:8px;">กดบันทึกแล้วแชร์ลง IG Stories ได้เลย</p>
               </div>
             </div>
           </div>
