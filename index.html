@@ -29,7 +29,7 @@
   html { scroll-behavior: smooth; }
 
   body {
-    font-family: 'Sarabun', sans-serif;
+    font-family: 'Noto Sans Thai', sans-serif;
     background: var(--cream);
     color: var(--charcoal);
     overflow-x: hidden;
@@ -103,7 +103,7 @@
   }
 
   .hero-tag {
-    font-family: 'Sarabun', sans-serif;
+    font-family: 'Noto Sans Thai', sans-serif;
     font-size: 12px;
     font-weight: 500;
     letter-spacing: 0.2em;
@@ -154,7 +154,7 @@
   .btn-primary {
     background: var(--moss);
     color: var(--white);
-    font-family: 'Sarabun', sans-serif;
+    font-family: 'Noto Sans Thai', sans-serif;
     font-size: 15px;
     font-weight: 500;
     padding: 14px 32px;
@@ -174,7 +174,7 @@
   .btn-ghost {
     background: transparent;
     color: var(--charcoal-soft);
-    font-family: 'Sarabun', sans-serif;
+    font-family: 'Noto Sans Thai', sans-serif;
     font-size: 15px;
     font-weight: 400;
     padding: 14px 28px;
@@ -387,7 +387,7 @@
   .quiz-back {
     background: none;
     border: none;
-    font-family: 'Sarabun', sans-serif;
+    font-family: 'Noto Sans Thai', sans-serif;
     font-size: 14px;
     color: var(--charcoal-soft);
     cursor: pointer;
@@ -567,7 +567,7 @@
     border: 1.5px solid var(--moss);
     background: transparent;
     color: var(--moss-dark);
-    font-family: 'Sarabun', sans-serif;
+    font-family: 'Noto Sans Thai', sans-serif;
     font-size: 14px;
     font-weight: 500;
     cursor: pointer;
@@ -836,7 +836,7 @@
     padding: 14px 16px;
     border: 1.5px solid var(--cream-dark);
     border-radius: 12px;
-    font-family: 'Sarabun', sans-serif;
+    font-family: 'Noto Sans Thai', sans-serif;
     font-size: 15px;
     font-weight: 300;
     color: var(--charcoal);
@@ -864,7 +864,7 @@
     border: 1.5px solid var(--cream-dark);
     border-radius: 10px;
     background: var(--white);
-    font-family: 'Sarabun', sans-serif;
+    font-family: 'Noto Sans Thai', sans-serif;
     font-size: 12px;
     font-weight: 500;
     color: var(--charcoal-soft);
@@ -886,7 +886,7 @@
     padding: 16px;
     background: var(--moss);
     color: var(--white);
-    font-family: 'Sarabun', sans-serif;
+    font-family: 'Noto Sans Thai', sans-serif;
     font-size: 16px;
     font-weight: 500;
     border: none;
@@ -1035,10 +1035,10 @@
     --pink:#C4889A; --teal:#6B9E9A; --navy:#2A3A5C;
   }
   
-  .write-frame-lt { margin-top:10px; min-height:36px; border-radius:8px; border:0.5px dashed rgba(245,240,232,0.25); padding:6px 10px; font-family:'Sarabun',sans-serif; font-size:10px; font-weight:300; color:rgba(245,240,232,0.5); line-height:1.6; outline:none; cursor:text; }
+  .write-frame-lt { margin-top:10px; min-height:36px; border-radius:8px; border:0.5px dashed rgba(245,240,232,0.25); padding:6px 10px; font-family:'Noto Sans Thai',sans-serif; font-size:10px; font-weight:300; color:rgba(245,240,232,0.5); line-height:1.6; outline:none; cursor:text; }
   .write-frame-lt:empty::before { content:attr(data-placeholder); opacity:0.4; pointer-events:none; }
   .write-frame-lt:focus { border-color:rgba(245,240,232,0.45); color:rgba(245,240,232,0.85); }
-  .write-frame-dk { margin-top:10px; min-height:36px; border-radius:8px; border:0.5px dashed rgba(58,58,46,0.3); padding:6px 10px; font-family:'Sarabun',sans-serif; font-size:10px; font-weight:300; color:rgba(58,58,46,0.5); line-height:1.6; outline:none; cursor:text; }
+  .write-frame-dk { margin-top:10px; min-height:36px; border-radius:8px; border:0.5px dashed rgba(58,58,46,0.3); padding:6px 10px; font-family:'Noto Sans Thai',sans-serif; font-size:10px; font-weight:300; color:rgba(58,58,46,0.5); line-height:1.6; outline:none; cursor:text; }
   .write-frame-dk:empty::before { content:attr(data-placeholder); opacity:0.45; pointer-events:none; }
   .write-frame-dk:focus { border-color:rgba(58,58,46,0.5); color:rgba(58,58,46,0.8); }
   
@@ -1121,17 +1121,22 @@
   .pill-purp{ background:rgba(155,139,180,0.3); color:#D0C0E8; border:0.5px solid rgba(155,139,180,0.4); }
   .pill-teal{ background:rgba(60,140,150,0.3); color:#90D4D8; border:0.5px solid rgba(60,140,150,0.4); }
 
+  #share-text-box:empty::before {
+    content: attr(data-placeholder);
+    opacity: 0.4;
+    pointer-events: none;
+  }
 </style>
 </head>
 <body>
 
 <!-- NAV -->
-<nav style="background:rgba(245,240,232,.94);backdrop-filter:blur(12px);border-bottom:.5px solid var(--cream-dark);height:56px;display:flex;align-items:center;justify-content:space-between;padding:0 24px;position:sticky;top:0;z-index:100;">
+<nav style="background:rgba(245,240,232,.94);backdrop-filter:blur(12px);border-bottom:.5px solid var(--cream-dark);min-height:56px;display:flex;align-items:center;justify-content:space-between;padding:0 16px;position:sticky;top:0;z-index:100;flex-wrap:nowrap;gap:8px;">
   <a style="font-family:\'Playfair Display\',serif;font-size:18px;font-style:italic;color:var(--charcoal);text-decoration:none;" href="#">Craftaway</a>
   <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
-    <a style="font-size:13px;color:var(--charcoal-soft);text-decoration:none;padding:6px 14px;border-radius:99px;border:1px solid var(--cream-dark);white-space:nowrap;" href="craftaway-demo.html">💬 คุยกับ Craftaway</a>
-    <a style="font-size:13px;color:var(--charcoal-soft);text-decoration:none;padding:6px 14px;border-radius:99px;border:1px solid var(--cream-dark);white-space:nowrap;" href="craftaway-mbti.html">🧠 MBTI Test</a>
-    <a style="font-size:13px;color:var(--white);background:var(--purple-soft);text-decoration:none;padding:6px 16px;border-radius:99px;white-space:nowrap;" href="https://staraligns.com/my-chart" target="_blank">✦ Human Design</a>
+    <a style="font-size:clamp(11px,2vw,13px);color:var(--charcoal-soft);text-decoration:none;padding:5px 10px;border-radius:99px;border:1px solid var(--cream-dark);white-space:nowrap;" href="craftaway-demo.html">💬 คุยกับ Craftaway</a>
+    <a style="font-size:clamp(11px,2vw,13px);color:var(--charcoal-soft);text-decoration:none;padding:5px 10px;border-radius:99px;border:1px solid var(--cream-dark);white-space:nowrap;" href="craftaway-mbti.html">🧠 MBTI Test</a>
+    <a style="font-size:clamp(11px,2vw,13px);color:var(--white);background:var(--purple-soft);text-decoration:none;padding:5px 12px;border-radius:99px;white-space:nowrap;" href="https://staraligns.com/my-chart" target="_blank">✦ Human Design</a>
   </div>
 </nav>
 
@@ -1258,12 +1263,12 @@
 
     <!-- Login bar -->
     <div id="login-bar" style="margin-bottom:24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;">
-      <p style="font-size:13px;font-weight:300;color:var(--charcoal-soft);">บันทึกผลของคุณไว้ได้เลย — <button onclick="openLoginModal()" style="background:none;border:none;color:var(--moss);font-size:13px;font-weight:500;cursor:pointer;padding:0;font-family:'Sarabun',sans-serif;">สร้าง profile ฟรี →</button></p>
+      <p style="font-size:13px;font-weight:300;color:var(--charcoal-soft);">บันทึกผลของคุณไว้ได้เลย — <button onclick="openLoginModal()" style="background:none;border:none;color:var(--moss);font-size:13px;font-weight:500;cursor:pointer;padding:0;font-family:'Noto Sans Thai',sans-serif;">สร้าง profile ฟรี →</button></p>
       <div id="user-bar" style="display:none;align-items:center;gap:10px;">
         <div id="user-avatar" style="width:32px;height:32px;border-radius:50%;background:rgba(107,124,92,0.15);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:500;color:var(--moss);"></div>
         <span id="user-greeting" style="font-size:13px;color:var(--charcoal-soft);"></span>
-        <button onclick="openDashboard()" style="background:none;border:1.5px solid var(--sand);border-radius:99px;padding:4px 14px;font-size:12px;font-weight:500;color:var(--charcoal-soft);cursor:pointer;font-family:'Sarabun',sans-serif;transition:all 0.2s;" onmouseover="this.style.borderColor='var(--moss)';this.style.color='var(--moss)'" onmouseout="this.style.borderColor='var(--sand)';this.style.color='var(--charcoal-soft)'">ดู profile ฉัน</button>
-        <button onclick="logoutUser()" style="background:none;border:none;font-size:12px;color:var(--charcoal-soft);opacity:0.4;cursor:pointer;font-family:'Sarabun',sans-serif;">ออก</button>
+        <button onclick="openDashboard()" style="background:none;border:1.5px solid var(--sand);border-radius:99px;padding:4px 14px;font-size:12px;font-weight:500;color:var(--charcoal-soft);cursor:pointer;font-family:'Noto Sans Thai',sans-serif;transition:all 0.2s;" onmouseover="this.style.borderColor='var(--moss)';this.style.color='var(--moss)'" onmouseout="this.style.borderColor='var(--sand)';this.style.color='var(--charcoal-soft)'">ดู profile ฉัน</button>
+        <button onclick="logoutUser()" style="background:none;border:none;font-size:12px;color:var(--charcoal-soft);opacity:0.4;cursor:pointer;font-family:'Noto Sans Thai',sans-serif;">ออก</button>
       </div>
     </div>
 
@@ -1405,7 +1410,7 @@
           <p style="font-size:12px;color:var(--charcoal-soft);margin-bottom:8px;">หรือกรอกงบที่มีจริงๆ (บาท)</p>
           <div style="display:flex;gap:8px;align-items:center;">
             <input id="budget-custom" type="number" placeholder="เช่น 5000" min="0"
-              style="flex:1;padding:10px 14px;border:1px solid rgba(212,197,169,0.6);border-radius:12px;font-family:'Sarabun',sans-serif;font-size:14px;background:var(--white);color:var(--charcoal);outline:none;"
+              style="flex:1;padding:10px 14px;border:1px solid rgba(212,197,169,0.6);border-radius:12px;font-family:'Noto Sans Thai',sans-serif;font-size:14px;background:var(--white);color:var(--charcoal);outline:none;"
               oninput="handleCustomBudget(this.value)"
               onfocus="this.style.borderColor='var(--moss)'" onblur="this.style.borderColor='rgba(212,197,169,0.6)'">
             <span style="font-size:14px;color:var(--charcoal-soft);">฿</span>
@@ -1581,7 +1586,7 @@
             <div style="font-family:\'Playfair Display\',serif;font-size:18px;font-weight:400;color:var(--charcoal);margin-bottom:8px;">บันทึก profile เพื่ออ่านผลเต็มๆ</div>
             <p style="font-size:13px;font-weight:300;color:var(--charcoal-soft);line-height:1.6;margin-bottom:20px;max-width:300px;">destination ที่เหมาะกับพลังงานคุณ, itinerary ง่ายๆ และ MBTI insight รอคุณอยู่ข้างใน</p>
             <button class="btn-primary" onclick="openLoginModal()" style="margin-bottom:10px;width:100%;max-width:280px;">สร้าง profile ฟรี — ดูผลเต็มๆ</button>
-            <button style="background:none;border:none;font-size:12px;color:var(--charcoal-soft);opacity:0.5;cursor:pointer;font-family:'Sarabun',sans-serif;" onclick="unlockResult()">ข้ามไปก่อน →</button>
+            <button style="background:none;border:none;font-size:12px;color:var(--charcoal-soft);opacity:0.5;cursor:pointer;font-family:'Noto Sans Thai',sans-serif;" onclick="unlockResult()">ข้ามไปก่อน →</button>
           </div>
         </div>
 
@@ -1601,13 +1606,23 @@
           <div id="story-share-section" style="margin-bottom:28px;">
             <div style="font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--moss);margin-bottom:12px;font-weight:500;">📲 แชร์ผลลัพธ์ของคุณ</div>
             <div style="text-align:center;">
-              <div id="share-card-html" style="margin:0 auto;display:inline-block;"></div>
-              <canvas id="share-card-canvas" width="540" height="960" style="display:none;"></canvas>
+              <!-- PNG card wrapper -->
+              <div id="share-card-wrap" style="position:relative;width:280px;margin:0 auto;display:inline-block;border-radius:20px;overflow:hidden;">
+                <img id="share-card-img" src="" alt="Travel Profile Card" style="width:100%;display:block;border-radius:20px;">
+                <!-- overlay text input -->
+                <div id="share-card-overlay" style="position:absolute;bottom:72px;left:0;right:0;padding:0 20px;">
+                  <div id="share-text-box"
+                    contenteditable="true"
+                    data-placeholder="เขียนอะไรก็ได้ที่นี่..."
+                    style="min-height:36px;border-radius:10px;border:0.5px dashed rgba(255,255,255,0.4);padding:7px 12px;font-family:'Noto Sans Thai',sans-serif;font-size:12px;font-weight:300;color:rgba(255,255,255,0.85);line-height:1.6;outline:none;cursor:text;background:rgba(0,0,0,0.15);backdrop-filter:blur(4px);text-align:left;word-break:break-word;"></div>
+                </div>
+              </div>
+              <canvas id="share-card-canvas" style="display:none;"></canvas>
               <div style="margin-top:12px;">
-                <button onclick="downloadStoryCard()" style="background:var(--moss);color:var(--white);border:none;padding:10px 24px;border-radius:12px;font-family:'Sarabun',sans-serif;font-size:13px;font-weight:500;cursor:pointer;display:inline-flex;align-items:center;gap:8px;">
+                <button onclick="downloadStoryCard()" style="background:var(--moss);color:var(--white);border:none;padding:10px 24px;border-radius:12px;font-family:'Noto Sans Thai',sans-serif;font-size:13px;font-weight:500;cursor:pointer;display:inline-flex;align-items:center;gap:8px;">
                   📥 บันทึก Story Card
                 </button>
-                <p style="font-size:11px;color:var(--charcoal-soft);opacity:0.5;margin-top:8px;">กดบันทึกแล้วแชร์ลง IG Stories ได้เลย</p>
+                <p style="font-size:11px;color:var(--charcoal-soft);opacity:0.5;margin-top:8px;">พิมพ์ข้อความได้เลย แล้วกดบันทึก</p>
               </div>
             </div>
           </div>
@@ -1656,8 +1671,8 @@
       <div class="price-card featured">
         <div class="price-tier">Signature</div>
         <div class="price-name">Design Your Journey</div>
-        <div class="price-amount"><span>฿</span>5,999</div>
-        <div class="price-note">คุย 30 นาที · ส่งผลใน 5–7 วัน</div>
+        <div class="price-amount" style="font-size:20px;letter-spacing:0.15em;color:var(--moss);">Coming Soon</div>
+        <div class="price-note">เร็วๆ นี้</div>
         <div class="price-divider"></div>
         <ul class="price-features">
           <li>เริ่มด้วยการคุย 30 นาที เพื่อเข้าใจตัวตนและสิ่งที่ต้องการจริงๆ</li>
@@ -1671,8 +1686,8 @@
         </div>
         <div style="margin-top:16px;background:rgba(107,124,92,0.06);border-radius:12px;padding:14px;">
           <div style="font-size:11px;font-weight:500;color:var(--moss);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:10px;">✦ เข้า Waitlist</div>
-          <input id="waitlist-sig-name" type="text" placeholder="ชื่อ" style="width:100%;padding:9px 12px;border:1px solid rgba(212,197,169,0.6);border-radius:10px;font-family:'Sarabun',sans-serif;font-size:13px;margin-bottom:8px;background:var(--white);color:var(--charcoal);outline:none;box-sizing:border-box;">
-          <input id="waitlist-sig-contact" type="text" placeholder="Email หรือ IG @username" style="width:100%;padding:9px 12px;border:1px solid rgba(212,197,169,0.6);border-radius:10px;font-family:'Sarabun',sans-serif;font-size:13px;margin-bottom:10px;background:var(--white);color:var(--charcoal);outline:none;box-sizing:border-box;">
+          <input id="waitlist-sig-name" type="text" placeholder="ชื่อ" style="width:100%;padding:9px 12px;border:1px solid rgba(212,197,169,0.6);border-radius:10px;font-family:'Noto Sans Thai',sans-serif;font-size:13px;margin-bottom:8px;background:var(--white);color:var(--charcoal);outline:none;box-sizing:border-box;">
+          <input id="waitlist-sig-contact" type="text" placeholder="Email หรือ IG @username" style="width:100%;padding:9px 12px;border:1px solid rgba(212,197,169,0.6);border-radius:10px;font-family:'Noto Sans Thai',sans-serif;font-size:13px;margin-bottom:10px;background:var(--white);color:var(--charcoal);outline:none;box-sizing:border-box;">
           <button onclick="joinWaitlist('signature','waitlist-sig-name','waitlist-sig-contact')" class="price-btn" style="margin-top:0;">แจ้งความสนใจ →</button>
         </div>
       </div>
@@ -1681,8 +1696,8 @@
       <div class="price-card">
         <div class="price-tier">Full Reading</div>
         <div class="price-name">Discover Yourself</div>
-        <div class="price-amount"><span>฿</span>9,999</div>
-        <div class="price-note">คุย 30 นาที · ส่งผลใน 7–10 วัน</div>
+        <div class="price-amount" style="font-size:20px;letter-spacing:0.15em;color:var(--accent);">Coming Soon</div>
+        <div class="price-note">เร็วๆ นี้</div>
         <div class="price-divider"></div>
         <ul class="price-features">
           <li>เริ่มด้วยการคุย 30 นาที เพื่อเข้าใจตัวตนและสิ่งที่ต้องการจริงๆ</li>
@@ -1698,8 +1713,8 @@
         </div>
         <div style="margin-top:16px;background:rgba(196,149,106,0.06);border-radius:12px;padding:14px;">
           <div style="font-size:11px;font-weight:500;color:var(--accent);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:10px;">✦ เข้า Waitlist</div>
-          <input id="waitlist-pre-name" type="text" placeholder="ชื่อ" style="width:100%;padding:9px 12px;border:1px solid rgba(212,197,169,0.6);border-radius:10px;font-family:'Sarabun',sans-serif;font-size:13px;margin-bottom:8px;background:var(--white);color:var(--charcoal);outline:none;box-sizing:border-box;">
-          <input id="waitlist-pre-contact" type="text" placeholder="Email หรือ IG @username" style="width:100%;padding:9px 12px;border:1px solid rgba(212,197,169,0.6);border-radius:10px;font-family:'Sarabun',sans-serif;font-size:13px;margin-bottom:10px;background:var(--white);color:var(--charcoal);outline:none;box-sizing:border-box;">
+          <input id="waitlist-pre-name" type="text" placeholder="ชื่อ" style="width:100%;padding:9px 12px;border:1px solid rgba(212,197,169,0.6);border-radius:10px;font-family:'Noto Sans Thai',sans-serif;font-size:13px;margin-bottom:8px;background:var(--white);color:var(--charcoal);outline:none;box-sizing:border-box;">
+          <input id="waitlist-pre-contact" type="text" placeholder="Email หรือ IG @username" style="width:100%;padding:9px 12px;border:1px solid rgba(212,197,169,0.6);border-radius:10px;font-family:'Noto Sans Thai',sans-serif;font-size:13px;margin-bottom:10px;background:var(--white);color:var(--charcoal);outline:none;box-sizing:border-box;">
           <button onclick="joinWaitlist('premium','waitlist-pre-name','waitlist-pre-contact')" class="price-btn" style="margin-top:0;">แจ้งความสนใจ →</button>
         </div>
       </div>
@@ -3181,42 +3196,51 @@
   };
 
   function renderStoryCard(profileKey, profileData) {
-    const th = storyThemes[profileKey] || storyThemes['explore'];
     window.currentProfileKey = profileKey;
     window.currentProfileData = profileData;
 
-    // Inject HTML card
-    const container = document.getElementById('share-card-html');
-    if (container) {
-      const html = storyCardHTMLs[profileKey] || storyCardHTMLs['explore'];
-      container.innerHTML = html;
-      // Make write-frame editable
-      container.querySelectorAll('[contenteditable]').forEach(function(el) {
-        el.setAttribute('contenteditable', 'true');
-      });
+    // โหลด PNG จาก GitHub
+    const img = document.getElementById('share-card-img');
+    if (img) {
+      img.src = profileKey + '.png';
+      img.onerror = function() {
+        // fallback ถ้าไม่เจอไฟล์
+        img.style.display = 'none';
+        document.getElementById('share-card-wrap').style.background = '#1a1a2e';
+      };
     }
 
-    // Also draw canvas for download
-    const canvas = document.getElementById('share-card-canvas');
-    if (canvas) drawCard(canvas, th, profileData);
+    // ปรับ text box สี ตาม theme (light/dark)
+    const th = storyThemes[profileKey] || storyThemes['explore'];
+    const isDark = th.textMode === 'light';
+    const tb = document.getElementById('share-text-box');
+    if (tb) {
+      if (isDark) {
+        tb.style.color = 'rgba(255,255,255,0.85)';
+        tb.style.borderColor = 'rgba(255,255,255,0.35)';
+        tb.style.background = 'rgba(0,0,0,0.18)';
+      } else {
+        tb.style.color = 'rgba(40,30,20,0.8)';
+        tb.style.borderColor = 'rgba(80,60,40,0.3)';
+        tb.style.background = 'rgba(255,255,255,0.35)';
+      }
+    }
   }
 
   function downloadStoryCard() {
     const profileData = window.currentProfileData;
     if (!profileData) { alert('กรุณาทำ quiz ให้เสร็จก่อนนะ'); return; }
 
-    const btn = document.querySelector('#story-share-section button');
-    const card = document.querySelector('#share-card-html .story');
-    if (!card) { alert('ไม่พบ card กรุณาทำ quiz ก่อนนะ'); return; }
+    const wrap = document.getElementById('share-card-wrap');
+    if (!wrap) return;
 
+    const btn = document.querySelector('#story-share-section button');
     if (btn) { btn.textContent = '⏳ กำลังสร้าง...'; btn.disabled = true; }
 
-    // Load html2canvas then capture the HTML card directly
-    const script = document.createElement('script');
-    script.src = 'https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js';
-    script.onload = function() {
-      html2canvas(card, {
-        scale: 4,
+    // โหลด html2canvas แล้ว capture
+    function doCapture() {
+      html2canvas(wrap, {
+        scale: 3,
         useCORS: true,
         allowTaint: true,
         backgroundColor: null,
@@ -3225,44 +3249,25 @@
         canvas.toBlob(function(blob) {
           const url = URL.createObjectURL(blob);
           const a = document.createElement('a');
-          a.href = url; a.download = 'craftaway-profile.png'; a.click();
+          a.href = url;
+          a.download = 'craftaway-' + (window.currentProfileKey || 'profile') + '.png';
+          a.click();
           URL.revokeObjectURL(url);
           if (btn) { btn.textContent = '📥 บันทึก Story Card'; btn.disabled = false; }
         }, 'image/png');
       }).catch(function() {
-        // fallback to canvas draw
-        const th = storyThemes[window.currentProfileKey] || storyThemes['explore'];
-        const hc = document.createElement('canvas');
-        hc.width = 1080; hc.height = 1920;
-        drawCard(hc, th, profileData);
-        hc.toBlob(function(blob) {
-          const url = URL.createObjectURL(blob);
-          const a = document.createElement('a');
-          a.href = url; a.download = 'craftaway-profile.png'; a.click();
-          URL.revokeObjectURL(url);
-          if (btn) { btn.textContent = '📥 บันทึก Story Card'; btn.disabled = false; }
-        }, 'image/png');
-      });
-    };
-    script.onerror = function() {
-      // fallback if CDN fails
-      const th = storyThemes[window.currentProfileKey] || storyThemes['explore'];
-      const hc = document.createElement('canvas');
-      hc.width = 1080; hc.height = 1920;
-      drawCard(hc, th, profileData);
-      hc.toBlob(function(blob) {
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url; a.download = 'craftaway-profile.png'; a.click();
-        URL.revokeObjectURL(url);
+        alert('กด screenshot แล้วบันทึกได้เลยนะ 📱');
         if (btn) { btn.textContent = '📥 บันทึก Story Card'; btn.disabled = false; }
-      }, 'image/png');
-    };
-    // ถ้า html2canvas โหลดแล้ว ใช้ได้เลย
+      });
+    }
+
     if (window.html2canvas) {
-      script.onload();
+      doCapture();
     } else {
-      document.head.appendChild(script);
+      const s = document.createElement('script');
+      s.src = 'https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js';
+      s.onload = doCapture;
+      document.head.appendChild(s);
     }
   }
 
